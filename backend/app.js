@@ -1,10 +1,14 @@
 const express = require('express');
 const app = express();
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const PORT = 3000;
 
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send("Hello world!");
+});
 
 app.post('/:userId/send/email', (req, res) => {
 	
