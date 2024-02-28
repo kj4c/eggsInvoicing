@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const PORT = 3000;
 
 app.use(express.json());
 
 app.post('/:userId/send/email', (req, res) => {
-
+	
   res.status(200).json({ invoiceId: 123 });
 });
 
@@ -25,7 +27,7 @@ app.post('/:userId/send/multiInvoice', (req, res) => {
 });
 
 app.post('/:userId/send/text', (req, res) => {
-  
+	// indentations 
   res.status(200).json({ textId: 789 });
 });
 
@@ -38,6 +40,8 @@ app.delete('/:userId/allEmails/delete', (req, res) => {
 
   res.status(200).json({ message: "successfully deleted invoice id" });
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
