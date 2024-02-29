@@ -3,16 +3,21 @@ const app = express();
 // const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const PORT = 3000;
+const pool = require('./database/db')
+const initdb = require('./database/initdb')
 
 app.use(express.json());
+initdb();
 
 app.get('/', (req, res) => {
   res.send("Hello world!");
 });
 
-app.post('/:userId/send/email', (req, res) => {
-	
-  res.status(200).json({ invoiceId: 123 });
+app.post('/:userId/send/email', async function (req, res) {
+	let q = "select * from users";
+  newSent = await pool.query(q);
+
+  res.status(200).json(newSent);
 });
 
 app.get('/:userId/receiveEmail', (req, res) => {
