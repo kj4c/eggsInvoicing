@@ -1,7 +1,7 @@
 const pool = require('./db')
 
 async function initdb() {
-  q = `CREATE TABLE IF NOT EXISTS users (
+  let q = `CREATE TABLE IF NOT EXISTS users (
     uid       serial primary key,
     email     varchar(225),
     phone_no  varchar(10),

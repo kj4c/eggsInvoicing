@@ -5,7 +5,7 @@ const fs = require('fs').promises;
 async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachment.xml') {
   await fs.writeFile(filename, xmlString);
 
-	// the nodemail transporter 
+  // the nodemail transporter 
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     host: "smtp.gmail.com",
@@ -17,7 +17,7 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
     },
   });
 
-	// the mail options 
+  // the mail options 
   const mailOptions = {
     from: "xmlsender1@gmail.com",
     to: recipient, 
@@ -32,7 +32,7 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
     ]
   };
 
-	// sending of the mail
+  // sending of the mail
   try {
     let info = await transporter.sendMail(mailOptions);
     console.log("Message sent: %s", info.messageId);

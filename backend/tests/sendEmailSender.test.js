@@ -17,7 +17,7 @@ describe('sendEmailWithXML function', () => {
 
     const nodemailer = require('nodemailer');
 
-		expect(nodemailer.createTransport().sendMail).toHaveBeenCalled();
+    expect(nodemailer.createTransport().sendMail).toHaveBeenCalled();
 
     expect(nodemailer.createTransport().sendMail).toHaveBeenCalledWith(expect.objectContaining({
       to: recipientEmail,
