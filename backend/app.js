@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 // const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const PORT = 3000;
 const pool = require('./database/db')
 const initdb = require('./database/initdb')
@@ -14,8 +14,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/:userId/send/email', async function (req, res) {
-	let q = "select * from users";
-  newSent = await pool.query(q);
+  let q = "select * from users";
+  let newSent = await pool.query(q);
 
   res.status(200).json(newSent);
 });
@@ -36,7 +36,7 @@ app.post('/:userId/send/multiInvoice', (req, res) => {
 });
 
 app.post('/:userId/send/text', (req, res) => {
-	// indentations 
+  // indentations 
   res.status(200).json({ textId: 789 });
 });
 
