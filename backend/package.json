@@ -17,7 +17,8 @@
     "jsonwebtoken": "^9.0.2",
     "node": "^21.6.2",
     "nodemailer": "^6.9.11",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
