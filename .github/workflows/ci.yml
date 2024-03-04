@@ -1,0 +1,29 @@
+name: Node.js CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x] # Adjust node versions as needed
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Change to backend directory
+      run: cd backend
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./backend
+    - name: Lint
+      run: npm run lint
+      working-directory: ./backend
+    - name: Run tests
+      run: npm test
+      working-directory: ./backend
