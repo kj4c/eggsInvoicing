@@ -1,1 +1,74 @@
+# Dependency directories
 node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Next.js build output
+.next
+out/
+
+# Nuxt.js build / generate output
+.nuxt
+dist/
+
+# Gatsby files
+.cache/
+# Comment the public line if your project uses Gatsby and *not* Next.js
+# Gatsby and Next.js use the same output folder (public/)
+public/
+
+# VuePress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# TypeScript compiled files
+*.tsbuildinfo
+/dist
+
+# Typings
+typings/
+
+# JetBrains IDEs (IntelliJ, PyCharm, etc.)
+.idea/
+
+# VSCode
+.vscode/
+
+# macOS files
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
