@@ -21,6 +21,7 @@
     "pg": "^8.11.3"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "eslint": "^8.57.0",
     "eslint-plugin-jest": "^27.9.0",
     "eslint-plugin-react": "^7.33.2",
