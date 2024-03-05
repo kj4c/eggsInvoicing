@@ -6,7 +6,8 @@ async function getNotifications(uId) {
   
   const result = await pool.query(query,[uId]);
   const notifications = result.rows[0].notifications;
-  if (notifications === null) {
+  console.log(notifications);
+  if (notifications === null || notifications.length === 0) {
     return {message: "No new notifications"};
   }
 
