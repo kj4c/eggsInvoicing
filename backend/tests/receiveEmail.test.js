@@ -15,7 +15,7 @@ describe("Receiving Email", () => {
     const receiver = 'Tom';
     const invoiceId = 123;
     pool.query.mockResolvedValueOnce({ rows: [{receiver: 'Tom', invoice_id: 123}]});
-    const result = await receiveEmail('receiver', invoiceId);
+    const result = await receiveEmail(receiver, invoiceId);
     expect(result).toEqual({status: 200, message: "Success"});
     expect(pool.query).toHaveBeenCalledWith("SELECT receiver, invoice_id FROM send_invoice WHERE RECEIVER = $1 AND invoice_id = $2",[receiver, invoiceId]);
   });
