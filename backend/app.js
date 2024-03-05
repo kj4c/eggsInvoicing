@@ -4,7 +4,8 @@ const app = express();
 // const jwt = require('jsonwebtoken');
 const PORT = 3000;
 const pool = require('./database/db')
-const initdb = require('./database/initdb')
+const initdb = require('./database/initdb');
+const receiveEmail = require('./functions/receiveEmail');
 
 app.use(express.json());
 initdb();
@@ -21,7 +22,8 @@ app.post('/:userId/send/email', async function (req, res) {
 });
 
 app.get('/:userId/receiveEmail', (req, res) => {
-
+  receiveEmail(123,123);
+  console.log('meow');
   res.status(200).json({ message: "successfully received X emails" });
 });
 
