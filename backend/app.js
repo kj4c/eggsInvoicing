@@ -5,6 +5,7 @@ const app = express();
 const PORT = 3000;
 const pool = require('./database/db');
 const getNotifications = require('./functions/receivingEmailFunction');
+const sendEmailWithXML = require('./functions/sendingEmailFunction');
 
 app.use(express.json());
 
@@ -13,10 +14,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/:userId/send/email', async function (req, res) {
-  let q = "select * from users";
-  let newSent = await pool.query(q);
-
-  res.status(200).json(newSent);
+  const { from, recipient, xmlString } = req.body;
+  res.status(200).json(sendEmailWithXML(from, recipient, xmlString));
 });
 
 app.get('/:userId/receiveEmail', (req, res) => {
