@@ -2,7 +2,7 @@ const pool = require("../database/db");
 
 
 async function getNotifications(uId) {
-  const query = "select notifications from users where uid = $1";
+  let query = "select notifications from users where uid = $1";
   
   const result = await pool.query(query,[uId]);
   const notifications = result.rows[0].notifications;
@@ -21,6 +21,8 @@ async function getNotifications(uId) {
     res.forEach(sentInvoicesRecord => resObj.notifications.push(sentInvoicesRecord));
   }
   
+  query = "update users set notifications = '{}' where uid = $1";
+  await pool.query(query, [uId]);
   return resObj;
 }
 
