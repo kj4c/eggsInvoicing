@@ -14,7 +14,7 @@ async function getNotifications(uId) {
     notifications: []
   };
 
-  for (notificationId of notifications) {
+  for (const notificationId of notifications) {
     const query = "select * from sent_invoices where invoice_id = $1";
     const res = (await pool.query(query, [notificationId])).rows;
     

@@ -3,7 +3,6 @@ const app = express();
 // const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 const PORT = 3000;
-const pool = require('./database/db');
 const getNotifications = require('./functions/receivingEmailFunction');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
 
