@@ -3,8 +3,8 @@ const app = express();
 // const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 const PORT = 3000;
-const pool = require('./database/db')
-const initdb = require('./database/initdb')
+const pool = require('./database/db');
+const getNotifications = require('./functions/receivingEmailFunction');
 
 app.use(express.json());
 
@@ -27,6 +27,15 @@ app.get('/:userId/receiveEmail', (req, res) => {
 app.put('/:userId/updateStatus', (req, res) => {
 
   res.status(200).json({ message: "Successfully changed state" });
+});
+
+app.get('/:userId/getNotifications', async function (req, res) {
+  try {
+    const uId = req.params.userId;
+    res.status(200).json(await getNotifications(uId));
+  } catch (err) {
+    console.error(err.message);
+  }
 });
 
 app.post('/:userId/send/multiInvoice', (req, res) => {

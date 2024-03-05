@@ -1,0 +1,27 @@
+const pool = require("../database/db");
+
+
+async function getNotifications(uId) {
+  const query = "select notifications from users where uid = $1";
+  
+  const result = await pool.query(query,[uId]);
+  const notifications = result.rows[0].notifications;
+  if (notifications === null) {
+    return {message: "No new notifications"};
+  }
+
+  const resObj = {
+    notifications: []
+  };
+
+  for (notificationId of notifications) {
+    const query = "select * from sent_invoices where invoice_id = $1";
+    const res = (await pool.query(query, [notificationId])).rows;
+    
+    res.forEach(sentInvoicesRecord => resObj.notifications.push(sentInvoicesRecord));
+  }
+  
+  return resObj;
+}
+
+module.exports = getNotifications;
