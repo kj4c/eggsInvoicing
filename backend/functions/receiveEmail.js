@@ -19,6 +19,4 @@ async function receiveEmail(receiver, invoiceId) {
     }
 }
 
-receiveEmail('Tom', 123);
-
 module.exports = receiveEmail;
