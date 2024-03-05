@@ -7,7 +7,6 @@ const pool = require('./database/db')
 const initdb = require('./database/initdb')
 
 app.use(express.json());
-initdb();
 
 app.get('/', (req, res) => {
   res.send("Hello world!");
