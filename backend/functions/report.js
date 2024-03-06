@@ -1,28 +1,40 @@
 const {jsPDF} = require('jspdf');
 require('jspdf-autotable');
 const pool = require('../database/db')
+const fs = require('fs');
+// Given a uid, generate a PDF of all the received invoices of the user with the invoice numbers, the email used that send the invoice, and received time
+async function generateReceivePdf(uid) {
+  const selectQuery = "SELECT s.invoice_id, s.sender_email, s.sent_at FROM sent_invoices s JOIN users u ON u.email = s.receiver_email WHERE u.uid = $1";
+  const qres = await pool.query(selectQuery, [uid]);
 
-// Returns a generated P
-async function generatePdf() {
-    const selectQuery = "SELECT invoice_id, sender_email, sent_at FROM sent_invoices";
-    const qres = await pool.query(selectQuery);
-    let data = qres.rows.map(row => [row.invoice_id, row.sender_email, row.sent_at.toLocaleString('en-au')]);
-    const doc = new jsPDF();
-    const tbCol = ["Invoice Id", "Received from","Time"];
+  // get current user's email
+  const userQuery = "SELECT email FROM users WHERE uid = $1";
+  let user = await pool.query(userQuery, [uid]);
+  user = user.rows[0].email;
 
-    let today = new Date().toLocaleString('en-au')
-    let subtitle = "Generated on: "+ today
-    let pageHeight = doc.internal.pageSize.getHeight();
-    let pageWidth = doc.internal.pageSize.getWidth();
-    
-    doc.text("Communication Report for Received Invoices", pageWidth / 2, 10, {align: 'center'});
-    doc.text(subtitle, pageWidth / 2, pageHeight  - 20, {align: 'center'});
-    doc.autoTable({
-        head: [tbCol],
-        body: data,
-        startY:20
-    });
-    doc.save("communication_report.pdf");
-    return {status: 200, doc: doc};
+  let data = qres.rows.map(row => [row.invoice_id, row.sender_email, row.sent_at.toLocaleString('en-au')]);
+  const doc = new jsPDF();
+  const tbCol = ["Invoice Id", "Sent by","Time"];
+
+  let today = new Date().toLocaleString('en-au')
+  let genDate = "Generated on: "+ today;
+  let pageWidth = doc.internal.pageSize.getWidth();
+  
+  doc.setFontSize(10);
+  doc.text(genDate, pageWidth - 5, 10, {align: 'right'});
+  doc.setFontSize(16);
+  doc.text("Communication Report for Received Invoices", pageWidth / 2, 20, {align: 'center'});
+  doc.setFontSize(12);
+  doc.text(`Received by: ${user}`, pageWidth / 2, 30, {align: 'center'});
+  doc.autoTable({
+    head: [tbCol],
+    body: data,
+    startY: 40
+  });
+  doc.save("communication_report_received.pdf");
+
+  // delete the file saved in directory
+  await fs.promises.unlink('./communication_report_received.pdf');
+  return {status: 200, doc: doc};
 }
-module.exports = generatePdf
+module.exports = generateReceivePdf

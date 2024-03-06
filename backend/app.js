@@ -7,9 +7,7 @@ const getNotifications = require('./functions/receivingEmailFunction');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
 const receiveEmail = require('./functions/receiveEmail');
 
-const generatePdf = require('./functions/report');
-const fs = require('fs');
-
+const generateReceivePdf = require('./functions/report');
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -53,22 +51,14 @@ app.post('/:userId/send/text', (req, res) => {
 
 app.get('/:userId/receiveReport', async(req, res) => {
   try {
-    let pdf = await generatePdf();
+    let pdf = await generateReceivePdf(2);
     if (pdf.status != 200) {
       res.status(400).message({error: "error generating the report"});
     }
     pdf = pdf.doc;
-    res.setHeader('Content-Disposition', 'attachment; filename="communication_report.pdf"'); 
+    res.setHeader('Content-Disposition', 'attachment; filename="communication_report_received.pdf"'); 
     res.setHeader('Content-Type', 'application/pdf');
     res.send(pdf.output());
-    let fileDeleted = false;
-    if (!fileDeleted) {
-      fs.unlink('./communication_report.pdf', (err) => {
-        if (err) throw err;
-        fileDeleted = true;
-        console.log("Deleted pdf");
-      })
-    }
   } catch (error) {
     console.log(error);
     res.status(400).json({message: "error generating the report"});
