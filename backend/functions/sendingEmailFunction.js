@@ -32,14 +32,9 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
     ]
   };
 
-  // sending of the mail
-  try {
-    let info = await transporter.sendMail(mailOptions);
-    console.log("Message sent: %s", info.messageId);
-    await fs.unlink(filename); 
-  } catch (error) {
-    console.error("Failed to send email:", error);
-  }
+  let info = await transporter.sendMail(mailOptions);
+  console.log("Message sent: %s", info.messageId);
+  await fs.unlink(filename); 
 }
 
 module.exports = sendEmailWithXML;
