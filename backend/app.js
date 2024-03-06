@@ -5,7 +5,6 @@ const app = express();
 const PORT = 3000;
 const getNotifications = require('./functions/receivingEmailFunction');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
-const pool = require('./database/db')
 const receiveEmail = require('./functions/receiveEmail');
 
 app.use(express.json());
