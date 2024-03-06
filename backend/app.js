@@ -5,6 +5,8 @@ const app = express();
 const PORT = 3000;
 const getNotifications = require('./functions/receivingEmailFunction');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
+const pool = require('./database/db')
+const receiveEmail = require('./functions/receiveEmail');
 
 app.use(express.json());
 
@@ -18,7 +20,8 @@ app.post('/:userId/send/email', async function (req, res) {
 });
 
 app.get('/:userId/receiveEmail', (req, res) => {
-
+  receiveEmail(123,123);
+  console.log('meow');
   res.status(200).json({ message: "successfully received X emails" });
 });
 
