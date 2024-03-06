@@ -3,22 +3,19 @@ const app = express();
 // const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 const PORT = 3000;
-const pool = require('./database/db')
-const initdb = require('./database/initdb');
+const getNotifications = require('./functions/receivingEmailFunction');
+const sendEmailWithXML = require('./functions/sendingEmailFunction');
 const receiveEmail = require('./functions/receiveEmail');
 
 app.use(express.json());
-initdb();
 
 app.get('/', (req, res) => {
   res.send("Hello world!");
 });
 
 app.post('/:userId/send/email', async function (req, res) {
-  let q = "select * from users";
-  let newSent = await pool.query(q);
-
-  res.status(200).json(newSent);
+  const { from, recipient, xmlString } = req.body;
+  res.status(200).json(sendEmailWithXML(from, recipient, xmlString));
 });
 
 app.get('/:userId/receiveEmail', (req, res) => {
@@ -30,6 +27,15 @@ app.get('/:userId/receiveEmail', (req, res) => {
 app.put('/:userId/updateStatus', (req, res) => {
 
   res.status(200).json({ message: "Successfully changed state" });
+});
+
+app.get('/:userId/getNotifications', async function (req, res) {
+  try {
+    const uId = req.params.userId;
+    res.status(200).json(await getNotifications(uId));
+  } catch (err) {
+    console.error(err.message);
+  }
 });
 
 app.post('/:userId/send/multiInvoice', (req, res) => {
