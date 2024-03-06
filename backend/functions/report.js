@@ -31,10 +31,6 @@ async function generateReceivePdf(uid) {
     body: data,
     startY: 40
   });
-  doc.save("communication_report_received.pdf");
-
-  // delete the file saved in directory
-  await fs.promises.unlink('./communication_report_received.pdf');
   return {status: 200, doc: doc};
 }
 module.exports = generateReceivePdf
