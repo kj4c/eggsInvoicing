@@ -4,11 +4,11 @@ const pool = require('../database/db')
 
 // Returns a generated P
 async function generatePdf() {
-    const selectQuery = "SELECT invoice_id, sender, sent_at FROM send_invoice";
+    const selectQuery = "SELECT invoice_id, sender_email, sent_at FROM sent_invoices";
     const qres = await pool.query(selectQuery);
-    let data = qres.rows.map(row => [row.invoice_id, row.sender, row.sent_at]);
+    let data = qres.rows.map(row => [row.invoice_id, row.sender_email, row.sent_at.toLocaleString('en-au')]);
     const doc = new jsPDF();
-    const tbCol = ["Invoice Id", "Sender","Time"];
+    const tbCol = ["Invoice Id", "Received from","Time"];
 
     let today = new Date().toLocaleString('en-au')
     let subtitle = "Generated on: "+ today
@@ -16,7 +16,7 @@ async function generatePdf() {
     let pageWidth = doc.internal.pageSize.getWidth();
     
     doc.text("Communication Report for Received Invoices", pageWidth / 2, 10, {align: 'center'});
-    doc.text(subtitle, pageWidth / 2, pageHeight  - 10, {align: 'center'});
+    doc.text(subtitle, pageWidth / 2, pageHeight  - 20, {align: 'center'});
     doc.autoTable({
         head: [tbCol],
         body: data,
