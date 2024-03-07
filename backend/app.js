@@ -7,6 +7,7 @@ const getNotifications = require('./functions/receivingEmailFunction');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
 const receiveEmail = require('./functions/receiveEmail');
 
+const generateReceivePdf = require('./functions/report');
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -29,9 +30,9 @@ app.put('/:userId/updateStatus', (req, res) => {
   res.status(200).json({ message: "Successfully changed state" });
 });
 
-app.get('/:userId/getNotifications', async function (req, res) {
+app.get('/getNotifications', async function (req, res) {
   try {
-    const uId = req.params.userId;
+    const uId = req.body.uId;
     res.status(200).json(await getNotifications(uId));
   } catch (err) {
     console.error(err.message);
@@ -46,6 +47,22 @@ app.post('/:userId/send/multiInvoice', (req, res) => {
 app.post('/:userId/send/text', (req, res) => {
   // indentations 
   res.status(200).json({ textId: 789 });
+});
+
+app.get('/:userId/receiveReport', async(req, res) => {
+  try {
+    let pdf = await generateReceivePdf(2);
+    if (pdf.status != 200) {
+      res.status(400).message({error: "error generating the report"});
+    }
+    pdf = pdf.doc;
+    res.setHeader('Content-Disposition', 'attachment; filename="communication_report_received.pdf"'); 
+    res.setHeader('Content-Type', 'application/pdf');
+    res.send(pdf.output());
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({message: "error generating the report"});
+  }
 });
 
 app.get('/:userId/allEmails', (req, res) => {
