@@ -18,6 +18,7 @@
     "jsonwebtoken": "^9.0.2",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
+    "middleware-http-errors": "^0.1.2",
     "node": "^21.6.2",
     "nodemailer": "^6.9.11",
     "pg": "^8.11.3"
