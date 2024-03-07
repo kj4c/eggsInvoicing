@@ -1,5 +1,5 @@
 const pool = require('../database/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const createError = require('http-errors');
 
 async function authLogin(username, password) {

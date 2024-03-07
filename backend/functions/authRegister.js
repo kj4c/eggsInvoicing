@@ -1,5 +1,5 @@
 const pool = require('../database/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const createError = require('http-errors');
 const saltRounds = 10;
 
@@ -34,7 +34,7 @@ async function authRegister(email, phone_no, username, password) {
 
     return {
       status: 200,
-      message: "Successfully registered"
+      message: "Successfully registered."
     }
     // gracefully catches error for unexpected occurences
   } catch (error) {
