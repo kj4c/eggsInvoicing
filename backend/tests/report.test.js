@@ -1,10 +1,14 @@
 const generateReceivePdf = require("../functions/report.js");
 const pool = require("../database/db");
-const { describe } = require("node:test");
 
 jest.mock("../database/db", () => ({
   query: jest.fn()
 }));
+
+beforeEach(() => {
+  jest.clearAllMocks();
+  jest.spyOn(console, 'error').mockImplementation(() => {}); 
+});
 
 describe("Generating receiving report", () => {
   it("Successfully generates report", async () => { 

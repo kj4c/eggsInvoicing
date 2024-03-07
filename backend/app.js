@@ -50,9 +50,10 @@ app.post('/:userId/send/text', (req, res) => {
   res.status(200).json({ textId: 789 });
 });
 
-app.get('/:userId/receiveReport', async(req, res) => {
+app.get('/receiveReport', async(req, res) => {
   try {
-    let pdf = await generateReceivePdf(2);
+    const uid = parseInt(req.query.uid);
+    let pdf = await generateReceivePdf(uid);
     if (pdf.status != 200) {
       res.status(400).message({error: "error generating the report"});
     }
