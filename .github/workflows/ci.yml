@@ -21,8 +21,8 @@ jobs:
     - name: Install dependencies
       run: npm install
       working-directory: ./backend
-    - name: Install jsPDF
-      run: npm install jsPDF
+    - name: Install jspdf
+      run: npm install jspdf
       working-directory: ./backend
     - name: Lint
       run: npm run lint
