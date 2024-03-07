@@ -31,7 +31,10 @@ async function authRegister(email, phone_no, username, password) {
     // const registered = await 
     pool.query(q, [email, phone_no, username, encrypted]);
     console.log('Successfully registered:', username);
-
+    return {
+      status: 200,
+      message: "Successfully registered."
+    }
     // gracefully catches error for unexpected occurences
   } catch (error) {
     console.error("Failed to register new user:", error.message);
