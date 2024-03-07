@@ -34,16 +34,17 @@ describe("authLogin", () => {
   it("should login user if given username and password are correct", async () => {
     const { username, password } = loginUser;
 
-    bcrypt.hash;
-    pool.query.mockResolvedValueOnce({ rows: [{ username: username, hashed_password: "hashed"}] });
+    pool.query.mockResolvedValueOnce({ rows: [{ uid: 1, username: username, hashed_password: "hashed"}] });
     bcrypt.compare.mockResolvedValueOnce(true);
 
-    await authLogin(username, password);
+    const login = await authLogin(username, password);
 
     expect(pool.query).toHaveBeenCalledTimes(1);
     expect(pool.query).toHaveBeenCalledWith("select * from users where username = $1", [username]);
 
     expect(bcrypt.compare).toHaveBeenCalledWith(password, "hashed");
+
+    expect(login).toEqual({ status: 200, uid: expect.any(Number) });
   });
   
   it("should throw an error if username entered doesn't exist", async () => {

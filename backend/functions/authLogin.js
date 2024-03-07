@@ -19,9 +19,11 @@ async function authLogin(username, password) {
       throw createError(401, "Password is incorrect");
     }
 
-    console.log("Successfully logged in:", existingUser.rows[0]);
+    console.log("Successfully logged in:", existingUser.rows[0].username);
+    console.log("uid: ", existingUser.rows[0].uid);
 
     return {
+      status: 200,
       uid: existingUser.rows[0].uid
     }
     // gracefully catches error for unexpected occurences
@@ -32,3 +34,5 @@ async function authLogin(username, password) {
 }
   
 module.exports = authLogin;
+
+// authLogin('winnie', 'password');
