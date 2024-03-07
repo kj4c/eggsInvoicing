@@ -1,13 +1,13 @@
 const authRegister = require("../functions/authRegister"); 
 const pool = require("../database/db");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
 jest.mock("../database/db", () => ({
   query: jest.fn()
 }));
 
-jest.mock("bcrypt", () => ({
+jest.mock("bcryptjs", () => ({
   hash: jest.fn()
 }));
 

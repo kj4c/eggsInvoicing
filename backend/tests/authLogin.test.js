@@ -1,16 +1,13 @@
 const authLogin = require("../functions/authLogin"); 
 const pool = require("../database/db");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 jest.mock("../database/db", () => ({
   query: jest.fn()
 }));
   
-jest.mock("bcrypt", () => ({
-  hash: jest.fn().mockResolvedValueOnce("hashed")
-}));
-
-jest.mock("bcrypt", () => ({
+jest.mock("bcryptjs", () => ({
+  hash: jest.fn().mockResolvedValueOnce("hashed"),
   compare: jest.fn()
 }));
 

@@ -6,6 +6,8 @@ const PORT = 3000;
 const getNotifications = require('./functions/receivingEmailFunction');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
 const receiveEmail = require('./functions/receiveEmail');
+const authRegister = require('./functions/authRegister');
+const authLogin = require('./functions/authLogin');
 
 const generateReceivePdf = require('./functions/report');
 app.use(express.json());
@@ -75,7 +77,23 @@ app.delete('/:userId/allEmails/delete', (req, res) => {
   res.status(200).json({ message: "successfully deleted invoice id" });
 });
 
+app.post('/register', async(req, res) => {
+  try {
+    const { email, phone, username, password } = req.body;
+    res.status(200).json(await authRegister(email, phone, username, password));
+  } catch (err) {
+    res.status(400).json({message: "Failed to register new user:"})
+  }
+});
 
+app.post('/login', async(req, res) => {
+  try {
+    const { username, password } = req.body;
+    res.status(200).json(await authLogin(username, password));
+  } catch (err) {
+    res.status(400).json({ message: "Failed to login:"})
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
