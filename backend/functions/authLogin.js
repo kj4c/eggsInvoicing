@@ -22,7 +22,6 @@ async function authLogin(username, password) {
     console.log("Successfully logged in:", existingUser.rows[0]);
 
     return {
-      status: 200,
       uid: existingUser.rows[0].uid
     }
     // gracefully catches error for unexpected occurences
