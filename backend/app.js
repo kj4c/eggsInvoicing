@@ -4,7 +4,8 @@ const errorHandler = require('middleware-http-errors');
 // const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 const PORT = 3000;
-const { getNotifications, hasReceivedInvoiceId} = require('./functions/receivingEmailFunction');
+const getNotifications = require('./functions/getNotifications');
+const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
 
 const generateReceivePdf = require('./functions/report');
@@ -31,13 +32,9 @@ app.put('/:userId/updateStatus', (req, res) => {
   res.status(200).json({ message: "Successfully changed state" });
 });
 
-app.get('/getNotifications', async function (req, res) {
-  try {
-    const uId = req.body.uId;
-    res.status(200).json(await getNotifications(uId));
-  } catch (err) {
-    console.error(err.message);
-  }
+app.get('/receive/getNotifications', async function (req, res) {
+  const uId = req.body.uId;
+  res.status(200).json(await getNotifications(uId));
 });
 
 app.post('/:userId/send/multiInvoice', (req, res) => {
