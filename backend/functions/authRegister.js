@@ -1,5 +1,5 @@
 const pool = require('../database/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const createError = require('http-errors');
 const saltRounds = 10;
 
@@ -30,8 +30,12 @@ async function authRegister(email, phone_no, username, password) {
     let q = "INSERT INTO users (email, phone_no, username, hashed_password) VALUES ($1, $2, $3, $4) RETURNING *";
     // const registered = await 
     pool.query(q, [email, phone_no, username, encrypted]);
-    console.log('Successfully registered:', username);
+    console.log("Successfully registered:", username);
 
+    return {
+      status: 200,
+      message: "Successfully registered."
+    }
     // gracefully catches error for unexpected occurences
   } catch (error) {
     console.error("Failed to register new user:", error.message);
