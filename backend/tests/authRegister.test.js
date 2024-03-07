@@ -47,7 +47,7 @@ describe("authRegister", () => {
 
     expect(bcrypt.hash).toHaveBeenCalledWith(password, saltRounds);
 
-    expect(pool.query).toHaveBeenCalledWith("INSERT INTO users (email, phone_no, username, password) VALUES ($1, $2, $3, $4) RETURNING *", [email, phone_no, username, "hashed"]);
+    expect(pool.query).toHaveBeenCalledWith("INSERT INTO users (email, phone_no, username, hashed_password) VALUES ($1, $2, $3, $4) RETURNING *", [email, phone_no, username, "hashed"]);
   });
 
   it("should throw an error if the email is already in use", async () => {
