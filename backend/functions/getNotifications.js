@@ -2,12 +2,12 @@ const pool = require("../database/db");
 
 async function getNotifications(uId) {
   let query = "select notifications from users where uid = $1";
-  const notifications = (await pool.query(query,[uId])).rows[0].notifications;
-  console.log(notifications);
-  if (notifications === null || notifications.length === 0) {
+  const res = await pool.query(query,[uId]);
+  if (res.rows.length === 0) {
     return {message: "No new notifications"};
   }
 
+  const notifications = res.rows[0].notifications;
   const resObj = {
     notifications: []
   };
