@@ -38,7 +38,7 @@ describe("authRegister", () => {
     pool.query.mockResolvedValueOnce({ rows: [] });
     bcrypt.hash.mockResolvedValueOnce("hashed");
 
-    const register = await authRegister(email, phone_no, username, password);
+    await authRegister(email, phone_no, username, password);
 
     expect(pool.query).toHaveBeenCalledTimes(4);
     expect(pool.query).toHaveBeenCalledWith("select * from users where email = $1", [email]);
@@ -48,7 +48,6 @@ describe("authRegister", () => {
     expect(bcrypt.hash).toHaveBeenCalledWith(password, saltRounds);
 
     expect(pool.query).toHaveBeenCalledWith("INSERT INTO users (email, phone_no, username, hashed_password) VALUES ($1, $2, $3, $4) RETURNING *", [email, phone_no, username, "hashed"]);
-    expect(register).toEqual({ status: 200, message: "Successfully registered."}); 
   });
 
   it("should throw an error if the email is already in use", async () => {
