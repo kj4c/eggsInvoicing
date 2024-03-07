@@ -43,3 +43,4 @@ describe("Receiving Email", () => {
     expect(pool.query).toHaveBeenCalledWith("SELECT receiver, invoice_id FROM send_invoice WHERE RECEIVER = $1 AND invoice_id = $2",[receiver, invoiceId]);
   });
 });
+
