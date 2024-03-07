@@ -30,9 +30,9 @@ app.put('/:userId/updateStatus', (req, res) => {
   res.status(200).json({ message: "Successfully changed state" });
 });
 
-app.get('/:userId/getNotifications', async function (req, res) {
+app.get('/getNotifications', async function (req, res) {
   try {
-    const uId = req.params.userId;
+    const uId = req.body.uId;
     res.status(200).json(await getNotifications(uId));
   } catch (err) {
     console.error(err.message);
