@@ -1,5 +1,5 @@
 const pool = require('../database/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const createError = require('http-errors');
 
 async function authLogin(username, password) {
@@ -22,6 +22,7 @@ async function authLogin(username, password) {
     console.log("Successfully logged in:", existingUser.rows[0]);
 
     return {
+      status: 200,
       uid: existingUser.rows[0].uid
     }
     // gracefully catches error for unexpected occurences

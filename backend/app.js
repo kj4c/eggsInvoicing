@@ -6,7 +6,11 @@ const PORT = 3000;
 const getNotifications = require('./functions/getNotifications');
 const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
+const receiveEmail = require('./functions/receiveEmail');
+const authRegister = require('./functions/authRegister');
+const authLogin = require('./functions/authLogin');
 const generateReceivePdf = require('./functions/report');
+
 app.use(express.json());
 app.use(errorHandler());
 app.use(bodyParser.json());
@@ -52,9 +56,10 @@ app.post('/:userId/send/text', (req, res) => {
   res.status(200).json({ textId: 789 });
 });
 
-app.get('/:userId/receiveReport', async(req, res) => {
+app.get('/receiveReport', async(req, res) => {
   try {
-    let pdf = await generateReceivePdf(2);
+    const uid = parseInt(req.query.uid);
+    let pdf = await generateReceivePdf(uid);
     if (pdf.status != 200) {
       res.status(400).message({error: "error generating the report"});
     }
@@ -78,8 +83,27 @@ app.delete('/:userId/allEmails/delete', (req, res) => {
   res.status(200).json({ message: "successfully deleted invoice id" });
 });
 
+app.post('/register', async(req, res) => {
+  try {
+    const { email, phone, username, password } = req.body;
+    res.status(200).json(await authRegister(email, phone, username, password));
+  } catch (err) {
+    res.status(400).json({message: "Failed to register new user:"})
+  }
+});
+
+app.post('/login', async(req, res) => {
+  try {
+    const { username, password } = req.body;
+    res.status(200).json(await authLogin(username, password));
+  } catch (err) {
+    res.status(400).json({ message: "Failed to login:"})
+  }
+});
+
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 }
 
 module.exports = app;
+

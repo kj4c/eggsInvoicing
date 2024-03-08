@@ -5,6 +5,11 @@ jest.mock("../database/db", () => ({
   query: jest.fn()
 }));
 
+beforeEach(() => {
+  jest.clearAllMocks();
+  jest.spyOn(console, 'error').mockImplementation(() => {}); 
+});
+
 describe("Generating receiving report", () => {
   beforeEach(() => {
     jest.clearAllMocks();
