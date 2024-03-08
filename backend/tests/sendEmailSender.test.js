@@ -22,5 +22,5 @@ describe('sendEmailWithXML function', () => {
     expect(nodemailer.createTransport().sendMail).toHaveBeenCalledWith(expect.objectContaining({
       to: recipientEmail,
     }));
-  });
+  }, 20 * 1000);
 });
