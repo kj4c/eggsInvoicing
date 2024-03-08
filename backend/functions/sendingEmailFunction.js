@@ -54,7 +54,7 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
   query = "update users set notifications = array_append(notifications, $1) where email = $2";
   await pool.query(query, [invoiceId, recipient]);
 
-  return info.messageId;
+  return invoiceId;
 }
 
 module.exports = sendEmailWithXML;
