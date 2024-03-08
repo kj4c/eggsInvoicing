@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">88.46% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/22</span>
+                <span class='fraction'>23/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/21</span>
+                <span class='fraction'>22/25</span>
             </div>
         
             
@@ -120,12 +120,19 @@
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,7 +141,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -156,33 +162,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const nodemailer = require('nodemailer');
 const fs = require('fs').promises;
 const pool = require('../database/db');
 &nbsp;
 async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
   const attachmentPromises = xmlFiles.map(async (xmlFile) =&gt; {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof xmlFile.filename !== 'string') {
+<span class="cstat-no" title="statement not covered" >      throw new Error(`Expected filename to be a string, but got ${typeof xmlFile.filename}`);</span>
+    }
     await fs.writeFile(xmlFile.filename, xmlFile.xmlString);
     return {
       filename: xmlFile.filename,
@@ -190,7 +201,6 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
       contentType: 'text/xml'
     };
   });
-&nbsp;
 &nbsp;
   const attachments = await Promise.all(attachmentPromises);
 &nbsp;
@@ -201,7 +211,7 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
     secure: false,
     auth: {
       user: "xmlsender1@gmail.com",
-      pass: "yourpassword", 
+      pass: "spfs ucnq sjaj qktq",
     },
   });
 &nbsp;
@@ -213,25 +223,27 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
     attachments: attachments,
   };
 &nbsp;
+  let info = await transporter.sendMail(mailOptions);
+  console.log("Message sent: %s", info.messageId);
 &nbsp;
   try {
-    let info = await transporter.sendMail(mailOptions);
-    console.log("Message sent: %s", info.messageId);
-    
     for (const attachment of attachments) {
       const xmlString = await fs.readFile(attachment.path, { encoding: 'utf8' });
-      let query = `insert into sent_invoices (sender_email, receiver_email, xml_invoices)
-                    values ($1, $2, $3) returning invoice_id`;
-      const invoiceId = (await pool.query(query, [from, recipient, '{' + xmlString + '}'])).rows[0].invoice_id;
+      let query = `INSERT INTO sent_invoices (sender_email, receiver_email, xml_invoices) VALUES ($1, $2, $3) RETURNING invoice_id`;
+      const invoiceId = (await pool.query(query, [from, recipient, xmlString])).rows[0].invoice_id;
 &nbsp;
-      query = "update users set notifications = array_append(notifications, $1) where email = $2";
-      await pool.query(query, [invoiceId, recipient]);
+      query = "UPDATE users SET notifications = array_append(notifications, $1) WHERE email = $2";
+      await pool.query(query, [invoiceId.toString(), recipient]);
     }
+  } catch (error) {
+<span class="cstat-no" title="statement not covered" >    console.error(error);</span>
+<span class="cstat-no" title="statement not covered" >    throw error;</span>
   } finally {
     const cleanupPromises = attachments.map(attachment =&gt; fs.unlink(attachment.path));
     await Promise.all(cleanupPromises);
   }
 }
+&nbsp;
 &nbsp;
 module.exports = sendEmailWithMultipleXML;
 &nbsp;</pre></td></tr></table></pre>
@@ -241,7 +253,7 @@ module.exports = sendEmailWithMultipleXML;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-08T04:14:28.477Z
+                at 2024-03-08T09:11:01.616Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
