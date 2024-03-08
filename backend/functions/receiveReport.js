@@ -4,7 +4,7 @@ const pool = require('../database/db')
 
 // given a uid, generate a PDF of all the received invoices of the user with the invoice numbers, the email used that send the invoice, and received time
 async function generateReceivePdf(uid) {
-   // error checking
+  // error checking
   if (uid === undefined) {
     console.log({error: "Invalid uid"});
     return {status: 400};
