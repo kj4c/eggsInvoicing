@@ -91,13 +91,13 @@ app.post('/register', async(req, res) => {
   }
 });
 
-app.post('/receiveEmail', async(req, res) => {
+app.get('/receiveEmail', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
     const invoiceId = parseInt(req.query.invoiceId);
     res.status(200).json(await receiveEmail(uid, invoiceId));
   } catch (err) {
-    res.status(400).json({message: "Email not received"})
+    res.status(400).json({message: "Email not received."})
   }
 });
 

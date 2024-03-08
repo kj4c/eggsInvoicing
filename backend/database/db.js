@@ -5,7 +5,7 @@ const pool = new Pool({
   password: "seng2021Eggs",
   host: "seng2021-db-instance-01.cfu4w8ycow63.ap-southeast-2.rds.amazonaws.com",
   port: 5432,
-  database: "seng2021_db",
+  databse: "seng2021_db",
   ssl: {
     rejectUnauthorized: false
   }

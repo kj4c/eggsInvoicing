@@ -1,12 +1,14 @@
-const receiveEmail = require("../functions/receiveEmail");
+const request = require('supertest');
 const pool = require("../database/db");
+const app = require('../app'); 
 const { describe, beforeEach, afterEach, it, expect } = require("@jest/globals");
 
-jest.mock("../database/db", () => ({
+
+jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
 
-describe("Receiving Email", () => {
+describe('/receiveEmail route', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.spyOn(console, 'error').mockImplementation(() => {}); // Suppress console.error
@@ -16,47 +18,51 @@ describe("Receiving Email", () => {
     console.error.mockRestore(); // Restore console.error
   });
 
-  it("should receive and notify user of email if the email exists and was sent", async () => {
-    const uid = 1;
-    const invoiceId = 123;
+  it('receives the email correctly', async () => {
+    const receiveEmailString = {
+      uid: 1,
+      invoiceId: 1
+    };
+    const uid = receiveEmailString.uid;
+    const invoiceId = receiveEmailString.invoiceId; 
+
     const email = 'dummy@gmail.com';
     pool.query.mockResolvedValueOnce({ rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({ rows: [{receiver: 'Tom', invoice_id: 123}]});
-    const result = await receiveEmail(uid, invoiceId);
+    const response = await request(app)
+      .get('/receiveEmail')
+      .query(receiveEmailString);
 
-    expect(result).toEqual({status: 200, message: "Success"});
+    expect(response.status).toBe(200);
+    expect(response._body.message).toBe("Success");
+    
     expect(pool.query).toHaveBeenCalledTimes(2);
     expect(pool.query).toHaveBeenCalledWith("SELECT email FROM users WHERE uid = $1", [uid]);
     let q = 'SELECT receiver_email, invoice_id FROM sent_invoice WHERE receiver_email = $1 AND invoice_id = $2';
     expect(pool.query).toHaveBeenCalledWith(q,[email, invoiceId]);
   });
 
-  it("cannot find the receiver", async () => {
-    const uid = 10000;
-    const invoiceId = 1;
+  it('no uid or invoiceId found.', async () => {
+    const receiveEmailString = {
+      uid: 10000,
+      invoiceId: 1
+    };
+    const uid = receiveEmailString.uid;
+    const invoiceId = receiveEmailString.invoiceId;
     const email = 'dummy@gmail.com';
+
     pool.query.mockResolvedValueOnce({ rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({ rows: []});
+    const response = await request(app)
+      .get('/receiveEmail')
+      .query(receiveEmailString);
 
-    await expect(receiveEmail(uid, invoiceId)).rejects.toThrow("Email not received."); // Make sure to await the promise
-    expect(pool.query).toHaveBeenCalledTimes(2);
-    expect(pool.query).toHaveBeenCalledWith("SELECT email FROM users WHERE uid = $1", [uid]);
-    let q = 'SELECT receiver_email, invoice_id FROM sent_invoice WHERE receiver_email = $1 AND invoice_id = $2';
-    expect(pool.query).toHaveBeenCalledWith(q,[email, invoiceId]);
-  });
-
-  it("cannot find the invoice_id", async () => {
-    const uid = 1;
-    const invoiceId = 112312313;
-    const email = 'dummy@gmail.com';
-    pool.query.mockResolvedValueOnce({ rows: [{email: email}]});
-    pool.query.mockResolvedValueOnce({ rows: []});
-
-    await expect(receiveEmail(uid, invoiceId)).rejects.toThrow("Email not received."); // Make sure to await the promise
+    expect(response.status).toBe(400);
+    expect(response._body.message).toBe("Email not received.");
+    
     expect(pool.query).toHaveBeenCalledTimes(2);
     expect(pool.query).toHaveBeenCalledWith("SELECT email FROM users WHERE uid = $1", [uid]);
     let q = 'SELECT receiver_email, invoice_id FROM sent_invoice WHERE receiver_email = $1 AND invoice_id = $2';
     expect(pool.query).toHaveBeenCalledWith(q,[email, invoiceId]);
   });
 });
-
