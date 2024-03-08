@@ -57,8 +57,9 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
   } finally {
     const cleanupPromises = attachments.map(attachment => fs.unlink(attachment.path));
     await Promise.all(cleanupPromises);
-    return invoiceIds; 
   }
+
+  return invoiceIds; 
 }
 
 
