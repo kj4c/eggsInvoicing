@@ -161,6 +161,7 @@
         <line num="9" count="1" type="stmt"/>
         <line num="13" count="3" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="receiveEmail.js" path="/import/adams/7/z5428854/invoice-seng2021-24t1-eggs/backend/functions/receiveEmail.js">
         <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="3" type="stmt"/>
@@ -175,6 +176,21 @@
         <line num="18" count="3" type="stmt"/>
         <line num="19" count="3" type="stmt"/>
         <line num="23" count="3" type="stmt"/>
+=======
+      <file name="receiveEmail.js" path="C:\Users\kahow\UNSW\reactProjects\invoice-seng2021-24t1-eggs\backend\functions\receiveEmail.js">
+        <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+>>>>>>> cd72d32f9d9ae3933bf3d12a77360070c2cc1866
       </file>
       <file name="report.js" path="/import/adams/7/z5428854/invoice-seng2021-24t1-eggs/backend/functions/report.js">
         <metrics statements="23" coveredstatements="23" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>

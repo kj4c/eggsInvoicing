@@ -4,6 +4,9 @@ const pool = require('../database/db');
 
 async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
   const attachmentPromises = xmlFiles.map(async (xmlFile) => {
+    if (typeof xmlFile.filename !== 'string') {
+      throw new Error(`Expected filename to be a string, but got ${typeof xmlFile.filename}`);
+    }
     await fs.writeFile(xmlFile.filename, xmlFile.xmlString);
     return {
       filename: xmlFile.filename,
@@ -11,7 +14,6 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
       contentType: 'text/xml'
     };
   });
-
 
   const attachments = await Promise.all(attachmentPromises);
 
@@ -22,7 +24,7 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
     secure: false,
     auth: {
       user: "xmlsender1@gmail.com",
-      pass: "yourpassword", 
+      pass: "spfs ucnq sjaj qktq",
     },
   });
 
@@ -34,24 +36,26 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
     attachments: attachments,
   };
 
+  let info = await transporter.sendMail(mailOptions);
+  console.log("Message sent: %s", info.messageId);
 
   try {
-    let info = await transporter.sendMail(mailOptions);
-    console.log("Message sent: %s", info.messageId);
-    
     for (const attachment of attachments) {
       const xmlString = await fs.readFile(attachment.path, { encoding: 'utf8' });
-      let query = `insert into sent_invoices (sender_email, receiver_email, xml_invoices)
-                    values ($1, $2, $3) returning invoice_id`;
-      const invoiceId = (await pool.query(query, [from, recipient, '{' + xmlString + '}'])).rows[0].invoice_id;
+      let query = `INSERT INTO sent_invoices (sender_email, receiver_email, xml_invoices) VALUES ($1, $2, $3) RETURNING invoice_id`;
+      const invoiceId = (await pool.query(query, [from, recipient, xmlString])).rows[0].invoice_id;
 
-      query = "update users set notifications = array_append(notifications, $1) where email = $2";
-      await pool.query(query, [invoiceId, recipient]);
+      query = "UPDATE users SET notifications = array_append(notifications, $1) WHERE email = $2";
+      await pool.query(query, [invoiceId.toString(), recipient]);
     }
+  } catch (error) {
+    console.error(error);
+    throw error;
   } finally {
     const cleanupPromises = attachments.map(attachment => fs.unlink(attachment.path));
     await Promise.all(cleanupPromises);
   }
 }
+
 
 module.exports = sendEmailWithMultipleXML;
