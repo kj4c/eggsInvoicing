@@ -1,5 +1,5 @@
-const generateReceivePdf = require("../functions/report.js");
-const pool = require("../database/db");
+const generateSentPdf = require("../functions/sentReport.js");
+const pool = require("../database/db.js");
 
 jest.mock("../database/db", () => ({
   query: jest.fn()
@@ -10,17 +10,17 @@ beforeEach(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {}); 
 });
 
-describe("Generating receiving report", () => {
+describe("Generating sent report", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.spyOn(console, 'error').mockImplementation(() => {}); 
   });
 
-  it("Successfully generates report", async () => { 
+  it("Successfully generates sent report", async () => { 
     const time = new Date();
-    pool.query.mockResolvedValueOnce({ rows: [{invoice_id: 1234, sender_email: "Bob", sent_at: time}]});
+    pool.query.mockResolvedValueOnce({ rows: [{invoice_id: 1234, receiver_email: "Bob", sent_at: time}]});
     pool.query.mockResolvedValueOnce({ rows: [{email: 'dummy@gmail.com'}]});
-    const receive = await generateReceivePdf(1);
+    const receive = await generateSentPdf(1);
     expect(receive.status).toEqual(200);    
   });
 });

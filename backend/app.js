@@ -10,7 +10,8 @@ const sendEmailWithMultipleXML = require('./functions/sendEmailWithMultXML');
 const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
 const receiveEmail = require('./functions/receiveEmail');
-const generateReceivePdf = require('./functions/report');
+const generateReceivePdf = require('./functions/receiveReport');
+const generateSentPdf = require('./functions/sentReport');
 
 app.use(express.json());
 app.use(errorHandler());
@@ -61,6 +62,23 @@ app.post('/send/multiInvoice', async (req, res) => {
 app.post('/:userId/send/text', (req, res) => {
   // indentations 
   res.status(200).json({ textId: 789 });
+});
+
+app.get('/sentReport', async(req, res) => {
+  try {
+    const uid = parseInt(req.query.uid);
+    let pdf = await generateSentPdf(uid);
+    if (pdf.status != 200) {
+      res.status(400).message({error: "error generating the report"});
+    }
+    pdf = pdf.doc;
+    res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"'); 
+    res.setHeader('Content-Type', 'application/pdf');
+    res.send(pdf.output());
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({message: "error generating the report"});
+  }
 });
 
 app.get('/receiveReport', async(req, res) => {
