@@ -3,7 +3,7 @@ const sendEmailWithXML = require('../functions/sendingEmailFunction');
 // testing of the mail to my email
 jest.mock('nodemailer', () => ({
   createTransport: jest.fn().mockReturnValue({
-    sendMail: jest.fn().mockResolvedValue({ messageId: '1' }),
+    sendMail: jest.fn().mockResolvedValue({ invoiceId: '1' }),
   }),
 }));
 
