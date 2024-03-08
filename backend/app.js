@@ -7,11 +7,9 @@ const getNotifications = require('./functions/getNotifications');
 const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
 const sendEmailWithMultipleXML = require('./functions/sendEmailWithMultXML');
-// const receiveEmail = require('./functions/receiveEmail');
 const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
 const receiveEmail = require('./functions/receiveEmail');
-
 const generateReceivePdf = require('./functions/report');
 
 app.use(express.json());
@@ -101,13 +99,13 @@ app.post('/register', async(req, res) => {
   }
 });
 
-app.post('/receiveEmail', async(req, res) => {
+app.get('/receiveEmail', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
     const invoiceId = parseInt(req.query.invoiceId);
     res.status(200).json(await receiveEmail(uid, invoiceId));
   } catch (err) {
-    res.status(400).json({message: "Email not received"})
+    res.status(400).json({message: "Email not received."})
   }
 });
 

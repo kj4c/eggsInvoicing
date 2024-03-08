@@ -1,5 +1,6 @@
 TN:
 SF:app.js
+<<<<<<< HEAD
 FN:19,(anonymous_0)
 FN:24,(anonymous_1)
 FN:36,(anonymous_2)
@@ -15,6 +16,24 @@ FN:103,(anonymous_11)
 FN:113,(anonymous_12)
 FNF:13
 FNH:3
+=======
+FN:18,(anonymous_0)
+FN:22,(anonymous_1)
+FN:34,(anonymous_2)
+FN:39,(anonymous_3)
+FN:43,(anonymous_4)
+FN:48,(anonymous_5)
+FN:53,(anonymous_6)
+FN:58,(anonymous_7)
+FN:75,(anonymous_8)
+FN:80,(anonymous_9)
+FN:85,(anonymous_10)
+FN:94,(anonymous_11)
+FN:104,(anonymous_12)
+FN:114,(anonymous_13)
+FNF:14
+FNH:2
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 FNDA:0,(anonymous_0)
 FNDA:1,(anonymous_1)
 FNDA:0,(anonymous_2)
@@ -25,6 +44,7 @@ FNDA:0,(anonymous_6)
 FNDA:0,(anonymous_7)
 FNDA:0,(anonymous_8)
 FNDA:0,(anonymous_9)
+<<<<<<< HEAD
 FNDA:2,(anonymous_10)
 FNDA:2,(anonymous_11)
 FNDA:0,(anonymous_12)
@@ -46,8 +66,34 @@ DA:17,3
 DA:19,3
 DA:20,0
 DA:24,3
+=======
+FNDA:0,(anonymous_10)
+FNDA:2,(anonymous_11)
+FNDA:0,(anonymous_12)
+FNDA:0,(anonymous_13)
+DA:1,2
+DA:2,2
+DA:3,2
+DA:4,2
+DA:5,2
+DA:6,2
+DA:7,2
+DA:8,2
+DA:9,2
+DA:10,2
+DA:11,2
+DA:12,2
+DA:14,2
+DA:15,2
+DA:16,2
+DA:18,2
+DA:19,0
+DA:22,2
+DA:23,1
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 DA:25,1
 DA:27,1
+<<<<<<< HEAD
 DA:28,1
 DA:29,1
 DA:31,0
@@ -104,11 +150,68 @@ BRDA:71,0,0,0
 BRDA:71,0,1,0
 BRDA:112,1,0,0
 BRDA:112,1,1,3
+=======
+DA:29,0
+DA:30,0
+DA:34,2
+DA:35,0
+DA:36,0
+DA:39,2
+DA:40,0
+DA:43,2
+DA:44,0
+DA:45,0
+DA:48,2
+DA:50,0
+DA:53,2
+DA:55,0
+DA:58,2
+DA:59,0
+DA:60,0
+DA:61,0
+DA:62,0
+DA:63,0
+DA:65,0
+DA:66,0
+DA:67,0
+DA:68,0
+DA:70,0
+DA:71,0
+DA:75,2
+DA:77,0
+DA:80,2
+DA:82,0
+DA:85,2
+DA:86,0
+DA:87,0
+DA:88,0
+DA:90,0
+DA:94,2
+DA:95,2
+DA:96,2
+DA:97,2
+DA:98,2
+DA:100,1
+DA:104,2
+DA:105,0
+DA:106,0
+DA:107,0
+DA:109,0
+DA:113,2
+DA:114,0
+DA:117,2
+LF:71
+LH:39
+BRDA:62,0,0,0
+BRDA:62,0,1,0
+BRDA:113,1,0,0
+BRDA:113,1,1,2
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 BRF:4
 BRH:1
 end_of_record
 TN:
-SF:database\db.js
+SF:database/db.js
 FNF:0
 FNH:0
 DA:1,4
@@ -120,7 +223,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:functions\authLogin.js
+SF:functions/authLogin.js
 FN:5,authLogin
 FNF:1
 FNH:1
@@ -151,7 +254,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:functions\authRegister.js
+SF:functions/authRegister.js
 FN:6,authRegister
 FNF:1
 FNH:1
@@ -190,14 +293,18 @@ BRF:6
 BRH:6
 end_of_record
 TN:
-SF:functions\getNotifications.js
+SF:functions/getNotifications.js
 FN:3,getNotifications
 FN:18,(anonymous_1)
 FNF:2
 FNH:1
 FNDA:2,getNotifications
 FNDA:0,(anonymous_1)
+<<<<<<< HEAD
 DA:1,4
+=======
+DA:1,3
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 DA:4,2
 DA:5,2
 DA:6,2
@@ -210,7 +317,11 @@ DA:17,0
 DA:18,0
 DA:21,1
 DA:22,1
+<<<<<<< HEAD
 DA:25,4
+=======
+DA:25,3
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 LF:14
 LH:11
 BRDA:6,0,0,1
@@ -219,18 +330,26 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:functions\hasReceivedInvoiceId.js
+SF:functions/hasReceivedInvoiceId.js
 FN:3,hasReceivedInvoiceId
 FNF:1
 FNH:1
 FNDA:2,hasReceivedInvoiceId
+<<<<<<< HEAD
 DA:1,4
+=======
+DA:1,3
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 DA:4,2
 DA:5,2
 DA:6,2
 DA:7,1
 DA:9,1
+<<<<<<< HEAD
 DA:13,4
+=======
+DA:13,3
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 LF:7
 LH:7
 BRDA:6,0,0,1
@@ -239,40 +358,47 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:functions\receiveEmail.js
+SF:functions/receiveEmail.js
 FN:4,receiveEmail
 FNF:1
 FNH:1
-FNDA:3,receiveEmail
-DA:1,1
-DA:2,1
-DA:5,3
-DA:6,3
-DA:7,3
-DA:8,2
-DA:10,1
-DA:11,1
-DA:17,2
-DA:18,2
-DA:22,1
-LF:11
-LH:11
-BRDA:7,0,0,2
-BRDA:7,0,1,1
+FNDA:5,receiveEmail
+DA:1,3
+DA:2,3
+DA:5,5
+DA:6,5
+DA:7,5
+DA:8,5
+DA:9,5
+DA:10,3
+DA:12,2
+DA:18,3
+DA:19,3
+DA:23,3
+LF:12
+LH:12
+BRDA:9,0,0,3
+BRDA:9,0,1,2
 BRF:2
 BRH:2
 end_of_record
 TN:
-SF:functions\report.js
+SF:functions/report.js
 FN:6,generateReceivePdf
 FN:15,(anonymous_1)
 FNF:2
 FNH:2
 FNDA:1,generateReceivePdf
 FNDA:1,(anonymous_1)
+<<<<<<< HEAD
 DA:1,4
 DA:2,4
 DA:3,4
+=======
+DA:1,3
+DA:2,3
+DA:3,3
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 DA:7,1
 DA:8,1
 DA:11,1
@@ -292,14 +418,18 @@ DA:27,1
 DA:28,1
 DA:29,1
 DA:34,1
+<<<<<<< HEAD
 DA:36,4
+=======
+DA:36,3
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 LF:23
 LH:23
 BRF:0
 BRH:0
 end_of_record
 TN:
-SF:functions\sendEmailWithMultXML.js
+SF:functions/sendEmailWithMultXML.js
 FN:5,sendEmailWithMultipleXML
 FN:6,(anonymous_1)
 FN:55,(anonymous_2)
@@ -341,14 +471,20 @@ BRF:2
 BRH:1
 end_of_record
 TN:
-SF:functions\sendingEmailFunction.js
+SF:functions/sendingEmailFunction.js
 FN:6,sendEmailWithXML
 FNF:1
 FNH:1
 FNDA:1,sendEmailWithXML
+<<<<<<< HEAD
 DA:1,3
 DA:2,3
 DA:3,3
+=======
+DA:1,2
+DA:2,2
+DA:3,2
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 DA:7,1
 DA:8,0
 DA:11,1
@@ -360,6 +496,7 @@ DA:31,1
 DA:46,1
 DA:47,1
 DA:48,1
+<<<<<<< HEAD
 DA:50,1
 DA:52,1
 DA:54,1
@@ -368,6 +505,11 @@ DA:57,1
 DA:60,3
 LF:20
 LH:17
+=======
+DA:51,2
+LF:15
+LH:15
+>>>>>>> ebff5b07c4ace99e9589f39a9dcf01248e18720e
 BRDA:6,0,0,1
 BRDA:7,1,0,0
 BRDA:7,1,1,1
