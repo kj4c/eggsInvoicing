@@ -39,11 +39,14 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
   let info = await transporter.sendMail(mailOptions);
   console.log("Message sent: %s", info.messageId);
 
+  const invoiceIds = [];
+
   try {
     for (const attachment of attachments) {
       const xmlString = await fs.readFile(attachment.path, { encoding: 'utf8' });
       let query = `INSERT INTO sent_invoices (sender_email, receiver_email, xml_invoices) VALUES ($1, $2, $3) RETURNING invoice_id`;
       const invoiceId = (await pool.query(query, [from, recipient, xmlString])).rows[0].invoice_id;
+      invoiceIds.push(invoiceId); 
 
       query = "UPDATE users SET notifications = array_append(notifications, $1) WHERE email = $2";
       await pool.query(query, [invoiceId.toString(), recipient]);
@@ -55,6 +58,8 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
     const cleanupPromises = attachments.map(attachment => fs.unlink(attachment.path));
     await Promise.all(cleanupPromises);
   }
+
+  return invoiceIds; 
 }
 
 

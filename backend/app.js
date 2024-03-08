@@ -51,8 +51,8 @@ app.get('/receive/getNotifications', async function (req, res) {
 app.post('/send/multiInvoice', async (req, res) => {
   try {
     const { from, recipient, xmlFiles } = req.body;
-    await sendEmailWithMultipleXML(from, recipient, xmlFiles);
-    res.status(200).json({ success: true, message: 'Email sent successfully with XML attachments.' });
+    const invoiceId = await sendEmailWithMultipleXML(from, recipient, xmlFiles);
+    res.status(200).json({ success: true, invoiceIds: invoiceId });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Failed to send email.' });
