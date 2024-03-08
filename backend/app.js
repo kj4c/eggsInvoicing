@@ -6,6 +6,7 @@ const PORT = 3000;
 const getNotifications = require('./functions/getNotifications');
 const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
+const sendEmailWithMultipleXML = require('./functions/sendEmailWithMultXML');
 // const receiveEmail = require('./functions/receiveEmail');
 const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
@@ -47,9 +48,15 @@ app.get('/receive/getNotifications', async function (req, res) {
   res.status(200).json(await getNotifications(uId));
 });
 
-app.post('/:userId/send/multiInvoice', (req, res) => {
-
-  res.status(200).json({ invoiceIds: [123, 456] });
+app.post('/send/multiInvoice', async (req, res) => {
+  try {
+    const { from, recipient, xmlFiles } = req.body;
+    await sendEmailWithMultipleXML(from, recipient, xmlFiles);
+    res.status(200).json({ success: true, message: 'Email sent successfully with XML attachments.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Failed to send email.' });
+  }
 });
 
 app.post('/:userId/send/text', (req, res) => {
