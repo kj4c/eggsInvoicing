@@ -18,8 +18,8 @@ describe("Generating sent report", () => {
 
   it("Successfully generates sent report", async () => { 
     const time = new Date();
-    pool.query.mockResolvedValueOnce({ rows: [{invoice_id: 1234, receiver_email: "Bob", sent_at: time}]});
     pool.query.mockResolvedValueOnce({ rows: [{email: 'dummy@gmail.com'}]});
+    pool.query.mockResolvedValueOnce({ rows: [{invoice_id: 1234, receiver_email: "Bob", sent_at: time}]});
     const receive = await generateSentPdf(1);
     expect(receive.status).toEqual(200);    
   });
