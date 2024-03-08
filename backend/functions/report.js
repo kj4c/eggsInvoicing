@@ -2,7 +2,7 @@ const { jsPDF } = require('jspdf');
 require('jspdf-autotable');
 const pool = require('../database/db')
 
-// Given a uid, generate a PDF of all the received invoices of the user with the invoice numbers, the email used that send the invoice, and received time
+// given a uid, generate a PDF of all the received invoices of the user with the invoice numbers, the email used that send the invoice, and received time
 async function generateReceivePdf(uid) {
   const selectQuery = "SELECT s.invoice_id, s.sender_email, s.sent_at FROM sent_invoices s JOIN users u ON u.email = s.receiver_email WHERE u.uid = $1";
   const qres = await pool.query(selectQuery, [uid]);

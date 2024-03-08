@@ -2,7 +2,6 @@ const nodemailer = require('nodemailer');
 const pool = require('../database/db');
 const fs = require('fs').promises; 
 
-
 // this is the function that would send the EMAIL with an XML file 
 async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachment.xml') {
   await fs.writeFile(filename, xmlString);
@@ -45,6 +44,8 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
 
   query = "update users set notifications = array_append(notifications, $1) where email = $2";
   await pool.query(query, [invoiceId, recipient]);
+
+  return info.messageId;
 }
 
 module.exports = sendEmailWithXML;
