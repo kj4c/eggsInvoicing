@@ -17,6 +17,6 @@ describe('/send/email route', () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body.success).toBe(true); 
-    expect(response.body.messageId).toEqual({messageId: '1'});
+    expect(response.body.invoiceId).toEqual({messageId: '1'});
   });
 });

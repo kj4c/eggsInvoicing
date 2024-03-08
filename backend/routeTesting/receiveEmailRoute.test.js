@@ -38,7 +38,7 @@ describe('/receiveEmail route', () => {
     
     expect(pool.query).toHaveBeenCalledTimes(2);
     expect(pool.query).toHaveBeenCalledWith("SELECT email FROM users WHERE uid = $1", [uid]);
-    let q = 'SELECT receiver_email, invoice_id FROM sent_invoice WHERE receiver_email = $1 AND invoice_id = $2';
+    let q = 'SELECT receiver_email, invoice_id FROM sent_invoices WHERE receiver_email = $1 AND invoice_id = $2';
     expect(pool.query).toHaveBeenCalledWith(q,[email, invoiceId]);
   });
 
@@ -62,7 +62,7 @@ describe('/receiveEmail route', () => {
     
     expect(pool.query).toHaveBeenCalledTimes(2);
     expect(pool.query).toHaveBeenCalledWith("SELECT email FROM users WHERE uid = $1", [uid]);
-    let q = 'SELECT receiver_email, invoice_id FROM sent_invoice WHERE receiver_email = $1 AND invoice_id = $2';
+    let q = 'SELECT receiver_email, invoice_id FROM sent_invoices WHERE receiver_email = $1 AND invoice_id = $2';
     expect(pool.query).toHaveBeenCalledWith(q,[email, invoiceId]);
   });
 });

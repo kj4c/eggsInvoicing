@@ -25,8 +25,8 @@ app.post('/send/email', async function (req, res) {
   const { from, recipient, xmlString } = req.body;
 
   try {
-    const messageId = await sendEmailWithXML(from, recipient, xmlString);
-    res.status(200).json({ success: true, messageId });
+    const invoiceId = await sendEmailWithXML(from, recipient, xmlString);
+    res.status(200).json({ success: true, invoiceId: invoiceId });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, error: 'Failed to send email' });

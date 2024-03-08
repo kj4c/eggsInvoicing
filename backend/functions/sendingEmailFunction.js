@@ -46,11 +46,12 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
   let info = await transporter.sendMail(mailOptions);
   console.log("Message sent: %s", info.messageId);
   await fs.unlink(filename); 
-
+  
   let query = `insert into sent_invoices (sender_email, receiver_email, xml_invoices)
-                values ($1, $2, $3) returning invoice_id`;
+  values ($1, $2, $3) returning invoice_id`;
   const invoiceId = (await pool.query(query,[from, recipient, '{' + xmlString +'}'])).rows[0].invoice_id;
-
+  console.log("Invoice ID: %d ", invoiceId);
+  
   query = "update users set notifications = array_append(notifications, $1) where email = $2";
   await pool.query(query, [invoiceId, recipient]);
 
