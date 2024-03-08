@@ -1,4 +1,4 @@
-const {jsPDF} = require('jspdf');
+const { jsPDF } = require('jspdf');
 require('jspdf-autotable');
 const pool = require('../database/db')
 

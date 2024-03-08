@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for receiveEmail.js</title>
+    <title>Code coverage report for functions/getNotifications.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> receiveEmail.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">functions</a> getNotifications.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">73.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>11/15</span>
             </div>
         
             
@@ -37,20 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">78.57% </span>
                 <span class="quiet">Lines</span>
-<<<<<<< HEAD
-                <span class='fraction'>10/10</span>
-=======
-                <span class='fraction'>11/11</span>
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
+                <span class='fraction'>11/14</span>
             </div>
         
             
@@ -65,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -87,80 +83,75 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
-<<<<<<< HEAD
-<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-=======
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<<<<<<< HEAD
-=======
-<span class="cline-any cline-yes">1x</span>
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const pool = require('../database/db');
-const createError = require('http-errors');
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const pool = require("../database/db");
 &nbsp;
-async function receiveEmail(receiver, invoiceId) {
-  try {
-    const emailFound = await pool.query("SELECT receiver, invoice_id FROM send_invoice WHERE RECEIVER = $1 AND invoice_id = $2",[receiver, invoiceId]);
-    if (emailFound.rows.length === 0) {
-      throw createError(400, "Email not received.");
-    } else {
-<<<<<<< HEAD
-=======
-      console.log(emailFound);
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
-      return {
-        status: 200,
-        message: "Success"
-      };
-    }
-  } catch (error) {
-    console.error("Failed to receive email:", error.message);
-    throw error;
+async function getNotifications(uId) {
+  let query = "select notifications from users where uid = $1";
+  const res = await pool.query(query,[uId]);
+  if (res.rows.length === 0) {
+    return {message: "No new notifications"};
   }
+&nbsp;
+  const notifications = res.rows[0].notifications;
+  const resObj = {
+    notifications: []
+  };
+&nbsp;
+  for (const notificationId of notifications) {
+    const query = <span class="cstat-no" title="statement not covered" >"select * from sent_invoices where invoice_id = $1";</span>
+    const res = <span class="cstat-no" title="statement not covered" >(await pool.query(query, [notificationId])).rows;</span>
+<span class="cstat-no" title="statement not covered" >    res.forEach(<span class="fstat-no" title="function not covered" >se</span>ntInvoicesRecord =&gt; <span class="cstat-no" title="statement not covered" >resObj.notifications.push(sentInvoicesRecord))</span>;</span>
+  }
+  
+  await pool.query("update users set notifications = '{}' where uid = $1", [uId]);
+  return resObj;
 }
 &nbsp;
-module.exports = receiveEmail;</pre></td></tr></table></pre>
+module.exports = getNotifications;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2024-03-06T04:05:26.059Z
-=======
-                at 2024-03-06T04:11:45.563Z
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
+                at 2024-03-07T10:44:03.099Z
             </div>
-        <script src="prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     

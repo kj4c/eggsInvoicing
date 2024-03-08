@@ -1,14 +1,20 @@
 const express = require('express');
 const app = express();
+const errorHandler = require('middleware-http-errors');
 // const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 const PORT = 3000;
-const getNotifications = require('./functions/receivingEmailFunction');
+const getNotifications = require('./functions/getNotifications');
+const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
-const receiveEmail = require('./functions/receiveEmail');
+// const receiveEmail = require('./functions/receiveEmail');
+const authRegister = require('./functions/authRegister');
+const authLogin = require('./functions/authLogin');
 
 const generateReceivePdf = require('./functions/report');
 app.use(express.json());
+// handles errors nicely
+app.use(errorHandler());
 
 app.get('/', (req, res) => {
   res.send("Hello world!");
@@ -19,10 +25,9 @@ app.post('/:userId/send/email', async function (req, res) {
   res.status(200).json(sendEmailWithXML(from, recipient, xmlString));
 });
 
-app.get('/:userId/receiveEmail', (req, res) => {
-  receiveEmail(123,123);
-  console.log('meow');
-  res.status(200).json({ message: "successfully received X emails" });
+app.get('/receive/hasReceivedInvoiceId', async function (req, res) {
+  const { invoiceId, receiverEmail } = req.body;
+  res.status(200).json(await hasReceivedInvoiceId(invoiceId, receiverEmail));
 });
 
 app.put('/:userId/updateStatus', (req, res) => {
@@ -30,13 +35,9 @@ app.put('/:userId/updateStatus', (req, res) => {
   res.status(200).json({ message: "Successfully changed state" });
 });
 
-app.get('/getNotifications', async function (req, res) {
-  try {
-    const uId = req.body.uId;
-    res.status(200).json(await getNotifications(uId));
-  } catch (err) {
-    console.error(err.message);
-  }
+app.get('/receive/getNotifications', async function (req, res) {
+  const uId = req.body.uId;
+  res.status(200).json(await getNotifications(uId));
 });
 
 app.post('/:userId/send/multiInvoice', (req, res) => {
@@ -49,9 +50,10 @@ app.post('/:userId/send/text', (req, res) => {
   res.status(200).json({ textId: 789 });
 });
 
-app.get('/:userId/receiveReport', async(req, res) => {
+app.get('/receiveReport', async(req, res) => {
   try {
-    let pdf = await generateReceivePdf(2);
+    const uid = parseInt(req.query.uid);
+    let pdf = await generateReceivePdf(uid);
     if (pdf.status != 200) {
       res.status(400).message({error: "error generating the report"});
     }
@@ -75,7 +77,23 @@ app.delete('/:userId/allEmails/delete', (req, res) => {
   res.status(200).json({ message: "successfully deleted invoice id" });
 });
 
+app.post('/register', async(req, res) => {
+  try {
+    const { email, phone, username, password } = req.body;
+    res.status(200).json(await authRegister(email, phone, username, password));
+  } catch (err) {
+    res.status(400).json({message: "Failed to register new user:"})
+  }
+});
 
+app.post('/login', async(req, res) => {
+  try {
+    const { username, password } = req.body;
+    res.status(200).json(await authLogin(username, password));
+  } catch (err) {
+    res.status(400).json({ message: "Failed to login:"})
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

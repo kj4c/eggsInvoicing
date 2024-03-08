@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for receiveEmail.js</title>
+    <title>Code coverage report for functions/authLogin.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> receiveEmail.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">functions</a> authLogin.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -46,11 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-<<<<<<< HEAD
-                <span class='fraction'>10/10</span>
-=======
-                <span class='fraction'>11/11</span>
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -87,26 +83,43 @@
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
-<<<<<<< HEAD
-<a name='L21'></a><a href='#L21'>21</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-=======
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<<<<<<< HEAD
-=======
-<span class="cline-any cline-yes">1x</span>
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,50 +130,55 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const pool = require('../database/db');
+const bcrypt = require('bcrypt');
 const createError = require('http-errors');
 &nbsp;
-async function receiveEmail(receiver, invoiceId) {
+async function authLogin(username, password) {
   try {
-    const emailFound = await pool.query("SELECT receiver, invoice_id FROM send_invoice WHERE RECEIVER = $1 AND invoice_id = $2",[receiver, invoiceId]);
-    if (emailFound.rows.length === 0) {
-      throw createError(400, "Email not received.");
-    } else {
-<<<<<<< HEAD
-=======
-      console.log(emailFound);
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
-      return {
-        status: 200,
-        message: "Success"
-      };
+        
+    // checks if username exists in database
+    const existingUser = await pool.query("select * from users where username = $1", [username]);
+    if (existingUser.rows.length == 0) {
+      throw createError(400, "Username does not exist");
     }
+  
+    // compares the encrypted password to password entered
+    const encrypted = existingUser.rows[0].hashed_password;
+      
+    const compare = await bcrypt.compare(password, encrypted);
+    if (!compare) {
+      throw createError(401, "Password is incorrect");
+    }
+&nbsp;
+    console.log("Successfully logged in:", existingUser.rows[0]);
+&nbsp;
+    return {
+      uid: existingUser.rows[0].uid
+    }
+    // gracefully catches error for unexpected occurences
   } catch (error) {
-    console.error("Failed to receive email:", error.message);
+    console.error("Failed to login:", error.message);
     throw error;
   }
 }
-&nbsp;
-module.exports = receiveEmail;</pre></td></tr></table></pre>
+  
+module.exports = authLogin;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2024-03-06T04:05:26.059Z
-=======
-                at 2024-03-06T04:11:45.563Z
->>>>>>> dd327de0f0dbc59311b4116a18e96e40c0048687
+                at 2024-03-07T10:44:03.099Z
             </div>
-        <script src="prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     
