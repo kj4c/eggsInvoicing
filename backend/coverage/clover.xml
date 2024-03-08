@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1709870785042" clover="3.2.0">
-  <project timestamp="1709870785042" name="All files">
-    <metrics statements="197" coveredstatements="162" conditionals="21" coveredconditionals="18" methods="25" coveredmethods="12" elements="243" coveredelements="192" complexity="0" loc="197" ncloc="197" packages="3" files="10" classes="10"/>
+<coverage generated="1709871268504" clover="3.2.0">
+  <project timestamp="1709871268504" name="All files">
+    <metrics statements="196" coveredstatements="161" conditionals="21" coveredconditionals="18" methods="25" coveredmethods="12" elements="242" coveredelements="191" complexity="0" loc="196" ncloc="196" packages="3" files="10" classes="10"/>
     <package name="backend">
-      <metrics statements="65" coveredstatements="33" conditionals="4" coveredconditionals="1" methods="13" coveredmethods="1"/>
+      <metrics statements="64" coveredstatements="32" conditionals="4" coveredconditionals="1" methods="13" coveredmethods="1"/>
       <file name="app.js" path="C:\Users\kahow\UNSW\reactProjects\invoice-seng2021-24t1-eggs\backend\app.js">
-        <metrics statements="65" coveredstatements="33" conditionals="4" coveredconditionals="1" methods="13" coveredmethods="1"/>
+        <metrics statements="64" coveredstatements="32" conditionals="4" coveredconditionals="1" methods="13" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -14,7 +14,6 @@
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
@@ -157,8 +156,8 @@
       </file>
       <file name="receiveEmail.js" path="C:\Users\kahow\UNSW\reactProjects\invoice-seng2021-24t1-eggs\backend\functions\receiveEmail.js">
         <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
         <line num="7" count="3" type="cond" truecount="2" falsecount="0"/>
@@ -167,7 +166,7 @@
         <line num="11" count="1" type="stmt"/>
         <line num="17" count="2" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
       </file>
       <file name="report.js" path="C:\Users\kahow\UNSW\reactProjects\invoice-seng2021-24t1-eggs\backend\functions\report.js">
         <metrics statements="23" coveredstatements="23" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
