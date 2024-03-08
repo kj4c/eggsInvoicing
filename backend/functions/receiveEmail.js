@@ -1,13 +1,14 @@
 const pool = require('../database/db');
 const createError = require('http-errors');
 
-async function receiveEmail(receiver, invoiceId) {
+async function receiveEmail(uid, invoiceId) {
   try {
-    const emailFound = await pool.query("SELECT receiver, invoice_id FROM send_invoice WHERE RECEIVER = $1 AND invoice_id = $2",[receiver, invoiceId]);
+    const userEmail = await pool.query("SELECT email FROM users WHERE uid = $1", [uid]);
+    let q = "SELECT receiver, invoice_id FROM send_invoice WHERE RECEIVER = $1 AND invoice_id = $2";
+    const emailFound = await pool.query(q,[userEmail.rows[0].email, invoiceId]);
     if (emailFound.rows.length === 0) {
       throw createError(400, "Email not received.");
     } else {
-      console.log(emailFound);
       return {
         status: 200,
         message: "Success"
@@ -17,6 +18,8 @@ async function receiveEmail(receiver, invoiceId) {
     console.error("Failed to receive email:", error.message);
     throw error;
   }
+
 }
+
 
 module.exports = receiveEmail;

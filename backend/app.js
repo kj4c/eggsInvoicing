@@ -9,6 +9,8 @@ const sendEmailWithXML = require('./functions/sendingEmailFunction');
 // const receiveEmail = require('./functions/receiveEmail');
 const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
+const receiveEmail = require('./functions/receiveEmail');
+
 const generateReceivePdf = require('./functions/report');
 
 app.use(express.json());
@@ -37,7 +39,6 @@ app.get('/receive/hasReceivedInvoiceId', async function (req, res) {
 });
 
 app.put('/:userId/updateStatus', (req, res) => {
-
   res.status(200).json({ message: "Successfully changed state" });
 });
 
@@ -89,6 +90,16 @@ app.post('/register', async(req, res) => {
     res.status(200).json(await authRegister(email, phone, username, password));
   } catch (err) {
     res.status(400).json({message: "Failed to register new user:"})
+  }
+});
+
+app.post('/receiveEmail', async(req, res) => {
+  try {
+    const uid = parseInt(req.query.uid);
+    const invoiceId = parseInt(req.query.invoiceId);
+    res.status(200).json(await receiveEmail(uid, invoiceId));
+  } catch (err) {
+    res.status(400).json({message: "Email not received"})
   }
 });
 
