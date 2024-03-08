@@ -6,11 +6,9 @@ const PORT = 3000;
 const getNotifications = require('./functions/getNotifications');
 const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
-// const receiveEmail = require('./functions/receiveEmail');
 const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
 const receiveEmail = require('./functions/receiveEmail');
-
 const generateReceivePdf = require('./functions/report');
 
 app.use(express.json());
