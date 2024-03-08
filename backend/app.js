@@ -1,6 +1,6 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
+const app = express();
 const errorHandler = require('middleware-http-errors');
 const PORT = 3000;
 const getNotifications = require('./functions/getNotifications');
@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
   res.send("Hello world!");
 });
 
+// manual testing works
 app.post('/send/email', async function (req, res) {
   const { from, recipient, xmlString } = req.body;
 

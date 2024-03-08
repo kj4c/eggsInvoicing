@@ -4,7 +4,16 @@ const fs = require('fs').promises;
 
 // this is the function that would send the EMAIL with an XML file 
 async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachment.xml') {
-  await fs.writeFile(filename, xmlString);
+  if (!xmlString) {
+    throw new Error('xmlString is required but was not provided.');
+  }
+
+  try {
+    await fs.writeFile(filename, xmlString);
+  } catch (error) {
+    console.error('Failed to write XML file:', error);
+    throw error; 
+  }
 
   // the nodemail transporter 
   let transporter = nodemailer.createTransport({
