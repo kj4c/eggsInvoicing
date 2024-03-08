@@ -25,7 +25,8 @@
     "nodemailer": "^6.9.11",
     "package": "^1.0.1",
     "pg": "^8.11.3",
-    "sync-request": "^6.1.0"
+    "sync-request": "^6.1.0",
+    "twilio": "^4.23.0"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
