@@ -1,25 +1,30 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 const errorHandler = require('middleware-http-errors');
-// const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
 const PORT = 3000;
 const getNotifications = require('./functions/getNotifications');
 const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
-
 const generateReceivePdf = require('./functions/report');
 app.use(express.json());
-// handles errors nicely
 app.use(errorHandler());
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send("Hello world!");
 });
 
-app.post('/:userId/send/email', async function (req, res) {
+app.post('/send/email', async function (req, res) {
   const { from, recipient, xmlString } = req.body;
-  res.status(200).json(sendEmailWithXML(from, recipient, xmlString));
+
+  try {
+    const messageId = await sendEmailWithXML(from, recipient, xmlString);
+    res.status(200).json({ success: true, messageId });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: 'Failed to send email' });
+  }
 });
 
 app.get('/receive/hasReceivedInvoiceId', async function (req, res) {
@@ -73,8 +78,8 @@ app.delete('/:userId/allEmails/delete', (req, res) => {
   res.status(200).json({ message: "successfully deleted invoice id" });
 });
 
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+}
 
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+module.exports = app;
