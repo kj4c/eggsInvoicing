@@ -5,6 +5,8 @@ const errorHandler = require('middleware-http-errors');
 const PORT = 3000;
 const getNotifications = require('./functions/getNotifications');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
+const sendEmailWithJSON = require('./functions/sendingEmailWithJsonFileAttachement');
+const sendEmailWIthMultipleJSON = require('./functions/sendEmailWIthMultipleJSON');
 const sendEmailWithMultipleXML = require('./functions/sendEmailWithMultXML');
 const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
@@ -29,6 +31,18 @@ app.post('/send/email', async function (req, res) {
 
   try {
     const invoiceId = await sendEmailWithXML(from, recipient, xmlString);
+    res.status(200).json({ success: true, invoiceId: invoiceId });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ success: false, error: 'Failed to send email' });
+  }
+});
+
+app.post('/send/email-json', async function (req, res) {
+  const { from, recipient, jsonString } = req.body;
+
+  try {
+    const invoiceId = await sendEmailWithJSON(from, recipient, jsonString);
     res.status(200).json({ success: true, invoiceId: invoiceId });
   } catch (error) {
     console.error(error);
@@ -71,6 +85,18 @@ app.post('/send/multiInvoice', async (req, res) => {
   }
 });
 
+app.post('/send/multiInvoice-json', async (req, res) => {
+  try {
+    const { from, recipient, jsonFiles } = req.body;
+    const invoiceId = await sendEmailWIthMultipleJSON(from, recipient, jsonFiles);
+    res.status(200).json({ success: true, invoiceIds: invoiceId });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Failed to send email.' });
+  }
+});
+
+/* istanbul ignore next */
 app.post('/:userId/send/text', (req, res) => {
   res.status(200).json({ textId: 789 });
 });
