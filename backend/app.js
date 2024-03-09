@@ -74,7 +74,7 @@ app.get('/sentReport', async(req, res) => {
     pdf = pdf.doc;
     res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"'); 
     res.setHeader('Content-Type', 'application/pdf');
-    res.send(pdf.output());
+    res.status(200).send(pdf.output());
   } catch (error) {
     console.log(error);
     res.status(400).json({message: "error generating the report"});
@@ -91,7 +91,7 @@ app.get('/receiveReport', async(req, res) => {
     pdf = pdf.doc;
     res.setHeader('Content-Disposition', 'attachment; filename="communication_report_received.pdf"'); 
     res.setHeader('Content-Type', 'application/pdf');
-    res.send(pdf.output());
+    res.status(200).send(pdf.output());
   } catch (error) {
     console.log(error);
     res.status(400).json({message: "error generating the report"});
