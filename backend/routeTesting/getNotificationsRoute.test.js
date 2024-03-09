@@ -2,8 +2,6 @@ const request = require('supertest');
 const pool = require("../database/db");
 const app = require('../app'); 
 const { describe, beforeEach, afterEach, it, expect } = require("@jest/globals");
-const getNotifications = require('../functions/getNotifications');
-
 
 jest.mock('../database/db', () => ({
   query: jest.fn()
