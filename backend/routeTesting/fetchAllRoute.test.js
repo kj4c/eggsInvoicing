@@ -24,17 +24,17 @@ describe('/fetchAll route', () => {
     console.error.mockRestore(); // Restore console.error
   });
 
-  // it('Invalid User Id', async () => {
-  //   pool.query.mockResolvedValueOnce({rows :[]});
+  it('Invalid User Id', async () => {
+    pool.query.mockResolvedValueOnce({rows :[]});
 
-  //   const response = await request(app).get('/receive/fetchByInvoiceId').send(body);
-  //   expect(response.status).toBe(403);
-  //   expect(response.body.message).toStrictEqual("Invalid User");
+    const response = await request(app).get('/receive/fetchAll').send(body);
+    expect(response.status).toBe(403);
+    expect(response.body.message).toStrictEqual("Invalid User");
     
-  //   expect(pool.query).toHaveBeenCalledTimes(1);
-  //   let q = "select uid from users where uid = $1";
-  //   expect(pool.query).toHaveBeenCalledWith(q, [uId]);
-  // });
+    expect(pool.query).toHaveBeenCalledTimes(1);
+    let q = "select uid from users where uid = $1";
+    expect(pool.query).toHaveBeenCalledWith(q, [uId]);
+  });
 
   it('Valid User Id', async () => {
     const expected = [
