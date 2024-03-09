@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../app'); 
 
-jest.mock('../functions/sendEmailWithMultipleJSON', () => jest.fn().mockResolvedValue([1, 2])); 
+jest.mock('../functions/sendEmailWIthMultipleJSON', () => jest.fn().mockResolvedValue([1, 2])); 
 
 describe('/send/multiDocument route', () => {
   it('should send an email with multiple JSON files attached', async () => {
