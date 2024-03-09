@@ -7,9 +7,6 @@ jest.mock("../database/db", () => ({
 }));
 
 const uId = 123;
-const body = {
-  uId : uId
-};
 
 describe("Test suite for /receive/getNotifications", () => {
   beforeEach(() => {
