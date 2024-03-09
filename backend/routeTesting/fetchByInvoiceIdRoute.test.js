@@ -4,7 +4,6 @@ const app = require('../app');
 
 const { describe, beforeEach, afterEach, it, expect } = require("@jest/globals");
 
-
 jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
