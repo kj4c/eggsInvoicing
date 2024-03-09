@@ -4,13 +4,23 @@ const pool = require('../database/db')
 
 // given a uid, generate a PDF of all the received invoices of the user with the invoice numbers, the email used that send the invoice, and received time
 async function generateReceivePdf(uid) {
-  const selectQuery = "SELECT s.invoice_id, s.sender_email, s.sent_at FROM sent_invoices s JOIN users u ON u.email = s.receiver_email WHERE u.uid = $1";
-  const qres = await pool.query(selectQuery, [uid]);
+  // error checking
+  if (uid === undefined) {
+    console.log({error: "Invalid uid"});
+    return {status: 400};
+  } 
 
   // get current user's email
   const userQuery = "SELECT email FROM users WHERE uid = $1";
   let user = await pool.query(userQuery, [uid]);
+  if (user.rows.length === 0) {
+    console.log({error: "Invalid uid"});
+    return {status: 400};
+  }
   user = user.rows[0].email;
+
+  const selectQuery = "SELECT s.invoice_id, s.sender_email, s.sent_at FROM sent_invoices s JOIN users u ON u.email = s.receiver_email WHERE u.uid = $1";
+  const qres = await pool.query(selectQuery, [uid]);
 
   let data = qres.rows.map(row => [row.invoice_id, row.sender_email, row.sent_at.toLocaleString('en-au')]);
   const doc = new jsPDF();
