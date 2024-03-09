@@ -52,7 +52,6 @@ describe("Test suite for fetchByInvoicId()", () => {
     pool.query.mockResolvedValueOnce({ rows :[expected]});
 
     const response = await fetchByInvoiceId(uId, invoiceId);
-    console.log(response);
     expect(response).toEqual(expected);
     expect(pool.query).toHaveBeenCalledTimes(3);
     let q = "select uid from users where uid = $1";
@@ -62,5 +61,4 @@ describe("Test suite for fetchByInvoicId()", () => {
     q = "select * from sent_invoices where invoice_id = $1 and receiver_email = $2";
     expect(pool.query).toHaveBeenCalledWith(q, [invoiceId, email]);
   });
- 
 });
