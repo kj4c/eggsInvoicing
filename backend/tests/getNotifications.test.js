@@ -6,6 +6,8 @@ jest.mock("../database/db", () => ({
   query: jest.fn()
 }));
 
+const uId = 123;
+
 describe("Test suite for /receive/getNotifications", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -22,14 +24,22 @@ describe("Test suite for /receive/getNotifications", () => {
   });
 
   it("Should return a list of notifications if user has notifications", async () => {
-    const uId = 999;
-    const q1 = "select notifications from users where uid = $1";
-    const q2 = "update users set notifications = '{}' where uid = $1"
-    pool.query.mockResolvedValueOnce({ rows: [ { notifications: [] } ] });
+    const expected = {
+      invoice_id: 630,
+      sender_email: 'dummy@gmail.com',
+      receiver_email: 'dummy@gmail.com',
+      xml_invoices: '{xml1}',
+      sent_at: "2024-03-09T04:38:43.305Z"
+    };
+    const invoice_id = expected.invoice_id;
+    pool.query.mockResolvedValueOnce({ rows: [{notifications: [invoice_id]}]});
+    pool.query.mockResolvedValueOnce({ rows :[{expected}]});
+
     const res = await getNotifications(uId);
-    expect(pool.query).toHaveBeenCalledTimes(2);
-    expect(pool.query).toHaveBeenCalledWith(q1,[uId]);
-    expect(pool.query).toHaveBeenCalledWith(q2,[uId]);
+    expect(pool.query).toHaveBeenCalledTimes(3);
+    expect(pool.query).toHaveBeenCalledWith("select notifications from users where uid = $1",[uId]);
+    expect(pool.query).toHaveBeenCalledWith("select * from sent_invoices where invoice_id = $1",[invoice_id]);
+    expect(pool.query).toHaveBeenCalledWith("update users set notifications = '{}' where uid = $1",[uId]);
     expect(res).toEqual({notifications: expect.any(Array)});
   });
 });
