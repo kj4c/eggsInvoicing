@@ -37,8 +37,7 @@ describe('/getNotifications route', () => {
     const response = await request(app).get('/receive/getNotifications').send(body);
 
     expect(response.status).toBe(200);
-    console.log(response._body)
-    expect(response._body.notifications[0].expected).toStrictEqual(expected);
+    expect(response.body.notifications[0].expected).toStrictEqual(expected);
     
     expect(pool.query).toHaveBeenCalledTimes(3);
     let q = "select notifications from users where uid = $1";
@@ -54,8 +53,7 @@ describe('/getNotifications route', () => {
     const response = await request(app).get('/receive/getNotifications').send(body);
 
     expect(response.status).toBe(200);
-    console.log(response._body)
-    expect(response._body.message).toStrictEqual("No new notifications");
+    expect(response.body.message).toStrictEqual("No new notifications");
     
     expect(pool.query).toHaveBeenCalledTimes(1);
     let q = "select notifications from users where uid = $1";

@@ -4,7 +4,6 @@ const app = express();
 const errorHandler = require('middleware-http-errors');
 const PORT = 3000;
 const getNotifications = require('./functions/getNotifications');
-// const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
 const sendEmailWithMultipleXML = require('./functions/sendEmailWithMultXML');
 const authRegister = require('./functions/authRegister');
@@ -12,10 +11,12 @@ const authLogin = require('./functions/authLogin');
 const receiveEmail = require('./functions/receiveEmail');
 const generateReceivePdf = require('./functions/receiveReport');
 const generateSentPdf = require('./functions/sentReport');
+const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 
 app.use(express.json());
 app.use(errorHandler());
 app.use(bodyParser.json());
+app.use(errorHandler());
 
 app.get('/', (req, res) => {
   res.send("Hello world!");
@@ -34,11 +35,14 @@ app.post('/send/email', async function (req, res) {
   }
 });
 
-// possibly will delete
-// app.get('/receive/hasReceivedInvoiceId', async function (req, res) {
-//   const { invoiceId, receiverEmail } = req.body;
-//   res.status(200).json(await hasReceivedInvoiceId(invoiceId, receiverEmail));
-// });
+app.get('/receive/fetchByInvoiceId', async function (req, res) {
+  const { uId, invoiceId } = req.body;
+  try {
+    res.json(await fetchByInvoiceId(uId, invoiceId));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
 
 // need to fix coverage for this 
 app.get('/receive/getNotifications', async function (req, res) {
