@@ -24,3 +24,37 @@ describe('sendEmailWithXML function', () => {
     }));
   }, 20 * 1000);
 });
+
+describe('sendEmailWithXML function error handling', () => {
+  it('should throw an error if xmlString is undefined', async () => {
+    const recipientEmail = "recipient@example.com";
+    const from = 'Error Case Sender';
+
+
+    await expect(sendEmailWithXML(from, recipientEmail, undefined))
+      .rejects
+      .toThrow('xmlString is required but was not provided.');
+
+  });
+
+  it('should throw an error if recipient is undefined', async () => {
+    const xmlString = "<xml>Error case XML string</xml>";
+    const from = 'Error Case Sender';
+
+    // Act and Assert
+    await expect(sendEmailWithXML(from, undefined, xmlString))
+      .rejects
+      .toThrow('recipient is required but was not provided.'); 
+  });
+
+  it('should throw an error if from is undefined', async () => {
+    const xmlString = "<xml>Error case XML string</xml>";
+    const recipientEmail = "recipient@example.com";
+
+    // Act and Assert
+    await expect(sendEmailWithXML(undefined, recipientEmail, xmlString))
+      .rejects
+      .toThrow('from is required but was not provided.'); 
+  });
+});
+

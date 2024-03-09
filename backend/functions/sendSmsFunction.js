@@ -1,29 +1,11 @@
-const twilio = require('twilio');
+const accountSid = 'AC99076d0a5f49f07bbaef91800d3d6710';
+const authToken = 'f9f71bdcc60a65f99bbcdbef5d986579';
+const client = require('twilio')(accountSid, authToken);
 
-const accountSid = 'AC7b5368acf509f230d72e41f6ed7acc9b';
-const authToken = 'd69fee5952dfc4028c4dbb4ad21f1a49';
-const twilioPhoneNumber = '+610421487088';
-
-const client = new twilio(accountSid, authToken);
-
-async function sendSMS(from, to, body) {
-  try {
-    const message = await client.messages.create({
-      body: body,
-      from: twilioPhoneNumber, // Twilio number
-      to: to // Recipient's phone number
-    });
-
-    console.log(`Message sent: ${message.sid}`);
-
-    // Here you can implement database logic similar to your email function
-    // For example, saving the SMS details to your database
-
-    return message.sid;
-  } catch (error) {
-    console.error('Failed to send SMS:', error);
-    throw error;
-  }
-}
-
-module.exports = sendSMS;
+client.messages
+  .create({
+    body: 'hey how you doing broski',
+    from: '+13087374083',
+    to: '+610421487088'
+  })
+  .then(message => console.log(message.sid)).catch(err => console.log(err));
