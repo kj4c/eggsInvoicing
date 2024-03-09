@@ -28,8 +28,8 @@ async function authRegister(email, phone_no, username, password) {
 
     // inserts the new registered user into the database 
     let q = "INSERT INTO users (email, phone_no, username, hashed_password) VALUES ($1, $2, $3, $4) RETURNING *";
-    // const registered = await 
-    pool.query(q, [email, phone_no, username, encrypted]);
+    // const registered = await
+    await pool.query(q, [email, phone_no, username, encrypted]);
     console.log("Successfully registered:", username);
 
     return {

@@ -9,12 +9,12 @@ CREATE TABLE IF NOT EXISTS users (
   notifications integer ARRAY
 );
 
-
 CREATE TABLE IF NOT EXISTS sent_invoices (
   invoice_id        serial primary key,
   sender_email      varchar(225) not null,
   receiver_email    varchar(225) not null,
-  xml_invoices      xml ARRAY not null,
+  invoices          text ARRAY not null,
+  type              varchar(225) not null,
   sent_at           timestamptz not null default now()
 );
 
