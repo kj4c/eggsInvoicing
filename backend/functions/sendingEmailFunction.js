@@ -8,12 +8,16 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
     throw new Error('xmlString is required but was not provided.');
   }
 
-  try {
-    await fs.writeFile(filename, xmlString);
-  } catch (error) {
-    console.error('Failed to write XML file:', error);
-    throw error; 
+  if (!recipient) {
+    throw new Error('recipient is required but was not provided.');
   }
+
+  if (!from) {
+    throw new Error('from is required but was not provided.');
+  }
+  
+
+  await fs.writeFile(filename, xmlString);
 
   // the nodemail transporter 
   let transporter = nodemailer.createTransport({

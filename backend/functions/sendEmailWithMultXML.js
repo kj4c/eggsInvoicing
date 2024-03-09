@@ -3,6 +3,18 @@ const fs = require('fs').promises;
 const pool = require('../database/db');
 
 async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
+  if (!from) {
+    throw new Error('from is required but was not provided.');
+  }
+
+  if (!recipient) {
+    throw new Error('recipient is required but was not provided.');
+  }
+
+  if (!xmlFiles || !Array.isArray(xmlFiles) || xmlFiles.length === 0) {
+    throw new Error('xmlFiles is required but was not provided.');
+  }
+
   const attachmentPromises = xmlFiles.map(async (xmlFile) => {
     if (typeof xmlFile.filename !== 'string') {
       throw new Error(`Expected filename to be a string, but got ${typeof xmlFile.filename}`);

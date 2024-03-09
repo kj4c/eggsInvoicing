@@ -4,7 +4,7 @@ const app = express();
 const errorHandler = require('middleware-http-errors');
 const PORT = 3000;
 const getNotifications = require('./functions/getNotifications');
-const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
+// const hasReceivedInvoiceId = require('./functions/hasReceivedInvoiceId');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
 const sendEmailWithMultipleXML = require('./functions/sendEmailWithMultXML');
 const authRegister = require('./functions/authRegister');
@@ -30,19 +30,17 @@ app.post('/send/email', async function (req, res) {
     res.status(200).json({ success: true, invoiceId: invoiceId });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, error: 'Failed to send email' });
+    res.status(400).json({ success: false, error: 'Failed to send email' });
   }
 });
 
-app.get('/receive/hasReceivedInvoiceId', async function (req, res) {
-  const { invoiceId, receiverEmail } = req.body;
-  res.status(200).json(await hasReceivedInvoiceId(invoiceId, receiverEmail));
-});
+// possibly will delete
+// app.get('/receive/hasReceivedInvoiceId', async function (req, res) {
+//   const { invoiceId, receiverEmail } = req.body;
+//   res.status(200).json(await hasReceivedInvoiceId(invoiceId, receiverEmail));
+// });
 
-app.put('/:userId/updateStatus', (req, res) => {
-  res.status(200).json({ message: "Successfully changed state" });
-});
-
+// need to fix coverage for this 
 app.get('/receive/getNotifications', async function (req, res) {
   const uId = req.body.uId;
   res.status(200).json(await getNotifications(uId));
@@ -60,7 +58,6 @@ app.post('/send/multiInvoice', async (req, res) => {
 });
 
 app.post('/:userId/send/text', (req, res) => {
-  // indentations 
   res.status(200).json({ textId: 789 });
 });
 
@@ -98,16 +95,6 @@ app.get('/receiveReport', async(req, res) => {
   }
 });
 
-app.get('/:userId/allEmails', (req, res) => {
-
-  res.status(200).json([{ title: "Invoice", sender: "sender@example.com", receiver: "receiver@example.com", xml: "<xml></xml>", time: "2024-02-28T12:00:00Z" }]);
-});
-
-app.delete('/:userId/allEmails/delete', (req, res) => {
-
-  res.status(200).json({ message: "successfully deleted invoice id" });
-});
-
 app.post('/register', async(req, res) => {
   try {
     const { email, phone, username, password } = req.body;
@@ -136,6 +123,7 @@ app.post('/login', async(req, res) => {
   }
 });
 
+/* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 }
