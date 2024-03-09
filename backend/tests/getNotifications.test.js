@@ -8,13 +8,12 @@ jest.mock("../database/db", () => ({
 
 const uId = 123;
 
-describe("Test suite for /receive/getNotifications", () => {
+describe("Test suite for getNotifications()", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it("Should return no notifications found for users with no notifications", async () => {
-    const uId = 999;
     const q = "select notifications from users where uid = $1";
     pool.query.mockResolvedValueOnce({ rows: [] });
     const res = await getNotifications(uId);
