@@ -5,7 +5,6 @@ jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
 
-
 describe('GET /receiveReport route', () => {
   beforeEach(() => {
     jest.clearAllMocks();
