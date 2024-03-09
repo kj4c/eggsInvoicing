@@ -5,7 +5,6 @@ jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
 
-
 describe('GET /receiveReport route', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -26,6 +25,12 @@ describe('GET /receiveReport route', () => {
   });
   it('Query not supplied', async() => {
     const res = await request(app).get('/receiveReport');
+    expect(res.status).toBe(400)
+  })
+  it('Invalid uid', async() => {
+    pool.query.mockResolvedValueOnce({ rows: []});
+    pool.query.mockResolvedValueOnce({ rows: []});
+    const res = await request(app).get('/receiveReport?uid=0');
     expect(res.status).toBe(400)
   })
 });
