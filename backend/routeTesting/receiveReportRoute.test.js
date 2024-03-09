@@ -28,4 +28,10 @@ describe('GET /receiveReport route', () => {
     const res = await request(app).get('/receiveReport');
     expect(res.status).toBe(400)
   })
+  it('Invalid uid', async() => {
+    pool.query.mockResolvedValueOnce({ rows: []});
+    pool.query.mockResolvedValueOnce({ rows: []});
+    const res = await request(app).get('/receiveReport?uid=0');
+    expect(res.status).toBe(400)
+  })
 });
