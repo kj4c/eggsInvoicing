@@ -12,6 +12,7 @@ const receiveEmail = require('./functions/receiveEmail');
 const generateReceivePdf = require('./functions/receiveReport');
 const generateSentPdf = require('./functions/sentReport');
 const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
+const fetchAll = require('./functions/fetchAll');
 
 app.use(express.json());
 app.use(errorHandler());
@@ -32,6 +33,15 @@ app.post('/send/email', async function (req, res) {
   } catch (error) {
     console.error(error);
     res.status(400).json({ success: false, error: 'Failed to send email' });
+  }
+});
+
+app.get('/receive/fetchAll', async function (req, res) {
+  const { uId }  = req.body;
+  try {
+    res.json(await fetchAll(uId));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
   }
 });
 
