@@ -61,6 +61,4 @@ async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
   return invoiceIds;
 }
 
-
 module.exports = sendEmailWithMultipleJSON;
- 
