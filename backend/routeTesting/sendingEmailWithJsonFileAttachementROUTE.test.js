@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../app');
 
-jest.mock('../functions/sendingEmailWithJsonFileAttachement', () => jest.fn().mockResolvedValue({ messageId: '1' }));
+jest.mock('../functions/sendingEmailWithJsonFileAttachment', () => jest.fn().mockResolvedValue({ messageId: '1' }));
 
 describe('/send/email-json route', () => {
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe('/send/email-json route', () => {
   });
 
   it('should throw an error if sending the email with JSON fails', async () => {
-    const sendEmailWithJSON = require('../functions/sendingEmailWithJsonFileAttachement');
+    const sendEmailWithJSON = require('../functions/sendingEmailWithJsonFileAttachment');
     sendEmailWithJSON.mockRejectedValueOnce(new Error('Failed to send email'));
 
     const mockEmailData = {

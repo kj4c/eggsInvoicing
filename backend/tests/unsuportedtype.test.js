@@ -1,4 +1,4 @@
-const sendInvoiceLater = require('../functions/sendingInoiceLater');
+const sendInvoiceLater = require('../functions/sendingInvoiceLater');
 
 describe('sendInvoiceLater error handling', () => {
   test('throws an error for unsupported type', async () => {

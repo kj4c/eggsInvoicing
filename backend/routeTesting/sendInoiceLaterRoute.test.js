@@ -2,8 +2,8 @@ const request = require('supertest');
 const app = require('../app'); // Adjust the path as needed
 
 // Assuming sendInvoiceLater is exported from a specific module, mock that module
-const sendInvoiceLater = require('../functions/sendingInoiceLater'); // Adjust the path as needed
-jest.mock('../functions/sendingInoiceLater');
+const sendInvoiceLater = require('../functions/sendingInvoiceLater'); // Adjust the path as needed
+jest.mock('../functions/sendingInvoiceLater');
 
 describe('/send/invoiceLater route', () => {
   beforeEach(() => {

@@ -1,4 +1,4 @@
-const sendEmailWithMultipleJSON = require('../functions/sendEmailWIthMultipleJSON'); // Update path as needed
+const sendEmailWithMultipleJSON = require('../functions/sendEmailWithMultipleJSON'); // Update path as needed
 const pool = require('../database/db');
 
 jest.mock('nodemailer', () => ({
