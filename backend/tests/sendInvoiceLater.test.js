@@ -4,7 +4,7 @@ jest.mock('../functions/sendingEmailFunction', () => jest.fn());
 jest.mock('../functions/sendingEmailWithJsonFileAttachment', () => jest.fn());
 
 // Now import the functions; they will be Jest mock functions
-const sendEmailWithMultipleJSON = require('../functions/sendEmailWithMultipleJSON');
+const sendEmailWithMultipleJSON = require('../functions/sendEmailWitheMultipleJSON');
 const sendEmailWithMultipleXML = require('../functions/sendEmailWithMultXML');
 const sendEmailWithXML = require('../functions/sendingEmailFunction');
 const sendEmailWithJSON = require('../functions/sendingEmailWithJsonFileAttachment');

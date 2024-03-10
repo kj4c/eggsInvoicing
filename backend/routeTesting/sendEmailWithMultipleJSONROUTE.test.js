@@ -39,7 +39,7 @@ describe('/send/multiDocument route error handling', () => {
   });
 
   it('should return an error response if sending fails', async () => {
-    const sendEmailWithMultipleJSON = require('../functions/sendEmailWithMultipleJSON');
+    const sendEmailWithMultipleJSON = require('../functions/sendEmailWitheMultipleJSON');
     sendEmailWithMultipleJSON.mockRejectedValueOnce(new Error('Sending failed'));
 
     const mockEmailData = {
