@@ -1,6 +1,5 @@
 const sendEmailWithMultipleJSON = require('../functions/sendEmailWIthMultipleJSON'); // Update path as needed
 const pool = require('../database/db');
-const fs = require('fs').promises;
 
 jest.mock('nodemailer', () => ({
   createTransport: jest.fn().mockReturnValue({
@@ -104,37 +103,37 @@ describe('sendEmailWithMultipleJSON function', () => {
 
 
 describe('sendEmailWithMultipleJSON processing and error handling', () => {
-    beforeEach(() => {
-      jest.clearAllMocks();
-      jest.spyOn(console, 'error').mockImplementation(() => {}); 
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jest.spyOn(console, 'error').mockImplementation(() => {}); 
 
-      jest.mock('fs', () => ({
-        promises: {
-          readFile: jest.fn().mockResolvedValue(JSON.stringify({ message: "Mock JSON Content" })),
-          unlink: jest.fn().mockResolvedValue(undefined),
-        }
-      }));
-    });
-  
-    it('should catch and rethrow an error during database operations', async () => {
-        const jsonFiles = [
-            {
-              jsonContent: { message: "Don't forget me this weekend!" },
-              filename: 'reminder.json'
-            },
-            {
-              jsonContent: { invoice: { to: "Client", amount: 100.00 } },
-              filename: 'invoice.json'
-            }
-        ];
-  
-      const from = "jackson@example.com";
-      const recipient = "kahowang3659@example.com";
-      
-      pool.query.mockRejectedValueOnce(new Error("Mock database error"));
-  
-      await expect(sendEmailWithMultipleJSON(from, recipient, jsonFiles)).rejects.toThrow("Mock database error");
-  
-    });
+    jest.mock('fs', () => ({
+      promises: {
+        readFile: jest.fn().mockResolvedValue(JSON.stringify({ message: "Mock JSON Content" })),
+        unlink: jest.fn().mockResolvedValue(undefined),
+      }
+    }));
   });
+  
+  it('should catch and rethrow an error during database operations', async () => {
+    const jsonFiles = [
+      {
+        jsonContent: { message: "Don't forget me this weekend!" },
+        filename: 'reminder.json'
+      },
+      {
+        jsonContent: { invoice: { to: "Client", amount: 100.00 } },
+        filename: 'invoice.json'
+      }
+    ];
+  
+    const from = "jackson@example.com";
+    const recipient = "kahowang3659@example.com";
+      
+    pool.query.mockRejectedValueOnce(new Error("Mock database error"));
+  
+    await expect(sendEmailWithMultipleJSON(from, recipient, jsonFiles)).rejects.toThrow("Mock database error");
+  
+  });
+});
   

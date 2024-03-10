@@ -1,5 +1,4 @@
 const sendEmailWithJSON = require('../functions/sendingEmailWithJsonFileAttachement'); // Adjust the path as needed
-const pool = require('../database/db');
 
 // Mocking nodemailer similarly as done for XML
 jest.mock('nodemailer', () => ({
