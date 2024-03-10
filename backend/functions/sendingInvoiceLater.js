@@ -1,4 +1,4 @@
-const sendEmailWithMultipleJSON = require('./sendEmailWIthMultipleJSON');
+const sendEmailWithMultipleJSON = require('./sendEmailWithMultipleJSON');
 const sendEmailWithMultipleXML = require('./sendEmailWithMultXML');
 const sendEmailWithXML = require('./sendingEmailFunction');
 const sendEmailWithJSON = require('./sendingEmailWithJsonFileAttachment');
