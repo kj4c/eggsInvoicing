@@ -23,11 +23,11 @@ describe('sendEmailWithMultipleJSON function', () => {
   it('should attempt to send an email with multiple JSON attachments correctly and interact with the database', async () => {
     const jsonFiles = [
       {
-        jsonContent: { message: 'Don\'t forget me this weekend!' },
+        jsonString: JSON.stringify({ message: 'Don\'t forget me this weekend!' }),
         filename: 'reminder.json'
       },
       {
-        jsonContent: { invoice: { to: 'Client', amount: 100.00 } },
+        jsonString: JSON.stringify({ invoice: { to: 'Client', amount: 100.00 } }),
         filename: 'invoice.json'
       }
     ];
@@ -39,25 +39,25 @@ describe('sendEmailWithMultipleJSON function', () => {
 
     const nodemailer = require('nodemailer');
 
-    // The expectation for sendMail should focus on the content being sent as part of the attachments
     expect(nodemailer.createTransport().sendMail).toHaveBeenCalled();
     expect(nodemailer.createTransport().sendMail).toHaveBeenCalledWith(expect.objectContaining({
       to: recipientEmail,
       attachments: expect.arrayContaining([
         expect.objectContaining({
           filename: 'reminder.json',
-          content: JSON.stringify({ message: 'Don\'t forget me this weekend!' }),
+          content: JSON.stringify({ message: 'Don\'t forget me this weekend!' }), // Ensuring content is correctly stringified JSON
           contentType: 'application/json'
         }),
         expect.objectContaining({
           filename: 'invoice.json',
-          content: JSON.stringify({ invoice: { to: 'Client', amount: 100.00 } }),
+          content: JSON.stringify({ invoice: { to: 'Client', amount: 100.00 } }), // Ensuring content is correctly stringified JSON
           contentType: 'application/json'
         })
       ])
     }));
 
-    expect(pool.query).toHaveBeenCalledTimes(4);
+    // If each jsonFile leads to two database queries (one for insertion and one for updating notifications),
+    // and there are 2 jsonFiles, then expect pool.query to have been called 4 times.
+    expect(pool.query).toHaveBeenCalledTimes(jsonFiles.length * 2);
   });
 });
-
