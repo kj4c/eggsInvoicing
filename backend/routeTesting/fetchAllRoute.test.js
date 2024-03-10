@@ -8,10 +8,10 @@ jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
 
-const uId = 123;
+const uid = 123;
 const email = 'dummy@gmail.com';
 const body = {
-  uId: uId,
+  uid: uid,
 };
 
 describe('/fetchAll route', () => {
@@ -27,13 +27,13 @@ describe('/fetchAll route', () => {
   it('Invalid User Id', async () => {
     pool.query.mockResolvedValueOnce({rows: []});
 
-    const response = await request(app).get('/receive/fetchAll').send(body);
+    const response = await request(app).get('/receive/fetchAll').query(body);
     expect(response.status).toBe(403);
     expect(response.body.message).toStrictEqual('Invalid User');
 
     expect(pool.query).toHaveBeenCalledTimes(1);
     const q = 'select uid from users where uid = $1';
-    expect(pool.query).toHaveBeenCalledWith(q, [uId]);
+    expect(pool.query).toHaveBeenCalledWith(q, [uid]);
   });
 
   it('Valid User Id', async () => {
@@ -54,19 +54,19 @@ describe('/fetchAll route', () => {
       }
     ];
 
-    pool.query.mockResolvedValueOnce({rows: [{uid: uId}]});
+    pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: expected});
 
-    const response = await request(app).get('/receive/fetchAll').send(body);
+    const response = await request(app).get('/receive/fetchAll').query(body);
     expect(response.status).toBe(200);
     expect(response.body).toStrictEqual(expected);
 
     expect(pool.query).toHaveBeenCalledTimes(3);
     let q = 'select uid from users where uid = $1';
-    expect(pool.query).toHaveBeenCalledWith(q, [uId]);
+    expect(pool.query).toHaveBeenCalledWith(q, [uid]);
     q = 'select email from users where uid = $1';
-    expect(pool.query).toHaveBeenCalledWith(q, [uId]);
+    expect(pool.query).toHaveBeenCalledWith(q, [uid]);
     q = 'select * from sent_invoices where receiver_email = $1';
     expect(pool.query).toHaveBeenCalledWith(q, [email]);
   });

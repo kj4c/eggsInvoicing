@@ -7,9 +7,9 @@ jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
 
-const uId = 123;
+const uid = 123;
 const body = {
-  uId: uId
+  uid: uid
 };
 
 describe('/getNotifications route', () => {
@@ -34,29 +34,29 @@ describe('/getNotifications route', () => {
     pool.query.mockResolvedValueOnce({ rows: [{notifications: [invoice_id]}]});
     pool.query.mockResolvedValueOnce({ rows: [{expected}]});
 
-    const response = await request(app).get('/receive/getNotifications').send(body);
+    const response = await request(app).get('/receive/getNotifications').query(body);
 
     expect(response.status).toBe(200);
     expect(response.body.notifications[0].expected).toStrictEqual(expected);
 
     expect(pool.query).toHaveBeenCalledTimes(3);
     let q = 'select notifications from users where uid = $1';
-    expect(pool.query).toHaveBeenCalledWith(q, [uId]);
+    expect(pool.query).toHaveBeenCalledWith(q, [uid]);
     q = 'select * from sent_invoices where invoice_id = $1';
     expect(pool.query).toHaveBeenCalledWith(q, [invoice_id]);
     q = 'update users set notifications = \'{}\' where uid = $1';
-    expect(pool.query).toHaveBeenCalledWith(q, [uId]);
+    expect(pool.query).toHaveBeenCalledWith(q, [uid]);
   });
 
   it('Should return no notifications found for users with no notifications', async () => {
     pool.query.mockResolvedValueOnce({rows: []});
-    const response = await request(app).get('/receive/getNotifications').send(body);
+    const response = await request(app).get('/receive/getNotifications').query(body);
 
     expect(response.status).toBe(200);
     expect(response.body.message).toStrictEqual('No new notifications');
 
     expect(pool.query).toHaveBeenCalledTimes(1);
     const q = 'select notifications from users where uid = $1';
-    expect(pool.query).toHaveBeenCalledWith(q, [uId]);
+    expect(pool.query).toHaveBeenCalledWith(q, [uid]);
   });
 });
