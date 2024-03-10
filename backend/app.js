@@ -27,6 +27,14 @@ app.get('/', (req, res) => {
 });
 
 // manual testing works
+/*
+@brief 
+Sends an email with a XML file attachment
+@params 
+from: string - who sent the email
+recipient: string - email of the recipient
+xmlString: string - XML string to be sent
+*/
 app.post('/send/email', async function (req, res) {
   const { from, recipient, xmlString } = req.body;
 
@@ -39,6 +47,14 @@ app.post('/send/email', async function (req, res) {
   }
 });
 
+/*
+@brief 
+Sends an email with a JSON file attachment
+@params 
+from: string - who sent the email
+recipient: string - email of the recipient
+jsonString: string - json string to be sent
+*/
 app.post('/send/email-json', async function (req, res) {
   const { from, recipient, jsonString } = req.body;
 
@@ -51,6 +67,12 @@ app.post('/send/email-json', async function (req, res) {
   }
 });
 
+/*
+@brief 
+fetches all invoices sent/received by user
+@params 
+uid: int - user id of the user
+*/
 app.get('/receive/fetchAll', async function (req, res) {
   const uid = parseInt(req.query.uid);
   try {
@@ -60,6 +82,13 @@ app.get('/receive/fetchAll', async function (req, res) {
   }
 });
 
+/*
+@brief 
+checks if a userId has received a specific invoiceId
+@params 
+uid: int - user id of the user
+invoiceId: int - invoice id of the invoice
+*/
 app.get('/receive/fetchByInvoiceId', async function (req, res) {
   const uid = parseInt(req.query.uid);
   const invoiceId = parseInt(req.query.invoiceId);
@@ -70,12 +99,25 @@ app.get('/receive/fetchByInvoiceId', async function (req, res) {
   }
 });
 
-// need to fix coverage for this
+/*
+@brief 
+retrieves all new notifications for a user
+@params 
+uid: int - user id of the user
+*/
 app.get('/receive/getNotifications', async function (req, res) {
   const uid = parseInt(req.query.uid);
   res.status(200).json(await getNotifications(uid));
 });
 
+/*
+@brief 
+send multiple XML invoices to the specified recipient
+@params 
+from: string - who sent the email
+recipient: string - email of the recipient
+xmlFiles: array string - array of XML strings to be sent
+*/
 app.post('/send/multiInvoice', async (req, res) => {
   try {
     const { from, recipient, xmlFiles } = req.body;
@@ -87,6 +129,14 @@ app.post('/send/multiInvoice', async (req, res) => {
   }
 });
 
+/*
+@brief 
+send multiple JSON invoices to the specified recipient
+@params 
+from: string - who sent the email
+recipient: string - email of the recipient
+jsonFiles: array string - array of JSON strings to be sent
+*/
 app.post('/send/multiInvoice-json', async (req, res) => {
   try {
     const { from, recipient, jsonFiles } = req.body;
@@ -98,11 +148,17 @@ app.post('/send/multiInvoice-json', async (req, res) => {
   }
 });
 
-/* istanbul ignore next */
-app.post('/:userId/send/text', (req, res) => {
-  res.status(200).json({ textId: 789 });
-});
-
+/*
+@brief 
+Generates a PDF showing all the invoices sent by the user
+@params 
+uid: int - user id of the user
+@output
+on success
+pdf: pdf - pdf file containing the report
+if failed
+error: string - error message
+*/
 app.get('/sentReport', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
@@ -121,6 +177,16 @@ app.get('/sentReport', async(req, res) => {
   }
 });
 
+/*
+@brief 
+send a singular file or multiple files to the recipient after a specified delay
+@params 
+type: string - type of file to be sent (json, xml, multiplejson, multiplexml)
+from: string - who sent the email
+recipient: string - email of the recipient
+content: array of strings OR string - file(s) to be sent
+delayInMinutes: int - delay in minutes before the email is sent
+*/
 app.post('/send/invoiceLater', async (req, res) => {
   const { type, from, recipient, content, delayInMinutes } = req.body;
 
@@ -138,6 +204,17 @@ app.post('/send/invoiceLater', async (req, res) => {
   }
 });
 
+/*
+@brief 
+Generates a PDF showing all the invoices received by the user
+@params 
+uid: int - user id of the user
+@output
+on success
+pdf: pdf - pdf file containing the report
+if failed
+error: string - error message
+*/
 app.get('/receiveReport', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
@@ -156,6 +233,20 @@ app.get('/receiveReport', async(req, res) => {
   }
 });
 
+/*
+@brief 
+registers a new user
+@params 
+email: string - email of the user
+phone: string - phone number of the user
+username: string - username of the user
+password: string - password of the user
+@output
+on success:
+status code and message
+on failure:
+status code and error message
+*/
 app.post('/register', async(req, res) => {
   try {
     const { email, phone, username, password } = req.body;
@@ -175,6 +266,19 @@ app.get('/receiveEmail', async(req, res) => {
   }
 });
 
+/*
+@brief 
+login a user
+@params 
+username: string - username of the user
+password: string - password of the user
+@output
+on success:
+status code - integer - 200
+uid - integer - id of the user
+on failure:
+status code and error message
+*/
 app.post('/login', async(req, res) => {
   try {
     const { username, password } = req.body;
