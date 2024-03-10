@@ -48,7 +48,7 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
   console.log('Message sent: %s', info.messageId);
 
   // Database operations remain unchanged
-  let query = `insert into sent_invoices (sender_email, receiver_email, invoices, type) values ($1, $2, $3, $4) returning invoice_id`;
+  let query = 'insert into sent_invoices (sender_email, receiver_email, invoices, type) values ($1, $2, $3, $4) returning invoice_id';
   const invoiceId = (await pool.query(query, [from, recipient, [xmlString], 'XML'])).rows[0].invoice_id;
   console.log('Invoice ID: %d ', invoiceId);
 
