@@ -52,18 +52,19 @@ app.post('/send/email-json', async function (req, res) {
 });
 
 app.get('/receive/fetchAll', async function (req, res) {
-  const { uId }  = req.body;
+  const uid = parseInt(req.query.uid);
   try {
-    res.json(await fetchAll(uId));
+    res.json(await fetchAll(uid));
   } catch (error) {
     res.status(error.statusCode).json(error);
   }
 });
 
 app.get('/receive/fetchByInvoiceId', async function (req, res) {
-  const { uId, invoiceId } = req.body;
+  const uid = parseInt(req.query.uid);
+  const invoiceId = parseInt(req.query.invoiceId);
   try {
-    res.json(await fetchByInvoiceId(uId, invoiceId));
+    res.json(await fetchByInvoiceId(uid, invoiceId));
   } catch (error) {
     res.status(error.statusCode).json(error);
   }
@@ -71,8 +72,8 @@ app.get('/receive/fetchByInvoiceId', async function (req, res) {
 
 // need to fix coverage for this
 app.get('/receive/getNotifications', async function (req, res) {
-  const uId = req.body.uId;
-  res.status(200).json(await getNotifications(uId));
+  const uid = parseInt(req.query.uid);
+  res.status(200).json(await getNotifications(uid));
 });
 
 app.post('/send/multiInvoice', async (req, res) => {
