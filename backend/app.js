@@ -122,13 +122,16 @@ app.get('/receiveReport', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
     let pdf = await generateReceivePdf(uid);
+
     if (pdf.status != 200) {
       res.status(400).message({error: "error generating the report"});
     }
+
     pdf = pdf.doc;
     res.setHeader('Content-Disposition', 'attachment; filename="communication_report_received.pdf"'); 
     res.setHeader('Content-Type', 'application/pdf');
     res.status(200).send(pdf.output());
+    
   } catch (error) {
     console.log(error);
     res.status(400).json({message: "error generating the report"});

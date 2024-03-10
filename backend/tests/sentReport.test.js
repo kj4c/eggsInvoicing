@@ -24,3 +24,18 @@ describe("Generating sent report", () => {
     expect(receive.status).toEqual(200);    
   });
 });
+
+describe("undefined User Id", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jest.spyOn(console, 'error').mockImplementation(() => {}); 
+  });
+
+  it("unsuccessfully generates sent report", async () => { 
+    const time = new Date();
+    pool.query.mockResolvedValueOnce({ rows: [{email: 'dummy@gmail.com'}]});
+    pool.query.mockResolvedValueOnce({ rows: [{invoice_id: 1234, receiver_email: "Bob", sent_at: time}]});
+    const response = await generateSentPdf(undefined);
+    expect(response.status).toEqual(400);    
+  });
+});

@@ -56,8 +56,8 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
   try {
     for (const attachment of attachments) {
       const xmlString = await fs.readFile(attachment.path, { encoding: 'utf8' });
-      let query = `INSERT INTO sent_invoices (sender_email, receiver_email, xml_invoices) VALUES ($1, $2, $3) RETURNING invoice_id`;
-      const invoiceId = (await pool.query(query, [from, recipient, xmlString])).rows[0].invoice_id;
+      let query = `INSERT INTO sent_invoices (sender_email, receiver_email, invoices, type) VALUES ($1, $2, ARRAY[$3], $4) RETURNING invoice_id`;
+      const invoiceId = (await pool.query(query, [from, recipient, xmlString, 'XML'])).rows[0].invoice_id;
       invoiceIds.push(invoiceId); 
 
       query = "UPDATE users SET notifications = array_append(notifications, $1) WHERE email = $2";
@@ -73,6 +73,5 @@ async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
 
   return invoiceIds; 
 }
-
 
 module.exports = sendEmailWithMultipleXML;
