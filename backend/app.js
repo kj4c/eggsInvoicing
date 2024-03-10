@@ -5,10 +5,10 @@ const errorHandler = require('middleware-http-errors');
 const PORT = 3000;
 const getNotifications = require('./functions/getNotifications');
 const sendEmailWithXML = require('./functions/sendingEmailFunction');
-const sendEmailWithJSON = require('./functions/sendingEmailWithJsonFileAttachement');
-const sendEmailWIthMultipleJSON = require('./functions/sendEmailWIthMultipleJSON');
+const sendEmailWithJSON = require('./functions/sendingEmailWithJsonFileAttachment');
+const sendEmailWithMultipleJSON = require('./functions/sendEmailWithMultipleJSON');
 const sendEmailWithMultipleXML = require('./functions/sendEmailWithMultXML');
-const sendInvoiceLater = require('./functions/sendingInoiceLater');
+const sendInvoiceLater = require('./functions/sendingInvoiceLater');
 const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
 const receiveEmail = require('./functions/receiveEmail');
@@ -89,7 +89,7 @@ app.post('/send/multiInvoice', async (req, res) => {
 app.post('/send/multiInvoice-json', async (req, res) => {
   try {
     const { from, recipient, jsonFiles } = req.body;
-    const invoiceId = await sendEmailWIthMultipleJSON(from, recipient, jsonFiles);
+    const invoiceId = await sendEmailWithMultipleJSON(from, recipient, jsonFiles);
     res.status(200).json({ success: true, invoiceIds: invoiceId });
   } catch (error) {
     console.error(error);

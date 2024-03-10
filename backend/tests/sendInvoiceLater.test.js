@@ -1,15 +1,15 @@
-jest.mock('../functions/sendEmailWIthMultipleJSON', () => jest.fn());
+jest.mock('../functions/sendEmailWithMultipleJSON', () => jest.fn());
 jest.mock('../functions/sendEmailWithMultXML', () => jest.fn());
 jest.mock('../functions/sendingEmailFunction', () => jest.fn());
-jest.mock('../functions/sendingEmailWithJsonFileAttachement', () => jest.fn());
+jest.mock('../functions/sendingEmailWithJsonFileAttachment', () => jest.fn());
 
 // Now import the functions; they will be Jest mock functions
-const sendEmailWithMultipleJSON = require('../functions/sendEmailWIthMultipleJSON');
+const sendEmailWithMultipleJSON = require('../functions/sendEmailWithMultipleJSON');
 const sendEmailWithMultipleXML = require('../functions/sendEmailWithMultXML');
 const sendEmailWithXML = require('../functions/sendingEmailFunction');
-const sendEmailWithJSON = require('../functions/sendingEmailWithJsonFileAttachement');
+const sendEmailWithJSON = require('../functions/sendingEmailWithJsonFileAttachment');
 
-const sendInvoiceLater = require('../functions/sendingInoiceLater');
+const sendInvoiceLater = require('../functions/sendingInvoiceLater');
 beforeEach(() => {
   jest.useFakeTimers();
   jest.clearAllMocks();
@@ -75,7 +75,7 @@ test('sendInvoiceLater calls the correct function with xml type after specified 
   expect(sendEmailWithXML).toHaveBeenCalledWith(from, recipient, xmlString);
 });
 
-jest.mock('../functions/sendingEmailWithJsonFileAttachement', () => jest.fn().mockImplementation(() => {
+jest.mock('../functions/sendingEmailWithJsonFileAttachment', () => jest.fn().mockImplementation(() => {
   throw new Error('Test error from sendEmailWithJSON');
 }));
 

@@ -1,4 +1,4 @@
-const sendEmailWithJSON = require('../functions/sendingEmailWithJsonFileAttachement'); // Adjust the path as needed
+const sendEmailWithJSON = require('../functions/sendingEmailWithJsonFileAttachment'); // Adjust the path as needed
 
 // Mocking nodemailer similarly as done for XML
 jest.mock('nodemailer', () => ({

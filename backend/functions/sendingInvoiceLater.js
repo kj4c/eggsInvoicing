@@ -1,7 +1,7 @@
 const sendEmailWithMultipleJSON = require('./sendEmailWIthMultipleJSON');
 const sendEmailWithMultipleXML = require('./sendEmailWithMultXML');
 const sendEmailWithXML = require('./sendingEmailFunction');
-const sendEmailWithJSON = require('./sendingEmailWithJsonFileAttachement');
+const sendEmailWithJSON = require('./sendingEmailWithJsonFileAttachment');
 
 async function sendInvoiceLater(type, from, recipient, filesOrString, delayInMinutes) {
   let sendFunction;
