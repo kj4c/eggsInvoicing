@@ -8,6 +8,7 @@ const sendEmailWithXML = require('./functions/sendingEmailFunction');
 const sendEmailWithJSON = require('./functions/sendingEmailWithJsonFileAttachement');
 const sendEmailWIthMultipleJSON = require('./functions/sendEmailWIthMultipleJSON');
 const sendEmailWithMultipleXML = require('./functions/sendEmailWithMultXML');
+const sendInvoiceLater = require('./functions/sendingInoiceLater');
 const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
 const receiveEmail = require('./functions/receiveEmail');
@@ -22,7 +23,7 @@ app.use(bodyParser.json());
 app.use(errorHandler());
 
 app.get('/', (req, res) => {
-  res.send("Hello world!");
+  res.send('Hello world!');
 });
 
 // manual testing works
@@ -68,7 +69,7 @@ app.get('/receive/fetchByInvoiceId', async function (req, res) {
   }
 });
 
-// need to fix coverage for this 
+// need to fix coverage for this
 app.get('/receive/getNotifications', async function (req, res) {
   const uId = req.body.uId;
   res.status(200).json(await getNotifications(uId));
@@ -105,16 +106,33 @@ app.get('/sentReport', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
     let pdf = await generateSentPdf(uid);
-    if (pdf.status != 200) {
-      res.status(400).message({error: "error generating the report"});
+    if (pdf.status !== 200) {
+      res.status(400).message({error: 'error generating the report'});
     }
     pdf = pdf.doc;
-    res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"'); 
+    res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"');
     res.setHeader('Content-Type', 'application/pdf');
     res.status(200).send(pdf.output());
   } catch (error) {
     console.log(error);
-    res.status(400).json({message: "error generating the report"});
+    res.status(400).json({message: 'error generating the report'});
+  }
+});
+
+app.post('/send/invoiceLater', async (req, res) => {
+  const { type, from, recipient, content, delayInMinutes } = req.body;
+
+  try {
+    if (!type || !from || !recipient || !content || delayInMinutes === undefined) {
+      return res.status(400).json({ success: false, message: 'Missing required parameters' });
+    }
+
+    await sendInvoiceLater(type, from, recipient, content, delayInMinutes);
+    console.log(`Scheduled invoice to be sent after ${delayInMinutes} minute(s)`);
+    res.status(202).json({ success: true, message: `Invoice scheduled to be sent after ${delayInMinutes} minute(s)` });
+  } catch (error) {
+    console.error('Error scheduling invoice:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
 
@@ -123,18 +141,18 @@ app.get('/receiveReport', async(req, res) => {
     const uid = parseInt(req.query.uid);
     let pdf = await generateReceivePdf(uid);
 
-    if (pdf.status != 200) {
-      res.status(400).message({error: "error generating the report"});
+    if (pdf.status !== 200) {
+      res.status(400).message({error: 'error generating the report'});
     }
 
     pdf = pdf.doc;
-    res.setHeader('Content-Disposition', 'attachment; filename="communication_report_received.pdf"'); 
+    res.setHeader('Content-Disposition', 'attachment; filename="communication_report_received.pdf"');
     res.setHeader('Content-Type', 'application/pdf');
     res.status(200).send(pdf.output());
-    
+
   } catch (error) {
     console.log(error);
-    res.status(400).json({message: "error generating the report"});
+    res.status(400).json({message: 'error generating the report'});
   }
 });
 
@@ -143,7 +161,7 @@ app.post('/register', async(req, res) => {
     const { email, phone, username, password } = req.body;
     res.status(200).json(await authRegister(email, phone, username, password));
   } catch (err) {
-    res.status(400).json({message: "Failed to register new user:"})
+    res.status(400).json({message: 'Failed to register new user:'});
   }
 });
 
@@ -153,7 +171,7 @@ app.get('/receiveEmail', async(req, res) => {
     const invoiceId = parseInt(req.query.invoiceId);
     res.status(200).json(await receiveEmail(uid, invoiceId));
   } catch (err) {
-    res.status(400).json({message: "Email not received."})
+    res.status(400).json({message: 'Email not received.'});
   }
 });
 
@@ -162,7 +180,7 @@ app.post('/login', async(req, res) => {
     const { username, password } = req.body;
     res.status(200).json(await authLogin(username, password));
   } catch (err) {
-    res.status(400).json({ message: "Failed to login:"})
+    res.status(400).json({ message: 'Failed to login:'});
   }
 });
 
