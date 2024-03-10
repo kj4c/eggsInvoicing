@@ -33,7 +33,8 @@ async function sendEmailWithJSON(from, recipient, jsonString, filename = 'attach
     attachments: [
       {
         filename: filename,
-        path: jsonString,
+        // ensure jsonString is a string. Use JSON.stringify if jsonString could be an object.
+        content: typeof jsonString === 'string' ? jsonString : JSON.stringify(jsonString),
         contentType: 'application/json'
       }
     ]
