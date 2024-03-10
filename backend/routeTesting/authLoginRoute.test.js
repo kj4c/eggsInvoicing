@@ -9,7 +9,7 @@ jest.mock('../functions/authLogin', () => jest.fn().mockImplementation((username
       uid: 1
     });
   } else {
-    return Promise.reject(new Error("Failed to login"));
+    return Promise.reject(new Error('Failed to login'));
   }
 }));
 
@@ -33,6 +33,6 @@ describe('/login route', () => {
       .send({ username: 'wrongUser', password: 'wrongPass' });
 
     expect(responseForInvalidCredentials.statusCode).toBe(400);
-    expect(responseForInvalidCredentials.body).toEqual({ message: "Failed to login:" });
+    expect(responseForInvalidCredentials.body).toEqual({ message: 'Failed to login:' });
   });
 });

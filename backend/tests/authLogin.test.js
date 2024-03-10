@@ -1,74 +1,73 @@
-const authLogin = require("../functions/authLogin"); 
-const pool = require("../database/db");
-const bcrypt = require("bcryptjs");
+const authLogin = require('../functions/authLogin');
+const pool = require('../database/db');
+const bcrypt = require('bcryptjs');
 
-jest.mock("../database/db", () => ({
+jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
-  
-jest.mock("bcryptjs", () => ({
-  hash: jest.fn().mockResolvedValueOnce("hashed"),
+
+jest.mock('bcryptjs', () => ({
+  hash: jest.fn().mockResolvedValueOnce('hashed'),
   compare: jest.fn()
 }));
 
 const loginUser = {
-  username: "winnie",
-  password: "password"
-}
+  username: 'winnie',
+  password: 'password'
+};
 
-describe("authLogin", () => {
+describe('authLogin', () => {
   let consoleSpy;
-  
+
   beforeEach(() => {
     jest.clearAllMocks();
-    consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
   });
-  
+
   afterEach(() => {
     consoleSpy.mockRestore();
   });
-  
-  it("should login user if given username and password are correct", async () => {
+
+  it('should login user if given username and password are correct', async () => {
     const { username, password } = loginUser;
 
     bcrypt.hash;
-    pool.query.mockResolvedValueOnce({ rows: [{ uid: 1, username: username, hashed_password: "hashed"}] });
+    pool.query.mockResolvedValueOnce({ rows: [{ uid: 1, username: username, hashed_password: 'hashed'}] });
     bcrypt.compare.mockResolvedValueOnce(true);
 
     const login = await authLogin(username, password);
 
     expect(pool.query).toHaveBeenCalledTimes(1);
-    expect(pool.query).toHaveBeenCalledWith("select * from users where username = $1", [username]);
+    expect(pool.query).toHaveBeenCalledWith('select * from users where username = $1', [username]);
 
-    expect(bcrypt.compare).toHaveBeenCalledWith(password, "hashed");
+    expect(bcrypt.compare).toHaveBeenCalledWith(password, 'hashed');
     expect(login).toEqual({ status: 200, uid: expect.any(Number)});
   });
-  
-  it("should throw an error if username entered doesn't exist", async () => {
+
+  it('should throw an error if username entered doesn\'t exist', async () => {
     const { username, password } = loginUser;
-				
-    pool.query.mockResolvedValueOnce({ rows: [] }); 
+
+    pool.query.mockResolvedValueOnce({ rows: [] });
 
     await expect(authLogin(username, password))
       .rejects
-      .toThrow("Username does not exist");
+      .toThrow('Username does not exist');
 
-    expect(pool.query).toHaveBeenCalledWith("select * from users where username = $1", [username]);
+    expect(pool.query).toHaveBeenCalledWith('select * from users where username = $1', [username]);
   });
-  
-  it("should throw an error if the password is incorrect", async () => {
+
+  it('should throw an error if the password is incorrect', async () => {
     const { username, password } = loginUser;
 
     bcrypt.hash;
-    pool.query.mockResolvedValueOnce({ rows: [{ username: username, hashed_password: password}] }); 
+    pool.query.mockResolvedValueOnce({ rows: [{ username: username, hashed_password: password}] });
     bcrypt.compare.mockResolvedValueOnce(false);
 
-    await expect(authLogin(username, "wrongpassword"))
+    await expect(authLogin(username, 'wrongpassword'))
       .rejects
-      .toThrow("Password is incorrect");
+      .toThrow('Password is incorrect');
 
-    expect(pool.query).toHaveBeenCalledWith("select * from users where username = $1", [username]);
-    expect(bcrypt.compare).toHaveBeenCalledWith("wrongpassword", password);
+    expect(pool.query).toHaveBeenCalledWith('select * from users where username = $1', [username]);
+    expect(bcrypt.compare).toHaveBeenCalledWith('wrongpassword', password);
   });
 });
-  

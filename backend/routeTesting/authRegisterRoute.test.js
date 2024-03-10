@@ -5,10 +5,10 @@ jest.mock('../functions/authRegister', () => jest.fn().mockImplementation((email
   if (email && phone && username && password) {
     return Promise.resolve({
       status: 200,
-      message: "Successfully registered."
+      message: 'Successfully registered.'
     });
   } else {
-    return Promise.reject(new Error("Failed to register new user:"));
+    return Promise.reject(new Error('Failed to register new user:'));
   }
 }));
 
@@ -26,13 +26,13 @@ describe('/register route', () => {
       .send(mockRegisterData);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.message).toEqual("Successfully registered.");
+    expect(response.body.message).toEqual('Successfully registered.');
 
     const responseForBadRequest = await request(app)
       .post('/register')
-      .send({}); 
+      .send({});
 
     expect(responseForBadRequest.statusCode).toBe(400);
-    expect(responseForBadRequest.body).toEqual({ message: "Failed to register new user:" });
+    expect(responseForBadRequest.body).toEqual({ message: 'Failed to register new user:' });
   });
 });
