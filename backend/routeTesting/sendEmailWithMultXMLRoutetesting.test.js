@@ -1,8 +1,7 @@
 const request = require('supertest');
-const app = require('../app'); 
+const app = require('../app');
 
 jest.mock('../functions/sendEmailWithMultXML', () => jest.fn().mockResolvedValue([1, 2])); // returns directly an array
-
 
 describe('/send/multiInvoice route', () => {
   it('should send an email with multiple XML files attached', async () => {
@@ -40,7 +39,7 @@ describe('/send/multiInvoice route', () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({
       success: true,
-      invoiceIds: expect.any(Array) 
+      invoiceIds: expect.any(Array)
     });
   });
 });
@@ -52,7 +51,6 @@ describe('/send/multiInvoice route error handling', () => {
     jest.clearAllMocks();
     jest.spyOn(console, 'error').mockImplementation(() => {});
   });
-
 
   it('should return an error response if sending fails', async () => {
     sendEmailWithMultipleXML.mockRejectedValueOnce(new Error('Sending failed'));

@@ -10,7 +10,7 @@ jest.mock('nodemailer', () => ({
 
 jest.mock('../database/db', () => ({
   query: jest.fn().mockResolvedValue({
-    rows: [{ invoice_id: '456' }] 
+    rows: [{ invoice_id: '456' }]
   })
 }));
 
@@ -39,9 +39,9 @@ describe('sendEmailWithMultipleXML function', () => {
       }
     ];
 
-    const recipientEmail = "kahowang3659@gmail.com";
+    const recipientEmail = 'kahowang3659@gmail.com';
     const from = 'Test Sender';
-    
+
     await sendEmailWithMultipleXML(from, recipientEmail, xmlFiles);
 
     const nodemailer = require('nodemailer');
@@ -55,7 +55,7 @@ describe('sendEmailWithMultipleXML function', () => {
         expect.objectContaining({ filename: 'invoice.xml', contentType: 'text/xml' })
       ])
     }));
-    
+
     expect(pool.query).toHaveBeenCalledTimes(xmlFiles.length * 2);
 
   });
@@ -63,9 +63,8 @@ describe('sendEmailWithMultipleXML function', () => {
 
 describe('sendEmailWithXML function error handling', () => {
   it('should throw an error if xmlString is undefined', async () => {
-    const recipientEmail = "recipient@example.com";
+    const recipientEmail = 'recipient@example.com';
     const from = 'Error Case Sender';
-
 
     await expect(sendEmailWithMultipleXML(from, recipientEmail, undefined))
       .rejects
@@ -101,7 +100,7 @@ describe('sendEmailWithXML function error handling', () => {
     // Act and Assert
     await expect(sendEmailWithMultipleXML(from, undefined, xmlFiles))
       .rejects
-      .toThrow('recipient is required but was not provided.'); 
+      .toThrow('recipient is required but was not provided.');
   });
 
   it('should throw an error if from is undefined', async () => {
@@ -127,12 +126,12 @@ describe('sendEmailWithXML function error handling', () => {
         filename: 'invoice.xml'
       }
     ];
-    const recipientEmail = "recipient@example.com";
+    const recipientEmail = 'recipient@example.com';
 
     // Act and Assert
     await expect(sendEmailWithMultipleXML(undefined, recipientEmail, xmlFiles))
       .rejects
-      .toThrow('from is required but was not provided.'); 
+      .toThrow('from is required but was not provided.');
   });
 
 });
@@ -163,19 +162,19 @@ describe('sendEmailWithMultipleXML function - filename type validation', () => {
       }
     ];
 
-    const recipientEmail = "kahowang3659@gmail.com";
+    const recipientEmail = 'kahowang3659@gmail.com';
     const from = 'Test Sender';
 
     await expect(sendEmailWithMultipleXML(from, recipientEmail, xmlFiles))
       .rejects
-      .toThrow(`Expected filename to be a string, but got number`);
+      .toThrow('Expected filename to be a string, but got number');
   });
 });
 
 describe('sendEmailWithXML processing and error handling', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    jest.spyOn(console, 'error').mockImplementation(() => {}); 
+    jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   it('should catch and rethrow an error during database operations', async () => {
@@ -202,22 +201,22 @@ describe('sendEmailWithXML processing and error handling', () => {
       }
     ];
 
-    const from = "sender@example.com";
-    const recipient = "recipient@example.com";
-    
+    const from = 'sender@example.com';
+    const recipient = 'recipient@example.com';
+
     // Mock fs.readFile to successfully read a file
     jest.mock('fs', () => ({
       promises: {
-        readFile: jest.fn().mockResolvedValue("<xml>Mock XML Content</xml>"),
+        readFile: jest.fn().mockResolvedValue('<xml>Mock XML Content</xml>'),
         unlink: jest.fn().mockResolvedValue(undefined),
       }
     }));
 
     // Mock the first call to pool.query to throw an error
-    pool.query.mockRejectedValueOnce(new Error("Mock database error"));
+    pool.query.mockRejectedValueOnce(new Error('Mock database error'));
 
     // Expect the function to throw the mock error
-    await expect(sendEmailWithMultipleXML(from, recipient, xmlFiles)).rejects.toThrow("Mock database error");
+    await expect(sendEmailWithMultipleXML(from, recipient, xmlFiles)).rejects.toThrow('Mock database error');
 
   });
 });

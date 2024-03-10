@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../app'); 
+const app = require('../app');
 
 describe('GET /', () => {
   it('responds with Hello world!', async () => {
@@ -8,6 +8,6 @@ describe('GET /', () => {
       .expect('Content-Type', /text\/html/)
       .expect(200);
 
-    expect(response.text).toEqual("Hello world!");
+    expect(response.text).toEqual('Hello world!');
   });
 });

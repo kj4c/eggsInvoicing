@@ -1,12 +1,12 @@
 const request = require('supertest');
-const app = require('../app'); 
+const app = require('../app');
 
 jest.mock('../functions/sendingEmailWithJsonFileAttachement', () => jest.fn().mockResolvedValue({ messageId: '1' }));
 
 describe('/send/email-json route', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    jest.spyOn(console, 'error').mockImplementation(() => {}); 
+    jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   it('should handle the email sending process with JSON correctly', async () => {
@@ -21,7 +21,7 @@ describe('/send/email-json route', () => {
       .send(mockEmailData);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.success).toBe(true); 
+    expect(response.body.success).toBe(true);
     expect(response.body.invoiceId).toEqual({messageId: '1'});
 
   });
@@ -41,7 +41,7 @@ describe('/send/email-json route', () => {
       .send(mockEmailData);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body.success).toBe(false); 
+    expect(response.body.success).toBe(false);
     expect(response.body.error).toBe('Failed to send email');
   });
 });
