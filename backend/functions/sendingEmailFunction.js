@@ -14,8 +14,6 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
     throw new Error('from is required but was not provided.');
   }
 
-  // No need to write the file to the filesystem
-
   // the nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -47,7 +45,7 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
   const info = await transporter.sendMail(mailOptions);
   console.log('Message sent: %s', info.messageId);
 
-  // Database operations remain unchanged
+  // database operations remain unchanged
   let query = 'insert into sent_invoices (sender_email, receiver_email, invoices, type) values ($1, $2, $3, $4) returning invoice_id';
   const invoiceId = (await pool.query(query, [from, recipient, [xmlString], 'XML'])).rows[0].invoice_id;
   console.log('Invoice ID: %d ', invoiceId);

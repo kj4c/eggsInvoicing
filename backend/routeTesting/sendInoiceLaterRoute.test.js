@@ -9,6 +9,7 @@ describe('/send/invoiceLater route', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.spyOn(console, 'error').mockImplementation(() => {});
+
   });
 
   it('should schedule an invoice to be sent later successfully', async () => {
