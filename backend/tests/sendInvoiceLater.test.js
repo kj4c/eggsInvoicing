@@ -13,6 +13,7 @@ const sendInvoiceLater = require('../functions/sendingInvoiceLater');
 beforeEach(() => {
   jest.useFakeTimers();
   jest.clearAllMocks();
+  jest.spyOn(console, 'error').mockImplementation(() => {}); // Suppress console.error
 });
 
 afterEach(() => {

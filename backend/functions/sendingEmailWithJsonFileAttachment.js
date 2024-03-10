@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
 const pool = require('../database/db');
-const fs = require('fs').promises;
 
 async function sendEmailWithJSON(from, recipient, jsonString, filename = 'attachment.json') {
   if (!jsonString) {
@@ -14,8 +13,6 @@ async function sendEmailWithJSON(from, recipient, jsonString, filename = 'attach
   if (!from) {
     throw new Error('from is required but was not provided.');
   }
-
-  await fs.writeFile(filename, jsonString);
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -36,7 +33,7 @@ async function sendEmailWithJSON(from, recipient, jsonString, filename = 'attach
     attachments: [
       {
         filename: filename,
-        path: `./${filename}`,
+        path: jsonString,
         contentType: 'application/json'
       }
     ]
@@ -44,7 +41,6 @@ async function sendEmailWithJSON(from, recipient, jsonString, filename = 'attach
 
   const info = await transporter.sendMail(mailOptions);
   console.log('Message sent: %s', info.messageId);
-  await fs.unlink(filename);
 
   let query = `insert into sent_invoices (sender_email, receiver_email, invoices, type)
   values ($1, $2, $3, $4) returning invoice_id`;

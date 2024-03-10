@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-const fs = require('fs').promises;
 const pool = require('../database/db');
 
 async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
@@ -15,19 +14,17 @@ async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
     throw new Error('jsonFiles is required but was not provided.');
   }
 
-  const attachmentPromises = jsonFiles.map(async (jsonFile) => {
-    if (typeof jsonFile.filename !== 'string') {
-      throw new Error(`Expected filename to be a string, but got ${typeof jsonFile.filename}`);
+  // Directly use the JSON content for attachments without writing to the filesystem
+  const attachments = jsonFiles.map(jsonFile => {
+    if (typeof jsonFile.filename !== 'string' || typeof jsonFile.jsonContent !== 'object') {
+      throw new Error(`Expected filename to be a string and jsonContent to be an object, but got ${typeof jsonFile.filename} and ${typeof jsonFile.jsonContent}`);
     }
-    await fs.writeFile(jsonFile.filename, JSON.stringify(jsonFile.jsonContent)); // Assuming jsonFile.jsonString is the actual JSON content
     return {
       filename: jsonFile.filename,
-      path: `./${jsonFile.filename}`,
-      contentType: 'application/json'
+      content: JSON.stringify(jsonFile.jsonContent),
+      contentType: 'application/json',
     };
   });
-
-  const attachments = await Promise.all(attachmentPromises);
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -35,13 +32,13 @@ async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
     port: 587,
     secure: false,
     auth: {
-      user: 'xmlSender1@gmail.com', // Make sure this matches your actual username
-      pass: 'spfs ucnq sjaj qktq', // Ensure this is your actual password or use environment variables for security
+      user: 'xmlSender1@gmail.com',
+      pass: 'spfs ucnq sjaj qktq',
     },
   });
 
   const mailOptions = {
-    from: 'xmlSender1@gmail.com', // Again, ensure accuracy and consistency in email addresses
+    from: 'xmlSender1@gmail.com',
     to: recipient,
     subject: 'Hello from Node.js with JSON',
     text: `Hey, here are the JSON files from ${from}`,
@@ -52,23 +49,13 @@ async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
   console.log('Message sent: %s', info.messageId);
 
   const invoiceIds = [];
+  for (const attachment of attachments) {
+    let query = 'INSERT INTO sent_invoices (sender_email, receiver_email, invoices, type) VALUES ($1, $2, ARRAY[$3::json], \'JSON\') RETURNING invoice_id';
+    const invoiceId = (await pool.query(query, [from, recipient, attachment.content])).rows[0].invoice_id;
+    invoiceIds.push(invoiceId);
 
-  try {
-    for (const attachment of attachments) {
-      const jsonString = await fs.readFile(attachment.path, { encoding: 'utf8' });
-      let query = 'INSERT INTO sent_invoices (sender_email, receiver_email, invoices, type) VALUES ($1, $2, ARRAY[$3::json], \'JSON\') RETURNING invoice_id';
-      const invoiceId = (await pool.query(query, [from, recipient, jsonString])).rows[0].invoice_id;
-      invoiceIds.push(invoiceId);
-
-      query = 'UPDATE users SET notifications = array_append(notifications, $1) WHERE email = $2';
-      await pool.query(query, [invoiceId.toString(), recipient]);
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  } finally {
-    const cleanupPromises = attachments.map(attachment => fs.unlink(attachment.path));
-    await Promise.all(cleanupPromises);
+    query = 'UPDATE users SET notifications = array_append(notifications, $1) WHERE email = $2';
+    await pool.query(query, [invoiceId.toString(), recipient]);
   }
 
   return invoiceIds;
