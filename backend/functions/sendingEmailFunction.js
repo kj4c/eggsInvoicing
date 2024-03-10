@@ -1,8 +1,6 @@
 const nodemailer = require('nodemailer');
 const pool = require('../database/db');
-const fs = require('fs').promises;
 
-// this is the function that would send the EMAIL with an XML file
 async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachment.xml') {
   if (!xmlString) {
     throw new Error('xmlString is required but was not provided.');
@@ -16,9 +14,9 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
     throw new Error('from is required but was not provided.');
   }
 
-  await fs.writeFile(filename, xmlString);
+  // No need to write the file to the filesystem
 
-  // the nodemail transporter
+  // the nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -26,20 +24,20 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
     secure: false,
     auth: {
       user: 'xmlsender1@gmail.com',
-      pass: 'spfs ucnq sjaj qktq',
+      pass: 'spfs ucnq sjaj qktq', // Be cautious with passwords; consider using environment variables for sensitive info
     },
   });
 
-  // the mail options
+  // the mail options, using content directly instead of a file path
   const mailOptions = {
-    from: 'xmlsender1@gmail.com',
+    from: 'xmlsender1@gmail.com', // Consider using the `from` parameter here if you want the sender to be dynamic
     to: recipient,
     subject: 'Hello from Node.js',
     text: `Hey, this is an XML file from ${from}`,
     attachments: [
       {
         filename: filename,
-        path: `./${filename}`,
+        content: xmlString, // Directly using the XML string here
         contentType: 'text/xml'
       }
     ]
@@ -48,10 +46,9 @@ async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachme
   // sending of the mail
   const info = await transporter.sendMail(mailOptions);
   console.log('Message sent: %s', info.messageId);
-  await fs.unlink(filename);
 
-  let query = `insert into sent_invoices (sender_email, receiver_email, invoices, type)
-  values ($1, $2, $3, $4) returning invoice_id`;
+  // Database operations remain unchanged
+  let query = `insert into sent_invoices (sender_email, receiver_email, invoices, type) values ($1, $2, $3, $4) returning invoice_id`;
   const invoiceId = (await pool.query(query, [from, recipient, [xmlString], 'XML'])).rows[0].invoice_id;
   console.log('Invoice ID: %d ', invoiceId);
 
