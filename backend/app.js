@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 // manual testing works
 app.post('/send/email', async function (req, res) {
   const { from, recipient, xmlString } = req.body;
-
+  
   try {
     const invoiceId = await sendEmailWithXML(from, recipient, xmlString);
     res.status(200).json({ success: true, invoiceId: invoiceId });

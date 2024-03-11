@@ -9,7 +9,7 @@ async function fetchByDate(uId, date) {
 
   // date format is yyyy-mm-dd UTC
   // select to_date('2024-03-09','YYYYMMDD')
-  // select sent_at::date 
+  // select sent_at::date
 
   let q = "select email from users where uid = $1";
   const email = (await pool.query(q, [uId])).rows[0].email;
