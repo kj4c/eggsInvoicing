@@ -163,8 +163,9 @@ app.get('/receiveHtml', async(req, res) => {
     let page = await receiveHtml(uid);
     if (page.status != 200) {
       res.status(page.status).json({message: page.error});
+    } else {
+      res.status(200).send(page);
     }
-    res.status(200).send(page);
   } catch (error) {
     console.log(error);
     res.status(400).json({message: 'error generating the report'});
