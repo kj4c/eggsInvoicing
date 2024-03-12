@@ -161,6 +161,9 @@ app.get('/receiveHtml', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
     let page = await receiveHtml(uid);
+    if (page.status != 200) {
+      res.status(page.status).json({message: page.error});
+    }
     res.status(200).send(page);
   } catch (error) {
     console.log(error);
