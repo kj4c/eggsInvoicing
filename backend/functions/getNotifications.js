@@ -6,7 +6,7 @@ async function getNotifications(uId) {
   if (validUser.rows.length === 0) {
     throw HTTPError(403, 'Invalid User');
   }
-  
+
   const query = 'select notifications from users where uid = $1';
   const res = await pool.query(query, [uId]);
   if (res.rows.length === 0) {
