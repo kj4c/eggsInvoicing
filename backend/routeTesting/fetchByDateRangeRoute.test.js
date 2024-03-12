@@ -117,7 +117,6 @@ describe('/fetchByDateRange route', () => {
     q = 'select email from users where uid = $1';
     expect(pool.query).toHaveBeenCalledWith(q, [uid]);
     q = 'select * from sent_invoices where receiver_email = $1 and sent_at::date between (select to_date($2, \'DD/MM/YYYY\')) and (select to_date($3, \'DD/MM/YYYY\'))';
-
     expect(pool.query).toHaveBeenCalledWith(q, [email, loDate, hiDate]);
   });
 });
