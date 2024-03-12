@@ -1,17 +1,16 @@
-const pool = require("../database/db");
+const pool = require('../database/db');
 
 async function receiveHtml(uid) {
-  console.log(uid)
   // error checking
   if (uid === undefined) {
-    return({status:400, error: 'Invalid uid'});
+    return({status: 400, error: 'Invalid uid'});
   }
 
   // get current user's email
   const userQuery = 'SELECT email FROM users WHERE uid = $1';
   let user = await pool.query(userQuery, [uid]);
   if (user.rows.length === 0) {
-    return({status:400, error: 'Invalid uid'});
+    return({status: 400, error: 'Invalid uid'});
   }
   user = user.rows[0].email;
   const selectQuery = 'SELECT s.invoice_id, s.sender_email, s.sent_at FROM sent_invoices s JOIN users u ON u.email = s.receiver_email WHERE u.uid = $1';
@@ -22,7 +21,7 @@ async function receiveHtml(uid) {
       <td>${row.sender_email}</td>
       <td>${row.sent_at.toLocaleString('en-au')}</td>
     </tr>
-  `).join('')
+  `).join('');
 
   return {
     status: 200,
@@ -48,7 +47,7 @@ async function receiveHtml(uid) {
       </body>
       </html>
     `
-  }
+  };
 }
 
-module.exports = receiveHtml
+module.exports = receiveHtml;

@@ -160,8 +160,8 @@ app.get('/receiveReport', async(req, res) => {
 app.get('/receiveHtml', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
-    let page = await receiveHtml(uid);
-    if (page.status != 200) {
+    const page = await receiveHtml(uid);
+    if (page.status !== 200) {
       res.status(page.status).json({message: page.error});
     } else {
       res.status(200).send(page);
