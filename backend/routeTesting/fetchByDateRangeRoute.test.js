@@ -11,7 +11,7 @@ jest.mock('../database/db', () => ({
 const uid = 123;
 const email = 'dummy@gmail.com';
 const loDate = '10/03/2024';
-const hiDate = '12/03/2024'
+const hiDate = '12/03/2024';
 
 const body = {
   uid: uid,
