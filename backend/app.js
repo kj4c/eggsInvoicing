@@ -16,6 +16,7 @@ const generateReceivePdf = require('./functions/receiveReport');
 const generateSentPdf = require('./functions/sentReport');
 const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
+const fetchByDate = require('./functions/fetchByDate');
 
 app.use(express.json());
 app.use(errorHandler());
@@ -70,10 +71,23 @@ app.get('/receive/fetchByInvoiceId', async function (req, res) {
   }
 });
 
-// need to fix coverage for this
+app.get('/receive/fetchByDate', async function (req, res) {
+  const uid = parseInt(req.query.uid);
+  const date = req.query.date;
+  try {
+    res.json(await fetchByDate(uid, date));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
 app.get('/receive/getNotifications', async function (req, res) {
   const uid = parseInt(req.query.uid);
-  res.status(200).json(await getNotifications(uid));
+  try {
+    res.json(await getNotifications(uid));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
 });
 
 app.post('/send/multiInvoice', async (req, res) => {
