@@ -24,7 +24,7 @@ async function receiveHtml(uid) {
       <td>${row.sender_email}</td>
       <td>${row.sent_at.toLocaleString('en-au')}</td>
     </tr>
-  `)
+  `).join('')
 
   return `
     <!DOCTYPE html>
