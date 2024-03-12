@@ -81,6 +81,17 @@ app.get('/receive/fetchByDate', async function (req, res) {
   }
 });
 
+app.get('/receive/fetchByDateRange', async function (req, res) {
+  const uid = parseInt(req.query.uid);
+  const fromDate = req.query.from;
+  const toDate = req.query.toDate
+  try {
+    
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
 app.get('/receive/getNotifications', async function (req, res) {
   const uid = parseInt(req.query.uid);
   try {
