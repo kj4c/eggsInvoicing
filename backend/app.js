@@ -17,6 +17,7 @@ const generateSentPdf = require('./functions/sentReport');
 const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
 const fetchByDate = require('./functions/fetchByDate');
+const fetchByDateRange = require('./functions/fetchByDateRange');
 
 app.use(express.json());
 app.use(errorHandler());
@@ -83,10 +84,10 @@ app.get('/receive/fetchByDate', async function (req, res) {
 
 app.get('/receive/fetchByDateRange', async function (req, res) {
   const uid = parseInt(req.query.uid);
-  const fromDate = req.query.from;
+  const fromDate = req.query.fromDate;
   const toDate = req.query.toDate
   try {
-    
+    res.json(await fetchByDateRange(uid, fromDate, toDate));
   } catch (error) {
     res.status(error.statusCode).json(error);
   }
