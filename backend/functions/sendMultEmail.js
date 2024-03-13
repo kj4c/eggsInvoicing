@@ -26,7 +26,7 @@ async function sendMultEmail(type, from, recipients, filesOrString) {
   for (let i = 0; i < recipients.length; i++) {
     try {
       const result =  await sendFunction(from, recipients[i], filesOrString);
-      console.log('Invoice sent successfully to recipient:', recipients[i] , 'Invoice ID:', result);
+      // console.log('Invoice sent successfully to recipient:', recipients[i] , 'Invoice ID:', result);
       finalResults.push(result);
     } catch (error) {
       console.error('Error sending invoice:', error);
