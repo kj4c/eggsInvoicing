@@ -20,34 +20,63 @@ async function getStatistics(uid, startDate, endDate) {
   q = 'select invoices from sent_invoices where receiver_email = $1 and sent_at::date between (select to_date($2, \'DD/MM/YYYY\')) and (select to_date($3, \'DD/MM/YYYY\'))';
 
   const invoices = await pool.query(q, [email, startDate, endDate]);
-  // console.log(invoices.rows);
-
-  // [{invoices: [...]}]
   if (invoices.rows.length === 0) {
     return { message: 'No invoices found within given date range'};
   }
-  
-  let payableAmount = 0.00;
-  let numInvoices = 0;
+
+  // invoices.rows = 
+  // [
+  //   { 
+  //     invoices: [xmlString1, xmlString2 ...]
+  //   },
+  //   {
+  //     invoices: [xmlString1, xmlString2 ...]
+  //   }
+  // ]
+
+  let lineExtensionAmount = taxExclusiveAmount = taxInclusiveAmount = 
+      chargeTotalAmount = prepaidAmount = payableAmount = numInvoices = 0;
+
   const parser = new  XMLParser();
-  for (const resObj of invoices.rows) {
-    for (const invoice of resObj.invoices) {
-      let xmlObj = parser.parse(invoice);
-      console.log(xmlObj.Invoice['cac:LegalMonetaryTotal']);
-      payableAmount += xmlObj.Invoice['cac:LegalMonetaryTotal']['cbc:PayableAmount'];
+  for (const invoiceObj of invoices.rows) {
+    for (const invoiceXml of invoiceObj.invoices) {
+      let xmlObj = parser.parse(invoiceXml);
+      const invoice = xmlObj.Invoice;
+      const monetaryTotal = invoice['cac:LegalMonetaryTotal'];
+      // console.log(monetaryTotal);
+      // console.log('IssueDate: ',invoice['cbc:IssueDate']);
+      // console.log('DueDate: ', invoice['cbc:DueDate']);
+      lineExtensionAmount +=parseFloat(monetaryTotal['cbc:LineExtensionAmount']);
+      taxExclusiveAmount +=parseFloat(monetaryTotal['cbc:TaxExclusiveAmount']);
+      taxInclusiveAmount +=parseFloat(monetaryTotal['cbc:TaxInclusiveAmount']);
+      if (monetaryTotal['cbc:ChargeTotalAmount']) {
+        chargeTotalAmount +=parseFloat(monetaryTotal['cbc:ChargeTotalAmount']);
+      }
+      if (monetaryTotal['cbc:PrepaidAmount']) {
+        prepaidAmount +=parseFloat(monetaryTotal['cbc:PrepaidAmount']);
+      }
+      payableAmount += parseFloat(monetaryTotal['cbc:PayableAmount']);
       numInvoices++;
     }
   }
-  
-  
-  payableAmount = payableAmount.toFixed(2);
-  console.log("payableAmount", payableAmount);
-  console.log("numInvoices", numInvoices);
- 
 
+  lineExtensionAmount = lineExtensionAmount.toFixed(2); 
+  taxExclusiveAmount = taxExclusiveAmount.toFixed(2); 
+  taxInclusiveAmount = taxInclusiveAmount.toFixed(2); 
+  chargeTotalAmount = chargeTotalAmount.toFixed(2); 
+  prepaidAmount = prepaidAmount.toFixed(2); 
+  payableAmount = payableAmount.toFixed(2);
+  // console.log(lineExtensionAmount, taxExclusiveAmount, taxInclusiveAmount, 
+  //   chargeTotalAmount, prepaidAmount, payableAmount, numInvoices);
   return {
+    message: `Total LegalMonetaryTotal for requested period from ${startDate} to ${endDate}`,
     numInvoices: numInvoices,
-    payableAmount: '$' + payableAmount
+    totalLineExtensionAmount: '$' + lineExtensionAmount,
+    totalTaxExclusiveAmount: '$' + taxExclusiveAmount,
+    totalTaxInclusiveAmount: '$' + taxInclusiveAmount,
+    totalChargeTotalAmount: '$' + chargeTotalAmount,
+    totalPrepaidAmount: '$' + prepaidAmount,
+    totalPayableAmount: '$' + payableAmount
   };
 }
 
