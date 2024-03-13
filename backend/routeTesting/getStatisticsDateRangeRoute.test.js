@@ -100,7 +100,7 @@ describe('/receive/getStatisticsDateRange route', () => {
       chargeTotalAmount: '$0.00',
       prepaidAmount: '$0.00',
       payableAmount: '$1784.51'
-    }
+    };
 
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
