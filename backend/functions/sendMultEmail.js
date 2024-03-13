@@ -22,7 +22,7 @@ async function sendMultEmail(type, from, recipients, filesOrString) {
     throw new Error(`Unsupported type: ${type}`);
   }
 
-  let finalResults = [];
+  const finalResults = [];
   for (let i = 0; i < recipients.length; i++) {
     try {
       const result =  await sendFunction(from, recipients[i], filesOrString);

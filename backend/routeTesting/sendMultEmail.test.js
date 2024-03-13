@@ -19,7 +19,7 @@ describe('/send/multEmail route', () => {
     const mockInvoiceData = {
       type: 'json',
       from: 'jackson@gmail.com',
-      recipients: ['kj@gmail.com','winston@gmail.com','kahowang3659@gmail.com'],
+      recipients: ['kj@gmail.com', 'winston@gmail.com', 'kahowang3659@gmail.com'],
       content: '<xml>swag</xml>'
     };
 
@@ -61,7 +61,7 @@ describe('/send/multEmail route', () => {
     const response = await request(app)
       .post('/send/multEmail')
       .send(mockBadData);
-    
+
     expect(response.statusCode).toBe(401);
     expect(response.body.success).toBe(false);
     expect(response.body.message).toBe('Recipients must be an array');
@@ -73,7 +73,7 @@ describe('/send/multEmail route', () => {
     const mockInvoiceData = {
       type: 'json',
       from: 'jackson@gmail.com',
-      recipients: ['kahowang3659@gmail.com','kj@gmail.com'],
+      recipients: ['kahowang3659@gmail.com', 'kj@gmail.com'],
       content: '{"message":"Internal server error test"}',
     };
 

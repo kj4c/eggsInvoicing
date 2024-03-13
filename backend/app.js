@@ -20,7 +20,6 @@ const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
 const sendMultEmail = require('./functions/sendMultEmail');
 
-
 app.use(express.json());
 app.use(errorHandler());
 app.use(bodyParser.json());

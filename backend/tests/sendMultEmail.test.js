@@ -23,7 +23,6 @@ test('sendMultEmail calls the correct function with JSON type', async () => {
 
   sendMultEmail(type, from, recipients, jsonString);
 
-
   for (let i = 0; i < recipients.length; i++) {
     expect(sendEmailWithJSON).toHaveBeenCalledWith(from, recipients[i], jsonString);
   }
@@ -32,14 +31,14 @@ test('sendMultEmail calls the correct function with JSON type', async () => {
 test('sendMultEmail calls the correct function with multiplejson type', async () => {
   const type = 'multiplejson';
   const from = 'test@test.com';
-  const recipients = ['jang@gmail.com','recipients@test.com'];
+  const recipients = ['jang@gmail.com', 'recipients@test.com'];
   const filesOrString = [{filename: 'file1.json', content: '{"test": "data1"}'}, {filename: 'file2.json', content: '{"test": "data2"}'}];
 
   await sendMultEmail(type, from, recipients, filesOrString);
 
   expect(sendEmailWithMultipleJSON).toHaveBeenCalledTimes(2);
 
-  for (let i = recipients.length - 1; i != 0; i--) {
+  for (let i = recipients.length - 1; i !== 0; i--) {
     expect(sendEmailWithMultipleJSON).toHaveBeenCalledWith(from, recipients[i], filesOrString);
   }
 
