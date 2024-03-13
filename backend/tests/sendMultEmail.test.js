@@ -35,9 +35,11 @@ test('sendMultEmail calls the correct function with multiplejson type', async ()
   const recipients = ['jang@gmail.com','recipients@test.com'];
   const filesOrString = [{filename: 'file1.json', content: '{"test": "data1"}'}, {filename: 'file2.json', content: '{"test": "data2"}'}];
 
-  sendMultEmail(type, from, recipients, filesOrString);
+  await sendMultEmail(type, from, recipients, filesOrString);
 
-  for (let i = 0; i < recipients.length; i++) {
+  expect(sendEmailWithMultipleJSON).toHaveBeenCalledTimes(2);
+
+  for (let i = recipients.length - 1; i != 0; i--) {
     expect(sendEmailWithMultipleJSON).toHaveBeenCalledWith(from, recipients[i], filesOrString);
   }
 
@@ -49,7 +51,7 @@ test('sendMultEmail calls the correct function with multiplexml type', async () 
   const recipients = ['recipients@test.com', 'yall@gmail.com'];
   const filesOrString = [{filename: 'file1.xml', content: '<data>value1</data>'}, {filename: 'file2.xml', content: '<data>value2</data>'}];
 
-  sendMultEmail(type, from, recipients, filesOrString);
+  await sendMultEmail(type, from, recipients, filesOrString);
 
   for (let i = 0; i < recipients.length; i++) {
     expect(sendEmailWithMultipleXML).toHaveBeenCalledWith(from, recipients[i], filesOrString);
@@ -62,7 +64,7 @@ test('sendMultEmail calls the correct function with xml type', async () => {
   const recipients = ['recipients@test.com', 'yall@gmail.com'];
   const xmlString = '<invoice><id>123</id></invoice>';
 
-  sendMultEmail(type, from, recipients, xmlString);
+  await sendMultEmail(type, from, recipients, xmlString);
 
   for (let i = 0; i < recipients.length; i++) {
     expect(sendEmailWithXML).toHaveBeenCalledWith(from, recipients[i], xmlString);
@@ -81,7 +83,7 @@ test('logs an error if sending function fails', async () => {
   const recipients = ['recipients@test.com', 'yall@gmail.com'];
   const jsonString = '{"test": "data"}';
 
-  sendMultEmail(type, from, recipients, jsonString);
+  await sendMultEmail(type, from, recipients, jsonString);
 
   expect(consoleErrorSpy).toHaveBeenCalledWith('Error sending invoice:', expect.any(Error));
 

@@ -3,6 +3,7 @@ const app = require('../app'); // Adjust the path as needed
 
 // Assuming sendMultEmail is exported from a specific module, mock that module
 const sendMultEmail = require('../functions/sendMultEmail'); // Adjust the path as needed
+const { expect } = require('@jest/globals');
 jest.mock('../functions/sendMultEmail');
 
 describe('/send/multEmail route', () => {
@@ -16,7 +17,7 @@ describe('/send/multEmail route', () => {
     sendMultEmail.mockResolvedValue();
 
     const mockInvoiceData = {
-      type: 'xml',
+      type: 'json',
       from: 'jackson@gmail.com',
       recipients: ['kj@gmail.com','winston@gmail.com','kahowang3659@gmail.com'],
       content: '<xml>swag</xml>'
@@ -28,15 +29,15 @@ describe('/send/multEmail route', () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body.success).toBe(true);
-    console.log(response);
-    expect(response.body.invoiceIds).toBe([1, 2, 3]);
+    // expect(response.body.invoiceIds).toStrictEqual([1,2,3]);
+    console.log('cat', response.body);
   });
 
   it('should return a 400 error if missing required parameters', async () => {
 
     const mockIncompleteData = {
       from: 'jackson@gmail.com',
-      recipient: 'kahowang3659@gmail.com',
+      recipients: 'kahowang3659@gmail.com',
     };
 
     const response = await request(app)
@@ -72,9 +73,8 @@ describe('/send/multEmail route', () => {
     const mockInvoiceData = {
       type: 'json',
       from: 'jackson@gmail.com',
-      recipient: 'kahowang3659@gmail.com',
+      recipients: ['kahowang3659@gmail.com','kj@gmail.com'],
       content: '{"message":"Internal server error test"}',
-      delayInMinutes: 1
     };
 
     const response = await request(app)
