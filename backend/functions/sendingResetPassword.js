@@ -47,7 +47,7 @@ async function sendingResetPassword(email) {
     }
 
   } catch (error) {
-    throw createError(500, 'Password reset email failed to send.');
+    throw createError(400, 'Password reset email failed to send.');
   }
 }
 
