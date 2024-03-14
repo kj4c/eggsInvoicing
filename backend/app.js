@@ -13,6 +13,7 @@ const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
 const receiveEmail = require('./functions/receiveEmail');
 const generateReceivePdf = require('./functions/receiveReport');
+const receiveHtml = require('./functions/receiveReportHtml');
 const generateSentPdf = require('./functions/sentReport');
 const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
@@ -195,6 +196,21 @@ app.get('/receiveReport', async(req, res) => {
       res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"');
       res.setHeader('Content-Type', 'application/pdf');
       res.status(200).send(pdf.output());
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({message: 'error generating the report'});
+  }
+});
+
+app.get('/receiveHtml', async(req, res) => {
+  try {
+    const uid = parseInt(req.query.uid);
+    const page = await receiveHtml(uid);
+    if (page.status !== 200) {
+      res.status(page.status).json({message: page.error});
+    } else {
+      res.status(200).send(page);
     }
   } catch (error) {
     console.log(error);
