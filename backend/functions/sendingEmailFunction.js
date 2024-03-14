@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
 const pool = require('../database/db');
 
+// this function allows the user to just send one xml file to the user
+// and the file name is always attachment.xml
 async function sendEmailWithXML(from, recipient, xmlString, filename = 'attachment.xml') {
   if (!xmlString) {
     throw new Error('xmlString is required but was not provided.');

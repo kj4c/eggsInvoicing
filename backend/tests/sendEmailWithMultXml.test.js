@@ -63,4 +63,69 @@ describe('sendEmailWithMultipleXML function', () => {
     expect(pool.query).toHaveBeenCalledTimes(xmlFiles.length * 2);
   });
 
+  it('should throw an error if "xmlFiles" is not provided', async () => {
+    const recipientEmail = 'example@example.com';
+    const from = 'Test Sender';
+
+    await expect(sendEmailWithMultipleXML(from, recipientEmail, null))
+      .rejects
+      .toThrow('xmlFiles is required but was not provided.');
+  });
+
+  it('should throw an error if "xmlFiles" is empty', async () => {
+    const recipientEmail = 'example@example.com';
+    const from = 'Test Sender';
+
+    await expect(sendEmailWithMultipleXML(from, recipientEmail, []))
+      .rejects
+      .toThrow('xmlFiles is required but was not provided.');
+  });
+
+  it('should throw an error if "xmlFiles" is not an array', async () => {
+    const recipientEmail = 'example@example.com';
+    const from = 'Test Sender';
+
+    await expect(sendEmailWithMultipleXML(from, recipientEmail, {}))
+      .rejects
+      .toThrow('xmlFiles is required but was not provided.');
+  });
+
+  it('should throw an error if filename or xmlString is not a string', async () => {
+    const xmlFiles = [{ filename: 123, xmlString: [] }];
+    const recipientEmail = 'example@example.com';
+    const from = 'Test Sender';
+
+    await expect(sendEmailWithMultipleXML(from, recipientEmail, xmlFiles))
+      .rejects
+      .toThrow('Expected filename and xmlString to be strings, but got number and object');
+  });
+
+  it('should throw an error if "recipient" is not provided', async () => {
+    const xmlFiles = [{ filename: 'note.xml', xmlString: '<note></note>' }];
+    const from = 'Test Sender';
+
+    await expect(sendEmailWithMultipleXML(from, null, xmlFiles))
+      .rejects
+      .toThrow('recipient is required but was not provided.');
+  });
+
+  it('should throw an error if "from" is not provided', async () => {
+    const xmlFiles = [{ filename: 'note.xml', xmlString: '<note></note>' }];
+    const recipientEmail = 'example@example.com';
+
+    await expect(sendEmailWithMultipleXML(null, recipientEmail, xmlFiles))
+      .rejects
+      .toThrow('from is required but was not provided.');
+  });
+
+  it('should throw an error if filename or xmlString is not a string', async () => {
+    const xmlFiles = [{ filename: 123, xmlString: [] }];
+    const recipientEmail = 'example@example.com';
+    const from = 'Test Sender';
+
+    await expect(sendEmailWithMultipleXML(from, recipientEmail, xmlFiles))
+      .rejects
+      .toThrow('Expected filename and xmlString to be strings, but got number and object');
+  });
+
 });

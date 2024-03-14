@@ -1,6 +1,7 @@
 const pool = require('../database/db');
 const HTTPError = require('http-errors');
 
+// this function would fetch the invoice by the userID
 async function fetchByInvoiceId(uId, invoiceId) {
   const validUser = await pool.query('select uid from users where uid = $1', [uId]);
   if (validUser.rows.length === 0) {

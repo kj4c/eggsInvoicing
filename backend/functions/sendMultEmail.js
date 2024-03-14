@@ -3,6 +3,7 @@ const sendEmailWithMultipleXML = require('./sendEmailWithMultXML');
 const sendEmailWithXML = require('./sendingEmailFunction');
 const sendEmailWithJSON = require('./sendingEmailWithJsonFileAttachment');
 
+// this allows the user to send multiple email to different users
 async function sendMultEmail(type, from, recipients, filesOrString) {
   let sendFunction;
   switch (type.toLowerCase()) {
