@@ -13,12 +13,14 @@ const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
 const receiveEmail = require('./functions/receiveEmail');
 const generateReceivePdf = require('./functions/receiveReport');
+const receiveHtml = require('./functions/receiveReportHtml');
 const generateSentPdf = require('./functions/sentReport');
 const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
 const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
 const getStatisticsDateRange = require('./functions/getStatisticsDateRange');
+const sendMultEmail = require('./functions/sendMultEmail');
 
 app.use(express.json());
 app.use(errorHandler());
@@ -176,6 +178,25 @@ app.post('/send/invoiceLater', async (req, res) => {
   }
 });
 
+app.post('/send/multEmail', async (req, res) => {
+  const { type, from, recipients, content } = req.body;
+  try {
+    if (!type || !from || !recipients || !content) {
+      return res.status(400).json({ success: false, message: 'Missing required parameters' });
+    }
+
+    if (!Array.isArray(recipients)) {
+      return res.status(401).json({ success: false, message: 'Recipients must be an array' });
+    }
+
+    const results = await sendMultEmail(type, from, recipients, content);
+    res.status(200).json({ success: true, invoiceIds: results });
+  } catch (error) {
+    console.error('Error sending multiple emails:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 app.get('/receiveReport', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
@@ -187,6 +208,21 @@ app.get('/receiveReport', async(req, res) => {
       res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"');
       res.setHeader('Content-Type', 'application/pdf');
       res.status(200).send(pdf.output());
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({message: 'error generating the report'});
+  }
+});
+
+app.get('/receiveHtml', async(req, res) => {
+  try {
+    const uid = parseInt(req.query.uid);
+    const page = await receiveHtml(uid);
+    if (page.status !== 200) {
+      res.status(page.status).json({message: page.error});
+    } else {
+      res.status(200).send(page);
     }
   } catch (error) {
     console.log(error);

@@ -1,0 +1,1094 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Team Eggs API",
+    "description" : "This is an API regarding the sending and receiving of e-invoices.",
+    "contact" : {
+      "email" : "z5428854@ad.unsw.edu.au"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://invoice-seng2021-24t1-eggs.vercel.app/",
+    "description" : "Team Eggs"
+  } ],
+  "tags" : [ {
+    "name" : "Sending invoices",
+    "description" : "Operations used to send E-Invoices"
+  }, {
+    "name" : "Receiving invoices",
+    "description" : "Operations used to receive E-invoices"
+  }, {
+    "name" : "Authentication"
+  } ],
+  "paths" : {
+    "/send/email" : {
+      "post" : {
+        "tags" : [ "Sending invoices" ],
+        "summary" : "sends an XML invoice to a specified user via email",
+        "description" : "sends an email with an attached XML file to a specified user",
+        "operationId" : "sendEmail",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/send_email_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "email successfully sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "email not sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/send/email-json" : {
+      "post" : {
+        "tags" : [ "Sending invoices" ],
+        "summary" : "sends a JSON invoice to a specified user via email",
+        "description" : "sends an email with an attached JSON file to a specified user",
+        "operationId" : "sendJsonEmail",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/send_emailjson_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "email successfully sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "email not sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/send/multiInvoice" : {
+      "post" : {
+        "tags" : [ "Sending invoices" ],
+        "summary" : "send multiple XML invoices to a specified user via email",
+        "description" : "sends an email with multiple XML files to a specified user",
+        "operationId" : "sendMultipleInvoices",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/send_multiInvoice_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "email successfully sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "email not sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/send/multiInvoice-json" : {
+      "post" : {
+        "tags" : [ "Sending invoices" ],
+        "summary" : "send mutliple JSON invoices",
+        "description" : "sends multiple json invoices to the specified user",
+        "operationId" : "sendText",
+        "requestBody" : {
+          "description" : "from, recipient and files to upload",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/send_multiInvoicejson_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "email successfully sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad input"
+          },
+          "500" : {
+            "description" : "emailed not sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/send/invoiceLater" : {
+      "post" : {
+        "tags" : [ "Sending invoices" ],
+        "summary" : "send invoices at a specific time",
+        "description" : "sends files to a recipient after some delay in minutes",
+        "operationId" : "sendLater",
+        "requestBody" : {
+          "description" : "type of file, from who, recipient, content, delay",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/send_invoiceLater_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "202" : {
+            "description" : "email successfully sent",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_202"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad input",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400_1"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_500_1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receiveEmail" : {
+      "get" : {
+        "tags" : [ "Receiving invoices" ],
+        "summary" : "checks if an email has been received by the specified user",
+        "description" : "checks if an email has been received by the specified user",
+        "operationId" : "receiveInvoice",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "the ID of the user",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "invoiceId",
+          "in" : "query",
+          "description" : "ID of the invoice",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "email successfully received",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "email not received",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receiveReport" : {
+      "get" : {
+        "tags" : [ "Receiving invoices" ],
+        "summary" : "Generate received communication report",
+        "description" : "A communication report showcasing all invoices received by the userId",
+        "operationId" : "report",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "the ID of the user",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Generate report",
+            "content" : {
+              "application/pdf" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/inline_response_200_4"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Error generating the report",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400_3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sentReport" : {
+      "get" : {
+        "tags" : [ "Receiving invoices" ],
+        "summary" : "Generates sent communication report",
+        "description" : "A communication report showcasing all invoices sent by the userId",
+        "operationId" : "report2",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "the ID of the user",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Generate report",
+            "content" : {
+              "application/pdf" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/inline_response_200_5"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Error generating the report",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400_3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receive/getNotifications" : {
+      "get" : {
+        "tags" : [ "Receiving invoices" ],
+        "summary" : "Get the number of new invoices the user received",
+        "description" : "Gets the number of new invoices the user received since last check",
+        "operationId" : "notifications",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "the ID of the user",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "received notfications",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_6"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "failed to call function"
+          }
+        }
+      }
+    },
+    "/receive/fetchAll" : {
+      "get" : {
+        "tags" : [ "Receiving invoices" ],
+        "summary" : "Fetches all invoices sent/received by user",
+        "description" : "Fetches all invoices sent/received by user",
+        "operationId" : "fetchAll",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "the ID of the user",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "received invoices",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_7"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "failed to call function"
+          }
+        }
+      }
+    },
+    "/receive/fetchByInvoiceId" : {
+      "get" : {
+        "tags" : [ "Receiving invoices" ],
+        "summary" : "Fetches the invoice sent to the user",
+        "description" : "Fetches the details of the invoice sent to the userId",
+        "operationId" : "fetchByInvoiceId",
+        "parameters" : [ {
+          "name" : "uid",
+          "in" : "query",
+          "description" : "the ID of the user",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "invoiceId",
+          "in" : "query",
+          "description" : "the ID of the invoice",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully found the invoice",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_8"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "No invoice found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400_4"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "failed to call function"
+          }
+        }
+      }
+    },
+    "/login" : {
+      "post" : {
+        "tags" : [ "Authentication" ],
+        "summary" : "User login",
+        "description" : "Login users into the website",
+        "requestBody" : {
+          "description" : "login details",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/login_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Login successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_9"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Failed to login"
+          }
+        }
+      }
+    },
+    "/register" : {
+      "post" : {
+        "tags" : [ "Authentication" ],
+        "summary" : "Registers user to the website",
+        "requestBody" : {
+          "description" : "login details",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/register_body"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Registered successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_200_10"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Unsuccessful registration",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400_5"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "send_email_body" : {
+        "type" : "object",
+        "properties" : {
+          "from" : {
+            "type" : "string",
+            "description" : "state who the email is from",
+            "example" : "Jackson Wang"
+          },
+          "recipient" : {
+            "type" : "string",
+            "description" : "email of the recipient",
+            "example" : "123@gmail.com"
+          },
+          "xmlString" : {
+            "type" : "string",
+            "description" : "xml string",
+            "example" : "<xml> xml file </xml>"
+          }
+        }
+      },
+      "inline_response_200" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean",
+            "description" : "success message",
+            "example" : true
+          },
+          "invoiceId" : {
+            "type" : "integer",
+            "description" : "The invoiceId",
+            "example" : 420
+          }
+        }
+      },
+      "inline_response_400" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean",
+            "description" : "success message",
+            "example" : false
+          },
+          "error" : {
+            "type" : "string",
+            "description" : "error message",
+            "example" : "Failed to send email"
+          }
+        }
+      },
+      "send_emailjson_body" : {
+        "type" : "object",
+        "properties" : {
+          "from" : {
+            "type" : "string",
+            "description" : "state who the email is from",
+            "example" : "Jackson Wang"
+          },
+          "recipient" : {
+            "type" : "string",
+            "description" : "email of the recipient",
+            "example" : "123@gmail.com"
+          },
+          "jsonString" : {
+            "type" : "object",
+            "description" : "JSON string",
+            "example" : {
+              "message" : "Here's a test JSON string"
+            }
+          }
+        }
+      },
+      "sendmultiInvoice_xmlFiles" : {
+        "type" : "object",
+        "properties" : {
+          "xmlString" : {
+            "description" : "xml string",
+            "example" : "<?xml version=\"1.0\"?>\n<note>\n  <to>Tove</to>\n  <from>Jani</from>\n  <heading>Reminder</heading>\n  <body>Don't forget me this weekend!</body>\n</note>"
+          },
+          "filename" : {
+            "description" : "file name",
+            "example" : "note.xml"
+          }
+        }
+      },
+      "send_multiInvoice_body" : {
+        "type" : "object",
+        "properties" : {
+          "from" : {
+            "type" : "string",
+            "description" : "state who the email is from",
+            "example" : "Jackson"
+          },
+          "recipient" : {
+            "type" : "string",
+            "description" : "email of the recipient",
+            "example" : "123@gmail.com"
+          },
+          "xmlFiles" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/sendmultiInvoice_xmlFiles"
+            }
+          }
+        }
+      },
+      "inline_response_200_1" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean",
+            "description" : "success message",
+            "example" : true
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "success string",
+            "example" : "Email sent successfully with XML attachments."
+          }
+        }
+      },
+      "send_multiInvoicejson_body" : {
+        "type" : "object",
+        "properties" : {
+          "from" : {
+            "type" : "string",
+            "description" : "sender name",
+            "example" : "Jackson Wang"
+          },
+          "recipient" : {
+            "type" : "string",
+            "description" : "email address of the receiver",
+            "example" : "123@gmail.com"
+          },
+          "jsonFiles" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "example" : {
+                "message" : "Hey guys",
+                "title" : "Whats up fam"
+              }
+            }
+          }
+        }
+      },
+      "inline_response_200_2" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean",
+            "description" : "success result",
+            "example" : true
+          },
+          "invoiceIds" : {
+            "type" : "array",
+            "description" : "array of invoice ids",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        }
+      },
+      "inline_response_500" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean",
+            "description" : "success result",
+            "example" : false
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "success message",
+            "example" : "Failed to send email."
+          }
+        }
+      },
+      "send_invoiceLater_body" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "description" : "type of file",
+            "example" : "xml",
+            "enum" : [ "multiplejson", "multiplexml", "xml", "json" ]
+          },
+          "from" : {
+            "type" : "string",
+            "description" : "from who",
+            "example" : "winston"
+          },
+          "recipient" : {
+            "type" : "string",
+            "description" : "email address of the receiver",
+            "example" : "123@gmail.com"
+          },
+          "content" : {
+            "oneOf" : [ {
+              "type" : "string",
+              "description" : "file to send",
+              "example" : "<xml> whats good </xml>"
+            }, {
+              "type" : "array",
+              "items" : {
+                "type" : "string",
+                "example" : "<xml>hey</xml>"
+              }
+            } ]
+          },
+          "delayInMinutes" : {
+            "type" : "integer",
+            "description" : "Delay in minutes to send file",
+            "example" : 10
+          }
+        }
+      },
+      "inline_response_202" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean",
+            "description" : "success result",
+            "example" : true
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "success message",
+            "example" : "Invoice scheduled to be sent after 10 minute(s)"
+          }
+        }
+      },
+      "inline_response_400_1" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean",
+            "description" : "success result",
+            "example" : false
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "success message",
+            "example" : "Missing required parameters"
+          }
+        }
+      },
+      "inline_response_500_1" : {
+        "type" : "object",
+        "properties" : {
+          "success" : {
+            "type" : "boolean",
+            "description" : "success result",
+            "example" : false
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "success message",
+            "example" : "Internal server error"
+          }
+        }
+      },
+      "inline_response_200_3" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "integer",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "example" : "Success"
+          }
+        }
+      },
+      "inline_response_400_2" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "integer",
+            "description" : "status code",
+            "example" : 400
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "error message",
+            "example" : "Email not received."
+          }
+        }
+      },
+      "inline_response_200_4" : {
+        "type" : "object",
+        "properties" : {
+          "invoice_id" : {
+            "type" : "string",
+            "example" : "10323"
+          },
+          "sender" : {
+            "type" : "string"
+          },
+          "time" : {
+            "type" : "string",
+            "example" : "1/3/2004 12:00"
+          }
+        }
+      },
+      "inline_response_400_3" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "description" : "error message",
+            "example" : "error generating the report"
+          }
+        }
+      },
+      "inline_response_200_5" : {
+        "type" : "object",
+        "properties" : {
+          "invoice_id" : {
+            "type" : "string",
+            "example" : "10323"
+          },
+          "receiver" : {
+            "type" : "string"
+          },
+          "time" : {
+            "type" : "string",
+            "example" : "1/3/2004 12:00"
+          }
+        }
+      },
+      "inline_response_200_6" : {
+        "type" : "object",
+        "properties" : {
+          "notifications" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "invoice_ID" : {
+                  "type" : "integer",
+                  "example" : 2
+                },
+                "sender_email" : {
+                  "type" : "string",
+                  "example" : "meow@gmail.com"
+                },
+                "receiver_email" : {
+                  "type" : "string",
+                  "example" : "woof@gmail.com"
+                },
+                "invoices" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
+                },
+                "sent_at" : {
+                  "type" : "string",
+                  "example" : "12-04-72 12:23:43PM"
+                }
+              }
+            }
+          }
+        }
+      },
+      "inline_response_200_7" : {
+        "type" : "object",
+        "properties" : {
+          "invoices" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "invoice_id" : {
+                  "type" : "integer",
+                  "example" : 2
+                },
+                "sender_email" : {
+                  "type" : "string",
+                  "example" : "meow@gmail.com"
+                },
+                "receiver_email" : {
+                  "type" : "string",
+                  "example" : "woof@gmail.com"
+                },
+                "invoices" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
+                },
+                "sent_at" : {
+                  "type" : "string",
+                  "example" : "12-04-72 12:23:43PM"
+                }
+              }
+            }
+          }
+        }
+      },
+      "inline_response_200_8" : {
+        "type" : "object",
+        "properties" : {
+          "invoice" : {
+            "type" : "object",
+            "properties" : {
+              "invoice_id" : {
+                "type" : "integer",
+                "example" : 2
+              },
+              "sender_email" : {
+                "type" : "string",
+                "example" : "meow@gmail.com"
+              },
+              "receiver_email" : {
+                "type" : "string",
+                "example" : "woof@gmail.com"
+              },
+              "invoices" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string"
+                }
+              },
+              "type" : {
+                "type" : "string",
+                "example" : "XML"
+              },
+              "sent_at" : {
+                "type" : "string",
+                "example" : "12-04-72 12:23:43PM"
+              }
+            }
+          }
+        }
+      },
+      "inline_response_400_4" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "InvoiceId does not exists"
+          }
+        }
+      },
+      "login_body" : {
+        "type" : "object",
+        "properties" : {
+          "username" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_9" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "integer",
+            "description" : "status code",
+            "example" : 200
+          },
+          "uid" : {
+            "type" : "integer",
+            "description" : "user ID",
+            "example" : 2
+          }
+        }
+      },
+      "register_body" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "phone" : {
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_200_10" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "integer",
+            "example" : 200
+          },
+          "message" : {
+            "type" : "string",
+            "example" : "Successfully registered."
+          }
+        }
+      },
+      "inline_response_400_5" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string",
+            "example" : "Failed to register new user:"
+          }
+        }
+      }
+    }
+  }
+}
