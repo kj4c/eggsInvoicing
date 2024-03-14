@@ -18,6 +18,7 @@ const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
 const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
+const sendMultEmail = require('./functions/sendMultEmail');
 
 app.use(express.json());
 app.use(errorHandler());
@@ -160,6 +161,25 @@ app.post('/send/invoiceLater', async (req, res) => {
     res.status(202).json({ success: true, message: `Invoice scheduled to be sent after ${delayInMinutes} minute(s)` });
   } catch (error) {
     console.error('Error scheduling invoice:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+app.post('/send/multEmail', async (req, res) => {
+  const { type, from, recipients, content } = req.body;
+  try {
+    if (!type || !from || !recipients || !content) {
+      return res.status(400).json({ success: false, message: 'Missing required parameters' });
+    }
+
+    if (!Array.isArray(recipients)) {
+      return res.status(401).json({ success: false, message: 'Recipients must be an array' });
+    }
+
+    const results = await sendMultEmail(type, from, recipients, content);
+    res.status(200).json({ success: true, invoiceIds: results });
+  } catch (error) {
+    console.error('Error sending multiple emails:', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
