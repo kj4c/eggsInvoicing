@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
 const pool = require('../database/db');
 
+// this function allows the user to send multipe an array of xml files
+// to the user and send all of it to the user 
 async function sendEmailWithMultipleXML(from, recipient, xmlFiles) {
   if (!from) {
     throw new Error('from is required but was not provided.');

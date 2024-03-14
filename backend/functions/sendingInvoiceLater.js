@@ -3,6 +3,7 @@ const sendEmailWithMultipleXML = require('./sendEmailWithMultXML');
 const sendEmailWithXML = require('./sendingEmailFunction');
 const sendEmailWithJSON = require('./sendingEmailWithJsonFileAttachment');
 
+// this allows to send the invoice later and the delay is in minutes 
 async function sendInvoiceLater(type, from, recipient, filesOrString, delayInMinutes) {
   let sendFunction;
   switch (type.toLowerCase()) {

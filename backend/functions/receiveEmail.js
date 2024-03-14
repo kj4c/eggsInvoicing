@@ -1,6 +1,8 @@
 const pool = require('../database/db');
 const createError = require('http-errors');
 
+// this function would receive the email internally 
+// and it would allow the check if the email invoice is in the invoice 
 async function receiveEmail(uid, invoiceId) {
   try {
     const userEmail = await pool.query('SELECT email FROM users WHERE uid = $1', [uid]);

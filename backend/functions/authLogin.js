@@ -2,6 +2,9 @@ const pool = require('../database/db');
 const bcrypt = require('bcryptjs');
 const createError = require('http-errors');
 
+// this function woudl take in user name and password
+// it go through number of error checks and check with the database
+// that if the user exist and it would log the user in 
 async function authLogin(username, password) {
   try {
 
