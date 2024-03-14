@@ -2,7 +2,7 @@ const pool = require('../database/db');
 const HTTPError = require('http-errors');
 
 // this function would allow the function to fetch
-// the invoice by date range 
+// the invoice by date range
 async function fetchByDateRange(uid, fromDate, toDate) {
   const validUser = await pool.query('select uid from users where uid = $1', [uid]);
   if (validUser.rows.length === 0) {

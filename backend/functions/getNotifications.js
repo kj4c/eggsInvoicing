@@ -1,8 +1,8 @@
 const pool = require('../database/db');
 const HTTPError = require('http-errors');
 
-// this function woudl allow the function to get the most recent 
-// notification from the invoice recieved 
+// this function woudl allow the function to get the most recent
+// notification from the invoice recieved
 async function getNotifications(uId) {
   const validUser = await pool.query('select uid from users where uid = $1', [uId]);
   if (validUser.rows.length === 0) {

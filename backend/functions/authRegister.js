@@ -3,9 +3,9 @@ const bcrypt = require('bcryptjs');
 const createError = require('http-errors');
 const saltRounds = 10;
 
-// register would take in email phone number username 
+// register would take in email phone number username
 // password and it would go through number of error checks
-// then it would allow the user to register and put the details on the 
+// then it would allow the user to register and put the details on the
 // database.
 async function authRegister(email, phone_no, username, password) {
   try {
