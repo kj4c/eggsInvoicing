@@ -230,6 +230,15 @@ app.post('/login', async(req, res) => {
   }
 });
 
+app.post('/resetPassword', async(req, res) => {
+  try {
+    const email = req.body;
+    res.status(200).json(await sendingResetPassword(email));
+  } catch (err) {
+    res.status(400).json({message: 'Password reset email failed to send.'})
+  }
+});
+
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
