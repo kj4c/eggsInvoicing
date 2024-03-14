@@ -6,7 +6,6 @@ const { send } = require('process');
 async function sendingResetPassword(email) {
   try {
     // checks if email exists in database
-    //console.log(await pool.query('select * from users'));
     const existingEmail = await pool.query('select * from users where email = $1', [email]);
     if (existingEmail.rows.length === 0) {
       throw createError(400, 'Email does not exist');
@@ -32,8 +31,6 @@ async function sendingResetPassword(email) {
       text: `Click the following link to reset your password: ${resetLink}`
     };
 
-    console.log(mailOptions);
-
     const info = await transporter.sendMail(mailOptions);
     console.log('Message sent: %s', info.messageId);
 
@@ -45,6 +42,7 @@ async function sendingResetPassword(email) {
     await pool.query(query, [invoiceId, email]);
 
     return {
+      status: 200,
       message: 'Password reset instructions were sent to your email.'
     }
 
@@ -54,5 +52,3 @@ async function sendingResetPassword(email) {
 }
 
 module.exports = sendingResetPassword;
-
-//sendingResetPassword("winnie@gmail.com")

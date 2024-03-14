@@ -6,10 +6,10 @@ jest.mock('../database/db', () => ({
 }));
 
 jest.mock('nodemailer', () => ({
-    createTransport: jest.fn().mockReturnValue({
-      sendMail: jest.fn().mockResolvedValue({ invoiceId: '1' }),
-    }),
-  }));
+  createTransport: jest.fn().mockReturnValue({
+    sendMail: jest.fn().mockResolvedValue({ invoiceId: '1' }),
+  }),
+}));
 
 describe('successful sendingResetPassword function', () => {
   it('should send a password reset function', async () => {
@@ -29,9 +29,10 @@ describe('successful sendingResetPassword function', () => {
     }));
 
     expect(sendResetEmail).toEqual({
+      status: 200,
       message: 'Password reset instructions were sent to your email.'
     });
-  },20 * 1000)
+  });
 });
 
 describe('sendResetPassword function error handling', () => {
