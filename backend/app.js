@@ -35,9 +35,9 @@ app.get('/', (req, res) => {
 
 // manual testing works
 /*
-@brief 
+@brief
 Sends an email with a XML file attachment
-@params 
+@params
 from: string - who sent the email
 recipient: string - email of the recipient
 xmlString: string - XML string to be sent
@@ -64,9 +64,9 @@ app.post('/send/email', async function (req, res) {
 });
 
 /*
-@brief 
+@brief
 Sends an email with a JSON file attachment
-@params 
+@params
 from: string - who sent the email
 recipient: string - email of the recipient
 jsonString: string - json string to be sent
@@ -93,9 +93,9 @@ app.post('/send/email-json', async function (req, res) {
 });
 
 /*
-@brief 
+@brief
 fetches all invoices sent/received by user
-@params 
+@params
 uid: int - user id of the user
 @output
 on success:
@@ -113,9 +113,9 @@ app.get('/receive/fetchAll', async function (req, res) {
 });
 
 /*
-@brief 
+@brief
 checks if a userId has received a specific invoiceId
-@params 
+@params
 uid: int - user id of the user
 invoiceId: int - invoice id of the invoice
 @output
@@ -135,9 +135,9 @@ app.get('/receive/fetchByInvoiceId', async function (req, res) {
 });
 
 /*
-@brief 
+@brief
 retrieves all invoices on a specific date
-@params 
+@params
 uid: int - user id of the user
 date: string - date of the invoices
 @output
@@ -156,9 +156,9 @@ app.get('/receive/fetchByDate', async function (req, res) {
 });
 
 /*
-@brief 
+@brief
 retrieves all invoices in between a date range
-@params 
+@params
 uid: int - user id of the user
 fromDate: string - start date of the range
 toDate: string - end date of the range
@@ -179,9 +179,9 @@ app.get('/receive/fetchByDateRange', async function (req, res) {
 });
 
 /*
-@brief 
+@brief
 retrieves all new notifications for a user
-@params 
+@params
 uid: int - user id of the user
 @output
 notifications: string - array of notifications for the user
@@ -198,9 +198,9 @@ app.get('/receive/getNotifications', async function (req, res) {
 });
 
 /*
-@brief 
+@brief
 send multiple XML invoices to the specified recipient
-@params 
+@params
 from: string - who sent the email
 recipient: string - email of the recipient
 xmlFiles: array string - array of XML strings to be sent
@@ -224,9 +224,9 @@ app.post('/send/multiInvoice', async (req, res) => {
 });
 
 /*
-@brief 
+@brief
 send multiple JSON invoices to the specified recipient
-@params 
+@params
 from: string - who sent the email
 recipient: string - email of the recipient
 jsonFiles: array string - array of JSON strings to be sent
@@ -250,9 +250,9 @@ app.post('/send/multiInvoice-json', async (req, res) => {
 });
 
 /*
-@brief 
+@brief
 Generates a PDF showing all the invoices sent by the user
-@params 
+@params
 uid: int - user id of the user
 @output
 on success
@@ -279,16 +279,16 @@ app.get('/sentReport', async(req, res) => {
 });
 
 /*
-@brief 
+@brief
 send a singular file or multiple files to the recipient after a specified delay
-@params 
+@params
 type: string - type of file to be sent (json, xml, multiplejson, multiplexml)
 from: string - who sent the email
 recipient: string - email of the recipient
 content: array of strings OR string - file(s) to be sent
 delayInMinutes: int - delay in minutes before the email is sent
 @output
-on success 
+on success
 status: 202
 success: boolean - true
 message: string - success message
@@ -314,12 +314,12 @@ app.post('/send/invoiceLater', async (req, res) => {
 });
 
 /*
-@brief 
+@brief
 send a singular file or multiple files to multiple recipients at the same time
-@params 
+@params
 type: string - type of file to be sent (json, xml, multiplejson, multiplexml)
 from: string - who sent the email
-recipients: array of strings - emails of the recipients 
+recipients: array of strings - emails of the recipients
 content: array of strings OR string - file(s) to be sent
 @output
 on success
@@ -350,9 +350,9 @@ app.post('/send/multEmail', async (req, res) => {
 });
 
 /*
-@brief 
+@brief
 Generates a PDF showing all the invoices received by the user
-@params 
+@params
 uid: int - user id of the user
 @output
 on success
@@ -379,9 +379,9 @@ app.get('/receiveReport', async(req, res) => {
 });
 
 /*
-@brief 
+@brief
 Generates a HTML file showing all the invoices received by the user
-@params 
+@params
 uid: int - user id of the user
 @output
 on success
@@ -405,9 +405,9 @@ app.get('/receiveHtml', async(req, res) => {
 });
 
 /*
-@brief 
+@brief
 registers a new user
-@params 
+@params
 email: string - email of the user
 phone: string - phone number of the user
 username: string - username of the user
@@ -438,9 +438,9 @@ app.get('/receiveEmail', async(req, res) => {
 });
 
 /*
-@brief 
+@brief
 login a user
-@params 
+@params
 username: string - username of the user
 password: string - password of the user
 @output
