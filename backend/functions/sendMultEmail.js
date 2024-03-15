@@ -3,8 +3,8 @@ const sendEmailWithMultipleXML = require('./sendEmailWithMultXML');
 const sendEmailWithXML = require('./sendingEmailFunction');
 const sendEmailWithJSON = require('./sendingEmailWithJsonFileAttachment');
 
-// this allows to send the invoice later and the delay is in minutes
-async function sendInvoiceLater(type, from, recipient, filesOrString, delayInMinutes) {
+// this allows the user to send multiple email to different users
+async function sendMultEmail(type, from, recipients, filesOrString) {
   let sendFunction;
   switch (type.toLowerCase()) {
   case 'multiplejson':
@@ -23,15 +23,18 @@ async function sendInvoiceLater(type, from, recipient, filesOrString, delayInMin
     throw new Error(`Unsupported type: ${type}`);
   }
 
-  setTimeout(async () => {
+  const finalResults = [];
+  for (let i = 0; i < recipients.length; i++) {
     try {
-      const result = await sendFunction(from, recipient, filesOrString);
-      console.log('Invoice sent successfully:', result);
-      return result;
+      const result =  await sendFunction(from, recipients[i], filesOrString);
+      // console.log('Invoice sent successfully to recipient:', recipients[i] , 'Invoice ID:', result);
+      finalResults.push(result);
     } catch (error) {
       console.error('Error sending invoice:', error);
     }
-  }, delayInMinutes * 60 * 1000);
+  }
+
+  return finalResults;
 }
 
-module.exports = sendInvoiceLater;
+module.exports = sendMultEmail;

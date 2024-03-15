@@ -1,6 +1,9 @@
 const nodemailer = require('nodemailer');
 const pool = require('../database/db');
 
+// this funciton would allow the user to send multiple json file in an array
+// to the user and send all of the json files that would ahve a file name
+// and the json string
 async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
   if (!from) {
     throw new Error('from is required but was not provided.');
@@ -14,14 +17,14 @@ async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
     throw new Error('jsonFiles is required but was not provided.');
   }
 
-  // Directly use the JSON content for attachments without writing to the filesystem
   const attachments = jsonFiles.map(jsonFile => {
-    if (typeof jsonFile.filename !== 'string' || typeof jsonFile.jsonContent !== 'object') {
-      throw new Error(`Expected filename to be a string and jsonContent to be an object, but got ${typeof jsonFile.filename} and ${typeof jsonFile.jsonContent}`);
+    // Expecting jsonString instead of jsonContent
+    if (typeof jsonFile.filename !== 'string' || typeof jsonFile.jsonString !== 'string') {
+      throw new Error(`Expected filename to be a string and jsonString to be a string, but got ${typeof jsonFile.filename} and ${typeof jsonFile.jsonString}`);
     }
     return {
       filename: jsonFile.filename,
-      content: JSON.stringify(jsonFile.jsonContent),
+      content: jsonFile.jsonString, // Directly using jsonString without JSON.stringify
       contentType: 'application/json',
     };
   });

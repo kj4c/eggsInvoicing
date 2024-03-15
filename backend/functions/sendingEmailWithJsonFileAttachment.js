@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
 const pool = require('../database/db');
 
+// this allows the user to send one json file that has a consistent file name
+// and sends it to the user with just one attachement
 async function sendEmailWithJSON(from, recipient, jsonString, filename = 'attachment.json') {
   if (!jsonString) {
     throw new Error('jsonString is required but was not provided.');
@@ -33,7 +35,8 @@ async function sendEmailWithJSON(from, recipient, jsonString, filename = 'attach
     attachments: [
       {
         filename: filename,
-        path: jsonString,
+        // ensure jsonString is a string. Use JSON.stringify if jsonString could be an object.
+        content: typeof jsonString === 'string' ? jsonString : JSON.stringify(jsonString),
         contentType: 'application/json'
       }
     ]

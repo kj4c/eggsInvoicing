@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS users (
   notifications integer ARRAY
 );
 
-
 CREATE TABLE IF NOT EXISTS sent_invoices (
   invoice_id        serial primary key,
   sender_email      varchar(225) not null,

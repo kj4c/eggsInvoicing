@@ -52,4 +52,43 @@ describe('sendEmailWithJSON function error handling', () => {
       .rejects
       .toThrow('from is required but was not provided.');
   });
+
+  it('should correctly handle jsonString when it is already a string', async () => {
+    const jsonString = '{"test": "string"}';
+    const recipientEmail = 'example@example.com';
+    const from = 'Test Sender';
+
+    await sendEmailWithJSON(from, recipientEmail, jsonString);
+
+    const nodemailer = require('nodemailer');
+    expect(nodemailer.createTransport().sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        attachments: expect.arrayContaining([
+          expect.objectContaining({
+            content: jsonString,
+          }),
+        ]),
+      }),
+    );
+  });
+
+  it('should correctly handle jsonString when it needs to be stringified', async () => {
+    const jsonContent = { test: 'string' };
+    const jsonStringified = JSON.stringify(jsonContent);
+    const recipientEmail = 'example@example.com';
+    const from = 'Test Sender';
+
+    await sendEmailWithJSON(from, recipientEmail, jsonContent);
+
+    const nodemailer = require('nodemailer');
+    expect(nodemailer.createTransport().sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        attachments: expect.arrayContaining([
+          expect.objectContaining({
+            content: jsonStringified,
+          }),
+        ]),
+      }),
+    );
+  });
 });

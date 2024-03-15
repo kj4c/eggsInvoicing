@@ -13,15 +13,22 @@ const authRegister = require('./functions/authRegister');
 const authLogin = require('./functions/authLogin');
 const receiveEmail = require('./functions/receiveEmail');
 const generateReceivePdf = require('./functions/receiveReport');
+const receiveHtml = require('./functions/receiveReportHtml');
 const generateSentPdf = require('./functions/sentReport');
 const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
+const fetchByDate = require('./functions/fetchByDate');
+const fetchByDateRange = require('./functions/fetchByDateRange');
+const sendMultEmail = require('./functions/sendMultEmail');
 
 app.use(express.json());
 app.use(errorHandler());
 app.use(bodyParser.json());
 app.use(errorHandler());
 
+/*
+Home page
+*/
 app.get('/', (req, res) => {
   res.send('Hello world!');
 });
@@ -34,6 +41,15 @@ Sends an email with a XML file attachment
 from: string - who sent the email
 recipient: string - email of the recipient
 xmlString: string - XML string to be sent
+@output
+on success:
+status code - integer - 200
+success: boolean - true
+invoiceId: integer - id of the invoice
+on failure:
+status code - integer - 400
+success: boolean - false
+error: string - error message
 */
 app.post('/send/email', async function (req, res) {
   const { from, recipient, xmlString } = req.body;
@@ -54,6 +70,15 @@ Sends an email with a JSON file attachment
 from: string - who sent the email
 recipient: string - email of the recipient
 jsonString: string - json string to be sent
+@output
+on success:
+status code - integer - 200
+success: boolean - true
+invoiceId: integer - id of the invoice
+on failure:
+status code - integer - 400
+success: boolean - false
+error: string - error message
 */
 app.post('/send/email-json', async function (req, res) {
   const { from, recipient, jsonString } = req.body;
@@ -72,6 +97,11 @@ app.post('/send/email-json', async function (req, res) {
 fetches all invoices sent/received by user
 @params 
 uid: int - user id of the user
+@output
+on success:
+invoices: array - array of invoices
+on failure:
+message: string - error message
 */
 app.get('/receive/fetchAll', async function (req, res) {
   const uid = parseInt(req.query.uid);
@@ -88,6 +118,11 @@ checks if a userId has received a specific invoiceId
 @params 
 uid: int - user id of the user
 invoiceId: int - invoice id of the invoice
+@output
+on success:
+invoice: object - invoice object
+on failure:
+message: string - error message
 */
 app.get('/receive/fetchByInvoiceId', async function (req, res) {
   const uid = parseInt(req.query.uid);
@@ -101,13 +136,65 @@ app.get('/receive/fetchByInvoiceId', async function (req, res) {
 
 /*
 @brief 
+retrieves all invoices on a specific date
+@params 
+uid: int - user id of the user
+date: string - date of the invoices
+@output
+invoices: array - array of invoices
+OR
+message: string - error message
+*/
+app.get('/receive/fetchByDate', async function (req, res) {
+  const uid = parseInt(req.query.uid);
+  const date = req.query.date;
+  try {
+    res.json(await fetchByDate(uid, date));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief 
+retrieves all invoices in between a date range
+@params 
+uid: int - user id of the user
+fromDate: string - start date of the range
+toDate: string - end date of the range
+@output
+invoices: array - array of invoices
+OR
+message: string - error message
+*/
+app.get('/receive/fetchByDateRange', async function (req, res) {
+  const uid = parseInt(req.query.uid);
+  const fromDate = req.query.fromDate;
+  const toDate = req.query.toDate;
+  try {
+    res.json(await fetchByDateRange(uid, fromDate, toDate));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief 
 retrieves all new notifications for a user
 @params 
 uid: int - user id of the user
+@output
+notifications: string - array of notifications for the user
+OR
+message: string - error message
 */
 app.get('/receive/getNotifications', async function (req, res) {
   const uid = parseInt(req.query.uid);
-  res.status(200).json(await getNotifications(uid));
+  try {
+    res.json(await getNotifications(uid));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
 });
 
 /*
@@ -117,6 +204,13 @@ send multiple XML invoices to the specified recipient
 from: string - who sent the email
 recipient: string - email of the recipient
 xmlFiles: array string - array of XML strings to be sent
+@output
+on success
+success: boolean - true
+invoiceIds: array int - array of invoice ids
+if failed
+success: boolean - false
+message: string - error message
 */
 app.post('/send/multiInvoice', async (req, res) => {
   try {
@@ -136,6 +230,13 @@ send multiple JSON invoices to the specified recipient
 from: string - who sent the email
 recipient: string - email of the recipient
 jsonFiles: array string - array of JSON strings to be sent
+@output
+on success
+success: boolean - true
+invoiceId: int - id of the invoice
+if failed
+success: boolean - false
+message: string - error message
 */
 app.post('/send/multiInvoice-json', async (req, res) => {
   try {
@@ -186,6 +287,14 @@ from: string - who sent the email
 recipient: string - email of the recipient
 content: array of strings OR string - file(s) to be sent
 delayInMinutes: int - delay in minutes before the email is sent
+@output
+on success 
+status: 202
+success: boolean - true
+message: string - success message
+if failed
+success: boolean - false
+message: string - error message
 */
 app.post('/send/invoiceLater', async (req, res) => {
   const { type, from, recipient, content, delayInMinutes } = req.body;
@@ -200,6 +309,42 @@ app.post('/send/invoiceLater', async (req, res) => {
     res.status(202).json({ success: true, message: `Invoice scheduled to be sent after ${delayInMinutes} minute(s)` });
   } catch (error) {
     console.error('Error scheduling invoice:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
+/*
+@brief 
+send a singular file or multiple files to multiple recipients at the same time
+@params 
+type: string - type of file to be sent (json, xml, multiplejson, multiplexml)
+from: string - who sent the email
+recipients: array of strings - emails of the recipients 
+content: array of strings OR string - file(s) to be sent
+@output
+on success
+status: 200
+success: boolean - true
+invoiceIds: array int - array of invoice ids
+if failed
+success: boolean - false
+message: string - error message
+*/
+app.post('/send/multEmail', async (req, res) => {
+  const { type, from, recipients, content } = req.body;
+  try {
+    if (!type || !from || !recipients || !content) {
+      return res.status(400).json({ success: false, message: 'Missing required parameters' });
+    }
+
+    if (!Array.isArray(recipients)) {
+      return res.status(401).json({ success: false, message: 'Recipients must be an array' });
+    }
+
+    const results = await sendMultEmail(type, from, recipients, content);
+    res.status(200).json({ success: true, invoiceIds: results });
+  } catch (error) {
+    console.error('Error sending multiple emails:', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
@@ -226,6 +371,32 @@ app.get('/receiveReport', async(req, res) => {
       res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"');
       res.setHeader('Content-Type', 'application/pdf');
       res.status(200).send(pdf.output());
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({message: 'error generating the report'});
+  }
+});
+
+/*
+@brief 
+Generates a HTML file showing all the invoices received by the user
+@params 
+uid: int - user id of the user
+@output
+on success
+page: html file containing the report
+if failed
+error: string - error message
+*/
+app.get('/receiveHtml', async(req, res) => {
+  try {
+    const uid = parseInt(req.query.uid);
+    const page = await receiveHtml(uid);
+    if (page.status !== 200) {
+      res.status(page.status).json({message: page.error});
+    } else {
+      res.status(200).send(page);
     }
   } catch (error) {
     console.log(error);
