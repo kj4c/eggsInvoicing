@@ -27,11 +27,31 @@ app.use(errorHandler());
 app.use(bodyParser.json());
 app.use(errorHandler());
 
+/*
+Home page
+*/
 app.get('/', (req, res) => {
   res.send('Hello world!');
 });
 
 // manual testing works
+/*
+@brief
+Sends an email with a XML file attachment
+@params
+from: string - who sent the email
+recipient: string - email of the recipient
+xmlString: string - XML string to be sent
+@output
+on success:
+status code - integer - 200
+success: boolean - true
+invoiceId: integer - id of the invoice
+on failure:
+status code - integer - 400
+success: boolean - false
+error: string - error message
+*/
 app.post('/send/email', async function (req, res) {
   const { from, recipient, xmlString } = req.body;
 
@@ -44,6 +64,23 @@ app.post('/send/email', async function (req, res) {
   }
 });
 
+/*
+@brief
+Sends an email with a JSON file attachment
+@params
+from: string - who sent the email
+recipient: string - email of the recipient
+jsonString: string - json string to be sent
+@output
+on success:
+status code - integer - 200
+success: boolean - true
+invoiceId: integer - id of the invoice
+on failure:
+status code - integer - 400
+success: boolean - false
+error: string - error message
+*/
 app.post('/send/email-json', async function (req, res) {
   const { from, recipient, jsonString } = req.body;
 
@@ -56,6 +93,17 @@ app.post('/send/email-json', async function (req, res) {
   }
 });
 
+/*
+@brief
+fetches all invoices sent/received by user
+@params
+uid: int - user id of the user
+@output
+on success:
+invoices: array - array of invoices
+on failure:
+message: string - error message
+*/
 app.get('/receive/fetchAll', async function (req, res) {
   const uid = parseInt(req.query.uid);
   try {
@@ -65,6 +113,18 @@ app.get('/receive/fetchAll', async function (req, res) {
   }
 });
 
+/*
+@brief
+checks if a userId has received a specific invoiceId
+@params
+uid: int - user id of the user
+invoiceId: int - invoice id of the invoice
+@output
+on success:
+invoice: object - invoice object
+on failure:
+message: string - error message
+*/
 app.get('/receive/fetchByInvoiceId', async function (req, res) {
   const uid = parseInt(req.query.uid);
   const invoiceId = parseInt(req.query.invoiceId);
@@ -75,6 +135,17 @@ app.get('/receive/fetchByInvoiceId', async function (req, res) {
   }
 });
 
+/*
+@brief
+retrieves all invoices on a specific date
+@params
+uid: int - user id of the user
+date: string - date of the invoices
+@output
+invoices: array - array of invoices
+OR
+message: string - error message
+*/
 app.get('/receive/fetchByDate', async function (req, res) {
   const uid = parseInt(req.query.uid);
   const date = req.query.date;
@@ -85,6 +156,18 @@ app.get('/receive/fetchByDate', async function (req, res) {
   }
 });
 
+/*
+@brief
+retrieves all invoices in between a date range
+@params
+uid: int - user id of the user
+fromDate: string - start date of the range
+toDate: string - end date of the range
+@output
+invoices: array - array of invoices
+OR
+message: string - error message
+*/
 app.get('/receive/fetchByDateRange', async function (req, res) {
   const uid = parseInt(req.query.uid);
   const fromDate = req.query.fromDate;
@@ -96,6 +179,18 @@ app.get('/receive/fetchByDateRange', async function (req, res) {
   }
 });
 
+/*
+@brief
+retrieves the statistics of the invoices in between a date range
+@params
+uid: int - user id of the user
+startDate: string - start date of the range
+endDate: string - end date of the range
+@output
+statistics: object - statistics of the invoices
+OR
+message: string - error message
+*/
 app.get('/receive/getStatisticsDateRange', async function (req, res) {
   const uid = parseInt(req.query.uid);
   const startDate = req.query.startDate;
@@ -107,6 +202,16 @@ app.get('/receive/getStatisticsDateRange', async function (req, res) {
   }
 });
 
+/*
+@brief
+retrieves all new notifications for a user
+@params
+uid: int - user id of the user
+@output
+notifications: string - array of notifications for the user
+OR
+message: string - error message
+*/
 app.get('/receive/getNotifications', async function (req, res) {
   const uid = parseInt(req.query.uid);
   try {
@@ -116,6 +221,21 @@ app.get('/receive/getNotifications', async function (req, res) {
   }
 });
 
+/*
+@brief
+send multiple XML invoices to the specified recipient
+@params
+from: string - who sent the email
+recipient: string - email of the recipient
+xmlFiles: array string - array of XML strings to be sent
+@output
+on success
+success: boolean - true
+invoiceIds: array int - array of invoice ids
+if failed
+success: boolean - false
+message: string - error message
+*/
 app.post('/send/multiInvoice', async (req, res) => {
   try {
     const { from, recipient, xmlFiles } = req.body;
@@ -127,6 +247,21 @@ app.post('/send/multiInvoice', async (req, res) => {
   }
 });
 
+/*
+@brief
+send multiple JSON invoices to the specified recipient
+@params
+from: string - who sent the email
+recipient: string - email of the recipient
+jsonFiles: array string - array of JSON strings to be sent
+@output
+on success
+success: boolean - true
+invoiceId: int - id of the invoice
+if failed
+success: boolean - false
+message: string - error message
+*/
 app.post('/send/multiInvoice-json', async (req, res) => {
   try {
     const { from, recipient, jsonFiles } = req.body;
@@ -138,11 +273,17 @@ app.post('/send/multiInvoice-json', async (req, res) => {
   }
 });
 
-/* istanbul ignore next */
-app.post('/:userId/send/text', (req, res) => {
-  res.status(200).json({ textId: 789 });
-});
-
+/*
+@brief
+Generates a PDF showing all the invoices sent by the user
+@params
+uid: int - user id of the user
+@output
+on success
+pdf: pdf - pdf file containing the report
+if failed
+error: string - error message
+*/
 app.get('/sentReport', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
@@ -161,6 +302,24 @@ app.get('/sentReport', async(req, res) => {
   }
 });
 
+/*
+@brief
+send a singular file or multiple files to the recipient after a specified delay
+@params
+type: string - type of file to be sent (json, xml, multiplejson, multiplexml)
+from: string - who sent the email
+recipient: string - email of the recipient
+content: array of strings OR string - file(s) to be sent
+delayInMinutes: int - delay in minutes before the email is sent
+@output
+on success
+status: 202
+success: boolean - true
+message: string - success message
+if failed
+success: boolean - false
+message: string - error message
+*/
 app.post('/send/invoiceLater', async (req, res) => {
   const { type, from, recipient, content, delayInMinutes } = req.body;
 
@@ -178,6 +337,23 @@ app.post('/send/invoiceLater', async (req, res) => {
   }
 });
 
+/*
+@brief
+send a singular file or multiple files to multiple recipients at the same time
+@params
+type: string - type of file to be sent (json, xml, multiplejson, multiplexml)
+from: string - who sent the email
+recipients: array of strings - emails of the recipients
+content: array of strings OR string - file(s) to be sent
+@output
+on success
+status: 200
+success: boolean - true
+invoiceIds: array int - array of invoice ids
+if failed
+success: boolean - false
+message: string - error message
+*/
 app.post('/send/multEmail', async (req, res) => {
   const { type, from, recipients, content } = req.body;
   try {
@@ -197,6 +373,17 @@ app.post('/send/multEmail', async (req, res) => {
   }
 });
 
+/*
+@brief
+Generates a PDF showing all the invoices received by the user
+@params
+uid: int - user id of the user
+@output
+on success
+pdf: pdf - pdf file containing the report
+if failed
+error: string - error message
+*/
 app.get('/receiveReport', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
@@ -215,6 +402,17 @@ app.get('/receiveReport', async(req, res) => {
   }
 });
 
+/*
+@brief
+Generates a HTML file showing all the invoices received by the user
+@params
+uid: int - user id of the user
+@output
+on success
+page: html file containing the report
+if failed
+error: string - error message
+*/
 app.get('/receiveHtml', async(req, res) => {
   try {
     const uid = parseInt(req.query.uid);
@@ -230,6 +428,20 @@ app.get('/receiveHtml', async(req, res) => {
   }
 });
 
+/*
+@brief
+registers a new user
+@params
+email: string - email of the user
+phone: string - phone number of the user
+username: string - username of the user
+password: string - password of the user
+@output
+on success:
+status code and message
+on failure:
+status code and error message
+*/
 app.post('/register', async(req, res) => {
   try {
     const { email, phone, username, password } = req.body;
@@ -249,6 +461,19 @@ app.get('/receiveEmail', async(req, res) => {
   }
 });
 
+/*
+@brief
+login a user
+@params
+username: string - username of the user
+password: string - password of the user
+@output
+on success:
+status code - integer - 200
+uid - integer - id of the user
+on failure:
+status code and error message
+*/
 app.post('/login', async(req, res) => {
   try {
     const { username, password } = req.body;
