@@ -19,6 +19,7 @@ const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
 const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
+const getStatisticsDateRange = require('./functions/getStatisticsDateRange');
 const sendMultEmail = require('./functions/sendMultEmail');
 
 app.use(express.json());
@@ -90,6 +91,17 @@ app.get('/receive/fetchByDateRange', async function (req, res) {
   const toDate = req.query.toDate;
   try {
     res.json(await fetchByDateRange(uid, fromDate, toDate));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+app.get('/receive/getStatisticsDateRange', async function (req, res) {
+  const uid = parseInt(req.query.uid);
+  const startDate = req.query.startDate;
+  const endDate = req.query.endDate;
+  try {
+    res.json(await getStatisticsDateRange(uid, startDate, endDate));
   } catch (error) {
     res.status(error.statusCode).json(error);
   }
