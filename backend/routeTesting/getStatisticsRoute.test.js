@@ -46,67 +46,67 @@ describe('Test suite for /receive/getStatistics route', () => {
     ];
 
     const res = {
-      "financialYearStats": {
-        "message": "LegalMonetaryTotal requested for FY2024",
-        "numInvoices": 4,
-        "numInvoiceLines": 11,
-        "lineExtensionAmount": "$1619.83",
-        "taxExclusiveAmount": "$1619.83",
-        "taxAmount": "$164.68",
-        "taxInclusiveAmount": "$1784.51",
-        "chargeTotalAmount": "$0.00",
-        "prepaidAmount": "$0.00",
-        "payableAmount": "$1784.51"
+      'financialYearStats': {
+        'message': 'LegalMonetaryTotal requested for FY2024',
+        'numInvoices': 4,
+        'numInvoiceLines': 11,
+        'lineExtensionAmount': '$1619.83',
+        'taxExclusiveAmount': '$1619.83',
+        'taxAmount': '$164.68',
+        'taxInclusiveAmount': '$1784.51',
+        'chargeTotalAmount': '$0.00',
+        'prepaidAmount': '$0.00',
+        'payableAmount': '$1784.51'
       },
-      "financialQuarterStats": {
-        "message": "LegalMonetaryTotal requested for Q3",
-        "numInvoices": 4,
-        "numInvoiceLines": 11,
-        "lineExtensionAmount": "$1619.83",
-        "taxExclusiveAmount": "$1619.83",
-        "taxAmount": "$164.68",
-        "taxInclusiveAmount": "$1784.51",
-        "chargeTotalAmount": "$0.00",
-        "prepaidAmount": "$0.00",
-        "payableAmount": "$1784.51"
+      'financialQuarterStats': {
+        'message': 'LegalMonetaryTotal requested for Q3',
+        'numInvoices': 4,
+        'numInvoiceLines': 11,
+        'lineExtensionAmount': '$1619.83',
+        'taxExclusiveAmount': '$1619.83',
+        'taxAmount': '$164.68',
+        'taxInclusiveAmount': '$1784.51',
+        'chargeTotalAmount': '$0.00',
+        'prepaidAmount': '$0.00',
+        'payableAmount': '$1784.51'
       },
-      "monthlyFinancialStats": {
-        "message": "LegalMonetaryTotal for this month of March",
-        "numInvoices": 4,
-        "numInvoiceLines": 11,
-        "lineExtensionAmount": "$1619.83",
-        "taxExclusiveAmount": "$1619.83",
-        "taxAmount": "$164.68",
-        "taxInclusiveAmount": "$1784.51",
-        "chargeTotalAmount": "$0.00",
-        "prepaidAmount": "$0.00",
-        "payableAmount": "$1784.51"
+      'monthlyFinancialStats': {
+        'message': 'LegalMonetaryTotal for this month of March',
+        'numInvoices': 4,
+        'numInvoiceLines': 11,
+        'lineExtensionAmount': '$1619.83',
+        'taxExclusiveAmount': '$1619.83',
+        'taxAmount': '$164.68',
+        'taxInclusiveAmount': '$1784.51',
+        'chargeTotalAmount': '$0.00',
+        'prepaidAmount': '$0.00',
+        'payableAmount': '$1784.51'
       },
-      "weeklyFinancialStats": {
-        "message": "LegalMonetaryTotal for this week (11/03/2024 - 17/03/2024)",
-        "numInvoices": 4,
-        "numInvoiceLines": 11,
-        "lineExtensionAmount": "$1619.83",
-        "taxExclusiveAmount": "$1619.83",
-        "taxAmount": "$164.68",
-        "taxInclusiveAmount": "$1784.51",
-        "chargeTotalAmount": "$0.00",
-        "prepaidAmount": "$0.00",
-        "payableAmount": "$1784.51"
+      'weeklyFinancialStats': {
+        'message': 'LegalMonetaryTotal for this week (11/03/2024 - 17/03/2024)',
+        'numInvoices': 4,
+        'numInvoiceLines': 11,
+        'lineExtensionAmount': '$1619.83',
+        'taxExclusiveAmount': '$1619.83',
+        'taxAmount': '$164.68',
+        'taxInclusiveAmount': '$1784.51',
+        'chargeTotalAmount': '$0.00',
+        'prepaidAmount': '$0.00',
+        'payableAmount': '$1784.51'
       },
-      "dailyFinancialStats": {
-        "message": "LegalMonetaryTotal for today (17/03/2024)",
-        "numInvoices": 4,
-        "numInvoiceLines": 11,
-        "lineExtensionAmount": "$1619.83",
-        "taxExclusiveAmount": "$1619.83",
-        "taxAmount": "$164.68",
-        "taxInclusiveAmount": "$1784.51",
-        "chargeTotalAmount": "$0.00",
-        "prepaidAmount": "$0.00",
-        "payableAmount": "$1784.51"
+      'dailyFinancialStats': {
+        'message': 'LegalMonetaryTotal for today (17/03/2024)',
+        'numInvoices': 4,
+        'numInvoiceLines': 11,
+        'lineExtensionAmount': '$1619.83',
+        'taxExclusiveAmount': '$1619.83',
+        'taxAmount': '$164.68',
+        'taxInclusiveAmount': '$1784.51',
+        'chargeTotalAmount': '$0.00',
+        'prepaidAmount': '$0.00',
+        'payableAmount': '$1784.51'
       }
-    }
+    };
 
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
@@ -119,40 +119,40 @@ describe('Test suite for /receive/getStatistics route', () => {
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: expected});
-    
+
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: expected});
-    
+
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: expected});
-    
+
     const response = await request(app).get('/receive/getStatistics').query(body);
     expect(response.status).toBe(200);
     expect(response.body).toStrictEqual(res);
-    
+
     expect(pool.query).toHaveBeenCalledTimes(15);
   });
 
   it('Valid User Id empty finanacial statistics', async () => {
     const res = {
-      "financialYearStats": {
-        "message": "No invoices found within given date range"
+      'financialYearStats': {
+        'message': 'No invoices found within given date range'
       },
-      "financialQuarterStats": {
-        "message": "No invoices found within given date range"
+      'financialQuarterStats': {
+        'message': 'No invoices found within given date range'
       },
-      "monthlyFinancialStats": {
-        "message": "No invoices found within given date range"
+      'monthlyFinancialStats': {
+        'message': 'No invoices found within given date range'
       },
-      "weeklyFinancialStats": {
-        "message": "No invoices found within given date range"
+      'weeklyFinancialStats': {
+        'message': 'No invoices found within given date range'
       },
-      "dailyFinancialStats": {
-        "message": "No invoices found within given date range"
+      'dailyFinancialStats': {
+        'message': 'No invoices found within given date range'
       }
-    }
+    };
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: []});
@@ -164,43 +164,43 @@ describe('Test suite for /receive/getStatistics route', () => {
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: []});
-    
+
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: []});
-    
+
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: []});
-    
+
     const response = await request(app).get('/receive/getStatistics').query(body);
     expect(response.status).toBe(200);
     expect(response.body).toStrictEqual(res);
-    
+
     expect(pool.query).toHaveBeenCalledTimes(15);
   });
 
   it('Valid User Id empty finanacial statistics, next financial year', async () => {
     const res = {
-      "financialYearStats": {
-        "message": "No invoices found within given date range"
+      'financialYearStats': {
+        'message': 'No invoices found within given date range'
       },
-      "financialQuarterStats": {
-        "message": "No invoices found within given date range"
+      'financialQuarterStats': {
+        'message': 'No invoices found within given date range'
       },
-      "monthlyFinancialStats": {
-        "message": "No invoices found within given date range"
+      'monthlyFinancialStats': {
+        'message': 'No invoices found within given date range'
       },
-      "weeklyFinancialStats": {
-        "message": "No invoices found within given date range"
+      'weeklyFinancialStats': {
+        'message': 'No invoices found within given date range'
       },
-      "dailyFinancialStats": {
-        "message": "No invoices found within given date range"
+      'dailyFinancialStats': {
+        'message': 'No invoices found within given date range'
       }
-    }
+    };
 
     const mockedDate = new Date(2024, 6, 10);
-    jest.useFakeTimers("modern");
+    jest.useFakeTimers('modern');
     jest.setSystemTime(mockedDate);
 
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
@@ -214,15 +214,15 @@ describe('Test suite for /receive/getStatistics route', () => {
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: []});
-    
+
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: []});
-    
+
     pool.query.mockResolvedValueOnce({rows: [{uid: uid}]});
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: []});
-    
+
     const response = await request(app).get('/receive/getStatistics').query(body);
     expect(response.status).toBe(200);
     expect(response.body).toStrictEqual(res);
