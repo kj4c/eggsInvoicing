@@ -205,7 +205,7 @@ app.get('/receive/getStatisticsDateRange', async function (req, res) {
 
 /*
 @brief
-retrieves the Financial Year, Financial Quarter, 
+retrieves the Financial Year, Financial Quarter,
 monthly, weekly and daily financial statistics of the invoices
 @params
 uid: int - user id of the user
