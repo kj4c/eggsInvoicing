@@ -21,6 +21,7 @@ const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
 const getStatisticsDateRange = require('./functions/getStatisticsDateRange');
 const sendMultEmail = require('./functions/sendMultEmail');
+const getStatistics = require('./functions/getStatistics');
 
 app.use(express.json());
 app.use(errorHandler());
@@ -197,6 +198,26 @@ app.get('/receive/getStatisticsDateRange', async function (req, res) {
   const endDate = req.query.endDate;
   try {
     res.json(await getStatisticsDateRange(uid, startDate, endDate));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
+retrieves the Financial Year, Financial Quarter,
+monthly, weekly and daily financial statistics of the invoices
+@params
+uid: int - user id of the user
+@output
+statistics: object - statistics of the invoices
+OR
+message: string - error message
+*/
+app.get('/receive/getStatistics', async function (req, res) {
+  const uid = parseInt(req.query.uid);
+  try {
+    res.json(await getStatistics(uid));
   } catch (error) {
     res.status(error.statusCode).json(error);
   }
