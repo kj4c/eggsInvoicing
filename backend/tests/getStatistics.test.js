@@ -37,6 +37,10 @@ describe('Test suite for getStatisticsDateRange()', () => {
       { invoices: [ xml4 ] }
     ];
 
+    const mockedDate = new Date(2024, 2, 17);
+    jest.useFakeTimers('modern');
+    jest.setSystemTime(mockedDate);
+
     const res = {
       'financialYearStats': {
         'message': 'LegalMonetaryTotal requested for FY2024',
@@ -123,6 +127,7 @@ describe('Test suite for getStatisticsDateRange()', () => {
     const response = await getStatistics(uid);
     expect(response).toStrictEqual(res);
 
+    jest.useRealTimers();
     expect(pool.query).toHaveBeenCalledTimes(15);
   });
 
