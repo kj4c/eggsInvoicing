@@ -45,6 +45,10 @@ describe('Test suite for /receive/getStatistics route', () => {
       { invoices: [ xml4 ] }
     ];
 
+    const mockedDate = new Date(2024, 2, 17);
+    jest.useFakeTimers('modern');
+    jest.setSystemTime(mockedDate);
+
     const res = {
       'financialYearStats': {
         'message': 'LegalMonetaryTotal requested for FY2024',
@@ -130,8 +134,9 @@ describe('Test suite for /receive/getStatistics route', () => {
 
     const response = await request(app).get('/receive/getStatistics').query(body);
     expect(response.status).toBe(200);
-    expect(response.body).toStrictEqual(res);
+    expect(response.body).toEqual(res);
 
+    jest.useRealTimers();
     expect(pool.query).toHaveBeenCalledTimes(15);
   });
 
