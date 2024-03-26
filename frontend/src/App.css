@@ -1,0 +1,17 @@
+.main-Container{
+  position: relative;
+  display: flex;
+  background-color: #FAFBFB;
+}
+
+.sidebarActive {
+  z-index: 10000000;
+  position: fixed;
+  width: 18rem;
+  background-color: #FAFBFB;
+  box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
+}
+
+.sidebarUnActive {
+  width: 0;
+}
