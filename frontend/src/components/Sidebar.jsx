@@ -12,16 +12,16 @@ const Sidebar = () => {
   const { activeMenu, setActiveMenu } = useStateContext();
 
   return (
-    <div className='sidebar-container'>
+    <div className='sidebar-container md-overflow-hidden'>
       {activeMenu && (
-        <>
+        <> 
           <div className='sidebar-listContainer'>
             <Link to="/" className='sidebar-title' onClick={() => setActiveMenu(false)}>
-              <FaHome /> <span>EGG-INVOICE</span>
+              <FaHome /> <span>HOMEPAGE</span>
             </Link>
             <Tooltip text='Menu'>
               <button 
-                className='sidebar-closeMenuButton' 
+                className='sidebar-closeMenuButton md-hidden'
                 type="button" 
                 onClick={() => setActiveMenu(!activeMenu)} 
               >
@@ -30,10 +30,10 @@ const Sidebar = () => {
             </Tooltip>
           </div>
           
-          <div className='sideBar-mt-10'>
+          <div className='sidebar-mt-10'>
           {links.map((item) => (
             <div key={item.title}>
-              <p className="sideBar-titles">
+              <p className="sidebar-listTitles">
                   {item.title}
               </p>
               {item.links.map((link) => (
@@ -41,7 +41,7 @@ const Sidebar = () => {
                   to={`/${link.path}`}
                   key={link.path}
                   onClick={() => {}}
-                  className={({ isActive }) => (isActive ? 'sideBar-activeLink' : 'sideBar-normalLink')}
+                  className={({ isActive }) => (isActive ? 'sidebar-activeLink' : 'sidebar-normalLink')}
                 >
                   {link.icon}
                   <span>{link.name}</span>

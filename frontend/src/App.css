@@ -1,4 +1,4 @@
-.main-Container{
+.main-container{
   position: relative;
   display: flex;
   background-color: #FAFBFB;
@@ -25,7 +25,7 @@
 .unActiveMenu {
   background-color: #FAFBFB;
   min-height: 100vh;
-  width: 10%;
+  width: 100%;
   flex-grow: 2;
 }
 
@@ -35,13 +35,15 @@
   width: 100%;
 }
 
-.unactivePage {
-  margin-top: 79px;
-  width: 100%
+@media (min-width: 768px) { 
+  .md-ml-flex72 {
+    margin-left: 18rem;
+    display: flex;
+  }
 }
 
-.activePage {
-  margin-left: 20em;
-  margin-top: 79px;
-  width: 100%
+@media (min-width: 768px) {
+  .md-static {
+    position: static;
+  }
 }
