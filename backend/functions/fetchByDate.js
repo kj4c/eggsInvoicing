@@ -1,6 +1,7 @@
 const pool = require('../database/db');
 const HTTPError = require('http-errors');
 
+// this function allows the user to fetch invoice by date
 async function fetchByDate(uId, date) {
   const validUser = await pool.query('select uid from users where uid = $1', [uId]);
   if (validUser.rows.length === 0) {

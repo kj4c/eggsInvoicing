@@ -1,6 +1,9 @@
 const nodemailer = require('nodemailer');
 const pool = require('../database/db');
 
+// this funciton would allow the user to send multiple json file in an array
+// to the user and send all of the json files that would ahve a file name
+// and the json string
 async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
   if (!from) {
     throw new Error('from is required but was not provided.');

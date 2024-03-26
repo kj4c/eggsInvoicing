@@ -1,6 +1,7 @@
 const pool = require('../database/db');
 const HTTPError = require('http-errors');
 
+// this would fetch all of the sent and recieved invoices
 async function fetchAll(uId) {
   const validUser = await pool.query('select uid from users where uid = $1', [uId]);
   if (validUser.rows.length === 0) {

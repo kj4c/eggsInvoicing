@@ -1,0 +1,57 @@
+.main-container{
+  position: relative;
+  display: flex;
+  background-color: #FAFBFB;
+}
+
+.sidebarActive {
+  z-index: 10000000;
+  position: fixed;
+  width: 18rem;
+  background-color: #FAFBFB;
+  box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
+}
+
+.sidebarUnActive {
+  width: 0;
+}
+
+.activeMenu {
+  background-color: #FAFBFB;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.unActiveMenu {
+  background-color: #FAFBFB;
+  min-height: 100vh;
+  width: 100%;
+  flex-grow: 2;
+}
+
+.navbar {
+  z-index: 10000;
+  position: fixed;
+  width: 100%;
+}
+
+body {
+  font-family: Roboto;
+}
+
+@media (min-width: 768px){
+  .md-ml-72{
+    margin-left: 18rem
+  }
+}
+
+@media (min-width: 768px) {
+  .md-static {
+    position: static;
+  }
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(./fonts/Roboto-Bold.ttf);
+}
