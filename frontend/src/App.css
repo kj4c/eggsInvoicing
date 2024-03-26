@@ -36,12 +36,12 @@
 }
 
 .unactivePage {
-  display: flex;
+  margin-top: 79px;
   width: 100%
 }
 
 .activePage {
-  display: flex;
   margin-left: 20em;
+  margin-top: 79px;
   width: 100%
 }
