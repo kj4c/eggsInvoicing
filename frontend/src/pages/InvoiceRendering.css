@@ -1,0 +1,16 @@
+.render-container {
+    display: flex;
+    height: 50vh;
+   
+}
+
+.render-container h1 {
+    display: flex;
+    align-self: top;
+    justify-self: center;
+}
+
+.fileBtn {
+    display: flex;
+    align-self: center;
+}
