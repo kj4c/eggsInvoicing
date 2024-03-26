@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import React from 'react'
-import Sidebar from './components/Sidebar';
+import { Navbar, Sidebar } from './components'
 import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation} from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 
@@ -14,6 +14,7 @@ const App = () => {
     <div>
       <BrowserRouter>
         <div className='main-Container'>
+          {/* Sidebar */}
           {activeMenu ? (
             <div className='sidebarActive'>
               <Sidebar />
@@ -23,7 +24,15 @@ const App = () => {
               <Sidebar />
             </div>
           )} 
+          
+          {/* Navbar */}
+          <div className={activeMenu ? 'isActiveMenu ' : 'unActiveMenu'}>
+            <div className='navbar'>
+              <Navbar />
+            </div>
+          </div>
 
+          {/* Routes */}
           <div>
             <Routes>
               {/* dashboard  */}
