@@ -15,3 +15,22 @@
 .sidebarUnActive {
   width: 0;
 }
+
+.activeMenu {
+  background-color: #FAFBFB;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.unActiveMenu {
+  background-color: #FAFBFB;
+  min-height: 100vh;
+  width: 100%;
+  flex-grow: 2;
+}
+
+.navbar {
+  z-index: 10000;
+  position: fixed;
+  width: 100%;
+}
