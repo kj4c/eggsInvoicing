@@ -26,18 +26,14 @@ const Navbar = () => {
   const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick } = useStateContext();
 
   return (
-    <div className='navbar-container'>
-      <NavButton 
-        title="Menu" 
-        customFunc={() => setActiveMenu(!activeMenu)} 
-        icon={<AiOutlineMenu />} 
-      />
+    <div className='navbar-container md-ml-6 md-mr-6'>
+      <NavButton title="Menu" customFunc={() => setActiveMenu(!activeMenu)} icon={<AiOutlineMenu />} />
 
       <div className='navbar-flex'>
         {/* <NavButton 
           title="Notification" 
           customFunc={() => handleClick('notification')} 
-          dotColor="rgb(254, 201, 15)" 
+          dotColour="rgb(254, 201, 15)" 
           icon={<IoIosNotificationsOutline />} 
         /> */}
 
@@ -48,8 +44,8 @@ const Navbar = () => {
           </div>
         </Tooltip>
 
-        {/* {isClicked.notification && (<Notification />)} */}
-        {/* {isClicked.userProfile && (<UserProfile />)} */}
+        {/* {isClicked.notification && (<Notification />)}
+        {isClicked.userProfile && (<UserProfile />)} */}
       </div>
     </div>
   )

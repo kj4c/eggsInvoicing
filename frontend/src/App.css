@@ -1,4 +1,4 @@
-.main-Container{
+.main-container{
   position: relative;
   display: flex;
   background-color: #FAFBFB;
@@ -33,4 +33,17 @@
   z-index: 10000;
   position: fixed;
   width: 100%;
+}
+
+@media (min-width: 768px) { 
+  .md-ml-flex72 {
+    margin-left: 18rem;
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .md-static {
+    position: static;
+  }
 }
