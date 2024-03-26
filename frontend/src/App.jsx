@@ -9,14 +9,13 @@ import './App.css'
 
 function App() {
   const { activeMenu } = useStateContext();
-
   return (
     <div>
       <BrowserRouter>
-        <div className = 'main-container'>
-          {/* Sidebar */}
+        <div className='main-container'>
+          {/* SideBar */}
           {activeMenu ? (
-            <div className='sidebarActive'>
+            <div className='sidebar sidebarActive'>
               <Sidebar />
             </div>
           ) : (
@@ -24,29 +23,31 @@ function App() {
               <Sidebar />
             </div>
           )}
+
           {/* Navbar */}
-          <div className={activeMenu ? 'activeMenu md-ml-flex72' : 'unActiveMenu' }>
-            <div className='navbar md-static'>
+          <div className={activeMenu ? 'activeMenu md-ml-72' : 'unActiveMenu' }>
+            <div className='md-static navbar'>
               <Navbar />
             </div>
+
             {/* Routes */}
             <div>
               <Routes>
                 {/* dashboard  */}
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path='/' element={(<Dashboard />)} />
+                <Route path='/dashboard' element={(<Dashboard />)} />
 
                 {/* pages  */}
-                <Route path="/invoiceCreation" element={<InvoiceCreation />} />
-                <Route path="/invoiceValidation" element={<InvoiceValidation />} />
-                <Route path="/invoiceRendering" element={<InvoiceRendering />} />
+                <Route path='/invoiceCreation' element={<InvoiceCreation />} />
+                <Route path='/invoiceValidation' element={<InvoiceValidation />} />
+                <Route path='/invoiceRendering' element={<InvoiceRendering />} />
               </Routes>
             </div>
           </div>
         </div>
       </BrowserRouter>
     </div>
-  )
-}
+  );
+};
 
 export default App
