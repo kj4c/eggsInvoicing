@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 
 const StateContext = createContext();
 
@@ -20,6 +21,10 @@ export const ContextProvider = ({ children }) => {
       {children}
     </StateContext.Provider>
   );
+};
+
+ContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export const useStateContext = () => useContext(StateContext);
