@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import './InvoiceRendering.css';
-import axios from 'axios';
 
 const InvoiceRendering = () => {
   const [file, setFile] = useState('ready');
@@ -21,8 +20,11 @@ const InvoiceRendering = () => {
 
   return(
     <div className='render-container'>
-      <h1>Render here</h1>
-      <input type='file' name='file' className='fileBtn' onChange={handleOnChange}/>
+      <h1>Render your invoice here</h1>
+      <div className='fileBtnDiv'>
+        <p1>Upload your file</p1>
+        <input type='file' name='file' className='fileBtn' onChange={handleOnChange}/>
+      </div>
       <button type='submit' className='submitBtn' onClick={handleOnSubmit}>Submit</button>
 
     </div>

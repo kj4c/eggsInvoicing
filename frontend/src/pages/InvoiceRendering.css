@@ -1,16 +1,41 @@
 .render-container {
-    display: flex;
-    height: 50vh;
-   
+  display: flex;
+  height: 50vh;
+  flex-direction: column;
+  align-items: center;
+
+  
 }
 
 .render-container h1 {
-    display: flex;
-    align-self: top;
-    justify-self: center;
+  display: flex;
+  align-self: top;
 }
 
+.fileBtnDiv {
+  display: flex;
+  background-color: #7f45f2;
+  height: 10vh;
+  width: 50vw;
+  align-items: center;
+  justify-content: center;  
+}
+
+.fileBtnDiv :hover {
+  cursor: pointer;
+}
+
+.fileBtnDiv p1 {
+  position: absolute
+}
+
+.fileBtn::-webkit-file-upload-button {
+  visibility: hidden;
+  width: 100%;
+}
 .fileBtn {
-    display: flex;
-    align-self: center;
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  color: transparent;
 }
