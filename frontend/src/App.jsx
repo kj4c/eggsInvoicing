@@ -33,7 +33,7 @@ const App = () => {
           </div>
 
           {/* Routes */}
-          <div>
+          <div className={activeMenu ? 'activePage' : 'unactivePage'}>
             <Routes>
               {/* dashboard  */}
               <Route path="/" element={<Dashboard />} />
