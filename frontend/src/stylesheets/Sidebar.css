@@ -49,7 +49,7 @@
   color: rgb(156 163 175 / 1);
 }
 
-.sideBar-activeLink {
+.sidebar-activeLink {
   display: flex;
   align-items: center;
   gap: 1.25rem;
@@ -65,7 +65,7 @@
   text-decoration: none;
 }
 
-.sideBar-normalLink {
+.sidebar-normalLink {
   display: flex;
   align-items: center;
   gap: 1.25rem;
@@ -80,6 +80,25 @@
   text-decoration: none;
 }
 
-.sideBar-normalLink:hover {
+.sidebar-normalLink:hover {
   background-color: #F7F7F7;
+}
+
+/* Medium screen size */
+@media (min-width: 768px) {
+  /* Apply overflow-hidden by default */
+  .md-overflow-hidden {
+    overflow: hidden;
+  }
+
+  /* Apply overflow-auto on hover */
+  .md-overflow-hidden:hover {
+    overflow: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .md-hidden {
+    display: none;
+  }
 }

@@ -7,13 +7,13 @@ import { useStateContext } from './contexts/ContextProvider';
 import './App.css'
 
 
-const App = () => {
+function App() {
   const { activeMenu } = useStateContext();
 
   return (
     <div>
       <BrowserRouter>
-        <div className='main-Container'>
+        <div className = 'main-container'>
           {/* Sidebar */}
           {activeMenu ? (
             <div className='sidebarActive'>
@@ -23,28 +23,25 @@ const App = () => {
             <div className='sidebarUnActive'>
               <Sidebar />
             </div>
-          )} 
-          
+          )}
           {/* Navbar */}
-          <div className={activeMenu ? 'isActiveMenu ' : 'unActiveMenu'}>
-            <div className='navbar'>
+          <div className={activeMenu ? 'activeMenu md-ml-72' : 'unActiveMenu' }>
+            <div className='navbar md-static'>
               <Navbar />
             </div>
-          </div>
+            {/* Routes */}
+            <div>
+              <Routes>
+                {/* dashboard  */}
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
 
-          {/* Routes */}
-          <div>
-            <Routes>
-              {/* dashboard  */}
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-
-              {/* pages  */}
-              <Route path="/invoiceCreation" element={<InvoiceCreation />} />
-              <Route path="/invoiceValidation" element={<InvoiceValidation />} />
-              <Route path="/invoiceRendering" element={<InvoiceRendering />} />
-              <Route path="/invoiceSending" element={<InvoiceSending/>}/>
-            </Routes>
+                {/* pages  */}
+                <Route path="/invoiceCreation" element={<InvoiceCreation />} />
+                <Route path="/invoiceValidation" element={<InvoiceValidation />} />
+                <Route path="/invoiceRendering" element={<InvoiceRendering />} />
+              </Routes>
+            </div>
           </div>
         </div>
       </BrowserRouter>
