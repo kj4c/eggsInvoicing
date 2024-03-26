@@ -35,6 +35,10 @@
   width: 100%;
 }
 
+body {
+  font-family: Roboto;
+}
+
 @media (min-width: 768px){
   .md-ml-72{
     margin-left: 18rem
@@ -45,4 +49,9 @@
   .md-static {
     position: static;
   }
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(./fonts/Roboto-Bold.ttf);
 }
