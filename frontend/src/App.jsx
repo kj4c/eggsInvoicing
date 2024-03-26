@@ -25,7 +25,7 @@ function App() {
             </div>
           )}
           {/* Navbar */}
-          <div className={activeMenu ? 'activeMenu md-ml-flex72' : 'unActiveMenu' }>
+          <div className={activeMenu ? 'activeMenu md-ml-72' : 'unActiveMenu' }>
             <div className='navbar md-static'>
               <Navbar />
             </div>
