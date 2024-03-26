@@ -17,7 +17,7 @@ const Sidebar = () => {
         <>
           <div className='sidebar-listContainer'>
             <Link to="/" className='sidebar-title' onClick={() => setActiveMenu(false)}>
-              <FaHome /> <span>HOMEPAGE</span>
+              <FaHome /> <span>EGG-INVOICE</span>
             </Link>
             <Tooltip text='Menu'>
               <button 
