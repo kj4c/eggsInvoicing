@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import React from 'react'
 import { Navbar, Sidebar } from './components'
-import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation} from './pages';
+import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending} from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 
 import './App.css'
@@ -43,6 +43,7 @@ const App = () => {
               <Route path="/invoiceCreation" element={<InvoiceCreation />} />
               <Route path="/invoiceValidation" element={<InvoiceValidation />} />
               <Route path="/invoiceRendering" element={<InvoiceRendering />} />
+              <Route path="/invoiceSending" element={<InvoiceSending/>}/>
             </Routes>
           </div>
         </div>

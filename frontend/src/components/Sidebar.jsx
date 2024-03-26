@@ -6,7 +6,7 @@ import { links } from '../data/dashboardData.jsx';
 import { useStateContext } from '../contexts/ContextProvider';
 
 import Tooltip from './Tooltip';
-import './Sidebar.css'
+import '../stylesheets/Sidebar.css'
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu } = useStateContext();

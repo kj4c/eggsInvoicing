@@ -7,7 +7,7 @@ import { Notification, UserProfile } from '.';
 
 import { useStateContext } from '../contexts/ContextProvider';
 import Tooltip from './Tooltip';
-import './Navbar.css'
+import '../stylesheets/Navbar.css'
 
 const NavButton = ({ title, customFunc, icon, dotColour }) => (
   <Tooltip text={title}>
