@@ -33,7 +33,7 @@ const Navbar = () => {
     handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [])
+  }, [])  //eslint-disable-line
 
   useEffect(() => {
     if (screenSize <= 900) {
@@ -41,7 +41,7 @@ const Navbar = () => {
     } else {
       setActiveMenu(true);
     }
-  }, [screenSize]);
+  }, [screenSize]); //eslint-disable-line
   
   return (
     <div className="navbar-container md-ml-6 md-mr-6e">
