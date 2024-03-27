@@ -11,7 +11,7 @@ const Dashboard = () => {
           <div className='Dashboard-Banner-Content'>
             <div>
               <p className='Dashboard-Earnings'>FY2024 Earnings</p>
-              <p className='Dashboard-Earnings-Content'>$63,448.78</p>
+              <p className='Dashboard-Earnings-Content'>$1234.56</p>
             </div>
           </div>
           <div className='mt-6'>
