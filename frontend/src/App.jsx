@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 // import React from 'react'
-import { Navbar, Sidebar } from './components'
-import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending} from './pages';
+import { Navbar, Sidebar, UserProfile } from './components'
+import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending } from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 
 import './App.css'
@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <div className = 'main-container'>
+        <div className='main-container'>
           {/* Sidebar */}
           {activeMenu ? (
             <div className='sidebarActive'>
@@ -25,7 +25,7 @@ function App() {
             </div>
           )}
           {/* Navbar */}
-          <div className={activeMenu ? 'activeMenu md-ml-72' : 'unActiveMenu' }>
+          <div className={activeMenu ? 'activeMenu md-ml-72' : 'unActiveMenu'}>
             <div className='navbar md-static'>
               <Navbar />
             </div>
@@ -40,7 +40,9 @@ function App() {
                 <Route path="/invoiceCreation" element={<InvoiceCreation />} />
                 <Route path="/invoiceValidation" element={<InvoiceValidation />} />
                 <Route path="/invoiceRendering" element={<InvoiceRendering />} />
-                <Route path="/invoiceSending" element={<InvoiceSending/>}/>
+                <Route path="/invoiceSending" element={<InvoiceSending />} />
+
+                <Route path="/profile" element={<UserProfile />} />
               </Routes>
             </div>
           </div>
