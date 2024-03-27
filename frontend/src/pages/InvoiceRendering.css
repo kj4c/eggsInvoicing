@@ -14,19 +14,29 @@
 
 .fileBtnDiv {
   display: flex;
-  background-color: #7f45f2;
+  position: relative;
+  border-radius: 1em;
+  border: solid;
+  border-color: #7f45f2;
   height: 10vh;
   width: 50vw;
   align-items: center;
   justify-content: center;  
+  text-align: center;
 }
 
 .fileBtnDiv :hover {
   cursor: pointer;
+  border-radius: 1em;
+  background-color: #7f45f2;
 }
 
-.fileBtnDiv p1 {
-  position: absolute
+.fileBtnDiv :hover .fileText {
+  color: white;
+}
+
+.fileText {
+  position: absolute;
 }
 
 .fileBtn::-webkit-file-upload-button {
@@ -38,4 +48,27 @@
   height: 10vh;
   width: 100%;
   color: transparent;
+}
+
+.overlay, .uploadNotif {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+}
+
+.overlay {
+  background: rgb(49, 49, 49, 0.8)
+}
+
+.notifText {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 15px 30px;
+  border: solid;
+  border-color: #7f45f2;
+  border-radius: 10px;
 }
