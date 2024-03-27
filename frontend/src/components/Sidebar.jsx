@@ -9,20 +9,26 @@ import Tooltip from './Tooltip';
 import '../stylesheets/Sidebar.css'
 
 const Sidebar = () => {
-  const { activeMenu, setActiveMenu } = useStateContext();
+  const { activeMenu, setActiveMenu, screenSize } = useStateContext();
+
+  const handleCloseSideBar = () => {
+    if (activeMenu && screenSize <= 900) {
+      setActiveMenu(false);
+    }
+  };
 
   return (
     <div className='sidebar-container md-overflow-hidden'>
       {activeMenu && (
         <> 
           <div className='sidebar-listContainer'>
-            <Link to="/" className='sidebar-title' onClick={() => setActiveMenu(false)}>
-              <FaHome /> <span>HOMEPAGE</span>
+            <Link to='/' className='sidebar-title' onClick={handleCloseSideBar}>
+              <FaHome /> <span>EGGS-INVOICE</span>
             </Link>
             <Tooltip text='Menu'>
               <button 
                 className='sidebar-closeMenuButton md-hidden'
-                type="button" 
+                type='button' 
                 onClick={() => setActiveMenu(!activeMenu)} 
               >
                 <MdOutlineCancel />
@@ -33,14 +39,14 @@ const Sidebar = () => {
           <div className='sidebar-mt-10'>
           {links.map((item) => (
             <div key={item.title}>
-              <p className="sidebar-listTitles">
+              <p className='sidebar-listTitles'>
                   {item.title}
               </p>
               {item.links.map((link) => (
                 <NavLink
                   to={`/${link.path}`}
                   key={link.path}
-                  onClick={() => {}}
+                  onClick={handleCloseSideBar}
                   className={({ isActive }) => (isActive ? 'sidebar-activeLink' : 'sidebar-normalLink')}
                 >
                   {link.icon}

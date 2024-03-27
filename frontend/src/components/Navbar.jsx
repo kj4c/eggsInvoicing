@@ -8,6 +8,8 @@ import PropTypes from 'prop-types'; // Import PropTypes
 import { useStateContext } from '../contexts/ContextProvider';
 import Tooltip from './Tooltip';
 import '../stylesheets/Navbar.css'
+import { useEffect } from 'react';
+
 
 const NavButton = ({ title, customFunc, icon, dotColour }) => (
   <Tooltip text={title}>
@@ -23,13 +25,28 @@ const NavButton = ({ title, customFunc, icon, dotColour }) => (
 
 
 const Navbar = () => {
-  // const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick } = useStateContext();
-  const { activeMenu, setActiveMenu, handleClick } = useStateContext();
-  return (
-    <div className='navbar-container md-ml-6 md-mr-6'>
-      <NavButton title="Menu" customFunc={() => setActiveMenu(!activeMenu)} icon={<AiOutlineMenu />} />
+  const { activeMenu, setActiveMenu, handleClick, screenSize, setScreenSize } = useStateContext();
 
-      <div className='navbar-flex'>
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])  //eslint-disable-line
+
+  useEffect(() => {
+    if (screenSize <= 900) {
+      setActiveMenu(false);
+    } else {
+      setActiveMenu(true);
+    }
+  }, [screenSize]); //eslint-disable-line
+  
+  return (
+    <div className="navbar-container md-ml-6 md-mr-6e">
+      <NavButton title="Menu" customFunc={() => setActiveMenu(!activeMenu)} icon={<AiOutlineMenu />} />
+      <div className="navbar-flex">
         {/* <NavButton 
           title="Notification" 
           customFunc={() => handleClick('notification')} 
@@ -37,18 +54,18 @@ const Navbar = () => {
           icon={<IoIosNotificationsOutline />} 
         /> */}
 
-        <Tooltip text='Profile'>
+        <Tooltip text="Profile">
           <div className='navbar-profile' onClick={() => handleClick('userProfile')}>
             <FaRegUser className='navbar-profile-image'/>
             <MdKeyboardArrowDown className="navbar-profileText" />
           </div>
         </Tooltip>
 
-        {/* {isClicked.notification && (<Notification />)}
-        {isClicked.userProfile && (<UserProfile />)} */}
+        {/* {isClicked.notification && (<Notification />)} */}
+        {/* {isClicked.userProfile && (<UserProfile />)} */}
       </div>
     </div>
-  )
+  );
 }
 
 // Define prop types for NavButton

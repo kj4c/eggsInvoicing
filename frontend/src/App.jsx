@@ -9,14 +9,13 @@ import './App.css'
 
 function App() {
   const { activeMenu } = useStateContext();
-
   return (
     <div>
       <BrowserRouter>
-        <div className = 'main-container'>
-          {/* Sidebar */}
+        <div className='main-container'>
+          {/* SideBar */}
           {activeMenu ? (
-            <div className='sidebarActive'>
+            <div className='sidebar sidebarActive'>
               <Sidebar />
             </div>
           ) : (
@@ -24,17 +23,19 @@ function App() {
               <Sidebar />
             </div>
           )}
+
           {/* Navbar */}
           <div className={activeMenu ? 'activeMenu md-ml-72' : 'unActiveMenu' }>
             <div className='navbar md-static'>
               <Navbar />
             </div>
+
             {/* Routes */}
             <div>
               <Routes>
                 {/* dashboard  */}
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path='/' element={(<Dashboard />)} />
+                <Route path='/dashboard' element={(<Dashboard />)} />
 
                 {/* pages  */}
                 <Route path="/invoiceCreation" element={<InvoiceCreation />} />
@@ -48,7 +49,7 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
 export default App
