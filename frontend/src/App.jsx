@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 // import React from 'react'
 import { Navbar, Sidebar } from './components'
-import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending} from './pages';
+import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput} from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 
 import './App.css'
@@ -41,6 +41,7 @@ function App() {
                 <Route path="/invoiceValidation" element={<InvoiceValidation />} />
                 <Route path="/invoiceRendering" element={<InvoiceRendering />} />
                 <Route path="/invoiceSending" element={<InvoiceSending/>}/>
+                <Route path="/invoiceInput" element={<InvoiceInput/>}/>
               </Routes>
             </div>
           </div>
