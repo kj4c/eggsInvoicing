@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { IoIosNotificationsOutline } from "react-icons/io";
+// import { IoIosNotificationsOutline } from "react-icons/io";
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { FaRegUser } from "react-icons/fa6";
-import { Notification, UserProfile } from '.';
-
+// import { Notification, UserProfile } from '.';
+import PropTypes from 'prop-types'; // Import PropTypes
 import { useStateContext } from '../contexts/ContextProvider';
 import Tooltip from './Tooltip';
-import './Navbar.css'
+import '../stylesheets/Navbar.css'
 
 const NavButton = ({ title, customFunc, icon, dotColour }) => (
   <Tooltip text={title}>
@@ -65,5 +65,13 @@ const Navbar = () => {
     </div>
   );
 }
+
+// Define prop types for NavButton
+NavButton.propTypes = {
+  title: PropTypes.string.isRequired, // Assuming title is required and a string
+  customFunc: PropTypes.func.isRequired, // Assuming customFunc is required and a function
+  icon: PropTypes.node, // Assuming icon is React node (e.g., an element), not marked as required
+  dotColour: PropTypes.string // Assuming dotColour is a string (e.g., for CSS color values), not marked as required
+};
 
 export default Navbar

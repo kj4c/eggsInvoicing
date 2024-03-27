@@ -52,3 +52,12 @@
     z-index: 10000000;
   }
 }
+
+body {
+  font-family: Roboto;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(./fonts/Roboto-Bold.ttf);
+}
