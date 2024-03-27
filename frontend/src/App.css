@@ -10,11 +10,10 @@
 .main-container{
   position: relative;
   display: flex;
-  background-color: #FAFBFB;
+  /* background-color: #FAFBFB; */
 }
 
 .sidebarActive {
-  z-index: 10000000;
   position: fixed;
   width: 18rem;
   background-color: #FAFBFB;
@@ -35,17 +34,14 @@
   background-color: #FAFBFB;
   min-height: 100vh;
   width: 100%;
-  flex-grow: 2;
+  flex: 2 2 auto;
 }
 
 .navbar {
   z-index: 10000;
   position: fixed;
   width: 100%;
-}
-
-body {
-  font-family: Roboto;
+  background-color: #FAFBFB;
 }
 
 @media (min-width: 768px){
@@ -58,6 +54,16 @@ body {
   .md-static {
     position: static;
   }
+}
+
+@media  screen and (max-width:800px) {
+  .sidebar{
+    z-index: 10000000;
+  }
+}
+
+body {
+  font-family: Roboto;
 }
 
 @font-face {
