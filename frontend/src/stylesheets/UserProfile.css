@@ -1,0 +1,16 @@
+.heading {
+  font-size: 36px;
+  padding-left: 100px;
+}
+
+.profile-picture {
+  height: 200px
+}
+
+.profile-info {
+  width: 800px;
+  justify-content: space-around;
+  font-size: 20px;
+  padding-top: 70px;
+  padding-left: 500px;
+}
