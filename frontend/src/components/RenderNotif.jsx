@@ -1,18 +1,17 @@
 import {useState} from 'react';
-
-const Notif = () => {
+import '../stylesheets/InvoiceRendering.css';
+const Notif = (props) => {
   
-  return(
+  return (props.trigger) ? (
     <div className='uploadNotif'>
-      <div className="overlay"></div>
       <div className="notifText">
-        <h3>Warning😢</h3>
-        <p>Please upload a file</p>
-        <button>Close</button>
+        <h3>Hey there</h3>
+        <p>Please upload a file ❤️</p>
+        <button className='closeBtn' onClick={() => props.setTrigger(false)}>OK!!!</button>
       </div>
     </div>
     
-  )
+  ):"";
 }
 
-export default Notif
+export default Notif;
