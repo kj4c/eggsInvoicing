@@ -22,7 +22,6 @@ const fetchByDateRange = require('./functions/fetchByDateRange');
 const getStatisticsDateRange = require('./functions/getStatisticsDateRange');
 const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
-const axios = require('axios');
 const cors = require('cors');
 app.use(cors());
 
