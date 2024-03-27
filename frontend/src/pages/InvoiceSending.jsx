@@ -1,6 +1,5 @@
 import '../stylesheets/InvoiceSending.css';
 import { useNavigate } from 'react-router-dom';
-import InvoiceInput from './InvoiceInput';
 
 const InvoiceSending = () => {
   const navigate = useNavigate();

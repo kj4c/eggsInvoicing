@@ -1,0 +1,90 @@
+.inputBox {
+  color: black;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 40px;
+  border-color: #7f45f2;
+  flex-direction: column;
+  font-size: 25px;
+  margin: 1%;    
+  padding: 30px;
+}
+
+.inputContainers {
+  margin-top: 2%;
+  margin-left: 15%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.formBox {
+  display: flex;
+}
+
+.labels {
+  flex-direction: column;
+  font-size: 40px;
+  margin-left: 1%;
+}
+
+.labels:click {
+  
+}
+
+.fileUpload {
+  background: #f9f3ff;
+  border-color: #7f45f2;
+  height: 200px;
+  width: 98%;
+  margin: 1%;
+  margin-right: 2%;
+  font-family: Roboto;
+  color: black;
+  font-size: 25px;
+  line-height: 50px;
+  text-align: center;;
+  border-radius: 10px;
+}
+
+.fileUpload:hover {
+  background: #e2c5ff;
+  transition: all .3s;
+}
+.submit{
+  background-color: initial;
+  background-image: linear-gradient(#8614f8 0, #760be0 100%);
+  border-radius: 5px;
+  border-style: none;
+  box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 25px;
+  font-weight: 500;
+  font-family: Roboto;
+  height: 100px;
+  line-height: 60px;
+  margin: 1%;
+  outline: 0;
+  text-align: center;
+  transition: all .3s cubic-bezier(.05, .03, .35, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: bottom;
+  width: 98%;
+}
+
+.submit:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 1000px) {
+  .submit{
+    font-size: 25px;
+    height: 55px;
+    line-height: 55px;
+    width: 150px;
+  }
+}
