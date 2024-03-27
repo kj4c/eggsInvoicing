@@ -26,38 +26,38 @@ const InvoiceInput = () => {
 	const [buttonName, setButtonName] = useState('Upload File');
 
 	const handleFileChange = (event) => {
-	  const file = event.target.files[0];
-	  setFileName(file ? file.name : 'No file chosen, yet.');
-	  if (file) {
-		setFile(file);
-		setButtonName(file.name);
-	  }
+		const file = event.target.files[0];
+		setFileName(file ? file.name : 'No file chosen, yet.');
+		if (file) {
+			setFile(file);
+			setButtonName(file.name);
+		}
 	};
 
 	const handleChange = (event) => {
-	  const { name, value } = event.target;
-	  setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+		const { name, value } = event.target;
+		setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
 	};
   
 	const handleSubmit = (event) => {
-	  event.preventDefault();
-	  /* Checks if the parameters r checked out */
-	  if (!isValidEmail(formData.to)) {
-		alert('Please enter a valid email in the "To" section and try again.')
-	  } else if (formData.from === "") {
-		alert('Please enter text in the "From" field.')
-	  } else if (fileName === 'No file chosen, yet.') {
-		alert('Please upload a file.')
-	  } else {
-		/*Opens the file and converts to a string*/
-		const reader = new FileReader();
-		reader.onload = function(e) {
-		  const xmlString = e.target.result;
-		  console.log("XML as a string:", xmlString);
-		};
-		reader.readAsText(file);
-	  	alert(`From: ${formData.from}, To: ${formData.to}, Text: ${formData.text}, Attachment: ${fileName}`);
-	  }
+		event.preventDefault();
+		/* Checks if the parameters r checked out */
+		if (!isValidEmail(formData.to)) {
+			alert('Please enter a valid email in the "To" section and try again.')
+		} else if (formData.from === "") {
+			alert('Please enter text in the "From" field.')
+		} else if (fileName === 'No file chosen, yet.') {
+			alert('Please upload a file.')
+		} else {
+			/*Opens the file and converts to a string*/
+			const reader = new FileReader();
+			reader.onload = function(e) {
+				const xmlString = e.target.result;
+				console.log("XML as a string:", xmlString);
+			};
+			reader.readAsText(file);
+			alert(`From: ${formData.from}, To: ${formData.to}, Text: ${formData.text}, Attachment: ${fileName}`);
+		}
   };
   
 	return (
@@ -82,7 +82,7 @@ const InvoiceInput = () => {
 				onClick={() => document.getElementById('fileUpload').click()}
 			>
 				{buttonName}
-      		</button>
+      </button>
 			<button className="submit" onClick = {handleSubmit}>Submit</button>
 		</div>
 	)
