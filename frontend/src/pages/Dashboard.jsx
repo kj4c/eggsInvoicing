@@ -1,4 +1,3 @@
-import React from 'react'
 import './Dashboard.css'
 import { Button } from '../components'
 import { cardData } from '../data/dashboardData'

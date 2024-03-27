@@ -8,6 +8,8 @@ import PropTypes from 'prop-types'; // Import PropTypes
 import { useStateContext } from '../contexts/ContextProvider';
 import Tooltip from './Tooltip';
 import '../stylesheets/Navbar.css'
+import { useEffect } from 'react';
+
 
 const NavButton = ({ title, customFunc, icon, dotColour }) => (
   <Tooltip text={title}>
@@ -23,7 +25,7 @@ const NavButton = ({ title, customFunc, icon, dotColour }) => (
 
 
 const Navbar = () => {
-  const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick, screenSize, setScreenSize } = useStateContext();
+  const { activeMenu, setActiveMenu, handleClick, screenSize, setScreenSize } = useStateContext();
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
