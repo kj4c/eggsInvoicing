@@ -1,7 +1,6 @@
 .navbar-container {
   position: relative;
   display: flex;
-  position: relative;
   justify-content: space-between;
   padding: 0.5rem;
 }
@@ -57,4 +56,15 @@
 .navbar-profileText {
   font-size: 14;
   color: rgb(156 163 175);
+}
+
+/* Medium screen size */
+@media (min-width: 768px){
+  .md-ml-6{
+    margin-left: 1.5rem
+  }
+
+  .md-mr-6{
+    margin-right: 1.5rem
+  }
 }

@@ -9,20 +9,26 @@ import Tooltip from './Tooltip';
 import './Sidebar.css'
 
 const Sidebar = () => {
-  const { activeMenu, setActiveMenu } = useStateContext();
+  const { activeMenu, setActiveMenu, screenSize } = useStateContext();
+
+  const handleCloseSideBar = () => {
+    if (activeMenu && screenSize <= 900) {
+      setActiveMenu(false);
+    }
+  };
 
   return (
-    <div className='sidebar-container'>
+    <div className='sidebar-container md-overflow-hidden'>
       {activeMenu && (
-        <>
+        <> 
           <div className='sidebar-listContainer'>
-            <Link to="/" className='sidebar-title' onClick={() => setActiveMenu(false)}>
-              <FaHome /> <span>EGG-INVOICE</span>
+            <Link to='/' className='sidebar-title' onClick={handleCloseSideBar}>
+              <FaHome /> <span>EGGS-INVOICE</span>
             </Link>
             <Tooltip text='Menu'>
               <button 
-                className='sidebar-closeMenuButton' 
-                type="button" 
+                className='sidebar-closeMenuButton md-hidden'
+                type='button' 
                 onClick={() => setActiveMenu(!activeMenu)} 
               >
                 <MdOutlineCancel />
@@ -30,18 +36,18 @@ const Sidebar = () => {
             </Tooltip>
           </div>
           
-          <div className='sideBar-mt-10'>
+          <div className='sidebar-mt-10'>
           {links.map((item) => (
             <div key={item.title}>
-              <p className="sideBar-titles">
+              <p className='sidebar-listTitles'>
                   {item.title}
               </p>
               {item.links.map((link) => (
                 <NavLink
                   to={`/${link.path}`}
                   key={link.path}
-                  onClick={() => {}}
-                  className={({ isActive }) => (isActive ? 'sideBar-activeLink' : 'sideBar-normalLink')}
+                  onClick={handleCloseSideBar}
+                  className={({ isActive }) => (isActive ? 'sidebar-activeLink' : 'sidebar-normalLink')}
                 >
                   {link.icon}
                   <span>{link.name}</span>
