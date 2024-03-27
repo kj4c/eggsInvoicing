@@ -1,5 +1,6 @@
-import {useState} from 'react';
 import '../stylesheets/InvoiceRendering.css';
+import PropTypes from 'prop-types';
+
 const Notif = (props) => {
   
   return (props.trigger) ? (
@@ -10,8 +11,11 @@ const Notif = (props) => {
         <button className='closeBtn' onClick={() => props.setTrigger(false)}>OK!!!</button>
       </div>
     </div>
-    
   ):"";
 }
 
+Notif.propTypes = {
+  trigger: PropTypes.bool.isRequired,
+  setTrigger: PropTypes.func.isRequired
+}
 export default Notif;

@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import '../stylesheets/InvoiceRendering.css';
 import Notif from '../components/RenderNotif';
-import axios from 'axios';
 
 const InvoiceRendering = () => {
   const [file, setFile] = useState('ready');
@@ -14,9 +13,6 @@ const InvoiceRendering = () => {
       return;
     }
   }
-
-
-
   function handleOnChange(e) {
     const target = e.target;
     setFile(target.files[0]);
@@ -27,7 +23,7 @@ const InvoiceRendering = () => {
     console.log(fileName);
     const formData = new FormData();
     formData.append('file', file);
-  }, [file]);
+  }, [file, fileName]);
 
   return(
     <div className='render-container'>
