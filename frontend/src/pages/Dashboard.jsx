@@ -1,9 +1,20 @@
-import './Dashboard.css'
+import '../stylesheets/Dashboard.css'
 import { Button } from '../components'
 import { cardData } from '../data/dashboardData'
-
+import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cookieExists = document.cookie.includes('cookie='); 
+
+    if (!cookieExists) {
+      navigate('/login');
+    }
+  }, [navigate]);
+
   return (
     <div className='mt-12'>
       <div className='Dashboard lg-flex-nowrap'>
