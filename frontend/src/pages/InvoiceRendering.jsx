@@ -7,9 +7,14 @@ const InvoiceRendering = () => {
   const [fileName, setFileName] = useState('');
   const [notif, setNotif] = useState(false);
   async function handleOnSubmit(e) {
+    const btn = document.querySelector('.noSubmitBtn');
+    btn.classList.add('vibrating');
+    setTimeout(() => {
+      btn.classList.remove('vibrating');
+    }, 300);
     e.preventDefault();
     if (file === 'ready') {
-      setNotif(true);
+      setTimeout(() => setNotif(true), 250);
       return;
     }
   }
