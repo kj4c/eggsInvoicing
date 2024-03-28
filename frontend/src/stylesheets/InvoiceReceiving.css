@@ -1,0 +1,25 @@
+.inboxContainer {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr 0.5fr;
+    grid-template-rows: 50px repeat(14, 1fr);
+    width: 90%;
+    background-color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 15px;
+    border: 3px solid #7f45f2;
+}
+
+.grid-item {
+    /* Special styles for items not in the first row */
+    background-color: white;
+    padding: 10px;
+    border-top: 3px solid #7f45f2;
+    border-bottom: 3px solid #7f45f2;
+  }
+
+.header {
+    align-self: center;
+    padding: 10px;
+    font-size: 25px;
+}
