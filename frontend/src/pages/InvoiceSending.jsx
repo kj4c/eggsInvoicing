@@ -1,8 +1,17 @@
 import '../stylesheets/InvoiceSending.css';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const InvoiceSending = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const cookieExists = document.cookie.includes('cookie='); 
+
+    if (!cookieExists) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const routeChange = () =>{ 
     let path = `/invoiceInput`; 
