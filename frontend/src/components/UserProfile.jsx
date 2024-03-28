@@ -1,7 +1,21 @@
 // import React from 'react'
 import '../stylesheets/UserProfile.css';
+// import { useState, useEffect } from 'react';
+// import axios from 'axios';
 
 const UserProfile = () => {
+  // const [userDetails, setUserDetails] = useState({
+  //   username: '',
+  //   email: '',
+  //   phone: ''
+  // });
+
+  // useEffect(() => {
+  //   const fetchUserDetails = async () => {
+  //     const response = await axios.get()
+  //   }
+  // })
+
   return (
     <div>
       <p className='heading'>Profile</p>
