@@ -17,7 +17,7 @@ function sendEmail(reqBody) {
 }
 
 const InvoiceInput = () => {
-	const [formData, setFormData] = useState({from: "", to: "", text: "", attachment: ""});
+	const [formData, setFormData] = useState({from: "", to: "", attachment: ""});
 	const [fileName, setFileName] = useState('No file chosen, yet.');
 	const [buttonName, setButtonName] = useState('Upload File');
 
@@ -59,9 +59,8 @@ const InvoiceInput = () => {
 				recipient: formData.to,
 				xmlString: formData.attachment
 			}
-			sendEmail(reqBody);
-
-			alert(`From: ${formData.from}, To: ${formData.to}, Text: ${formData.text}, Attachment: ${fileName}`);
+			sendEmail(reqBody)
+			alert('Email successfully sent!');
 		}
   };
   
@@ -71,8 +70,6 @@ const InvoiceInput = () => {
 			<input type="text" className="inputBox" name="from" value={formData.from} onChange={handleChange}/>
 			<label className="labels">To:</label>
 			<input type="email" className="inputBox" name="to" value={formData.to} onChange={handleChange}/>
-			<label className="labels">Text:</label>
-			<input className="inputBox" name="text" value={formData.text} onChange={handleChange}/>
 			<label className="labels">Attachment:</label>
 			<input 
 				type= "file" 
