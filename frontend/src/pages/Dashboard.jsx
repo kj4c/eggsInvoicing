@@ -2,7 +2,7 @@ import '../stylesheets/Dashboard.css'
 import { Button } from '../components'
 import { cardData } from '../data/dashboardData'
 import { useNavigate } from 'react-router-dom'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 const Dashboard = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import '../stylesheets/InvoiceSending.css';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const InvoiceSending = () => {
   const navigate = useNavigate();

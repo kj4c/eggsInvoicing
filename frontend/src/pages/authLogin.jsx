@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import '../stylesheets/auth.css';
-import favicon from '../assets/egg_favicon.png'
 import picture from '../assets/picture1.jpg';
 import eggslogo from '../assets/eggs.logo.png';
 import picture2 from '../assets/picture2.jpg';
