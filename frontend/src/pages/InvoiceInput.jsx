@@ -19,14 +19,12 @@ function sendEmail(reqBody) {
 const InvoiceInput = () => {
 	const [formData, setFormData] = useState({from: "", to: "", text: "", attachment: ""});
 	const [fileName, setFileName] = useState('No file chosen, yet.');
-	const [file, setFile] = useState();
 	const [buttonName, setButtonName] = useState('Upload File');
 
 	const handleFileChange = (event) => {
 		let newFile = event.target.files[0];
 		setFileName(newFile ? newFile.name : 'No file chosen, yet.');
 		if (newFile) {
-			setFile(newFile);
 			setButtonName(newFile.name);
 
 			/*Opens the file and converts to a string*/
