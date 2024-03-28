@@ -147,21 +147,20 @@
   color: rgb(125, 125, 125);
 }
 
-.noSubmitBtn:hover {
-  animation: vibrate 0.4s;
+.vibrating {
+  animation: vibrate 0.3s;
 }
 
 
 @keyframes vibrate {
-  0% { transform: translate(0.2px, 0px) rotate(0.5deg); }
-  10% { transform: translate(-0.2px, 0px) rotate(-0.5deg); }
-  20% { transform: translate(-0.2px, 0px) rotate(0.4deg); }
-  30% { transform: translate(-0.2px, 0px) rotate(-0.4deg); }
-  40% { transform: translate(0.2px, 0px) rotate(0.3deg); }
-  50% { transform: translate(0.2px, 0px) rotate(-0.3deg); }
-  60% { transform: translate(-0.2px, 0px) rotate(0.2deg); }
-  70% { transform: translate(-0.2px, 0px) rotate(-0.2deg); }
-  80% { transform: translate(0.2px, 0px) rotate(0.1deg); }
-  90% { transform: translate(0.2px, 0px) rotate(-0.1deg); }
-  100% { transform: translate(-0.2px, 0px) rotate(-0.1deg); }
+  0% {transform: translateX(3px);}
+  10% {transform: translateX(-3px);}
+  20% {transform: translateX(2.5px);}
+  40% {transform: translateX(-2.5px);}
+  50% {transform: translateX(2px);}
+  60% {transform: translateX(-1px);}
+  70% {transform: translateX(1px);}
+  80% {transform: translateX(-1px);}
+  90% {transform: translateX(1px);}
+  100% {transform: translateX(-1px);}
 }
