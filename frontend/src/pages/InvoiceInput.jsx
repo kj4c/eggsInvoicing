@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import '../stylesheets/InvoiceInput.css';
+import axios from 'axios';
 
 
 function isValidEmail(email) {
@@ -8,29 +9,34 @@ function isValidEmail(email) {
 	return regex.test(email);
 }
 
-// function readFile(file) {
-// 	const fs = require('fs');
+function sendEmail(reqBody) {
+	axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/email", reqBody)
+	.then((response) => {
+		console.log(response);
+	});
+}
 
-// 	try {
-// 		const data = fs.readFileSync(file, 'utf8');
-// 		console.log('meow', data);
-// 	} catch (err) {
-// 		console.error('error reading file');
-// 	}
-// 	FileReader();
-// }
 const InvoiceInput = () => {
-	const [formData, setFormData] = useState({from: "", to: "", text: ""});
+	const [formData, setFormData] = useState({from: "", to: "", text: "", attachment: ""});
 	const [fileName, setFileName] = useState('No file chosen, yet.');
 	const [file, setFile] = useState();
 	const [buttonName, setButtonName] = useState('Upload File');
 
 	const handleFileChange = (event) => {
-		const file = event.target.files[0];
-		setFileName(file ? file.name : 'No file chosen, yet.');
-		if (file) {
-			setFile(file);
-			setButtonName(file.name);
+		let newFile = event.target.files[0];
+		setFileName(newFile ? newFile.name : 'No file chosen, yet.');
+		if (newFile) {
+			setFile(newFile);
+			setButtonName(newFile.name);
+
+			/*Opens the file and converts to a string*/
+			const reader = new FileReader();
+			let xmlString;
+			reader.readAsText(newFile);
+			reader.onload = function(e) {
+				xmlString = e.target.result;
+				formData.attachment = xmlString;
+			};
 		}
 	};
 
@@ -49,13 +55,14 @@ const InvoiceInput = () => {
 		} else if (fileName === 'No file chosen, yet.') {
 			alert('Please upload a file.')
 		} else {
-			/*Opens the file and converts to a string*/
-			const reader = new FileReader();
-			reader.onload = function(e) {
-				const xmlString = e.target.result;
-				console.log("XML as a string:", xmlString);
-			};
-			reader.readAsText(file);
+			/* Call the function to send the email*/
+			const reqBody = {
+				from: formData.from,
+				recipient: formData.to,
+				xmlString: formData.attachment
+			}
+			sendEmail(reqBody);
+
 			alert(`From: ${formData.from}, To: ${formData.to}, Text: ${formData.text}, Attachment: ${fileName}`);
 		}
   };
@@ -74,7 +81,6 @@ const InvoiceInput = () => {
 				id = "fileUpload" 
 				hidden = 'hidden' 
 				name="file" 
-				value={formData.attachment}
 				accept=".xml" onChange={handleFileChange}
 			/>
 			<button
