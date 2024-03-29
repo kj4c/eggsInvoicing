@@ -69,7 +69,7 @@ function AuthRegister() {
               <input
                 type="email"
                 placeholder='email'
-                className='email-input-box'
+                className='inputFields'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -80,6 +80,7 @@ function AuthRegister() {
               <input
                 type="text"
                 placeholder='username'
+                className='inputFields'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -90,6 +91,7 @@ function AuthRegister() {
               <input
                 type="password"
                 placeholder='password'
+                className='inputFields'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -100,6 +102,7 @@ function AuthRegister() {
               <input
                 type="tel"
                 placeholder='phone number'
+                className='inputFields'
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 required

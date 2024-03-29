@@ -91,6 +91,7 @@ function AuthLogin() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                className='inputFields'
               />
             </div>
             <div>
@@ -101,6 +102,7 @@ function AuthLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className='inputFields'
               />
             </div>
             <p className='login-error'>{error}</p>
