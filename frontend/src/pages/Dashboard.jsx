@@ -1,10 +1,20 @@
-import React from 'react'
-import './Dashboard.css'
+import '../stylesheets/Dashboard.css'
 import { Button } from '../components'
 import { cardData } from '../data/dashboardData'
-
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cookieExists = document.cookie.includes('cookie='); 
+
+    if (!cookieExists) {
+      navigate('/login');
+    }
+  }, [navigate]);
+
   return (
     <div className='mt-12'>
       <div className='Dashboard lg-flex-nowrap'>
@@ -12,7 +22,7 @@ const Dashboard = () => {
           <div className='Dashboard-Banner-Content'>
             <div>
               <p className='Dashboard-Earnings'>FY2024 Earnings</p>
-              <p className='Dashboard-Earnings-Content'>$63,448.78</p>
+              <p className='Dashboard-Earnings-Content'>$1234.56</p>
             </div>
           </div>
           <div className='mt-6'>

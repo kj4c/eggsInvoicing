@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import { MdOutlineCancel } from 'react-icons/md';
 import { FaHome } from 'react-icons/fa';
@@ -6,7 +6,7 @@ import { links } from '../data/dashboardData.jsx';
 import { useStateContext } from '../contexts/ContextProvider';
 
 import Tooltip from './Tooltip';
-import './Sidebar.css'
+import '../stylesheets/Sidebar.css'
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu, screenSize } = useStateContext();

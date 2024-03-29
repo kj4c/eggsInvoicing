@@ -18,15 +18,21 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Change to backend directory
       run: cd backend
-    - name: Install dependencies
+    - name: Install dependencies backend
       run: npm install
       working-directory: ./backend
+    - name: Install dependencies frontend
+      run: npm install
+      working-directory: ./frontend
     - name: Install jspdf
       run: npm install jspdf
       working-directory: ./backend
-    - name: Lint
+    - name: Lint Backend
       run: npm run lint
       working-directory: ./backend
+    - name: Lint Frontend
+      run: npm run lint
+      working-directory: ./frontend
     - name: Run tests
       run: npm test
       working-directory: ./backend

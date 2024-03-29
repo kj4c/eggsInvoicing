@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+:root {
+  font-family: 'Roboto', sans-serif;
+}
+
+* {
+  margin: 0;
+}
+
 .main-container{
   position: relative;
   display: flex;
@@ -51,4 +60,13 @@
   .sidebar{
     z-index: 10000000;
   }
+}
+
+body {
+  font-family: Roboto;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(./fonts/Roboto-Bold.ttf);
 }
