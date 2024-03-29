@@ -23,7 +23,6 @@ const NavButton = ({ title, customFunc, icon, dotColour }) => (
   </Tooltip>
 );
 
-
 const Navbar = () => {
   const { activeMenu, setActiveMenu, handleClick, screenSize, setScreenSize } = useStateContext();
 
