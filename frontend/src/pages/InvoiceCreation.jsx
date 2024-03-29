@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './InvoiceCreation.css';
-import { useForm } from 'react-hook-form';
-// import { DevTool } from '@hookform/devtools'
 import FormInput from '../components/FormInput';
 import { inputs } from '../data/InvoiceCreationInputs';
 

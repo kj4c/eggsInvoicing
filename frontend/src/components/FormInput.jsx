@@ -1,7 +1,4 @@
 import React from 'react'
-import { useForm } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools'
-
 import './FormInput.css'
 
 const FormInput = (props) => {
