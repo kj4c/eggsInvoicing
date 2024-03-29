@@ -5,7 +5,7 @@ import { links } from '../data/dashboardData.jsx';
 import { useStateContext } from '../contexts/ContextProvider';
 import Tooltip from './Tooltip';
 import '../stylesheets/Sidebar.css'
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // const Sidebar = () => {
 //   const { activeMenu, setActiveMenu, screenSize } = useStateContext();
