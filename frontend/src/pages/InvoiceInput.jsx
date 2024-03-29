@@ -48,10 +48,8 @@ const InvoiceInput = () => {
 	const goBack = () => {
         navigate("/invoiceSending");
       };
-  
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		/* Checks if the parameters r checked out */
 		if (!isValidEmail(formData.to)) {
 			alert('Please enter a valid email in the "To" section and try again.')
 		} else if (formData.from === "") {
@@ -59,7 +57,6 @@ const InvoiceInput = () => {
 		} else if (fileName === 'No file chosen, yet.') {
 			alert('Please upload a file.')
 		} else {
-			/* Call the function to send the email*/
 			const reqBody = {
 				from: formData.from,
 				recipient: formData.to,
@@ -68,7 +65,7 @@ const InvoiceInput = () => {
 			sendEmail(reqBody)
 			alert('Email successfully sent!');
 		}
-  	};
+	};
   
 	return (
 		<div className = "inputContainers">

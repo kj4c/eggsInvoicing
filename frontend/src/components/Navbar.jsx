@@ -11,7 +11,6 @@ import '../stylesheets/Navbar.css'
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-
 const NavButton = ({ title, customFunc, icon, dotColour }) => (
   <Tooltip text={title}>
     <button type="button"
@@ -33,7 +32,7 @@ const Navbar = () => {
     handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []) 
+  }, [setScreenSize]) 
 
   useEffect(() => {
     if (screenSize <= 900) {
@@ -41,7 +40,7 @@ const Navbar = () => {
     } else {
       setActiveMenu(true);
     }
-  }, [screenSize]);
+  }, [screenSize, setActiveMenu]);
 
   return (
     <div className="navbar-container md-ml-6 md-mr-6e">
