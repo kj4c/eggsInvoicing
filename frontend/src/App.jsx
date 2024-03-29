@@ -44,6 +44,7 @@ const AppContent = () => {
             <Route path="/invoiceRendering" element={<InvoiceRendering />} />
             <Route path="/invoiceSending" element={<InvoiceSending />} />
             <Route path="/invoiceInput" element={<InvoiceInput />} />
+            <Route path="/invoiceReceiving" element={<InvoiceReceiving />} />
             <Route path="/login" element={<AuthLogin />} />
             <Route path="/register" element={<AuthRegister />} />
           </Routes>

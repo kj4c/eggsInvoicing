@@ -417,7 +417,7 @@ app.get('/receiveReport', async(req, res) => {
       res.status(400).json({error: 'error generating the report'});
     } else {
       pdf = pdf.doc;
-      res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"');
+      res.setHeader('Content-Disposition', 'attachment; filename="communication_report_receive.pdf"');
       res.setHeader('Content-Type', 'application/pdf');
       res.status(200).send(pdf.output());
     }
@@ -445,7 +445,7 @@ app.get('/receiveHtml', async(req, res) => {
     if (page.status !== 200) {
       res.status(page.status).json({message: page.error});
     } else {
-      res.status(200).send(page);
+      res.status(200).send(page.page);
     }
   } catch (error) {
     console.log(error);
