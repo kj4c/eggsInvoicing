@@ -11,13 +11,17 @@ const UserProfile = () => {
     phone: ''
   });
 
-  // useEffect(() => {
-  //   const fetchUserDetails = async () => {
-  //     const response = await axios.get()
-  //   }
-  // })
   async function getUserInfo() {
-    axios.post()
+    const uid = localStorage.getItem('uid');
+    await axios.get('https://invoice-seng2021-24t1-eggs.vercel.app/getInfo', {
+      uid
+    }).then(res => {
+      setUserDetails.username(res.data.username);
+      setUserDetails.email(res.data.email);
+      setUserDetails.phone(res.data.phone);
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
   return (
@@ -26,14 +30,22 @@ const UserProfile = () => {
       <div className='profile-info'>
         <img className='profile-picture' />
         <hr className="solid" />
-        <p className='user-name'>Username</p>
+        <div className='info-containers'>
+          <p className='user-name'>Username</p>
+          <p className='user-info'>sample_user</p>
+        </div>
         <hr className="solid" />
-        <p className='email'>Email</p>
+        <div className='info-containers'>
+          <p className='email'>Email</p>
+          <p className='user-info'>sample@mail.com</p>
+        </div>
         <hr className="solid" />
-        <p className='phone-no'>Phone</p>
+        <div className='info-containers'>
+          <p className='phone-no'>Phone</p>
+          <p className='user-info'>0123456789</p>
+        </div>
         <hr className="solid" />
-        <a href=""></a>
-        <button className='log-out'>Log Out</button>
+        <Link to="/login" className='log-out'>Log Out</Link>
       </div>
 
     </div>
