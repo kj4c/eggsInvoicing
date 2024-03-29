@@ -8,6 +8,7 @@ import AuthRegister from './pages/authRegister';
 import InvoiceInputJSON from './pages/invoiceInputJson';
 import NotFoundPage from './pages/NotFoundPage';
 import ForgetPassword from './pages/forgetPassword';
+import UserProfile from './components/UserProfile';
 
 import './App.css'
 
@@ -18,13 +19,12 @@ const AppContent = () => {
   const knownPaths = [
     '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
     '/invoiceRendering', '/invoiceSending', '/invoiceInput',
-    '/login', '/register', '/invoiceInputJson'
+    '/login', '/register', '/invoiceInputJson', '/profile'
   ];
 
   const hideSidebarPaths = ['/login', '/register', 'reset-password'];
 
   const showSidebar = knownPaths.includes(location.pathname) && !hideSidebarPaths.includes(location.pathname);
-
   return (
     <div className='main-container'>
       {showSidebar && (
@@ -49,6 +49,8 @@ const AppContent = () => {
             <Route path="/invoiceInputJson" element={<InvoiceInputJSON />} />
             <Route path="/reset-password" element={<ForgetPassword />} />
             <Route path="*" element={<NotFoundPage />} />
+
+            <Route path="/profile" element={<UserProfile />} />
           </Routes>
         </div>
       </div>

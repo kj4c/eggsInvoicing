@@ -9,6 +9,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 import Tooltip from './Tooltip';
 import '../stylesheets/Navbar.css'
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const NavButton = ({ title, customFunc, icon, dotColour }) => (
@@ -17,7 +18,7 @@ const NavButton = ({ title, customFunc, icon, dotColour }) => (
       className='navbar-button'
       onClick={() => customFunc()}
     >
-      <span style={{ background: dotColour }} className='navbar-dotColour'/>
+      <span style={{ background: dotColour }} className='navbar-dotColour' />
       {icon}
     </button>
   </Tooltip>
@@ -48,11 +49,11 @@ const Navbar = () => {
       <div className="navbar-flex">
         {activeMenu && (
           <Tooltip text="Profile">
-            <div className='navbar-profile' onClick={() => handleClick('userProfile')}>
-              <FaRegUser className='navbar-profile-image'/>
+            <Link to='/profile' className='navbar-profile' onClick={() => handleClick('userProfile')}>
+              <FaRegUser className='navbar-profile-image' />
               <MdKeyboardArrowDown className="navbar-profileText" />
-            </div>
-          </Tooltip>
+            </Link>
+        </Tooltip>
         )}
       </div>
     </div>
