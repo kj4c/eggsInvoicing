@@ -1,19 +1,19 @@
-.FI-Container{
+.S-Container{
   display: flex;
   flex-direction: column;
-  width: 800px;
+  width: 782px;
   margin-bottom: 10px;
   /* background-color: rgb(20, 170, 100); */
 }
 
-.input {
+.S-select {
   padding: 15px;
   margin: 10px 0px;
-  font-size: large;
+  font-size: medium;
   /* background-color: rgb(111, 206, 235); */
 }
 
-.label{
+.S-label{
   font-size: medium;
   color: gray;
 }

@@ -7,14 +7,26 @@ export const inputs = [
     label: "Issue Date",
     required: true,
   },
-  {
-    id: 2,
-    name: "invoiceTypeCode",
-    type: "text",
-    placeholder: "Invoice Type Code",
-    label: "Invoice Type Code",
-    required: true,
-  },
+  // {
+  //   id: 2,
+  //   name: "invoiceTypeCode",
+  //   type: "text",
+  //   placeholder: "Invoice Type Code",
+  //   label: "Invoice Type Code",
+  //   required: true,
+  //   options: [
+  //     {
+  //       id: 15,
+  //       name: "Standard Invoice",
+  //       type: "text",
+  //     },
+  //     {
+  //       id: 16,
+  //       name: "Commercial Invoice",
+  //       type: "text",
+  //     },
+  //   ]
+  // },
   {
     id: 3,
     heading: 'Party Details',
