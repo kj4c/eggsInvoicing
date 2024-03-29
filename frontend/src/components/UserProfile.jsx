@@ -1,28 +1,28 @@
 // import React from 'react'
 import '../stylesheets/UserProfile.css';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+// import { useState, useEffect } from 'react';
+// import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
-  const [userDetails, setUserDetails] = useState({
-    username: '',
-    email: '',
-    phone: ''
-  });
+  // const [userDetails, setUserDetails] = useState({
+  //   username: '',
+  //   email: '',
+  //   phone: ''
+  // });
 
-  async function getUserInfo() {
-    const uid = localStorage.getItem('uid');
-    await axios.get('https://invoice-seng2021-24t1-eggs.vercel.app/getInfo', {
-      uid
-    }).then(res => {
-      setUserDetails.username(res.data.username);
-      setUserDetails.email(res.data.email);
-      setUserDetails.phone(res.data.phone);
-    }).catch(err => {
-      console.log(err);
-    })
-  }
+  // async function getUserInfo() {
+  //   const uid = localStorage.getItem('uid');
+  //   await axios.get('https://invoice-seng2021-24t1-eggs.vercel.app/getInfo', {
+  //     uid
+  //   }).then(res => {
+  //     setUserDetails.username(res.data.username);
+  //     setUserDetails.email(res.data.email);
+  //     setUserDetails.phone(res.data.phone);
+  //   }).catch(err => {
+  //     console.log(err);
+  //   })
+  // }
 
   return (
     <div>
