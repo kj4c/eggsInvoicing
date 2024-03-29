@@ -3,12 +3,14 @@ import { FaFileInvoice } from "react-icons/fa6";
 import { GrValidate } from "react-icons/gr";
 import { ImFilePicture } from "react-icons/im";
 import { SlPaperPlane } from "react-icons/sl";
+import { TbFileUpload } from "react-icons/tb";
 
 export const links = [
   {
     title: 'Dashboard',
     links: [
       {
+        id: 0,
         name: 'Dashboard',
         path: 'dashboard',
         icon: <FiShoppingBag></FiShoppingBag>,
@@ -19,24 +21,35 @@ export const links = [
     title: 'Pages',
     links: [
       {
+        id: 1,
         name: 'Create Invoice',
         path: 'invoiceCreation',
         icon: <FaFileInvoice></FaFileInvoice>,
+        subMenus: [
+          {
+            name: 'Upload Documents',
+            path: 'invoiceCreation/uploadDocument',
+            icon: <TbFileUpload></TbFileUpload>
+          }
+        ],
       },
       {
+        id: 2,
         name: 'Validate Invoice',
         path: 'invoiceValidation',
         icon: <GrValidate></GrValidate>,
       },
       {
+        id: 3,
         name: 'Render Invoice',
         path: 'invoiceRendering',
         icon: <ImFilePicture></ImFilePicture>,
       },
       {
+        id: 4,
         name: 'Sending Invoice',
         path: 'invoiceSending',
-        icon: <SlPaperPlane></SlPaperPlane>
+        icon: <SlPaperPlane></SlPaperPlane>,
       }
     ],
   },

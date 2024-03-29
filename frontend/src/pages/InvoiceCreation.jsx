@@ -25,7 +25,6 @@ const InvoiceCreation = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
   };
 
   const onChange = (e) => {
@@ -35,10 +34,6 @@ const InvoiceCreation = () => {
       const endIndex = name.indexOf(']');
       const index = parseInt(name.substring(startIndex, endIndex));
       const field = name.substring(endIndex + 2); // Adjusted to skip ']' and '.'
-      
-      console.log("index = ", index);
-      console.log("field = ", field);
-      console.log("value = ", value);
       
       setValues(prevValues => {
         const updatedNumItems = [...prevValues.numItems]; // Shallow copy of numItems array
@@ -74,9 +69,6 @@ const InvoiceCreation = () => {
     }
   };
   
-  
-  console.log(values);
-
   return (
     <div className='IC-Container'>
       <form className='IC-Form' onSubmit={handleSubmit}>

@@ -64,6 +64,22 @@
   text-decoration: none;
 }
 
+.sidebar-submenu-activeLink {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-left: 1rem;
+  padding-bottom: 0.625rem;
+  border-radius: 0.5rem;
+  margin: 2rem;
+  color: rgb(55 65 81);
+  text-decoration: none;
+}
+
+.sidebar-submenu-activeLink:hover {
+  background-color: #F7F7F7;
+}
+
 .sidebar-normalLink {
   display: flex;
   align-items: center;
@@ -80,6 +96,43 @@
 
 .sidebar-normalLink:hover {
   background-color: #F7F7F7;
+}
+
+.sidebar-subMenu-normalLink {
+  display: none;
+}
+
+.subMenu-normal {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-left: 2rem;
+  padding-left: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.625rem;
+  border-radius: 0.5rem;
+  color: rgb(55 65 81);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.subMenu-normal:hover {
+  background-color: #F7F7F7;
+}
+
+.subMenu-active {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-left: 2rem;
+  margin-right: 10px;
+  padding-left: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.625rem;
+  border-radius: 0.5rem;
+  color: rgb(55 65 81);
+  font-size: 1rem;
+  text-decoration: none;
 }
 
 /* Medium screen size */
