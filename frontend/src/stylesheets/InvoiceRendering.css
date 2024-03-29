@@ -14,9 +14,9 @@
 .fileBtnDiv {
   display: flex;
   position: relative;
-  border-radius: 1em;
   border: solid;
   border-color: #7f45f2;
+  border-radius: 16px;
   height: 10vh;
   width: 50vw;
   align-items: center;
@@ -37,10 +37,8 @@
 
 .fileText {
   position: absolute;
-}
-
-.fileText {
-  position: absolute;
+  font-size: 1.5em;
+  font-weight: 900;
 }
 
 .fileBtn::-webkit-file-upload-button {
@@ -79,7 +77,7 @@
   background-color: white;
   border: solid;
   border-color: #7f45f2;
-  border-radius: 0.8em;
+  border-radius: 16px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -94,7 +92,7 @@
   margin-top: 10px;
   background-color: rgb(192, 189, 189);
   border: none;
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 0.5em 0.8em;
   font-weight: 600;
   font-size: 13px;
@@ -121,7 +119,7 @@
 .submitBtn, .noSubmitBtn {
   display: flex;
   position: relative;
-  border-radius: 1em;
+  border-radius: 16px;
   border: solid;
   border-color: #7f45f2;
   height: 10vh;
@@ -130,7 +128,7 @@
   justify-content: center;  
   text-align: center;
   background-color: white;
-  font-size: 16px;
+  font-size: 1.5em;
   font-weight: 600;
   padding: 5vh;
   transition: 0.3s;
@@ -138,7 +136,6 @@
 
 .submitBtn:hover {
   cursor: pointer;
-  border-radius: 1em;
   background-color: #7f45f2;
   color: white;
 }
@@ -147,21 +144,20 @@
   color: rgb(125, 125, 125);
 }
 
-.noSubmitBtn:hover {
+.vibrating {
   animation: vibrate 0.4s;
 }
 
 
 @keyframes vibrate {
-  0% { transform: translate(0.2px, 0px) rotate(0.5deg); }
-  10% { transform: translate(-0.2px, 0px) rotate(-0.5deg); }
-  20% { transform: translate(-0.2px, 0px) rotate(0.4deg); }
-  30% { transform: translate(-0.2px, 0px) rotate(-0.4deg); }
-  40% { transform: translate(0.2px, 0px) rotate(0.3deg); }
-  50% { transform: translate(0.2px, 0px) rotate(-0.3deg); }
-  60% { transform: translate(-0.2px, 0px) rotate(0.2deg); }
-  70% { transform: translate(-0.2px, 0px) rotate(-0.2deg); }
-  80% { transform: translate(0.2px, 0px) rotate(0.1deg); }
-  90% { transform: translate(0.2px, 0px) rotate(-0.1deg); }
-  100% { transform: translate(-0.2px, 0px) rotate(-0.1deg); }
+  0% {transform: translateX(3px);}
+  10% {transform: translateX(-3px);}
+  20% {transform: translateX(2.5px);}
+  40% {transform: translateX(-2.5px);}
+  50% {transform: translateX(2px);}
+  60% {transform: translateX(-1px);}
+  70% {transform: translateX(1px);}
+  80% {transform: translateX(-1px);}
+  90% {transform: translateX(1px);}
+  100% {transform: translateX(-1px);}
 }

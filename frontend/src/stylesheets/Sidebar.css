@@ -100,3 +100,11 @@
     display: none;
   }
 }
+
+.sidebar, .sidebarActive, .sidebarUnActive {
+  transition: all 0.3s ease;
+}
+
+.main-container, .md-ml-72, .activeMenu, .unActiveMenu {
+  transition: margin-left 0.3s ease;
+}
