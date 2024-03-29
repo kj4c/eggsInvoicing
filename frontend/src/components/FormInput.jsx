@@ -1,14 +1,16 @@
+import React from 'react'
+import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools'
+
 import './FormInput.css'
 
 const FormInput = (props) => {
-
-  const handleSumbit = (e) => {
-    e.preventDefault();
-  }
+  const {label, onChange, id,errorMessage, ...inputProps } = props;
+  
   return (
-    <div className='formInput'>
-      {/* <label>Username</label> */}
-      <input className='input' placeholder={props.placeholder}/>
+    <div className='FI-Container'>
+      <label className='label'>{label}</label>
+      <input className='input' {...inputProps} onChange={onChange} />
     </div>
   )
 }
