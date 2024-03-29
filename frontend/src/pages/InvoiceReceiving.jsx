@@ -2,21 +2,10 @@ import '../stylesheets/InvoiceReceiving.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { element } from 'prop-types';
-
-async function generatePDF(uid) {
-  try {
-    let response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receiveReport?uid=${uid}`);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 const InvoiceReceiving = () => {
   const [data, setData] = useState(null);
   const [dataFound, setDataFound] = useState(false);
-  const [error, setError] = useState(null);
   const [hoveredRow, setHoveredRow] = useState(null);
   const navigate = useNavigate();
 
@@ -26,7 +15,7 @@ const InvoiceReceiving = () => {
       navigate('/login');
       return;
     }
-  }, [navigate]);
+  }, [cookieExists, navigate]);
 
   let uid;
   if (cookieExists) {
@@ -58,7 +47,7 @@ const InvoiceReceiving = () => {
       try {
         let response = 
         await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,)
-        
+
         response.data.map((item) => {
           let date = new Date(item.sent_at);
           let hour = date.getHours();
@@ -68,7 +57,6 @@ const InvoiceReceiving = () => {
         setData(response.data);
         console.log('hello')
       } catch (error) {
-        setError(error);
         console.log('error');
       } finally {
         setDataFound(true);
@@ -76,7 +64,7 @@ const InvoiceReceiving = () => {
     }
 
     fetchData();
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, [uid]); // Empty dependency array means this effect runs once on mount
 
   return (
     <>
@@ -94,7 +82,7 @@ const InvoiceReceiving = () => {
           <p className='header'>Title</p>
           <p className='header'>Sender</p>
           <p className='header'>Type</p>    
-          <p className='header'>Time</p>
+          <p className='header'>Date</p>
           {dataFound && data.map((item, index) => (
           <div className={`grid-row ${hoveredRow === index ? 'row-hover' : ''}`} 
              onMouseEnter={() => setHoveredRow(index)} 

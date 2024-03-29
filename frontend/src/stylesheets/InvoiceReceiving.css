@@ -1,14 +1,16 @@
 .inboxContainer {
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 0.5fr 0.2fr;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr 0.4fr;
     grid-template-rows: 55px repeat(2, 1fr);
     width: 90%;
+    height: 80vh;
     background-color: white;
     margin-left: 5%;
     margin-right: 5%;
     border-radius: 15px;
     border: 3px solid #7f45f2;
     margin-bottom: 2%;
+    overflow: auto;
 }
 
 .grid-row {

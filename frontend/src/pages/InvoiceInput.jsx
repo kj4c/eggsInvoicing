@@ -83,7 +83,7 @@ const InvoiceInput = () => {
 				onClick={() => document.getElementById('fileUpload').click()}
 			>
 				{buttonName}
-      		</button>
+      </button>
 			<button className="submit" onClick = {handleSubmit}>Submit</button>
 		</div>
 	)
