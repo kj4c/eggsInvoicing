@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './InvoiceCreation.css';
 import FormInput from '../components/FormInput';
 import { inputs } from '../data/InvoiceCreationInputs';

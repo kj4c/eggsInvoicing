@@ -1,8 +1,7 @@
-import React from 'react'
 import './FormInput.css'
 
 const FormInput = (props) => {
-  const {label, onChange, id,errorMessage, ...inputProps } = props;
+  const {label, onChange, ...inputProps } = props;
   
   return (
     <div className='FI-Container'>
