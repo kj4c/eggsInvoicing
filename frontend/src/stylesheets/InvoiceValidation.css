@@ -1,0 +1,112 @@
+h1 {
+  margin: 50px;
+  color: #442583
+}
+
+.valid-text {
+  margin-left: -30px;
+  margin-top: 20px;
+}
+
+.validation-container {
+  position: relative;
+  align-items: center;
+  height: 1000px;
+
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-top: 30px;
+  padding-left: 50px;
+
+  border-style: solid;
+  border-radius: 40px;
+  border-width: 2px;
+  border-color: grey;
+}
+
+.mid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* .validation-container button {
+  font-size: 24px;
+  font-weight: bold;
+
+  border: solid;
+  border-color: #7f45f2;
+  border-radius: 16px;
+
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: 0.2s;
+} */
+
+/* .validation-container button:hover {
+  background-color: #7f45f2;
+  color: white;
+  cursor: pointer;
+} */
+
+.select-button-div {
+  display: flex;
+  position: relative;
+  border: solid;
+  border-color: #7f45f2;
+  border-radius: 16px;
+  height: 10vh;
+  width: 30vw;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10vh;
+  transition: 0.2s;
+}
+
+.select-button {
+  position: absolute;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.select-file::-webkit-file-upload-button {
+  visibility: hidden;
+  width: 100%;
+}
+
+.select-file {
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  color: transparent;
+}
+
+.select-button-div:hover {
+  background-color: #7f45f2;
+  color: white;
+}
+
+.select-button-div :hover {
+  cursor: pointer;
+}
+
+.valid-submit {
+  margin-top: 2vh;
+
+  height: 5vh;
+  width: 7vw;
+}
+
+.validating-load {
+  font-size: 30px;
+  margin-top: 5vh;
+}
+
+.valid-report-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
