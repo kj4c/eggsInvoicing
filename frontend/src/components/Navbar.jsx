@@ -9,6 +9,8 @@ import { useStateContext } from '../contexts/ContextProvider';
 import Tooltip from './Tooltip';
 import '../stylesheets/Navbar.css'
 import { useEffect } from 'react';
+import UserProfile from './UserProfile';
+import { Link } from 'react-router-dom';
 
 
 const NavButton = ({ title, customFunc, icon, dotColour }) => (
@@ -17,7 +19,7 @@ const NavButton = ({ title, customFunc, icon, dotColour }) => (
       className='navbar-button'
       onClick={() => customFunc()}
     >
-      <span style={{ background: dotColour }} className='navbar-dotColour'/>
+      <span style={{ background: dotColour }} className='navbar-dotColour' />
       {icon}
     </button>
   </Tooltip>
@@ -41,7 +43,7 @@ const Navbar = () => {
       setActiveMenu(true);
     }
   }, [screenSize]); //eslint-disable-line
-  
+
   return (
     <div className="navbar-container md-ml-6 md-mr-6e">
       <NavButton title="Menu" customFunc={() => setActiveMenu(!activeMenu)} icon={<AiOutlineMenu />} />
@@ -54,10 +56,10 @@ const Navbar = () => {
         /> */}
 
         <Tooltip text="Profile">
-          <div className='navbar-profile' onClick={() => handleClick('userProfile')}>
-            <FaRegUser className='navbar-profile-image'/>
+          <Link to='/profile' className='navbar-profile' onClick={() => handleClick('userProfile')}>
+            <FaRegUser className='navbar-profile-image' />
             <MdKeyboardArrowDown className="navbar-profileText" />
-          </div>
+          </Link>
         </Tooltip>
 
         {/* {isClicked.notification && (<Notification />)} */}
