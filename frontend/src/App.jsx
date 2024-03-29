@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 // No need to import React with the latest React version unless you're using class components or React. useState, etc. explicitly
-import { Navbar, Sidebar } from './components'
+import { Navbar, Sidebar, UserProfile } from './components'
 import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput } from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
@@ -14,7 +14,7 @@ const AppContent = () => {
 
   // Paths where the sidebar should not be shown
   const hideSidebarPaths = ['/login', '/register'];
-  
+
   // Check if the current path is one of the paths where the sidebar should be hidden
   const showSidebar = !hideSidebarPaths.includes(location.pathname);
 
@@ -29,8 +29,8 @@ const AppContent = () => {
       )}
 
       {/* Navbar */}
-      <div className={activeMenu && showSidebar ? 'activeMenu md-ml-72' : 'unActiveMenu' }>
-      
+      <div className={activeMenu && showSidebar ? 'activeMenu md-ml-72' : 'unActiveMenu'}>
+
         {/* Routes */}
         <div>
           <Routes>
@@ -46,6 +46,8 @@ const AppContent = () => {
             <Route path="/invoiceInput" element={<InvoiceInput />} />
             <Route path="/login" element={<AuthLogin />} />
             <Route path="/register" element={<AuthRegister />} />
+
+            <Route path="/profile" element={<UserProfile />} />
           </Routes>
         </div>
       </div>
