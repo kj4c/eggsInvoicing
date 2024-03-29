@@ -21,13 +21,13 @@ const UserProfile = () => {
       <p className='heading'>Profile</p>
       <img className='profile-picture' />
       <div className='profile-info'>
-        <hr class="solid" />
+        <hr className="solid" />
         <p className='user-name'>Username</p>
-        <hr class="solid" />
+        <hr className="solid" />
         <p className='email'>Email</p>
-        <hr class="solid" />
+        <hr className="solid" />
         <p className='phone-no'>Phone</p>
-        <hr class="solid" />
+        <hr className="solid" />
       </div>
     </div>
   )

@@ -9,7 +9,6 @@ import { useStateContext } from '../contexts/ContextProvider';
 import Tooltip from './Tooltip';
 import '../stylesheets/Navbar.css'
 import { useEffect } from 'react';
-import UserProfile from './UserProfile';
 import { Link } from 'react-router-dom';
 
 
