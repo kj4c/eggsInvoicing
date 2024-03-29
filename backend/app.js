@@ -445,7 +445,7 @@ app.get('/receiveHtml', async(req, res) => {
     if (page.status !== 200) {
       res.status(page.status).json({message: page.error});
     } else {
-      res.status(200).send(page);
+      res.status(200).send(page.page);
     }
   } catch (error) {
     console.log(error);
