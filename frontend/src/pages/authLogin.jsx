@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
 import '../stylesheets/auth.css';
 import picture from '../assets/picture1.jpg';
 import eggslogo from '../assets/eggs.logo.png';
@@ -112,6 +113,7 @@ function AuthLogin() {
           </form>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

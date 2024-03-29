@@ -17,6 +17,7 @@
 
 .navbar-button:hover {
   background-color: #F7F7F7;
+  cursor: pointer;
 }
 
 .navbar-dotColour {
@@ -45,6 +46,7 @@
 
 .navbar-profile:hover {
   background-color: #F7F7F7;
+  cursor: pointer;
 }
 
 .navbar-profile-image {

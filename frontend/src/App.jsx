@@ -5,22 +5,28 @@ import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, Invoic
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
 import AuthRegister from './pages/authRegister';
+import InvoiceInputJSON from './pages/invoiceInputJson';
+import NotFoundPage from './pages/NotFoundPage';
+import ForgetPassword from './pages/forgetPassword';
 
 import './App.css'
 
 const AppContent = () => {
   const { activeMenu } = useStateContext();
-  const location = useLocation(); // Getting the current path
+  const location = useLocation();
 
-  // Paths where the sidebar should not be shown
-  const hideSidebarPaths = ['/login', '/register'];
-  
-  // Check if the current path is one of the paths where the sidebar should be hidden
-  const showSidebar = !hideSidebarPaths.includes(location.pathname);
+  const knownPaths = [
+    '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
+    '/invoiceRendering', '/invoiceSending', '/invoiceInput',
+    '/login', '/register', '/invoiceInputJson'
+  ];
+
+  const hideSidebarPaths = ['/login', '/register', 'reset-password'];
+
+  const showSidebar = knownPaths.includes(location.pathname) && !hideSidebarPaths.includes(location.pathname);
 
   return (
     <div className='main-container'>
-      {/* Conditionally render Sidebar based on the path */}
       {showSidebar && (
         <div className={activeMenu ? 'sidebar sidebarActive' : 'sidebarUnActive'}>
           <Navbar />
@@ -28,17 +34,11 @@ const AppContent = () => {
         </div>
       )}
 
-      {/* Navbar */}
-      <div className={activeMenu && showSidebar ? 'activeMenu md-ml-72' : 'unActiveMenu' }>
-      
-        {/* Routes */}
+      <div className={activeMenu && showSidebar ? 'activeMenu md-ml-72' : 'unActiveMenu'}>
         <div>
           <Routes>
-            {/* dashboard */}
             <Route path='/' element={<Dashboard />} />
             <Route path='/dashboard' element={<Dashboard />} />
-
-            {/* pages */}
             <Route path="/invoiceCreation" element={<InvoiceCreation />} />
             <Route path="/invoiceValidation" element={<InvoiceValidation />} />
             <Route path="/invoiceRendering" element={<InvoiceRendering />} />
@@ -46,12 +46,16 @@ const AppContent = () => {
             <Route path="/invoiceInput" element={<InvoiceInput />} />
             <Route path="/login" element={<AuthLogin />} />
             <Route path="/register" element={<AuthRegister />} />
+            <Route path="/invoiceInputJson" element={<InvoiceInputJSON />} />
+            <Route path="/reset-password" element={<ForgetPassword />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </div>
     </div>
   );
 }
+
 
 function App() {
   return (
