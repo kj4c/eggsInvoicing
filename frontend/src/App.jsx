@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 // No need to import React with the latest React version unless you're using class components or React. useState, etc. explicitly
 import { Navbar, Sidebar } from './components'
-import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput } from './pages';
+import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered } from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
 import AuthRegister from './pages/authRegister';
@@ -18,7 +18,7 @@ const AppContent = () => {
 
   const knownPaths = [
     '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
-    '/invoiceRendering', '/invoiceSending', '/invoiceInput',
+    '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
     '/login', '/register', '/invoiceInputJson', '/profile'
   ];
 
@@ -42,6 +42,7 @@ const AppContent = () => {
             <Route path="/invoiceCreation" element={<InvoiceCreation />} />
             <Route path="/invoiceValidation" element={<InvoiceValidation />} />
             <Route path="/invoiceRendering" element={<InvoiceRendering />} />
+            <Route path="/invoiceRendered" element={<InvoiceRendered />} />
             <Route path="/invoiceSending" element={<InvoiceSending />} />
             <Route path="/invoiceInput" element={<InvoiceInput />} />
             <Route path="/login" element={<AuthLogin />} />
