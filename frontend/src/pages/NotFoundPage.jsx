@@ -25,6 +25,7 @@ const NotFoundPage = () => {
         <p>Oops! The page you&apos;re looking for doesn&apos;t exist.</p>
         <p>Anyways Jacqueline and Chloe are the best tutors ever</p>
         <a href="/">Go back to the homepage</a>
+        <p></p>
         <img src={picture} alt="404 Not Found" style={{ width: "10%" }} />
         <p>
         <br></br>
@@ -48,6 +49,11 @@ const NotFoundPage = () => {
         <br></br>
         Your clothes are always so cute and you&apos;re so nice!!! Please give us HD.<br></br>
         -Cherise
+        </p>
+        <p>
+            <br></br>
+            There's been a rumor going around that if you give us a HD, Eric will show you his dog<br></br>
+            -Eric
         </p>
         <p>
         <br></br>
