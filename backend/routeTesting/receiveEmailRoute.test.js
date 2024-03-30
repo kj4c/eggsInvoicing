@@ -19,7 +19,7 @@ describe('/receiveEmail route', () => {
 
   it('receives the email correctly', async () => {
     const receiveEmailString = {
-      uid: 1,
+      uid: '1',
       invoiceId: 1
     };
     const uid = receiveEmailString.uid;
@@ -43,7 +43,7 @@ describe('/receiveEmail route', () => {
 
   it('no uid or invoiceId found.', async () => {
     const receiveEmailString = {
-      uid: 10000,
+      uid: '132',
       invoiceId: 1
     };
     const uid = receiveEmailString.uid;

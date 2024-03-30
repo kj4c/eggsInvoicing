@@ -73,10 +73,10 @@ const InvoiceInput = () => {
                 Back
             </button>
             <h1 className="header">Send Email with XML File</h1>
-			<p className='description'>1. From: should be your email<br></br>2. Enter the recipients email inside the To (Email) <br></br>3. Lastly upload your json file from your computer </p>
+			<p className='description'>1. From: should be your email<br></br>2. Enter the recipients email inside the To (Email) <br></br>3. Lastly upload your XML file from your computer </p>
 			<label className="labels">From:</label>
 			<input type="text" className="inputBox" name="from" value={formData.from} onChange={handleChange}/>
-			<label className="labels">To:</label>
+			<label className="labels">To (Email):</label>
 			<input type="email" className="inputBox" name="to" value={formData.to} onChange={handleChange}/>
 			<label className="labels">Attachment:</label>
 			<input 

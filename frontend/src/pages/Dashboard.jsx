@@ -118,7 +118,7 @@ const Dashboard = () => {
                 {item.icon}
               </button>
               <p style={{marginTop: '0.75rem'}}>
-                <span className="">ammount</span>
+                <span className="">amount</span>
               </p>
               <p className="Dashboard-Card-Title">{item.title}</p>
             </div>
