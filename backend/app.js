@@ -534,14 +534,14 @@ app.get('/getUserInfo', async (req, res) => {
   }
 });
 
-app.post('/resetPassword', async(req, res) => {
-  try {
-    const email = req.body;
-    res.status(200).json(await sendingResetPassword(email));
-  } catch (err) {
-    res.status(400).json({message: 'Password reset email failed to send.'})
-  }
-});
+// app.post('/resetPassword', async(req, res) => {
+//   try {
+//     const email = req.body;
+//     res.status(200).json(await sendingResetPassword(email));
+//   } catch (err) {
+//     res.status(400).json({message: 'Password reset email failed to send.'})
+//   }
+// });
 
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {

@@ -15,16 +15,16 @@ async function resetPasswordFunction(email, password) {
 
     const encrypted = await bcrypt.hash(password, saltRounds);
 
-    const updatePassword = await pool.query('update users set hashed_password = $1 where email = $2', [encrypted, email]);
+    await pool.query('update users set hashed_password = $1 where email = $2', [encrypted, email]);
     console.log('Password successfully reset.');
 
     return {
       status: 200,
       message: 'Password successfully reset.'
-    }
+    };
   } catch (err) {
-    throw createError(400, 'Failed to reset password.')
+    throw createError(400, 'Failed to reset password.');
   }
-};
+}
 
 module.exports = resetPasswordFunction;

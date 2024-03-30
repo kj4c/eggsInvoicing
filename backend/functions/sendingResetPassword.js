@@ -1,7 +1,6 @@
 const pool = require('../database/db');
 const nodemailer = require('nodemailer');
 const createError = require('http-errors');
-const { send } = require('process');
 
 async function sendingResetPassword(email) {
   try {
@@ -18,14 +17,14 @@ async function sendingResetPassword(email) {
       secure: false,
       auth: {
         user: 'xmlsender1@gmail.com',
-        pass: 'spfs ucnq sjaj qktq', 
+        pass: 'spfs ucnq sjaj qktq',
       },
     });
 
-    const resetLink = `https://invoice-seng2021-24t1-eggs.vercel.app/resetPassword/${email}`
+    const resetLink = `https://invoice-seng2021-24t1-eggs.vercel.app/resetPassword/${email}`;
 
     const mailOptions = {
-      from: 'xmlsender1@gmail.com', 
+      from: 'xmlsender1@gmail.com',
       to: email,
       subject: 'Password Reset',
       text: `Click the following link to reset your password: ${resetLink}`
@@ -44,7 +43,7 @@ async function sendingResetPassword(email) {
     return {
       status: 200,
       message: 'Password reset instructions were sent to your email.'
-    }
+    };
 
   } catch (error) {
     throw createError(400, 'Password reset email failed to send.');
