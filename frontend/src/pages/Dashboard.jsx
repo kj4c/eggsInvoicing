@@ -59,7 +59,7 @@ const Dashboard = () => {
     });
 
     const apiRequestBody = {
-      "model": "gpt-3.5-turbof",
+      "model": "gpt-3.5-turbo",
       "messages": [
         systemMessage, 
         ...apiMessages
