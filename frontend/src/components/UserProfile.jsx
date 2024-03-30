@@ -1,12 +1,9 @@
 // import React from 'react'
 import '../stylesheets/UserProfile.css';
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import picture from '../assets/profile.png';
-
-
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -24,7 +21,7 @@ const UserProfile = () => {
     email: '',
     phone_no: ''
   });
-
+  
   function getCookie(name) {
     let cookies = document.cookie.split('; ');
     let cookieValue = cookies.find(row => row.startsWith(name + '='));
@@ -44,7 +41,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     getUserInfo();
-  }, []); 
+  },);
     
   const handleLogout = () => {
     localStorage.removeItem('uid');
