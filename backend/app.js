@@ -25,8 +25,25 @@ const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
 const cors = require('cors');
+
+const allowedOrigins = [
+  'https://invoice-seng2021-24t1-eggs-frontend.vercel.app',
+  'http://localhost:5173',
+];
+
 app.use(cors({
-  origin: 'https://invoice-seng2021-24t1-eggs-frontend.vercel.app/'
+  origin: function (origin, callback) {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
 }));
 
 app.use(express.json());
