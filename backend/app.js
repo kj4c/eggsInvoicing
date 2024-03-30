@@ -25,7 +25,9 @@ const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+  origin: 'https://invoice-seng2021-24t1-eggs-frontend.vercel.app/'
+}));
 
 app.use(express.json());
 app.use(errorHandler());
