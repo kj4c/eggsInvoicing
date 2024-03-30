@@ -11,8 +11,7 @@ import ForgetPassword from './pages/forgetPassword';
 import UserProfile from './components/UserProfile';
 import InvoiceInputMultiple from './pages/invoiceInputMultiple';
 import InvoiceInputMultipleJson from './pages/invoiceInputMultipleJson';
-
-import './App.css'
+import './App.css';
 
 const AppContent = () => {
   const { activeMenu } = useStateContext();
@@ -49,7 +48,7 @@ const AppContent = () => {
             <Route path="/invoiceSending" element={<InvoiceSending />} />
             <Route path="/invoiceInput" element={<InvoiceInput />} />
             <Route path="/invoiceInputMultiple" element={<InvoiceInputMultiple />} />
-            <Route path='/invoiceInputMultipleJson' element={<InvoiceInputMultipleJson />}></Route>
+            <Route path='/invoiceInputMultipleJson' element={<InvoiceInputMultipleJson />} />
             <Route path="/invoiceReceiving" element={<InvoiceReceiving />} />
             <Route path="/login" element={<AuthLogin />} />
             <Route path="/register" element={<AuthRegister />} />
