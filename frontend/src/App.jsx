@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 // No need to import React with the latest React version unless you're using class components or React. useState, etc. explicitly
 import { Navbar, Sidebar } from './components'
-import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving } from './pages';
+import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving, HtmlRendering} from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
 import AuthRegister from './pages/authRegister';
@@ -22,7 +22,7 @@ const AppContent = () => {
     '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
     '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
     '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving',
-    '/invoiceInputMultiple', '/invoiceInputMultipleJson'
+    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering'
   ];
 
   const hideSidebarPaths = ['/login', '/register', 'reset-password'];
@@ -57,6 +57,7 @@ const AppContent = () => {
             <Route path="/register" element={<AuthRegister />} />
             <Route path="/invoiceInputJson" element={<InvoiceInputJSON />} />
             <Route path="/reset-password" element={<ForgetPassword />} />
+            <Route path="/htmlRendering" element={<HtmlRendering />} />
             <Route path="*" element={<NotFoundPage />} />
 
             <Route path="/profile" element={<UserProfile />} />
