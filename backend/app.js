@@ -25,7 +25,26 @@ const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
 const cors = require('cors');
-app.use(cors());
+
+const allowedOrigins = [
+  'https://invoice-seng2021-24t1-eggs-frontend.vercel.app',
+  'http://localhost:5173',
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 app.use(express.json());
 app.use(errorHandler());
@@ -111,7 +130,7 @@ on failure:
 message: string - error message
 */
 app.get('/receive/fetchAll', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   try {
     res.json(await fetchAll(uid));
   } catch (error) {
@@ -132,7 +151,7 @@ on failure:
 message: string - error message
 */
 app.get('/receive/fetchByInvoiceId', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   const invoiceId = parseInt(req.query.invoiceId);
   try {
     res.json(await fetchByInvoiceId(uid, invoiceId));
@@ -153,7 +172,7 @@ OR
 message: string - error message
 */
 app.get('/receive/fetchByDate', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   const date = req.query.date;
   try {
     res.json(await fetchByDate(uid, date));
@@ -175,7 +194,7 @@ OR
 message: string - error message
 */
 app.get('/receive/fetchByDateRange', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   const fromDate = req.query.fromDate;
   const toDate = req.query.toDate;
   try {
@@ -198,7 +217,7 @@ OR
 message: string - error message
 */
 app.get('/receive/getStatisticsDateRange', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
   try {
@@ -220,7 +239,7 @@ OR
 message: string - error message
 */
 app.get('/receive/getStatistics', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   try {
     res.json(await getStatistics(uid));
   } catch (error) {
@@ -239,7 +258,7 @@ OR
 message: string - error message
 */
 app.get('/receive/getNotifications', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   try {
     res.json(await getNotifications(uid));
   } catch (error) {
@@ -312,7 +331,7 @@ error: string - error message
 */
 app.get('/sentReport', async (req, res) => {
   try {
-    const uid = parseInt(req.query.uid);
+    const uid = req.query.uid;
     let pdf = await generateSentPdf(uid);
     if (pdf.status !== 200) {
       res.status(400).json({ error: 'error generating the report' });
@@ -412,13 +431,13 @@ error: string - error message
 */
 app.get('/receiveReport', async (req, res) => {
   try {
-    const uid = parseInt(req.query.uid);
+    const uid = req.query.uid;
     let pdf = await generateReceivePdf(uid);
     if (pdf.status !== 200) {
       res.status(400).json({ error: 'error generating the report' });
     } else {
       pdf = pdf.doc;
-      res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"');
+      res.setHeader('Content-Disposition', 'attachment; filename="communication_report_receive.pdf"');
       res.setHeader('Content-Type', 'application/pdf');
       res.status(200).send(pdf.output());
     }
@@ -441,7 +460,7 @@ error: string - error message
 */
 app.get('/receiveHtml', async (req, res) => {
   try {
-    const uid = parseInt(req.query.uid);
+    const uid = req.query.uid;
     const page = await receiveHtml(uid);
     if (page.status !== 200) {
       res.status(page.status).json({ message: page.error });
@@ -479,7 +498,7 @@ app.post('/register', async (req, res) => {
 
 app.get('/receiveEmail', async (req, res) => {
   try {
-    const uid = parseInt(req.query.uid);
+    const uid = req.query.uid;
     const invoiceId = parseInt(req.query.invoiceId);
     res.status(200).json(await receiveEmail(uid, invoiceId));
   } catch (err) {
@@ -526,13 +545,22 @@ status code and error message
 */
 app.get('/getUserInfo', async (req, res) => {
   try {
-    const uid = parseInt(req.query.uid);
+    const uid = req.query.uid;
     const userInfo = await getUserInfo(uid);
     res.status(200).json(userInfo);
   } catch (err) {
     res.status(400).json({ message: 'Failed to get user info:' });
   }
 });
+
+// app.post('/resetPassword', async(req, res) => {
+//   try {
+//     const email = req.body;
+//     res.status(200).json(await sendingResetPassword(email));
+//   } catch (err) {
+//     res.status(400).json({message: 'Password reset email failed to send.'})
+//   }
+// });
 
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {

@@ -1,0 +1,105 @@
+.inboxContainer {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr 0.4fr;
+    grid-template-rows: 55px repeat(15, 1fr);
+    width: 90%;
+    height: 75vh;
+    background-color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 15px;
+    border: 3px solid #7f45f2;
+    margin-bottom: 2%;
+    overflow: auto;
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+.fetch {
+    flex: 1;
+}
+
+.inputSearch {
+    flex: 1;
+}
+
+.options {
+    flex: 1;
+}
+
+.grid-row {
+    display: contents; /* This makes .grid-row act as a "wrapper" without affecting the grid layout */
+}
+
+.row-hover .grid-item {
+    background-color: #ecececec; /* This will now work since .grid-row acts as a real container */
+}
+
+.grid-item {
+    /* Special styles for items not in the first row */
+    background-color: white;
+    padding: 10px;
+    border-bottom: 2px solid #7f45f2;
+    align-self: center;
+}
+
+.header {
+    align-self: center;
+    padding: 10px;
+    font-size: 22px;
+    border-bottom: 2px solid #7f45f2;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    z-index: 100;
+    position: sticky;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    bottom: 1px;
+}
+
+.inputSearch {
+    background-color: aqua;
+}
+
+
+.button1, .button2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 18%;
+    margin-right: 18%;
+    background-color: white;
+    border: 3px solid #7f45f2;
+    border-radius: 20px;
+    cursor: pointer;
+
+    /* Additional styling to reset some default button styles */
+    font-size: 22px;
+    line-height: 50px; /* This helps vertically center the text */
+    text-align: center;
+    padding: 20px;
+    
+    /* Optional: Add a hover effect */
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.button1:hover, .button2:hover {
+    background-color:  #9c6aff; /* Darker shade on hover */
+    color: white;  
+    border: 3px solid white;
+}
+
+.button1 {
+    flex: 1
+}
+
+.button2 {
+    flex: 1
+}

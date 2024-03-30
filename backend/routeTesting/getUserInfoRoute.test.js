@@ -3,7 +3,7 @@ const app = require('../app');
 
 // mocking the authLogin function to simulate logging in
 jest.mock('../functions/getUserInfo', () => jest.fn().mockImplementation((uid) => {
-  if (uid === 1) {
+  if (uid === '1') {
     return Promise.resolve({
       status: 200,
       username: 'winny',

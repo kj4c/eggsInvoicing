@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chatscope/chat-ui-kit-react": "^2.0.3",
+    "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@fontsource/roboto": "^5.0.12",
     "axios": "^1.6.8",
     "https": "^1.0.0",
@@ -17,6 +19,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {

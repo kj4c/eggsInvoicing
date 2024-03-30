@@ -6,7 +6,7 @@
   border-color: #7f45f2;
   flex-direction: column;
   font-size: 25px;
-  margin: 1%;    
+  margin: 1%; 
   padding: 30px;
 }
 
@@ -36,11 +36,13 @@
   margin: 1%;
   margin-right: 2%;
   font-family: Roboto;
-  color: black;
+  font-weight: bold;
+  color: rgb(155, 155, 155);
   font-size: 25px;
   line-height: 50px;
   text-align: center;;
   border-radius: 10px;
+  transition: all .3s ease;
 }
 
 .fileUpload:hover {

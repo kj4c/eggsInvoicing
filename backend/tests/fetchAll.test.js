@@ -6,7 +6,7 @@ jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
 
-const uId = 123;
+const uId = '123';
 const email = 'dummy@gmail.com';
 
 describe('Test suite for fetchAll()', () => {

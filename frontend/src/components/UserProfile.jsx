@@ -1,15 +1,25 @@
 // import React from 'react'
 import '../stylesheets/UserProfile.css';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { useState, useEffect } from 'react';
+// import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const UserProfile = () => {
-  const [userDetails, setUserDetails] = useState({
-    username: '',
-    email: '',
-    phone: ''
-  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cookieExists = document.cookie.includes('cookie='); 
+
+    if (!cookieExists) {
+      navigate('/login');
+    }
+  }, [navigate]);
+  // const [userDetails, setUserDetails] = useState({
+  //   username: '',
+  //   email: '',
+  //   phone: ''
+  // });
 
   async function getUserInfo() {
     const uid = localStorage.getItem('uid');
@@ -26,6 +36,13 @@ const UserProfile = () => {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('uid');
+    document.cookie = 'cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    navigate('/login');
   }
 
   return (
@@ -49,7 +66,7 @@ const UserProfile = () => {
           <p className='user-info'>{userDetails.phone_no}</p>
         </div>
         <hr className="solid" />
-        <Link to="/login" className='log-out'>Log Out</Link>
+        <button onClick={handleLogout} className='log-out'>Log Out</button>
       </div>
 
     </div>

@@ -8,7 +8,7 @@ jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
 
-const uid = 123;
+const uid = '123';
 const email = 'dummy@gmail.com';
 const date = '11/03/2024';
 const body = {

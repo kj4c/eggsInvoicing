@@ -7,7 +7,7 @@ jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
 
-const uid = 123;
+const uid = '123';
 const body = {
   uid: uid
 };
