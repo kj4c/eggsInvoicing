@@ -70,7 +70,10 @@ const UserProfile = () => {
   document.cookie = 'cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
   document.cookie = 'uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
   document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
-  document.cookie = 'phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; navigate('/login'); }
+  document.cookie = 'phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
+  document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
+  navigate('/');
+  }
 
   return (
     <div>

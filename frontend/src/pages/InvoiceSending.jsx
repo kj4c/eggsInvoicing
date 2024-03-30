@@ -41,7 +41,7 @@ const InvoiceSending = () => {
       <button className = 'email-options' onClick={routeChange3}>Sending Email with Multiple XML Files</button>
       <button className = 'email-options' onClick={routeChange4}>Sending Email with Multiple JSON Files</button>
       <button className = 'email-options' onClick={routeChange4}>Sending Email Later</button>
-      <button className = 'email-options' onClick={routeChange4}>Sending multiple emails</button>
+      <button className = 'email-options' onClick={routeChange4}>Sending multiple emails of invoices</button>
     </div>
     </>
   )
