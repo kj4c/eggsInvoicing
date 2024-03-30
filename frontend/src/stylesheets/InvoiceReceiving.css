@@ -16,19 +16,34 @@
 .searchContainer {
     display: flex;
     flex-direction: row;
-    margin: 20px;
+    margin-left: 10vh;
+    margin-right: 10vh;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
 }
 
-.fetch {
-    flex: 1;
+.fetching {
+    flex: 1.5;
+    font-size: 30px;
 }
 
+.search {
+    border-radius: 20px;
+    margin-right: 1%;
+}
 .inputSearch {
-    flex: 1;
+    flex: 2;
+    margin-right: 10%;
+    border: none;
+    border-bottom: 2px solid #000000;
+    outline: none;
+    font-size: 20px;
 }
 
 .options {
-    flex: 1;
+    font-size: 20px;
+    padding: 5px;
+    flex: 1.5;
 }
 
 .grid-row {
@@ -63,11 +78,6 @@
     width: 100%;
     bottom: 1px;
 }
-
-.inputSearch {
-    background-color: aqua;
-}
-
 
 .button1, .button2 {
     margin-top: 10px;
