@@ -32,7 +32,7 @@ const Navbar = () => {
     handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [])  //eslint-disable-line
+  }, [setScreenSize])
 
   useEffect(() => {
     if (screenSize <= 900) {
@@ -40,28 +40,20 @@ const Navbar = () => {
     } else {
       setActiveMenu(true);
     }
-  }, [screenSize]); //eslint-disable-line
+  }, [screenSize, setActiveMenu]);
 
   return (
     <div className="navbar-container md-ml-6 md-mr-6e">
       <NavButton title="Menu" customFunc={() => setActiveMenu(!activeMenu)} icon={<AiOutlineMenu />} />
       <div className="navbar-flex">
-        {/* <NavButton 
-          title="Notification" 
-          customFunc={() => handleClick('notification')} 
-          dotColour="rgb(254, 201, 15)" 
-          icon={<IoIosNotificationsOutline />} 
-        /> */}
-
-        <Tooltip text='Profile'>
-          <Link to="/profile" className='navbar-profile' onClick={() => handleClick('userProfile')}>
-            <FaRegUser className='navbar-profile-image' />
-            <MdKeyboardArrowDown className="navbar-profileText" />
-          </Link>
-        </Tooltip>
-
-        {/* {isClicked.notification && (<Notification />)} */}
-        {/* {isClicked.userProfile && (<UserProfile />)} */}
+        {activeMenu && (
+          <Tooltip text="Profile">
+            <Link to='/profile' className='navbar-profile' onClick={() => handleClick('userProfile')}>
+              <FaRegUser className='navbar-profile-image' />
+              <MdKeyboardArrowDown className="navbar-profileText" />
+            </Link>
+          </Tooltip>
+        )}
       </div>
     </div>
   );

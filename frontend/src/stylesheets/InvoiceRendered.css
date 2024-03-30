@@ -1,0 +1,96 @@
+.renderedContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 15px;
+    height: 100vh;
+}
+
+
+
+.responseContent {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 35vw 25vw;
+    width: 63vw;
+    justify-content: center;
+    padding: 10px;
+    border: solid;
+    border-color: #7f45f2;
+    border-radius: 16px;
+    background-color: #e6daff5e;
+}
+
+.responseContent > div:first-of-type {
+    grid-column: span 2;
+    justify-self: center;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.responseContent > div:first-of-type h2{
+    font-size: 29px;
+}
+
+.responseContent > *:not(:first-child) {
+    padding: 3px;
+}
+
+.responseContent > div:last-of-type {
+    grid-column: 1/ span 2;
+    grid-row: span 2;
+    width: 60vw;
+    display: inline-block;
+    justify-self: center;
+}
+
+.responseContent > div:last-of-type p {
+    display: inline-block;
+    padding-right: 10px;
+}
+
+p {
+    padding: 0px; 
+}
+
+h2 {
+    font-size: 25px;
+    padding: 7px 0 7px 0;
+    color: #3c1194;
+}
+
+
+h3 {
+    padding: 5px 0 5px 0;
+    color: #3d1194be;
+}
+
+h4 {
+    padding: 5px 0 5px 0;
+    color: #432e6db7;
+}
+
+.responseContent > div:last-of-type h2,
+.responseContent > div:last-of-type h3,
+.responseContent > div:last-of-type h4
+ {
+    text-align: center;
+}
+
+
+.backBtn {
+    background-color: #e6daff5e;
+    padding:  8px 20px;
+    margin-top: px;
+    border: solid #7f45f2;
+    border-radius: 0.8em;
+    font-weight: 600;
+    font-size: 15px;
+    color: #3c1194;
+}
+
+.backBtn:hover {
+    cursor: pointer;
+    background-color: #d5c6f7f3;
+}

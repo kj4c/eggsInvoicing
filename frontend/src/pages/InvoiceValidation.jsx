@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import '../stylesheets/InvoiceValidation.css'
 
@@ -6,8 +6,8 @@ const InvoiceValidation = () => {
   const [file, setFile] = useState('');
   const [fileName, setFileName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [passed, setPassed] = useState('');
-  const [failed, setFailed] = useState('');
+  // const [passed, setPassed] = useState('');
+  // const [failed, setFailed] = useState('');
 
   function handleOnChange(e) {
     const target = e.target;
@@ -15,7 +15,7 @@ const InvoiceValidation = () => {
     setFileName(target.files[0].name);
   }
 
-  async function handleOnSubmit(e) {
+  async function handleOnSubmit() {
     if (file !== '') {
       const login = getValidate();
       console.log(login);
@@ -27,10 +27,10 @@ const InvoiceValidation = () => {
   formData.append('file', file);
 
   async function getValidate() {
-    await axios.post('https://invoice-seng2021-24t1-eggs.vercel.app/login', {
+    await axios.post('https://invoice-validation-deployment.onrender.com/auth/login', {
       body: {
-        "username": "khyejac",
-        "password": "password"
+        username: "eggsinvoicing",
+        password: "password123"
       }
     }).then(res => {
       console.log(res.data);
@@ -55,8 +55,8 @@ const InvoiceValidation = () => {
           {/* <p className={file !== 'ready' ? 'valid-uploaded' : 'valid-not-uploaded'}>Uploaded: {fileName} </p> */}
           <button className='valid-submit' onClick={handleOnSubmit}>Submit</button>
           {isSubmitting && <p className='validating-load'>Validating...</p>}
-          {passed && <p className='valid-result'>Invoice Passed Validation</p>}
-          {failed && <p className='valid-result'>Invoice Failed Validation</p>}
+          {/* {passed && <p className='valid-result'>Invoice Passed Validation</p>}
+          {failed && <p className='valid-result'>Invoice Failed Validation</p>} */}
           <h2 className='valid-report'>Generate Validation Report</h2>
           <div className='valid-report-container'>
             <button className='valid-type'>HTML</button>

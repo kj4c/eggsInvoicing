@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import Footer from '../components/Footer';
 import '../stylesheets/auth.css';
 import eggslogo from '../assets/eggs.logo.png';
 import picture1 from '../assets/picture1.jpg';
@@ -30,8 +32,18 @@ function AuthRegister() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [currentImage, setCurrentImage] = useState(0); 
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImage((currentImage) => (currentImage + 1) % images.length);
+    }, 3500
+    ); 
+    
+    return () => clearInterval(intervalId); 
+  }, []); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -59,7 +71,7 @@ function AuthRegister() {
       </div>
       <div className="auth-page-container">
         <div className="slideshow-container">
-          <img src={images[Math.floor(Math.random() * images.length)]} alt="Slideshow" className="slideshow-image" />
+          <img src={images[currentImage]} alt="Slideshow" className="slideshow-image" />
         </div>
         <div className="registration-form-container">
           <form onSubmit={handleSubmit} className="registration-form">
@@ -113,6 +125,7 @@ function AuthRegister() {
           </form>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
