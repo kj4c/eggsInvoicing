@@ -7,61 +7,6 @@ import Tooltip from './Tooltip';
 import '../stylesheets/Sidebar.css'
 import { useState } from 'react';
 
-// const Sidebar = () => {
-//   const { activeMenu, setActiveMenu, screenSize } = useStateContext();
-
-//   const handleCloseSideBar = () => {
-//     if (activeMenu && screenSize <= 900) {
-//       setActiveMenu(false);
-//     }
-//   };
-
-//   return (
-//     <div className='sidebar-container md-overflow-hidden'>
-//       {activeMenu && (
-//         <> 
-//           <div className='sidebar-listContainer'>
-//             <Link to='/' className='sidebar-title' onClick={handleCloseSideBar}>
-//               <FaHome /> <span>EGGS-INVOICE</span>
-//             </Link>
-//             <Tooltip text='Menu'>
-//               <button 
-//                 className='sidebar-closeMenuButton md-hidden'
-//                 type='button' 
-//                 onClick={() => setActiveMenu(!activeMenu)} 
-//               >
-//                 <MdOutlineCancel />
-//               </button>
-//             </Tooltip>
-//           </div>
-          
-//           <div className='sidebar-mt-10'>
-//           {links.map((item) => (
-//             <div key={item.title}>
-//               <p className='sidebar-listTitles'>
-//                   {item.title}
-//               </p>
-//               {item.links.map((link) => (
-//                 <NavLink
-//                   to={`/${link.path}`}
-//                   key={link.path}
-//                   onClick={handleCloseSideBar}
-//                   className={({ isActive }) => (isActive ? 'sidebar-activeLink' : 'sidebar-normalLink')}
-//                 >
-//                   {link.icon}
-//                   <span>{link.name}</span>
-//                 </NavLink>
-//               ))}
-//             </div>
-//           ))}
-//           </div>
-//         </>
-//       )}
-//     </div>
-//   )
-// }
-
-
 const Sidebar = () => {
   const { activeMenu, setActiveMenu } = useStateContext();
   const [activeItem, setActiveItem] = useState(null);

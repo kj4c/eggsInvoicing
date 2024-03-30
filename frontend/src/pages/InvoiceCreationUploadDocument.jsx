@@ -1,8 +1,11 @@
 import '../stylesheets/InvoiceCreationUploadDocument.css'
 
+
 const InvoiceCreationUploadDocument = () => {
   return (
-    <div>InvoiceCreationUploadDocument</div>
+    <div classname='ICUD=Container'>
+      
+    </div>
   )
 }
 

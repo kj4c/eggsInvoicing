@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import './InvoiceCreation.css';
+import '../stylesheets/InvoiceCreation.css';
 import FormInput from '../components/FormInput';
 import { inputs } from '../data/InvoiceCreationInputs';
-import '../components/FormInput.css';
+import '../stylesheets/FormInput.css';
 
 const InvoiceCreation = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
