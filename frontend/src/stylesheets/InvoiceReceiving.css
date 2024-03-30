@@ -19,6 +19,18 @@
     margin: 20px;
 }
 
+.fetch {
+    flex: 1;
+}
+
+.inputSearch {
+    flex: 1;
+}
+
+.options {
+    flex: 1;
+}
+
 .grid-row {
     display: contents; /* This makes .grid-row act as a "wrapper" without affecting the grid layout */
 }

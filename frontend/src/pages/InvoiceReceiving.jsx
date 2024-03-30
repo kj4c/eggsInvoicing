@@ -69,9 +69,9 @@ const InvoiceReceiving = () => {
   return (
     <>
       <div className='searchContainer'>
-        <p>Fetch Invoices</p>
+        <p className = "fetching">Fetch Invoices</p>
         <input type="text" className='inputSearch'/>
-        <select>
+        <select className = "options">
           <option value="ID">by Invoice ID</option>
           <option value="Date">by Date</option>
           <option value="DateRange">by Date Range</option>
