@@ -18,11 +18,16 @@ const InvoiceSending = () => {
     navigate(path);
   }
 
+  const routeChange2 = () =>{ 
+    let path = `/invoiceInputJson`; 
+    navigate(path);
+  }
+
   return (
     <>
     <div className='options-grid-container'>
       <button className = 'email-options' onClick={routeChange}>Sending Email with XML File</button>
-      <button className = 'email-options'>Sending Email with JSON File</button>
+      <button className = 'email-options' onClick={routeChange2}>Sending Email with JSON File</button>
       <button className = 'email-options'>Sending Email with Multiple XML Files</button>
       <button className = 'email-options'>Sending Email with Multiple JSON Files</button>
     </div>

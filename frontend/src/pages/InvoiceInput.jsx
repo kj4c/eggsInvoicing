@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import '../stylesheets/InvoiceInput.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 function isValidEmail(email) {
@@ -17,9 +18,10 @@ function sendEmail(reqBody) {
 }
 
 const InvoiceInput = () => {
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({from: "", to: "", attachment: ""});
 	const [fileName, setFileName] = useState('No file chosen, yet.');
-	const [buttonName, setButtonName] = useState('Upload File');
+	const [buttonName, setButtonName] = useState('Upload XML File');
 
 	const handleFileChange = (event) => {
 		let newFile = event.target.files[0];
@@ -42,10 +44,12 @@ const InvoiceInput = () => {
 		const { name, value } = event.target;
 		setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
 	};
-  
+
+	const goBack = () => {
+        navigate("/invoiceSending");
+      };
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		/* Checks if the parameters r checked out */
 		if (!isValidEmail(formData.to)) {
 			alert('Please enter a valid email in the "To" section and try again.')
 		} else if (formData.from === "") {
@@ -53,7 +57,6 @@ const InvoiceInput = () => {
 		} else if (fileName === 'No file chosen, yet.') {
 			alert('Please upload a file.')
 		} else {
-			/* Call the function to send the email*/
 			const reqBody = {
 				from: formData.from,
 				recipient: formData.to,
@@ -62,10 +65,15 @@ const InvoiceInput = () => {
 			sendEmail(reqBody)
 			alert('Email successfully sent!');
 		}
-  };
+	};
   
 	return (
 		<div className = "inputContainers">
+			<button onClick={goBack} className="backButton">
+                Back
+            </button>
+            <h1 className="header">Send Email with XML File</h1>
+			<p className='description'>1. From: should be your email<br></br>2. Enter the recipients email inside the To (Email) <br></br>3. Lastly upload your json file from your computer </p>
 			<label className="labels">From:</label>
 			<input type="text" className="inputBox" name="from" value={formData.from} onChange={handleChange}/>
 			<label className="labels">To:</label>
