@@ -3,7 +3,6 @@ import axios from 'axios';
 import '../stylesheets/InvoiceValidation.css'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { externalAxios, internalAxios } from '../axiosConfig';
 
 const InvoiceValidation = () => {
   const [file, setFile] = useState('');
@@ -40,7 +39,7 @@ const InvoiceValidation = () => {
   formData.append('file', file);
 
   async function getValidate() {
-    await internalAxios.post('https://invoice-validation-deployment.onrender.com/auth/login', {
+    await axios.post('https://invoice-validation-deployment.onrender.com/auth/login', {
       body: {
         username: "eggsinvoicing",
         password: "password123"
