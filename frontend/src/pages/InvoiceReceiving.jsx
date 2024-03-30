@@ -51,12 +51,45 @@ const InvoiceReceiving = () => {
   const generateHTML = async () => {
     try {
       const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receiveHtml?uid=${uid}`);
+      const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+
+      /* Creates the hyperlink where the link is the PDF file. */
+      const fileLink = document.createElement('a');
+      fileLink.href = fileURL;
+      fileLink.setAttribute('download', 'htmlreport.txt');
+      document.body.appendChild(fileLink);
+
+      fileLink.click();
+      fileLink.remove(); // Clean up after initiating the download
       navigate('/htmlRendering', { state: { res: response.data } });
     } catch (error) {
       console.error('Download error:', error);
       alert('An error occurred while downloading the file');
     }
   };
+
+  const openXML = async (invoiceId) => {
+    try {
+      const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByInvoiceId?uid=${uid}&invoiceId=${invoiceId}`, {
+        responseType: 'json', // Assuming the server responds with JSON
+      });
+      
+      
+      const fileURL = window.URL.createObjectURL(new Blob([response.data.invoices], { type: 'xml' })); // Explicitly set the MIME type
+      /* Creates the hyperlink where the link is the PDF file. */
+      const fileLink = document.createElement('a');
+      fileLink.href = fileURL;
+      fileLink.setAttribute('download', 'xmlfile.xml');
+      document.body.appendChild(fileLink);
+
+      fileLink.click();
+
+      window.open(fileURL, "_blank");
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while opening the file');
+    }
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -90,7 +123,7 @@ const InvoiceReceiving = () => {
     <>
       <div className='searchContainer'>
         <p className = "fetching">Fetch Invoices</p>
-        <button className='search'><SearchIcon/></button>
+        <button className='search'><SearchIcon style={{color: 'white'}}/></button>
         <input type="text" className='inputSearch' placeholder='Fetch'/>
         <select className = "options" placeholder='Options' value={selectedOption} onChange={handleSelectChange}>
           <option value="" disabled>Select an option</option>
@@ -105,11 +138,12 @@ const InvoiceReceiving = () => {
           <p className='header'>Sender</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
-          {dataFound && data.map((item, index) => (
-          <div className={`grid-row ${hoveredRow === index ? 'row-hover' : ''}`} 
-             onMouseEnter={() => setHoveredRow(index)} 
+          {dataFound && data.map((item) => (
+          <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
+             onMouseEnter={() => setHoveredRow(item.invoice_id)} 
              onMouseLeave={() => setHoveredRow(null)} 
-             key={index}>
+             key={item.invoice_id}
+             onClick={() => openXML(item.invoice_id)}>
           <p className="grid-item">{item.invoice_id}</p>
           <p className="grid-item">Placeholder</p>
           <p className="grid-item">{item.sender_email}</p>
@@ -126,4 +160,4 @@ const InvoiceReceiving = () => {
   )
 }
   
-export default InvoiceReceiving
+export default InvoiceReceiving;
