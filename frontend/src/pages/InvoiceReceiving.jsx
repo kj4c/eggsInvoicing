@@ -111,14 +111,15 @@ const InvoiceReceiving = () => {
         let response = 
         await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,);
         
-        response.data.map((item) => {
+        response.data.reverse().map((item) => {
           let date = new Date(item.sent_at);
+          let actualDate = date.toLocaleDateString();
           let hour = date.getHours();
           let min = date.getMinutes();
           if (min < 10) {
-            item.sent_at = `${hour}:0${min}`
+            item.sent_at = `${actualDate} ${hour}:0${min}`;
           } else {
-            item.sent_at = `${hour}:${min}`;
+            item.sent_at = `${actualDate} ${hour}:${min}`;
           }
         });
         setLoading(false);
@@ -153,14 +154,14 @@ const InvoiceReceiving = () => {
           <p className='header'>Sender</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
-          {dataFound && data.map((item) => (
+          {dataFound && data.map((item, index) => (
           <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
              onMouseEnter={() => setHoveredRow(item.invoice_id)} 
              onMouseLeave={() => setHoveredRow(null)} 
              key={item.invoice_id}
              onClick={() => openXML(item.invoice_id)}>
           <p className="grid-item">{item.invoice_id}</p>
-          <p className="grid-item">Placeholder</p>
+          <p className="grid-item">Invoice: {data.length - index}</p>
           <p className="grid-item">{item.sender_email}</p>
           <p className="grid-item">{item.type}</p>
           <p className="grid-item">{item.sent_at}</p>
