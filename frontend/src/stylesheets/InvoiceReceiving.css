@@ -1,9 +1,9 @@
 .inboxContainer {
     display: grid;
     grid-template-columns: 0.5fr 1fr 1fr 0.5fr 0.4fr;
-    grid-template-rows: 55px repeat(2, 1fr);
+    grid-template-rows: 55px repeat(15, 1fr);
     width: 90%;
-    height: 80vh;
+    height: 75vh;
     background-color: white;
     margin-left: 5%;
     margin-right: 5%;
@@ -11,6 +11,12 @@
     border: 3px solid #7f45f2;
     margin-bottom: 2%;
     overflow: auto;
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
 }
 
 .grid-row {
