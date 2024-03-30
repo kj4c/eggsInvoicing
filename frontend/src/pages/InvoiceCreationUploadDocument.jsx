@@ -1,10 +1,10 @@
+import FileUpload from '../components/FileUpload'
 import '../stylesheets/InvoiceCreationUploadDocument.css'
-
 
 const InvoiceCreationUploadDocument = () => {
   return (
-    <div classname='ICUD=Container'>
-      
+    <div className='ICUD-container'>
+      <FileUpload />
     </div>
   )
 }
