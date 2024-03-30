@@ -51,9 +51,9 @@ const NotFoundPage = () => {
         -Cherise
         </p>
         <p>
-            <br></br>
-            There's been a rumor going around that if you give us a HD, Eric will show you his dog<br></br>
-            -Eric
+        <br></br>
+        There&apos;s been a rumor going around that if you give us a HD, Eric will show you his dog<br></br>
+        -Eric
         </p>
         <p>
         <br></br>
