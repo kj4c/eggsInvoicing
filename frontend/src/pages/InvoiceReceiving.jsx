@@ -57,16 +57,17 @@ const InvoiceReceiving = () => {
       case "Date":
         setFormData(prev => ({ ...prev, Date: searchInput }));
         break;
-      case "DateRange":
+      case "DateRange": {
         // Your logic for handling date range
         const [from, to] = searchInput.split("-");
         setFormData(prev => ({ ...prev, DateFrom: from, DateTo: to }));
         break;
+      }
       default:
         // No default action
     }
     console.log(formData);
-  }, [fetchOption, searchInput]); // Dependencies
+  }, [searchInput]); // Dependencies
 
   async function fetchData() {
     if (fetchOption === 'All') {
@@ -139,7 +140,7 @@ const InvoiceReceiving = () => {
         setLoading(false);
         setData(response.data);
       } catch (error) {
-        alert('No Invoice found matching that Date');
+        alert('No Invoice found matching given Date');
         setLoading(false);
       } finally {
         setDataFound(true);
@@ -149,8 +150,7 @@ const InvoiceReceiving = () => {
       try {
         setLoading(true);
         let response = 
-        await axios.get
-        (`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByDateRange?uid=${uid}&fromDate=${formData.DateFrom}&toDate=${formData.DateTo}`,);
+        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByDateRange?uid=${uid}&fromDate=${formData.DateFrom}&toDate=${formData.DateTo}`,);
         response.data.reverse().map((item) => {
           let date = new Date(item.sent_at);
           let actualDate = date.toLocaleDateString('en-GB');
@@ -165,7 +165,7 @@ const InvoiceReceiving = () => {
         setLoading(false);
         setData(response.data);
       } catch (error) {
-        alert('No Invoice found matching that Date');
+        alert('No Invoice found matching that Date Range');
         setLoading(false);
       } finally {
         setDataFound(true);
