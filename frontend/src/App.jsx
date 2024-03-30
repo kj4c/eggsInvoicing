@@ -9,6 +9,8 @@ import InvoiceInputJSON from './pages/invoiceInputJson';
 import NotFoundPage from './pages/NotFoundPage';
 import ForgetPassword from './pages/forgetPassword';
 import UserProfile from './components/UserProfile';
+import InvoiceInputMultiple from './pages/invoiceInputMultiple';
+import InvoiceInputMultipleJson from './pages/invoiceInputMultipleJson';
 
 import './App.css'
 
@@ -19,7 +21,8 @@ const AppContent = () => {
   const knownPaths = [
     '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
     '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
-    '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving'
+    '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving',
+    '/invoiceInputMultiple', '/invoiceInputMultipleJson'
   ];
 
   const hideSidebarPaths = ['/login', '/register', 'reset-password'];
@@ -45,6 +48,8 @@ const AppContent = () => {
             <Route path="/invoiceRendered" element={<InvoiceRendered />} />
             <Route path="/invoiceSending" element={<InvoiceSending />} />
             <Route path="/invoiceInput" element={<InvoiceInput />} />
+            <Route path="/invoiceInputMultiple" element={<InvoiceInputMultiple />} />
+            <Route path='/invoiceInputMultipleJson' element={<InvoiceInputMultipleJson />}></Route>
             <Route path="/invoiceReceiving" element={<InvoiceReceiving />} />
             <Route path="/login" element={<AuthLogin />} />
             <Route path="/register" element={<AuthRegister />} />
@@ -61,7 +66,6 @@ const AppContent = () => {
     </div>
   );
 }
-
 
 function App() {
   return (
