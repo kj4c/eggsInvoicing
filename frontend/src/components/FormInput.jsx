@@ -1,4 +1,4 @@
-import './FormInput.css'
+import '../stylesheets/FormInput.css'
 
 const FormInput = (props) => {
   const {label, onChange, ...inputProps } = props;
