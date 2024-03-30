@@ -123,3 +123,11 @@
 .button2 {
     flex: 1
 }
+
+.loadingScreen {
+    position: absolute;
+    top: 40%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    font-size: 47px; /* Adjust as needed */
+  }

@@ -122,3 +122,51 @@
   border-color: #5d2eb4; /* Border color matches the active background */
   transform: translateY(1px);
 }
+
+.attachmentGroup {
+  margin-bottom: 20px; /* Space between each attachment group */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Styles for the title input of each attachment */
+.attachmentTitleInput {
+  margin: 5px 0;
+  padding: 10px;
+  width: 80%; /* Adjust the width as necessary */
+  border: 2px solid #007bff; /* Light blue border */
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Styles for the file input */
+.attachmentFileInput {
+  margin: 5px 0;
+  padding: 10px;
+  width: calc(80% + 22px); /* Slightly larger to align with the title input's visual width */
+  border: 2px dashed #007bff; /* Light blue dashed border */
+  border-radius: 4px;
+  background-color: #f8f9fa; /* Light background to distinguish from other inputs */
+  color: #495057; /* Slightly darker text for better readability */
+  cursor: pointer;
+}
+
+/* Style adjustments for the span displaying the file name */
+.fileNameDisplay {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #6c757d; /* Grey text */
+}
+
+/* General styling for buttons within the form for consistency */
+.formButton {
+  cursor: pointer;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff; /* White text */
+}
