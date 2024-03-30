@@ -6,16 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import picture from '../assets/profile.png';
 
+
+
 const UserProfile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
     const cookieExists = document.cookie.includes('cookie='); 
-
     if (!cookieExists) {
       navigate('/login');
     }
   }, [navigate]);
+
   
   const [userDetails, setUserDetails] = useState({
     username: '',
@@ -23,32 +25,37 @@ const UserProfile = () => {
     phone_no: ''
   });
 
-  async function getUserInfo() {
-    const uid = localStorage.getItem('uid');
-    try {
-      const res = await axios.get('https://invoice-seng2021-24t1-eggs.vercel.app/getUserInfo', {
-        params: {
-          uid: uid
-        }
-      });
-      setUserDetails({
-        username: res.data.username,
-        email: res.data.email,
-        phone_no: res.data.phone_no
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  function getCookie(name) {
+    let cookies = document.cookie.split('; ');
+    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    return cookieValue ? cookieValue.split('=')[1] : null;
   }
 
+  async function getUserInfo() {
+    const uid = localStorage.getItem('uid');
+
+    setUserDetails({
+      uid: uid,
+      username: getCookie('username'),
+      email: getCookie('email'),
+      phone_no: getCookie('phone_no')
+    });
+  }
+
+  useEffect(() => {
+    getUserInfo();
+  }, []); 
+    
   const handleLogout = () => {
     localStorage.removeItem('uid');
     document.cookie = 'cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = 'uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     navigate('/login');
   }
 
-  getUserInfo();
+  
 
   return (
     <div>
@@ -77,4 +84,4 @@ const UserProfile = () => {
   )
 }
 
-export default UserProfile
+export default UserProfile;
