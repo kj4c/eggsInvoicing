@@ -59,7 +59,7 @@ const InvoiceReceiving = () => {
         break;
       case "DateRange":
         // Your logic for handling date range
-        const [from, to] = searchInput.split(" to ");
+        const [from, to] = searchInput.split("-");
         setFormData(prev => ({ ...prev, DateFrom: from, DateTo: to }));
         break;
       default:
@@ -74,10 +74,9 @@ const InvoiceReceiving = () => {
         setLoading(true);
         let response = 
         await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,);
-        
         response.data.reverse().map((item) => {
           let date = new Date(item.sent_at);
-          let actualDate = date.toLocaleDateString();
+          let actualDate = date.toLocaleDateString('en-GB');
           let hour = date.getHours();
           let min = date.getMinutes();
           if (min < 10) {
@@ -102,7 +101,7 @@ const InvoiceReceiving = () => {
         await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByInvoiceId?uid=${uid}&invoiceId=${formData.ID}`,);
         let item = response.data;
         let date = new Date(item.sent_at);
-        let actualDate = date.toLocaleDateString();
+        let actualDate = date.toLocaleDateString('en-GB');
         let hour = date.getHours();
         let min = date.getMinutes();
         if (min < 10) {
@@ -120,7 +119,59 @@ const InvoiceReceiving = () => {
       } finally {
         setDataFound(true);
       }
+    } else if (fetchOption === 'Date') {
+      console.log("MEOW");
+      try {
+        setLoading(true);
+        let response = 
+        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByDate?uid=${uid}&date=${formData.Date}`,);
+        response.data.reverse().map((item) => {
+          let date = new Date(item.sent_at);
+          let actualDate = date.toLocaleDateString('en-GB');
+          let hour = date.getHours();
+          let min = date.getMinutes();
+          if (min < 10) {
+            item.sent_at = `${actualDate} ${hour}:0${min}`;
+          } else {
+            item.sent_at = `${actualDate} ${hour}:${min}`;
+          }
+        });
+        setLoading(false);
+        setData(response.data);
+      } catch (error) {
+        alert('No Invoice found matching that Date');
+        setLoading(false);
+      } finally {
+        setDataFound(true);
+      }
+    } else if (fetchOption === 'DateRange') {
+      console.log("WOOF");
+      try {
+        setLoading(true);
+        let response = 
+        await axios.get
+        (`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByDateRange?uid=${uid}&fromDate=${formData.DateFrom}&toDate=${formData.DateTo}`,);
+        response.data.reverse().map((item) => {
+          let date = new Date(item.sent_at);
+          let actualDate = date.toLocaleDateString('en-GB');
+          let hour = date.getHours();
+          let min = date.getMinutes();
+          if (min < 10) {
+            item.sent_at = `${actualDate} ${hour}:0${min}`;
+          } else {
+            item.sent_at = `${actualDate} ${hour}:${min}`;
+          }
+        });
+        setLoading(false);
+        setData(response.data);
+      } catch (error) {
+        alert('No Invoice found matching that Date');
+        setLoading(false);
+      } finally {
+        setDataFound(true);
+      }
     }
+
   }
 
   const handleSelectChange = () => {
@@ -204,7 +255,7 @@ const InvoiceReceiving = () => {
           <option value="All">Display all</option>
           <option value="ID">by Invoice ID</option>
           <option value="Date">by Date (DD/MM/YYYY)</option>
-          <option value="DateRange">by Date Range</option>
+          <option value="DateRange">by Date Range (DD/MM/YYYY-DD/MM/YYYY)</option>
         </select>
       </div>
       <div className="inboxContainer">
