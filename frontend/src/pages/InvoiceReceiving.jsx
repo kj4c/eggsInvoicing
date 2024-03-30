@@ -4,13 +4,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchIcon from '@mui/icons-material/Search';
 
+
 const InvoiceReceiving = () => {
   const [data, setData] = useState(null);
   const [dataFound, setDataFound] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
   const [Loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState('Fetching Invoices');
-  const [selectedOption, setSelectedOption] = useState('');
+  const [fetchOption, setFetchOption] = useState('All')
+  const [formData, setFormData] =  useState({ID: "", Date: "", DateFrom: "", DateTo: ""});
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
   const cookieExists = document.cookie.includes('cookie='); 
@@ -38,8 +41,91 @@ const InvoiceReceiving = () => {
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, []);
 
-  const handleSelectChange = (event) => {
-    setSelectedOption(event.target.value);
+  // Function to handle actual search input changes
+  const handleSearchChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  // useEffect hook to update formData based on selectedVariable and searchInput
+  useEffect(() => {
+    // Logic to update formData based on selectedVariable whenever searchInput changes
+    // or the selected variable changes
+    switch(fetchOption) {
+      case "ID":
+        setFormData(prev => ({ ...prev, ID: searchInput }));
+        break;
+      case "Date":
+        setFormData(prev => ({ ...prev, Date: searchInput }));
+        break;
+      case "DateRange":
+        // Your logic for handling date range
+        const [from, to] = searchInput.split(" to ");
+        setFormData(prev => ({ ...prev, DateFrom: from, DateTo: to }));
+        break;
+      default:
+        // No default action
+    }
+    console.log(formData);
+  }, [fetchOption, searchInput, formData]); // Dependencies
+
+  async function fetchData() {
+    if (fetchOption === 'All') {
+      try {
+        setLoading(true);
+        let response = 
+        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,);
+        
+        response.data.reverse().map((item) => {
+          let date = new Date(item.sent_at);
+          let actualDate = date.toLocaleDateString();
+          let hour = date.getHours();
+          let min = date.getMinutes();
+          if (min < 10) {
+            item.sent_at = `${actualDate} ${hour}:0${min}`;
+          } else {
+            item.sent_at = `${actualDate} ${hour}:${min}`;
+          }
+        });
+        setLoading(false);
+        setData(response.data);
+        console.log('hello')
+      } catch (error) {
+        console.log('error');
+      } finally {
+        setDataFound(true);
+      }
+    } else if (fetchOption === 'ID') {
+      console.log("YO");
+      try {
+        setLoading(true);
+        let response = 
+        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByInvoiceId?uid=${uid}&invoiceId=${formData.ID}`,);
+        let item = response.data;
+        let date = new Date(item.sent_at);
+        let actualDate = date.toLocaleDateString();
+        let hour = date.getHours();
+        let min = date.getMinutes();
+        if (min < 10) {
+          item.sent_at = `${actualDate} ${hour}:0${min}`;
+        } else {
+          item.sent_at = `${actualDate} ${hour}:${min}`;
+        }
+        let array = [];
+        array[0] = item;
+        setData(array);
+      } catch (error) {
+        alert('No Invoice found matching that ID');
+        setLoading(false);
+      } finally {
+        setDataFound(true);
+      }
+    }
+  }
+
+  const handleSelectChange = () => {
+    // Get the select element
+    const selectValue = document.getElementById('options').value;
+    setFetchOption(selectValue);
   };
   
   const generatePDF = async () => {
@@ -87,7 +173,6 @@ const InvoiceReceiving = () => {
         responseType: 'json', // Assuming the server responds with JSON
       });
       
-      
       const fileURL = window.URL.createObjectURL(new Blob([response.data.invoices], { type: 'xml' })); // Explicitly set the MIME type
       /* Creates the hyperlink where the link is the PDF file. */
       const fileLink = document.createElement('a');
@@ -105,46 +190,19 @@ const InvoiceReceiving = () => {
   }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true);
-        let response = 
-        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,);
-        
-        response.data.reverse().map((item) => {
-          let date = new Date(item.sent_at);
-          let actualDate = date.toLocaleDateString();
-          let hour = date.getHours();
-          let min = date.getMinutes();
-          if (min < 10) {
-            item.sent_at = `${actualDate} ${hour}:0${min}`;
-          } else {
-            item.sent_at = `${actualDate} ${hour}:${min}`;
-          }
-        });
-        setLoading(false);
-        setData(response.data);
-        console.log('hello')
-      } catch (error) {
-        console.log('error');
-      } finally {
-        setDataFound(true);
-      }
-    }
-
     fetchData();
-  }, [uid]); // Empty dependency array means this effect runs once on mount
+  }, [fetchData]); // Empty dependency array means this effect runs once on mount
 
   return (
     <>
       <div className='searchContainer'>
         <p className = "fetching">Fetch Invoices</p>
-        <button className='search'><SearchIcon style={{color: 'white'}}/></button>
-        <input type="text" className='inputSearch' placeholder='Fetch'/>
-        <select className = "options" placeholder='Options' value={selectedOption} onChange={handleSelectChange}>
-          <option value="" disabled>Select an option</option>
+        <button className='search'><SearchIcon style={{color: 'white'}} onClick = {fetchData}/></button>
+        <input type="text" className='inputSearch' placeholder='Fetch' onChange = {handleSearchChange}/>
+        <select id = "options" className = "options" placeholder='Options' onChange={handleSelectChange}>
+          <option value="All">Display all</option>
           <option value="ID">by Invoice ID</option>
-          <option value="Date">by Date</option>
+          <option value="Date">by Date (DD/MM/YYYY)</option>
           <option value="DateRange">by Date Range</option>
         </select>
       </div>
