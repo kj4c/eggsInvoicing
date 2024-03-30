@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import '../stylesheets/InvoiceValidation.css'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const InvoiceValidation = () => {
   const [file, setFile] = useState('');
@@ -8,6 +10,16 @@ const InvoiceValidation = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   // const [passed, setPassed] = useState('');
   // const [failed, setFailed] = useState('');
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cookieExists = document.cookie.includes('cookie='); 
+
+    if (!cookieExists) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   function handleOnChange(e) {
     const target = e.target;
