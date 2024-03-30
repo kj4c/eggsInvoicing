@@ -418,7 +418,7 @@ app.get('/receiveReport', async (req, res) => {
       res.status(400).json({ error: 'error generating the report' });
     } else {
       pdf = pdf.doc;
-      res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"');
+      res.setHeader('Content-Disposition', 'attachment; filename="communication_report_receive.pdf"');
       res.setHeader('Content-Type', 'application/pdf');
       res.status(200).send(pdf.output());
     }

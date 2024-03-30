@@ -13,7 +13,7 @@ const InvoiceSending = () => {
     }
   }, [navigate]);
 
-  const routeChange = () =>{ 
+  const routeChange = () => { 
     let path = `/invoiceInput`; 
     navigate(path);
   }
