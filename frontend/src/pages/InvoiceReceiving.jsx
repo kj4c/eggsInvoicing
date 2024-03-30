@@ -99,7 +99,7 @@ const InvoiceReceiving = () => {
     }
 
     fetchData();
-  }, [uid]); // empty dependency array means this effect runs once on mount
+  }, [uid]); // Empty dependency array means this effect runs once on mount
 
   return (
     <>
