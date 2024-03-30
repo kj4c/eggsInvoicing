@@ -8,8 +8,8 @@ import PropTypes from 'prop-types'; // Import PropTypes
 import { useStateContext } from '../contexts/ContextProvider';
 import Tooltip from './Tooltip';
 import '../stylesheets/Navbar.css'
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const NavButton = ({ title, customFunc, icon, dotColour }) => (
   <Tooltip text={title}>
@@ -32,7 +32,7 @@ const Navbar = () => {
     handleResize();
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [setScreenSize]) 
+  }, [setScreenSize])
 
   useEffect(() => {
     if (screenSize <= 900) {
@@ -52,7 +52,7 @@ const Navbar = () => {
               <FaRegUser className='navbar-profile-image' />
               <MdKeyboardArrowDown className="navbar-profileText" />
             </Link>
-        </Tooltip>
+          </Tooltip>
         )}
       </div>
     </div>
