@@ -9,7 +9,7 @@
   height: 200px;
   width: 200px;
   border-radius: 200px;
-  border-color: #7f45f2;
+  border-color: grey;
   border-style: solid;
 
 }
@@ -50,6 +50,7 @@ hr {
 .user-info {
   font-size: 20px;
   padding-right: 30px;
+  color: grey
 }
 
 .log-out {

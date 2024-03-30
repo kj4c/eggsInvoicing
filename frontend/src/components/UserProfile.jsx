@@ -1,9 +1,10 @@
 // import React from 'react'
 import '../stylesheets/UserProfile.css';
-// import { useState, useEffect } from 'react';
-// import axios from 'axios';
+import { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import picture from '../assets/profile.png';
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -15,23 +16,25 @@ const UserProfile = () => {
       navigate('/login');
     }
   }, [navigate]);
-  // const [userDetails, setUserDetails] = useState({
-  //   username: '',
-  //   email: '',
-  //   phone: ''
-  // });
+  
+  const [userDetails, setUserDetails] = useState({
+    username: '',
+    email: '',
+    phone_no: ''
+  });
 
   async function getUserInfo() {
     const uid = localStorage.getItem('uid');
     try {
-      // maybe get uses somthign diff??
-      const response = await axios.get('https://invoice-seng2021-24t1-eggs.vercel.app/getUserInfo', {
-        uid
+      const res = await axios.get('https://invoice-seng2021-24t1-eggs.vercel.app/getUserInfo', {
+        params: {
+          uid: uid
+        }
       });
       setUserDetails({
         username: res.data.username,
         email: res.data.email,
-        phone: res.data.phone
+        phone_no: res.data.phone_no
       });
     } catch (error) {
       console.log(error);
@@ -45,11 +48,13 @@ const UserProfile = () => {
     navigate('/login');
   }
 
+  getUserInfo();
+
   return (
     <div>
       <p className='heading'>Profile</p>
       <div className='profile-info'>
-        <img className='profile-picture' />
+        <img className='profile-picture' src={picture}/>
         <hr className="solid" />
         <div className='info-containers'>
           <p className='user-name'>Username</p>
@@ -68,7 +73,6 @@ const UserProfile = () => {
         <hr className="solid" />
         <button onClick={handleLogout} className='log-out'>Log Out</button>
       </div>
-
     </div>
   )
 }
