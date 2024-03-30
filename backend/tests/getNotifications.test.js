@@ -6,7 +6,7 @@ jest.mock('../database/db', () => ({
   query: jest.fn()
 }));
 
-const uId = 123;
+const uId = '123';
 
 describe('Test suite for getNotifications()', () => {
   beforeEach(() => {
