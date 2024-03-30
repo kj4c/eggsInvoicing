@@ -5,20 +5,41 @@ import { cardData } from '../data/dashboardData';
 import '../stylesheets/Dashboard.css';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
-
+import axios from 'axios';
 const API_KEY = "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";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [data, setData] = useState('');
 
+  const cookieExists = document.cookie.includes('cookie='); 
   useEffect(() => {
-    const cookieExists = document.cookie.includes('cookie='); 
-
     if (!cookieExists) {
       navigate('/login');
+      return;
     }
-  }, [navigate]);
+    let uid;
+    if (cookieExists) {
+      uid = document.cookie.split("; ");
+      uid = uid.find(part => part.startsWith("uid=")).split("=")[1];
+    }
 
+    if (data === '') {
+      notif(uid);
+    }
+  }, [cookieExists, navigate]);
+
+  // Page
+  const notif = async (uid) => {
+    try {
+      const response = await axios.get(`http://localhost:3000/receive/getNotifications?uid=${uid}`);
+      setData(`${response.data.notifications.length}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };  
+
+  //chat
   const [messages, setMessages] = useState([
     {
       message: "Hello I'm your assistant for Eggs Invoicing. How can I help you today?",
@@ -94,7 +115,7 @@ const Dashboard = () => {
           <div className='Dashboard-Banner-Content'>
             <div>
               <p className='Dashboard-Earnings'>FY2024 Earnings</p>
-              <p className='Dashboard-Earnings-Content'>$1234.56</p>
+              <p className='Dashboard-Earnings-Content'>${data}</p>
             </div>
           </div>
           <div className='mt-6'>
