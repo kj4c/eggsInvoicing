@@ -2,9 +2,19 @@
 import '../stylesheets/UserProfile.css';
 // import { useState, useEffect } from 'react';
 // import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const UserProfile = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cookieExists = document.cookie.includes('cookie='); 
+
+    if (!cookieExists) {
+      navigate('/login');
+    }
+  }, [navigate]);
   // const [userDetails, setUserDetails] = useState({
   //   username: '',
   //   email: '',
@@ -23,6 +33,13 @@ const UserProfile = () => {
   //     console.log(err);
   //   })
   // }
+
+  const handleLogout = () => {
+    localStorage.removeItem('uid');
+    document.cookie = 'cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    navigate('/login');
+  }
 
   return (
     <div>
@@ -45,7 +62,7 @@ const UserProfile = () => {
           <p className='user-info'>0123456789</p>
         </div>
         <hr className="solid" />
-        <Link to="/login" className='log-out'>Log Out</Link>
+        <button onClick={handleLogout} className='log-out'>Log Out</button>
       </div>
 
     </div>
