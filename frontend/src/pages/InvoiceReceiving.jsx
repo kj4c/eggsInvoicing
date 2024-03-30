@@ -66,7 +66,7 @@ const InvoiceReceiving = () => {
         // No default action
     }
     console.log(formData);
-  }, [fetchOption, searchInput, formData]); // Dependencies
+  }, [fetchOption, searchInput]); // Dependencies
 
   async function fetchData() {
     if (fetchOption === 'All') {
@@ -113,6 +113,7 @@ const InvoiceReceiving = () => {
         let array = [];
         array[0] = item;
         setData(array);
+        setLoading(false);
       } catch (error) {
         alert('No Invoice found matching that ID');
         setLoading(false);
@@ -191,7 +192,7 @@ const InvoiceReceiving = () => {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]); // Empty dependency array means this effect runs once on mount
+  }, []); // Empty dependency array means this effect runs once on mount
 
   return (
     <>
