@@ -118,5 +118,3 @@ const InvoiceCreation = () => {
 };
 
 export default InvoiceCreation;
-
-// when i press select, based on the numDivs, can you append numDivs amount of object containing {itemName, itemDescription, itemId, itemCost,InvoicedQuantity, unitCode, currencyID}

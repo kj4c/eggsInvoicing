@@ -29,35 +29,46 @@ const InvoiceCreationUploadDocument = () => {
   };
 
   const handleFileUpload = async () => {
+    console.log("HERE");
     if (uploadStatus === "done") {
       clearFileInput();
       return;
     }
 
     try {
-      setUploadStatus("uploading");
-
-      const formData = new FormData();
-      formData.append("invoice.csv", selectedFile);
-
-      const response = await axios.post(
-        "http://3.27.23.157/invoice/CSV",
-        formData,
-        {
-          onUploadProgress: (progressEvent) => {
-            const percentCompleted = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total
-            );
-            setUploadProgress(percentCompleted);
-          },
-        }
-      );
-      console.log(response);
-      setUploadStatus("done");
+      const token = await axios.post('https://3dj53454nj.execute-api.ap-southeast-2.amazonaws.com/login', {
+        email: 'eggInvoice@gmail.com',
+        password: 'eggInvoice'
+      });
+      console.log("token = ", token);
     } catch (error) {
       console.error(error);
-      setUploadStatus("select");
     }
+
+    // try {
+    //   setUploadStatus("uploading");
+
+    //   const formData = new FormData();
+    //   formData.append("invoice.csv", selectedFile);
+
+    //   const response = await axios.post(
+    //     "http://3.27.23.157/invoice/CSV",
+    //     formData,
+    //     {
+    //       onUploadProgress: (progressEvent) => {
+    //         const percentCompleted = Math.round(
+    //           (progressEvent.loaded * 100) / progressEvent.total
+    //         );
+    //         setUploadProgress(percentCompleted);
+    //       },
+    //     }
+    //   );
+    //   console.log(response);
+    //   setUploadStatus("done");
+    // } catch (error) {
+    //   console.error(error);
+    //   setUploadStatus("select");
+    // }
   };
 
   return (
@@ -68,7 +79,7 @@ const InvoiceCreationUploadDocument = () => {
           style={{ display: "none" }}
           type="file"
           onChange={handleFileInput}
-        />
+          />
 
         {!selectedFile && (
           <button className="upload" onClick={onChooseFile}>
@@ -95,12 +106,12 @@ const InvoiceCreationUploadDocument = () => {
 
               <div className="file-desc">
                 <div style={{ flex: 1 }}>
-                  <h1>{selectedFile.name}</h1>
+                  <h6>{selectedFile.name}</h6>
                   <div className="progress-container">
                     <div
                       className="progress-bar"
                       style={{ width: `${uploadProgress}%` }}
-                    />
+                      />
                   </div>
                 </div>
 
@@ -114,8 +125,8 @@ const InvoiceCreationUploadDocument = () => {
                   <div className="progress-circle">
                     {uploadStatus === "uploading" ? (
                       `${uploadProgress}%`
-                    ) : uploadStatus === "done" ? (
-                      <span>
+                      ) : uploadStatus === "done" ? (
+                        <span>
                         <FaCheck />
                       </span>
                     ) : null}
@@ -136,3 +147,4 @@ const InvoiceCreationUploadDocument = () => {
 };
 
 export default InvoiceCreationUploadDocument;
+

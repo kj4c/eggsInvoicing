@@ -20,7 +20,7 @@ const AppContent = () => {
     '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
     '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
     '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving',
-    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering'
+    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering', '/invoiceCreation/uploadDocument'
   ];
 
   const hideSidebarPaths = ['/login', '/register', 'reset-password'];

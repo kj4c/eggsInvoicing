@@ -6,8 +6,9 @@
   /* background-color: purple; */
 }
 
+
 .upload {
-  width: 330px;
+  width: 660px;
   height: 150px;
   font-size: 18px;
   font-weight: 500;
@@ -16,25 +17,38 @@
   align-items: center;
   justify-content: center;
   gap: 15px;
-  color: #5d4dcc;
+  color:blueviolet;
   background-color: #fff;
-  border: 1.5px dashed #5d4dcc;
+  border: 1.5px dashed blueviolet;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
+  /* background-color: aqua; */
 }
 
 .upload:hover {
   background-color: gainsboro;
 }
 
+.upload span{
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  color: #5d4dcc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  background-color: #f1efff;
+}
+
 .uploadIcon {
   font-size: 30px;
+  /* background-color: rgb(255, 255, 0); */
 }
 
 .file-container {
   margin-top: 5%;
-  width: 300px;
   display: flex;
   align-items: center;
   gap: 15px;
@@ -42,12 +56,14 @@
   background-color: #fff;
   border: 1px solid rgba(117, 96, 255, 0.281);
   border-radius: 6px;
-  padding: 8px 15px;
+  padding: 15px 15px;
+  /* background-color: #000; */
 }
 
 .file-icon {
   font-size: 30px;
   color: blueviolet;
+  /* background-color: #5d4dcc; */
 }
 
 .file-desc {
@@ -58,7 +74,7 @@
   /* background-color: blueviolet; */
 }
 
-.file-desc h1 {
+.file-desc h6 {
   flex: 1;
   font-size: 13px;
   font-weight: 400;
@@ -70,6 +86,7 @@
   background-color: gainsboro;
   border-radius: 8px;
   margin-top: 8px;
+  /* background-color: brown; */
 }
 
 .progress-bar {
@@ -81,6 +98,7 @@
 }
 
 .close-icon {
+  display: flex;
   font-size: 20px;
   cursor: pointer;
 }
@@ -100,7 +118,7 @@
 }
 
 .upload-btn {
-  width: 330px;
+  width: 660px;
   font-size: 14px;
   font-weight: 500;
   color: #fff;

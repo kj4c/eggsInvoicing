@@ -53,10 +53,11 @@ export const links = [
         icon: <SlPaperPlane></SlPaperPlane>
       },
       {
+        id:5,
         name: 'Receiving Invoice',
         path: 'invoiceReceiving',
         icon: <HiOutlineFolderOpen />,
-      }
+      },
     ],
   },
 ];
