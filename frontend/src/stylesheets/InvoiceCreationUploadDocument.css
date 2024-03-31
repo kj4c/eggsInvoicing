@@ -3,5 +3,111 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  
+  /* background-color: purple; */
+}
+
+.upload {
+  width: 330px;
+  height: 150px;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: #5d4dcc;
+  background-color: #fff;
+  border: 1.5px dashed #5d4dcc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.upload:hover {
+  background-color: gainsboro;
+}
+
+.uploadIcon {
+  font-size: 30px;
+}
+
+.file-container {
+  margin-top: 5%;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid rgba(117, 96, 255, 0.281);
+  border-radius: 6px;
+  padding: 8px 15px;
+}
+
+.file-icon {
+  font-size: 30px;
+  color: blueviolet;
+}
+
+.file-desc {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  /* background-color: blueviolet; */
+}
+
+.file-desc h1 {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.progress-container {
+  width: 100%;
+  height: 5px;
+  background-color: gainsboro;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 5px;
+  background-color: blueviolet;
+  border-radius: 8px;
+  transition: width 0.5s ease;
+}
+
+.close-icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.file-desc button,
+.progress-circle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #463a99;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 30px;
+}
+
+.upload-btn {
+  width: 330px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: blueviolet;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 15px;
+  cursor: pointer;
 }

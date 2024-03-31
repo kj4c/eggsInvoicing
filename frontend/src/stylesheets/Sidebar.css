@@ -24,8 +24,8 @@
   text-decoration: none;
 }
 
-.sidebar-mt-10{
-  margin-top: 2.5rem
+.sidebar-mt-10 {
+  margin-top: 2.5rem;
 }
 
 .sidebar-closeMenuButton {
@@ -39,7 +39,7 @@
 }
 
 .sidebar-closeMenuButton:hover {
-  background-color: #F7F7F7
+  background-color: #f7f7f7;
 }
 
 .sidebar-listTitles {
@@ -79,7 +79,7 @@
 }
 
 .sidebar-normalLink:hover {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 
 .subMenu-normal {
@@ -97,7 +97,7 @@
 }
 
 .subMenu-normal:hover {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 
 .subMenu-active {
@@ -134,10 +134,15 @@
   }
 }
 
-.sidebar, .sidebarActive, .sidebarUnActive {
+.sidebar,
+.sidebarActive,
+.sidebarUnActive {
   transition: all 0.3s ease;
 }
 
-.main-container, .md-ml-72, .activeMenu, .unActiveMenu {
+.main-container,
+.md-ml-72,
+.activeMenu,
+.unActiveMenu {
   transition: margin-left 0.3s ease;
 }
