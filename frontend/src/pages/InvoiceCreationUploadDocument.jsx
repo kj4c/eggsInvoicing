@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-// import axios from "axios";
+import axios from "axios";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { FaRegFileAlt } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
@@ -38,23 +38,24 @@ const InvoiceCreationUploadDocument = () => {
       setUploadStatus("uploading");
 
       const formData = new FormData();
-      formData.append("file", selectedFile);
+      formData.append("invoice.csv", selectedFile);
 
-      // const response = await axios.post(
-      //   "http://localhost:8000/api/upload",
-      //   formData,
-      //   {
-      //     onUploadProgress: (progressEvent) => {
-      //       const percentCompleted = Math.round(
-      //         (progressEvent.loaded * 100) / progressEvent.total
-      //       );
-      //       setUploadProgress(percentCompleted);
-      //     },
-      //   }
-      // );
-
+      const response = await axios.post(
+        "http://3.27.23.157/invoice/CSV",
+        formData,
+        {
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(percentCompleted);
+          },
+        }
+      );
+      console.log(response);
       setUploadStatus("done");
     } catch (error) {
+      console.error(error);
       setUploadStatus("select");
     }
   };
