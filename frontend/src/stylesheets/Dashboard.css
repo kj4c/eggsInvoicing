@@ -11,99 +11,19 @@
   flex-wrap: wrap;
   justify-content: center;
 }
-
-.Dashboard-banner {
-  margin: 0.75rem;
-  height: 11rem;
-  width: 100%;
-  border-radius: 0.75rem;
-  background-color: black;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 2rem;
-  padding-top: 2.25rem;
-  background-image: url('../assets/banner.jpeg');
-}
-
-.Dashboard-Banner-Content {
+.welcome-message {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
-.Dashboard-Earnings {
-  font-weight: 700; 
-  color: white;
-}
-
-.Dashboard-Earnings-Content{
-  font-size:1.5rem; 
-  line-height:2rem;
-  color: white;
-  margin-top: 0;
-}
-
-.Dashboard-mainCard-Button{
-  border-radius: 9999px;
-  padding: 1rem;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  color: rgb(255 255 255);
-  opacity: 0;
-}
-
-.Dashboard-mainCard-Button:hover {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.Dashboard-Card-Container {
-  margin: 0.75rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-}
-
-.Dashboard-Card-Style {
-  height: 11rem;
-  border-radius: 1rem;
-  background-color: rgb(255 255 255);
-  padding: 1rem;
-  padding-top: 2.25rem;
-}
-
-.Dashboard-Card-Button-Style {
-  border-radius: 9999px;
-  padding: 1rem;
-  font-size: 1.5rem;
-  /* line-height: 2rem; */
-  opacity: 0.7;
-  border: none;
-}
-
-.Dashboard-Card-Button-Style2 {
-  border-radius: 9999px;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
+.welcome {
   display: inline-block;
-  font-size: 1.5rem;
-  margin: 4px 2px;
-  opacity: 0.7;
-  border: none;
+  margin: 0px;
+  padding-right: 0.4em;
 }
 
-.Dashboard-Card-Button-Style:hover {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.Dashboard-Card-Title {
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: rgb(156 163 175);
+.name {
+  display: inline-block;
+  margin: 0px;
 }
 
 @media (min-width: 768px){
