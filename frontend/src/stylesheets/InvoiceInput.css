@@ -10,6 +10,20 @@
   padding: 30px;
 }
 
+.inputBox2 {
+  color: black;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 40px;
+  border-color: #7f45f2;
+  flex-direction: column;
+  font-size: 20px;
+  margin: 1%; 
+  padding: 10px;
+  width: 20%;
+  height: 20%;
+}
+
 .inputContainers {
   margin-left: 15%;
   margin-top: 5%;
@@ -29,7 +43,7 @@
 }
 
 .fileUpload {
-  background: #f9f3ff;
+  background: #ffffff;
   border-color: #7f45f2;
   height: 200px;
   width: 98%;
@@ -46,7 +60,8 @@
 }
 
 .fileUpload:hover {
-  background: #e2c5ff;
+  background: #f3f3f3;
+  color: #7f45f2;
   transition: all .3s;
   cursor: pointer;
 }

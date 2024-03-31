@@ -241,6 +241,28 @@ const InvoiceReceiving = () => {
     }
   }
 
+  const openJSON = async (invoiceId) => {
+    try {
+      const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByInvoiceId?uid=${uid}&invoiceId=${invoiceId}`, {
+        responseType: 'json', // Assuming the server responds with JSON
+      });
+      
+      const fileURL = window.URL.createObjectURL(new Blob([response.data.invoices], { type: 'json' })); // Explicitly set the MIME type
+      /* Creates the hyperlink where the link is the PDF file. */
+      const fileLink = document.createElement('a');
+      fileLink.href = fileURL;
+      fileLink.setAttribute('download', 'jsonFile.json');
+      document.body.appendChild(fileLink);
+
+      fileLink.click();
+
+      window.open(fileURL, "_blank");
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while opening the file');
+    }
+  }
+
   useEffect(() => {
     fetchData();
   }, []); // Empty dependency array means this effect runs once on mount
@@ -269,7 +291,7 @@ const InvoiceReceiving = () => {
              onMouseEnter={() => setHoveredRow(item.invoice_id)} 
              onMouseLeave={() => setHoveredRow(null)} 
              key={item.invoice_id}
-             onClick={() => openXML(item.invoice_id)}>
+             onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
           <p className="grid-item">{item.invoice_id}</p>
           <p className="grid-item">Invoice: {data.length - index}</p>
           <p className="grid-item">{item.sender_email}</p>
