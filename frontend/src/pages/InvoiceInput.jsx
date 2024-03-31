@@ -34,7 +34,7 @@ const InvoiceInput = () => {
 		if (newFile) {
 			setButtonName(newFile.name);
 
-			/*Opens the file and converts to a string*/
+			/*Opens the file nd converts to a string*/
 			const reader = new FileReader();
 			let xmlString;
 			reader.readAsText(newFile);
