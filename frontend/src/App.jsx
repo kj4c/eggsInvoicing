@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-// No need to import React with the latest React version unless you're using class components or React. useState, etc. explicitly
+// No need to imprt React with the latest React version unless you're using class components or React. useState, etc. explicitly
 import { Navbar, Sidebar } from './components'
 import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving, HtmlRendering} from './pages';
 import { useStateContext } from './contexts/ContextProvider';
