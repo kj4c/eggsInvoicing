@@ -2,11 +2,15 @@ import '../stylesheets/InvoiceReceiving.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import SearchIcon from '@mui/icons-material/Search';
 
 const InvoiceReceiving = () => {
   const [data, setData] = useState(null);
   const [dataFound, setDataFound] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
+  const [Loading, setLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState('Fetching Invoices');
+  const [selectedOption, setSelectedOption] = useState('');
   const navigate = useNavigate();
 
   const cookieExists = document.cookie.includes('cookie='); 
@@ -23,6 +27,21 @@ const InvoiceReceiving = () => {
     uid = uid.find(part => part.startsWith("uid=")).split("=")[1];
   }
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setLoadingText(prev => {
+        if (prev.length >= 20) return 'Fetching Invoices';
+        return prev + '.';
+      });
+    }, 200); 
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []);
+
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  
   const generatePDF = async () => {
     try {
       const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receiveReport?uid=${uid}`);
@@ -42,18 +61,34 @@ const InvoiceReceiving = () => {
     }
   };
 
+  const generateHTML = async () => {
+    try {
+      const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receiveHtml?uid=${uid}`);
+      navigate('/htmlRendering', { state: { res: response.data } });
+    } catch (error) {
+      console.error('Download error:', error);
+      alert('An error occurred while downloading the file');
+    }
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true);
         let response = 
-        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,)
-
+        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,);
+        
         response.data.map((item) => {
           let date = new Date(item.sent_at);
           let hour = date.getHours();
           let min = date.getMinutes();
-          item.sent_at = `${hour}:${min}`;
+          if (min < 10) {
+            item.sent_at = `${hour}:0${min}`
+          } else {
+            item.sent_at = `${hour}:${min}`;
+          }
         });
+        setLoading(false);
         setData(response.data);
         console.log('hello')
       } catch (error) {
@@ -70,8 +105,10 @@ const InvoiceReceiving = () => {
     <>
       <div className='searchContainer'>
         <p className = "fetching">Fetch Invoices</p>
-        <input type="text" className='inputSearch'/>
-        <select className = "options">
+        <button className='search'><SearchIcon/></button>
+        <input type="text" className='inputSearch' placeholder='Fetch'/>
+        <select className = "options" placeholder='Options' value={selectedOption} onChange={handleSelectChange}>
+          <option value="" disabled>Select an option</option>
           <option value="ID">by Invoice ID</option>
           <option value="Date">by Date</option>
           <option value="DateRange">by Date Range</option>
@@ -81,7 +118,7 @@ const InvoiceReceiving = () => {
           <p className='header'>Invoice ID</p>
           <p className='header'>Title</p>
           <p className='header'>Sender</p>
-          <p className='header'>Type</p>    
+          <p className='header'>Type</p>     
           <p className='header'>Date</p>
           {dataFound && data.map((item, index) => (
           <div className={`grid-row ${hoveredRow === index ? 'row-hover' : ''}`} 
@@ -95,10 +132,12 @@ const InvoiceReceiving = () => {
           <p className="grid-item">{item.sent_at}</p>
         </div>
       ))}
+      {Loading && <h1 className='loadingScreen'>{loadingText}</h1>}
+
       </div>
       <div className='buttonContainer'>
         <button className='button1' onClick={generatePDF}>Generate PDF</button>
-        <button className='button2'>Generate HTML</button>
+        <button className='button2' onClick={generateHTML}>Generate HTML</button>
       </div>
     </>
   )

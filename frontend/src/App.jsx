@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 // No need to import React with the latest React version unless you're using class components or React. useState, etc. explicitly
 import { Navbar, Sidebar } from './components'
-import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving } from './pages';
+import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving, HtmlRendering} from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
 import AuthRegister from './pages/authRegister';
@@ -9,8 +9,9 @@ import InvoiceInputJSON from './pages/invoiceInputJson';
 import NotFoundPage from './pages/NotFoundPage';
 import ForgetPassword from './pages/forgetPassword';
 import UserProfile from './components/UserProfile';
-
-import './App.css'
+import InvoiceInputMultiple from './pages/invoiceInputMultiple';
+import InvoiceInputMultipleJson from './pages/invoiceInputMultipleJson';
+import './App.css';
 
 const AppContent = () => {
   const { activeMenu } = useStateContext();
@@ -19,7 +20,8 @@ const AppContent = () => {
   const knownPaths = [
     '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
     '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
-    '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving'
+    '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving',
+    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering'
   ];
 
   const hideSidebarPaths = ['/login', '/register', 'reset-password'];
@@ -45,6 +47,8 @@ const AppContent = () => {
             <Route path="/invoiceRendered" element={<InvoiceRendered />} />
             <Route path="/invoiceSending" element={<InvoiceSending />} />
             <Route path="/invoiceInput" element={<InvoiceInput />} />
+            <Route path="/invoiceInputMultiple" element={<InvoiceInputMultiple />} />
+            <Route path='/invoiceInputMultipleJson' element={<InvoiceInputMultipleJson />} />
             <Route path="/invoiceReceiving" element={<InvoiceReceiving />} />
             <Route path="/login" element={<AuthLogin />} />
             <Route path="/register" element={<AuthRegister />} />
@@ -52,6 +56,7 @@ const AppContent = () => {
             <Route path="/register" element={<AuthRegister />} />
             <Route path="/invoiceInputJson" element={<InvoiceInputJSON />} />
             <Route path="/reset-password" element={<ForgetPassword />} />
+            <Route path="/htmlRendering" element={<HtmlRendering />} />
             <Route path="*" element={<NotFoundPage />} />
 
             <Route path="/profile" element={<UserProfile />} />
@@ -61,7 +66,6 @@ const AppContent = () => {
     </div>
   );
 }
-
 
 function App() {
   return (

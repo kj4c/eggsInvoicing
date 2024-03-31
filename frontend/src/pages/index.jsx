@@ -6,3 +6,4 @@ export { default as InvoiceValidation } from './InvoiceValidation';
 export { default as InvoiceSending } from './InvoiceSending';
 export { default as InvoiceInput } from './InvoiceInput';
 export { default as InvoiceReceiving } from './InvoiceReceiving';
+export { default as HtmlRendering} from './HtmlRendering';
