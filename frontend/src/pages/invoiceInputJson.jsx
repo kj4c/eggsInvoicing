@@ -8,6 +8,13 @@ function isValidEmail(email) {
     return regex.test(email);
 }
 
+function getCookie(name) {
+    let cookies = document.cookie.split('; ');
+    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    return cookieValue ? cookieValue.split('=')[1] : null;
+}
+
+
 function sendEmail(reqBody) {
     axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/email-json", reqBody)
     .then((response) => {
@@ -17,7 +24,7 @@ function sendEmail(reqBody) {
 
 const InvoiceInputJSON = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({from: "", to: "", attachment: ""});
+    const [formData, setFormData] = useState({from: getCookie('email') || "", to: "", attachment: ""});
     const [fileName, setFileName] = useState('No file chosen, yet.');
     const [buttonName, setButtonName] = useState('Upload JSON File');
 
