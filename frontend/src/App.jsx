@@ -10,7 +10,6 @@ import AuthRegister from './pages/authRegister';
 import InvoiceInputJSON from './pages/invoiceInputJson';
 import NotFoundPage from './pages/NotFoundPage';
 import ForgetPassword from './pages/forgetPassword';
-import UserProfile from './components/UserProfile';
 
 import './App.css'
 
