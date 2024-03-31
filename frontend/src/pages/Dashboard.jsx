@@ -4,8 +4,7 @@ import '../stylesheets/Dashboard.css';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import axios from 'axios';
-import {ChatIcon} from '@mui/icons-material/Chat';
-
+import { Link } from 'react-router-dom';
 const API_KEY = "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";
 
 const Dashboard = () => {
@@ -144,21 +143,34 @@ const Dashboard = () => {
       <div className="welcome-page">
         <div className="welcome-message">
           <h1 className='hello'>Hello {name} !</h1>
-          <p className="welcome">Welcome to EGG-INVOICE, our all-in-one e-invoicing platform to effortlessly create, send, and manage received invoices</p>
+          <p className="welcome">Welcome to EGG-INVOICE, your all-in-one e-invoicing platform for effortlessly creating, sending, and managing received invoices.</p>
         </div>
-        <div className='unread-box'>
-          <p className="unread-start">You have</p>
-          {!loaded ? (
-            <p className="unread-data" dangerouslySetInnerHTML={{ __html: loading }}></p>
-          ) : (
-            <p className="unread-data" dangerouslySetInnerHTML={{ __html: data }}></p>
-          )}
-          <p className="unread-end">unread emails</p>
-        </div>
-        <div className="create">
-          
+        <div className="dashboard-content">
+          <div className="unread">
+            <div className='unread-box'>
+              <p className="unread-start">You have</p>
+              {!loaded ? (
+                <p className="unread-data" dangerouslySetInnerHTML={{ __html: loading }}></p>
+              ) : (
+                <p className="unread-data" dangerouslySetInnerHTML={{ __html: data }}></p>
+              )}
+              <p className="unread-end">unread emails</p>
+            </div>
+            <div className="receive-btn">
+              <Link to="../invoiceReceiving" className='receive-link'>Check your received invoices</Link>
+            </div>
+            
+          </div>
+
+          <div className="create">
+            <p className="ready-text">Ready to get started?</p>
+            <div className="create-btn">
+              <Link to="../invoiceCreation" className='create-link'>Create your invoice here</Link>
+            </div>
+          </div>
         </div>
       </div>
+
       {
         !chat ? (
           <button style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px"}} onClick={() => setChat(true) }></button>
@@ -186,9 +198,7 @@ const Dashboard = () => {
                 </MainContainer>
             </div>
             <button style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px"}} onClick={() => setChat(false) }></button>
-          </div>
-          
-          
+          </div>         
         )
       }
       

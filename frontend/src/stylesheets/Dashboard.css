@@ -1,18 +1,27 @@
+.mt-12{
+  margin-top: 3rem;
+}
 
+.mt-6 {
+  margin-top: 1.5rem;
+}
 
 .Dashboard {
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 3rem;
   height: 50vh;
-  width: 80vw;;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 13vh;
+  margin-left: 8vw;
+}
+
+.welcome-page {
+  width: 100%;
 }
 
 .welcome-message {
   display: flex;
   flex-direction: column;
-  padding-top: 8vh;
-  padding-left: 10vh;
   width: 100%;
 }
 
@@ -21,7 +30,9 @@
   margin: 0;
   padding: 0;
   font-size: 80px;
-  color: #7f45f2
+  color: #7f45f2;
+  width: 80%;
+  padding-bottom: 10px;
 }
 
 .welcome {
@@ -31,9 +42,74 @@
   padding-right: 0.4em;
   font-size: 20px;
   color: #442583;
+  max-width: 90%;
+  padding-bottom: 8vh;
+}
+
+.dashboard-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 
+.unread-box {
+  max-width: 50vw;
+  font-size: 30px;
+  display: flex;
+  justify-self: center;
+}
+
+.unread-start, .unread-data, .unread-end{
+  padding-right: 10px;
+}
+
+.unread-data {
+  color:#442583;
+}
+
+.ready-text{
+  font-size: 30px;
+}
+
+.create {
+  margin-top: 5vh;
+}
+
+.receive-btn, .create-btn {
+  background-color: #eae0ff85;
+  border: solid #7f45f2;
+  border-radius: 10px;
+  width: 50vw;
+  height: 10vh;
+  margin-top: 3vh;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-size: 1.3em;
+  transition: 0.28s;
+}
+
+.receive-btn:hover, .create-btn:hover {
+  background-color: #7f45f2;
+}
+
+.receive-btn:hover > .receive-link {
+  color: white;
+}
+
+.create-btn:hover > .create-link {
+  color: white;
+}
+.receive-link, .create-link {
+  text-decoration: none;
+  width: 100%;
+}
+
+.receive-link:active, .create-link:active {
+  text-decoration: none;
+  color: #442583;
+}
 @media (min-width: 768px){
   .md-w-56{
     width: 14rem
