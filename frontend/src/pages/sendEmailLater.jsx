@@ -76,18 +76,18 @@ function SendEmailLater() {
         };
     };
 
-    const handleFilesChange = (index, event) => {
-        const newFile = event.target.files[0];
-        if (newFile) {
-            const updatedFiles = formData.content.map((file, fileIndex) => {
-                if (index === fileIndex) {
-                    return { filename: newFile.name, xmlString: newFile };
-                }
-                return file;
-            });
-            setFormData({...formData, content: updatedFiles});
-        }
-    };
+    // const handleFilesChange = (index, event) => {
+    //     const newFile = event.target.files[0];
+    //     if (newFile) {
+    //         const updatedFiles = formData.content.map((file, fileIndex) => {
+    //             if (index === fileIndex) {
+    //                 return { filename: newFile.name, xmlString: newFile };
+    //             }
+    //             return file;
+    //         });
+    //         setFormData({...formData, content: updatedFiles});
+    //     }
+    // };
 
     const addFileInput = () => {
         setFormData(prevFormData => ({
