@@ -43,7 +43,7 @@ const InvoiceCreationUploadDocument = () => {
     // } catch (error) {
     //   console.error(error);
     // }
-
+    e.preventDefault();
     try {
       console.log("HERE");
       const userData = await axios.post('https://invoice-seng2021-24t1-eggs-frontend.vercel.app/login', {
