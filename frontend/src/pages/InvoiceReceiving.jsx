@@ -33,7 +33,7 @@ const InvoiceReceiving = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setLoadingText(prev => {
-        if (prev.length >= 0) return 'Fetching Invoices';
+        if (prev.length >= 20) return 'Fetching Invoices';
         return prev + '.';
       });
     }, 200); 
