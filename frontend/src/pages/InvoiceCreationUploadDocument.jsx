@@ -28,47 +28,59 @@ const InvoiceCreationUploadDocument = () => {
     setUploadStatus("select");
   };
 
-  const handleFileUpload = async () => {
-    console.log("HERE");
+  const handleFileUpload = async (e) => {
     if (uploadStatus === "done") {
       clearFileInput();
       return;
     }
-
-    try {
-      const token = await axios.post('https://3dj53454nj.execute-api.ap-southeast-2.amazonaws.com/login', {
-        email: 'eggInvoice@gmail.com',
-        password: 'eggInvoice'
-      });
-      console.log("token = ", token);
-    } catch (error) {
-      console.error(error);
-    }
-
+    
     // try {
-    //   setUploadStatus("uploading");
-
-    //   const formData = new FormData();
-    //   formData.append("invoice.csv", selectedFile);
-
-    //   const response = await axios.post(
-    //     "http://3.27.23.157/invoice/CSV",
-    //     formData,
-    //     {
-    //       onUploadProgress: (progressEvent) => {
-    //         const percentCompleted = Math.round(
-    //           (progressEvent.loaded * 100) / progressEvent.total
-    //         );
-    //         setUploadProgress(percentCompleted);
-    //       },
-    //     }
-    //   );
-    //   console.log(response);
-    //   setUploadStatus("done");
+    //   const token = await axios.post('https://3dj53454nj.execute-api.ap-southeast-2.amazonaws.com/login', {
+    //     email: 'eggInvoice@gmail.com',
+    //     password: 'eggInvoice'
+    //   });
+    //   console.log("token = ", token);
     // } catch (error) {
     //   console.error(error);
-    //   setUploadStatus("select");
     // }
+
+    try {
+      console.log("HERE");
+      const userData = await axios.post('https://invoice-seng2021-24t1-eggs-frontend.vercel.app/login', {
+        username: 'khyejac',
+        password: 'password'
+      });
+      console.log("userData = ", userData);
+    } catch (error) {
+      console.log("ERROR!!!")
+      console.error(error);
+    }
+ 
+
+    try {
+      setUploadStatus("uploading");
+
+      const formData = new FormData();
+      formData.append("invoice.csv", selectedFile);
+
+      const response = await axios.post(
+        "http://3.27.23.157/invoice/CSV",
+        formData,
+        {
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(percentCompleted);
+          },
+        }
+      );
+      console.log(response);
+      setUploadStatus("done");
+    } catch (error) {
+      console.error(error);
+      setUploadStatus("select");
+    }
   };
 
   return (
