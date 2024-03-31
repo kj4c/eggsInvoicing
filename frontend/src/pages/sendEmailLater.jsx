@@ -28,41 +28,77 @@ function sendEmailLater(reqBody) {
 function SendEmailLater() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        type: "multiplejson", // or "multiplexml"
+        type: "", // or "multiplexml"
         from: getCookie('email') || "",
         recipient: "",
-        content: [{filename: "", jsonString: null}], 
+        content: [{filename: "", xmlString: ""}], 
         delayInMinutes: 0
     });
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
+    const handleOptionChange = () => {
+        // Get the select element
+        let selectElement = document.getElementById('options');
+        const selectValue = selectElement.value;
+        setFormData((prevFormData) => ({ ...prevFormData, type: selectValue }));
+        alert('Selected type: ' + selectValue);
     };
 
-    const handleFilesChange = (index, event) => {
-        const newFile = event.target.files[0];
-        if (newFile) {
-            const updatedFiles = formData.files.map((file, fileIndex) => {
-                if (index === fileIndex) {
-                    return { name: newFile.name, content: newFile };
+    const handleChange = (event) => {
+		const { name, value } = event.target;
+		setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+	};
+
+    const handleXmlStringChange = (index, event) => {
+        const fileReader = new FileReader();
+        fileReader.readAsText(event.target.files[0], "UTF-8");
+        fileReader.onload = e => {
+            const updatedXmlFiles = formData.content.map((file, i) => {
+                if (i === index) {
+                    return { ...file, filename: event.target.files[0].name, xmlString: e.target.result};
                 }
                 return file;
             });
-            setFormData({...formData, files: updatedFiles});
-        }
+            setFormData({...formData, content: updatedXmlFiles});
+        };
     };
+
+    const handleJsonStringChange = (index, event) => {
+        const fileReader = new FileReader();
+        fileReader.readAsText(event.target.files[0], "UTF-8");
+        fileReader.onload = e => {
+            const updatedJsonFiles = formData.content.map((file, i) => {
+                if (i === index) {
+                    return { ...file, filename: event.target.files[0].name, jsonString: e.target.result };
+                }
+                return file;
+            });
+            setFormData({...formData, content: updatedJsonFiles});
+        };
+    };
+
+    // const handleFilesChange = (index, event) => {
+    //     const newFile = event.target.files[0];
+    //     if (newFile) {
+    //         const updatedFiles = formData.content.map((file, fileIndex) => {
+    //             if (index === fileIndex) {
+    //                 return { filename: newFile.name, xmlString: newFile };
+    //             }
+    //             return file;
+    //         });
+    //         setFormData({...formData, content: updatedFiles});
+    //     }
+    // };
 
     const addFileInput = () => {
         setFormData(prevFormData => ({
             ...prevFormData,
-            content: [...prevFormData.content, { name: "", content: null }]
+            content: [...prevFormData.content, { filename: "", files: null }]
         }));
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+        // console.log(formData);
         if (!isValidEmail(formData.recipient)) {
             alert('Please enter a valid email in the "Recipient" section and try again.');
             return;
@@ -73,7 +109,7 @@ function SendEmailLater() {
             return;
         } 
         
-        if (formData.content.some(item => !item.fileString)) {
+        if (formData.content.some(item => item.filename === "")) {
             alert('Please attach at least one file.');
             return;
         } 
@@ -90,18 +126,19 @@ function SendEmailLater() {
             if (formData.type === "multiplejson") {
                 // If JSON, parse the string to JSON object (if needed)
                 try {
-                    processedItem.content = JSON.parse(item.fileString);
+                    processedItem.jsonString = JSON.parse(item.jsonString);
                 } catch (error) {
                     alert(`Error parsing JSON for file: ${item.filename}`);
                     throw error; // Prevent form submission
                 }
-            } else if (formData.type === "multiplexml") {
-                processedItem.content = item.fileString;
+            } else {
+                processedItem.xmlString = item.xmlString;
             }
             return processedItem;
         });
-    
-        const reqBody = { ...formData, content: processedContent };
+
+        const reqBody = { ...formData, content: processedContent};
+        console.log(reqBody);
         sendEmailLater(reqBody);
     };
 
@@ -112,7 +149,8 @@ function SendEmailLater() {
             <form className="formContainer">
                 <div className="formGroup">
                     <label>Type:</label>
-                    <select name="type" value={formData.type} onChange={handleChange} className="inputBox">
+                    <select name="type" id="options" onChange={handleOptionChange} className="inputBox2">
+                        <option value= "" >Select an option</option>
                         <option value="multiplejson">Multiple JSON</option>
                         <option value="multiplexml">Multiple XML</option>
                     </select>
@@ -135,7 +173,10 @@ function SendEmailLater() {
                         <div key={index} className="attachmentGroup">
                             <input
                                 type="file"
-                                onChange={(e) => handleFilesChange(index, e)}
+                                onChange={(e) => 
+                                    formData.type === 'multiplejson' ? 
+                                    handleJsonStringChange(index, e) :
+                                    handleXmlStringChange(index, e)}
                                 accept=".json,.xml"
                                 className="attachmentFileInput"
                             />
