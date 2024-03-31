@@ -23,7 +23,7 @@ const NotFoundPage = () => {
       <div style={{ padding: "1rem", textAlign: "center" }}>
         <h1>404: Page Not Found</h1>
         <p>Oops! The page you&apos;re looking for doesn&apos;t exist.</p>
-        <p>Anyways Jacqueline and Chloe are the best tutors ever</p>
+        <p>Anyways Jacqueline you are the best tutor ever</p>
         <a href="/">Go back to the homepage</a>
         <p></p>
         <img src={picture} alt="404 Not Found" style={{ width: "10%" }} />

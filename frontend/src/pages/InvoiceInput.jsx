@@ -3,11 +3,16 @@ import '../stylesheets/InvoiceInput.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
 function isValidEmail(email) {
 	// Simple regex for basic email validation
 	const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	return regex.test(email);
+}
+
+function getCookie(name) {
+    let cookies = document.cookie.split('; ');
+    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    return cookieValue ? cookieValue.split('=')[1] : null;
 }
 
 function sendEmail(reqBody) {
@@ -19,7 +24,7 @@ function sendEmail(reqBody) {
 
 const InvoiceInput = () => {
 	const navigate = useNavigate();
-	const [formData, setFormData] = useState({from: "", to: "", attachment: ""});
+	const [formData, setFormData] = useState({from: getCookie('email') || "", to: "", attachment: ""});
 	const [fileName, setFileName] = useState('No file chosen, yet.');
 	const [buttonName, setButtonName] = useState('Upload XML File');
 
@@ -29,7 +34,7 @@ const InvoiceInput = () => {
 		if (newFile) {
 			setButtonName(newFile.name);
 
-			/*Opens the file and converts to a string*/
+			/*Opens the file nd converts to a string*/
 			const reader = new FileReader();
 			let xmlString;
 			reader.readAsText(newFile);
