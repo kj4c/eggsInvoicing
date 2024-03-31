@@ -8,6 +8,12 @@ function isValidEmail(email) {
     return regex.test(email);
 }
 
+function getCookie(name) {
+    let cookies = document.cookie.split('; ');
+    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    return cookieValue ? cookieValue.split('=')[1] : null;
+}
+
 function sendEmail(reqBody) {
     axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/multiInvoice", reqBody)
     .then((response) => {
@@ -19,7 +25,7 @@ function sendEmail(reqBody) {
 const InvoiceInputMultiple = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        from: "",
+        from: getCookie('email') || "",
         recipient: "",
         xmlFiles: [{ filename: "", xmlString: "" }] // Initially empty XML string
     });
