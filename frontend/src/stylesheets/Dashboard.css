@@ -1,30 +1,38 @@
-.mt-12{
-  margin-top: 3rem;
-}
 
-.mt-6 {
-  margin-top: 1.5rem;
-}
 
 .Dashboard {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  margin-top: 3rem;
+  height: 50vh;
+  width: 80vw;;
 }
+
 .welcome-message {
   display: flex;
+  flex-direction: column;
+  padding-top: 8vh;
+  padding-left: 10vh;
+  width: 100%;
+}
+
+.hello {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  font-size: 80px;
+  color: #7f45f2
 }
 
 .welcome {
   display: inline-block;
+  white-space: normal;
   margin: 0px;
   padding-right: 0.4em;
+  font-size: 20px;
+  color: #442583;
 }
 
-.name {
-  display: inline-block;
-  margin: 0px;
-}
 
 @media (min-width: 768px){
   .md-w-56{
