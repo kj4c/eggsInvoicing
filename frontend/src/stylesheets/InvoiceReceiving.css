@@ -1,0 +1,132 @@
+.inboxContainer {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr 0.4fr;
+    grid-template-rows: 55px repeat(15, 1fr);
+    width: 90%;
+    height: 75vh;
+    background-color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 15px;
+    border: 3px solid #7f45f2;
+    margin-bottom: 1%;
+    overflow: auto;
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10vh;
+    margin-right: 10vh;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+}
+
+.fetching {
+    flex: 1.5;
+    font-size: 30px;
+}
+
+.search {
+    border-radius: 20px;
+    margin-right: 1%;
+    background-color: #7f45f2;
+    border: none;
+}
+
+.search:hover {
+    cursor: pointer;
+}
+.inputSearch {
+    flex: 2;
+    margin-right: 10%;
+    border: none;
+    background-color: #FAFBFB;
+    border-bottom: 2px solid #000000;
+    outline: none;
+    font-size: 20px;
+}
+
+.options {
+    font-size: 18px;
+    font-family: Roboto;
+    padding: 5px;
+    flex: 1.5;
+    border: 2px solid #7f45f2;
+}
+
+.grid-row {
+    display: contents; /* This makes .grid-row act as a "wrapper" without affecting the grid layout */
+}
+
+.row-hover .grid-item {
+    background-color: #ecececec;
+    cursor: pointer; /* This will now work since .grid-row acts as a real container */
+}
+
+.grid-item {
+    /* Special styles for items not in the first row */
+    background-color: white;
+    padding: 10px;
+    border-bottom: 2px solid #7f45f2;
+    align-self: center;
+}
+
+.header {
+    align-self: center;
+    padding: 10px;
+    font-size: 22px;
+    border-bottom: 2px solid #7f45f2;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    z-index: 100;
+    position: sticky;
+    background-color: #FAFBFB;
+    width: 100%;
+}
+
+.button1, .button2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 18%;
+    margin-right: 18%;
+    background-color: white;
+    border: 3px solid #7f45f2;
+    border-radius: 20px;
+    cursor: pointer;
+
+    /* Additional styling to reset some default button styles */
+    font-size: 22px;
+    line-height: 50px; /* This helps vertically center the text */
+    text-align: center;
+    padding: 20px;
+    
+    /* Optional: Add a hover effect */
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.button1:hover, .button2:hover {
+    background-color:  #9c6aff; /* Darker shade on hover */
+    color: white;  
+    border: 3px solid white;
+}
+
+.button1 {
+    flex: 1
+}
+
+.button2 {
+    flex: 1
+}
+
+.loadingScreen {
+    position: absolute;
+    top: 40%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    font-size: 47px; /* Adjust as needed */
+  }

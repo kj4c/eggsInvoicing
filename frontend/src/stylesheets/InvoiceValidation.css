@@ -1,0 +1,186 @@
+h1 {
+  margin: 50px;
+  color: #442583
+}
+
+.valid-text {
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.validation-container {
+  position: relative;
+  align-items: center;
+  padding: 50px;
+
+  margin-left: 50px;
+  margin-right: 50px;
+
+  border-style: solid;
+  border-radius: 40px;
+  border-width: 2px;
+  border-color: grey;
+}
+
+.mid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.select-button-div {
+  display: flex;
+  position: relative;
+  border: solid;
+  border-color: #7f45f2;
+  border-radius: 16px;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 7vh;
+  transition: 0.2s;
+}
+
+.select-button {
+  position: absolute;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.select-file::-webkit-file-upload-button {
+  visibility: hidden;
+  width: 100%;
+}
+
+.select-file {
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  color: transparent;
+}
+
+.select-button-div:hover {
+  background-color: #7f45f2;
+  color: white;
+}
+
+.select-button-div :hover {
+  cursor: pointer;
+}
+
+/* uploaded text appearing */
+.valid-uploaded {
+  margin-top: 3vh;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 16px;
+  text-align: center;
+
+  background-color: #7f45f2;
+  border-radius: 16px;
+}
+
+.valid-not-uploaded {
+  color: transparent;
+  padding: -2vh;
+}
+
+.valid-submit {
+  margin-top: 3vh;
+
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: 0.2s;
+
+  /* height: 5vh;
+  width: 7vw; */
+  padding: 9px;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  border-color: #7f45f2;
+  border-radius: 16px;
+  border-style: solid;
+  border-width: 2px;
+
+}
+
+.valid-submit:hover {
+  cursor: pointer;
+  background-color: #7f45f2;
+  color: white;
+}
+
+.invalid-format {
+  color: #7f45f2;
+  font-size: 30px;
+  margin-top: 5vh;
+}
+
+
+.validating-load {
+  font-size: 30px;
+  margin-top: 5vh;
+}
+
+.validating-error {
+  font-size: 30px;
+  margin-top: 5vh;
+}
+
+.valid-result {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.report-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.validation-report {
+  background-color: white;
+  padding: 25px;
+}
+
+.report-download {
+  margin-top: 3vh;
+  margin-left: 3vh;
+  padding: 20px;
+
+  font-size: 24px;
+  font-weight: bold;
+
+  border-color: #7f45f2;
+  border-radius: 16px;
+  border-style: solid;
+  border-width: 2px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.report-download:hover {
+  cursor: pointer;
+  background-color: #7f45f2;
+  color: white;
+}
+
+.report-title {
+  text-align: center;
+}
+
+.report-results {
+  margin: 5vh;
+  color: #7f45f2;
+}

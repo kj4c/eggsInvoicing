@@ -23,8 +23,28 @@ const fetchByDateRange = require('./functions/fetchByDateRange');
 const getStatisticsDateRange = require('./functions/getStatisticsDateRange');
 const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
+const getUserInfo = require('./functions/getUserInfo');
 const cors = require('cors');
-app.use(cors());
+
+const allowedOrigins = [
+  'https://invoice-seng2021-24t1-eggs-frontend.vercel.app',
+  'http://localhost:5173',
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 app.use(express.json());
 app.use(errorHandler());
@@ -110,7 +130,7 @@ on failure:
 message: string - error message
 */
 app.get('/receive/fetchAll', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   try {
     res.json(await fetchAll(uid));
   } catch (error) {
@@ -131,7 +151,7 @@ on failure:
 message: string - error message
 */
 app.get('/receive/fetchByInvoiceId', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   const invoiceId = parseInt(req.query.invoiceId);
   try {
     res.json(await fetchByInvoiceId(uid, invoiceId));
@@ -152,7 +172,7 @@ OR
 message: string - error message
 */
 app.get('/receive/fetchByDate', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   const date = req.query.date;
   try {
     res.json(await fetchByDate(uid, date));
@@ -174,7 +194,7 @@ OR
 message: string - error message
 */
 app.get('/receive/fetchByDateRange', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   const fromDate = req.query.fromDate;
   const toDate = req.query.toDate;
   try {
@@ -197,7 +217,7 @@ OR
 message: string - error message
 */
 app.get('/receive/getStatisticsDateRange', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   const startDate = req.query.startDate;
   const endDate = req.query.endDate;
   try {
@@ -219,7 +239,7 @@ OR
 message: string - error message
 */
 app.get('/receive/getStatistics', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   try {
     res.json(await getStatistics(uid));
   } catch (error) {
@@ -238,7 +258,7 @@ OR
 message: string - error message
 */
 app.get('/receive/getNotifications', async function (req, res) {
-  const uid = parseInt(req.query.uid);
+  const uid = req.query.uid;
   try {
     res.json(await getNotifications(uid));
   } catch (error) {
@@ -309,12 +329,12 @@ pdf: pdf - pdf file containing the report
 if failed
 error: string - error message
 */
-app.get('/sentReport', async(req, res) => {
+app.get('/sentReport', async (req, res) => {
   try {
-    const uid = parseInt(req.query.uid);
+    const uid = req.query.uid;
     let pdf = await generateSentPdf(uid);
     if (pdf.status !== 200) {
-      res.status(400).json({error: 'error generating the report'});
+      res.status(400).json({ error: 'error generating the report' });
     } else {
       pdf = pdf.doc;
       res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"');
@@ -323,7 +343,7 @@ app.get('/sentReport', async(req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).json({message: 'error generating the report'});
+    res.status(400).json({ message: 'error generating the report' });
   }
 });
 
@@ -409,21 +429,21 @@ pdf: pdf - pdf file containing the report
 if failed
 error: string - error message
 */
-app.get('/receiveReport', async(req, res) => {
+app.get('/receiveReport', async (req, res) => {
   try {
-    const uid = parseInt(req.query.uid);
+    const uid = req.query.uid;
     let pdf = await generateReceivePdf(uid);
     if (pdf.status !== 200) {
-      res.status(400).json({error: 'error generating the report'});
+      res.status(400).json({ error: 'error generating the report' });
     } else {
       pdf = pdf.doc;
-      res.setHeader('Content-Disposition', 'attachment; filename="communication_report_sent.pdf"');
+      res.setHeader('Content-Disposition', 'attachment; filename="communication_report_receive.pdf"');
       res.setHeader('Content-Type', 'application/pdf');
       res.status(200).send(pdf.output());
     }
   } catch (error) {
     console.log(error);
-    res.status(400).json({message: 'error generating the report'});
+    res.status(400).json({ message: 'error generating the report' });
   }
 });
 
@@ -438,18 +458,18 @@ page: html file containing the report
 if failed
 error: string - error message
 */
-app.get('/receiveHtml', async(req, res) => {
+app.get('/receiveHtml', async (req, res) => {
   try {
-    const uid = parseInt(req.query.uid);
+    const uid = req.query.uid;
     const page = await receiveHtml(uid);
     if (page.status !== 200) {
-      res.status(page.status).json({message: page.error});
+      res.status(page.status).json({ message: page.error });
     } else {
       res.status(200).send(page.page);
     }
   } catch (error) {
     console.log(error);
-    res.status(400).json({message: 'error generating the report'});
+    res.status(400).json({ message: 'error generating the report' });
   }
 });
 
@@ -467,22 +487,22 @@ status code and message
 on failure:
 status code and error message
 */
-app.post('/register', async(req, res) => {
+app.post('/register', async (req, res) => {
   try {
     const { email, phone, username, password } = req.body;
     res.status(200).json(await authRegister(email, phone, username, password));
   } catch (err) {
-    res.status(400).json({message: 'Failed to register new user:'});
+    res.status(400).json({ message: 'Failed to register new user:' });
   }
 });
 
-app.get('/receiveEmail', async(req, res) => {
+app.get('/receiveEmail', async (req, res) => {
   try {
-    const uid = parseInt(req.query.uid);
+    const uid = req.query.uid;
     const invoiceId = parseInt(req.query.invoiceId);
     res.status(200).json(await receiveEmail(uid, invoiceId));
   } catch (err) {
-    res.status(400).json({message: 'Email not received.'});
+    res.status(400).json({ message: 'Email not received.' });
   }
 });
 
@@ -499,15 +519,48 @@ uid - integer - id of the user
 on failure:
 status code and error message
 */
-app.post('/login', async(req, res) => {
+app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
     const userData = await authLogin(username, password);
     res.status(200).json(userData);
   } catch (err) {
-    res.status(400).json({ message: 'Failed to login:'});
+    res.status(400).json({ message: 'Failed to login:' });
   }
 });
+
+/*
+@brief
+gets user info
+@params
+uid: integer - id of the user
+@output
+on success:
+status code - integer - 200
+username - string - username of user
+email - string - email of user
+phone_no - string - phone number of user
+on failure:
+status code and error message
+*/
+app.get('/getUserInfo', async (req, res) => {
+  try {
+    const uid = req.query.uid;
+    const userInfo = await getUserInfo(uid);
+    res.status(200).json(userInfo);
+  } catch (err) {
+    res.status(400).json({ message: 'Failed to get user info:' });
+  }
+});
+
+// app.post('/resetPassword', async(req, res) => {
+//   try {
+//     const email = req.body;
+//     res.status(200).json(await sendingResetPassword(email));
+//   } catch (err) {
+//     res.status(400).json({message: 'Password reset email failed to send.'})
+//   }
+// });
 
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== 'test') {

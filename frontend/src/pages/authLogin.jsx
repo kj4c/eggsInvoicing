@@ -60,11 +60,23 @@ function AuthLogin() {
         password,
       });
       
-      console.log('Login successful:', response.data);
+      const userInfo = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/getUserInfo?uid=${response.data.uid}`);
+
       const cookie = generateRandomString(10);
       document.cookie = `cookie=${cookie}; path=/`;
       document.cookie = `uid=${response.data.uid}; path=/`;
+      
       localStorage.setItem('uid', response.data.uid);
+      localStorage.setItem('email', userInfo.data.email);
+      localStorage.setItem('username', userInfo.data.username);
+      localStorage.setItem('phone_no', userInfo.data.phone_no);
+
+      document.cookie = `email=${userInfo.data.email}; path=/`;
+      document.cookie = `username=${userInfo.data.username}; path=/`;
+      document.cookie = `phone_no=${userInfo.data.phone_no}; path=/`;
+
+      console.log('Login successful:', response.data);
+
       navigate(`/`);
     } catch (error) {
       setError('Login failed. Please check your credentials and try again.')
@@ -92,6 +104,7 @@ function AuthLogin() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                className='inputFields'
               />
             </div>
             <div>
@@ -102,6 +115,7 @@ function AuthLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className='inputFields'
               />
             </div>
             <p className='login-error'>{error}</p>
