@@ -12,6 +12,7 @@ import UserProfile from './components/UserProfile';
 import InvoiceInputMultiple from './pages/invoiceInputMultiple';
 import InvoiceInputMultipleJson from './pages/invoiceInputMultipleJson';
 import './App.css';
+import SendEmailLater from './pages/sendEmailLater';
 
 const AppContent = () => {
   const { activeMenu } = useStateContext();
@@ -21,7 +22,7 @@ const AppContent = () => {
     '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
     '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
     '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving',
-    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering'
+    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering', '/sendEmailLater'
   ];
 
   const hideSidebarPaths = ['/login', '/register', 'reset-password'];
@@ -58,6 +59,7 @@ const AppContent = () => {
             <Route path="/reset-password" element={<ForgetPassword />} />
             <Route path="/htmlRendering" element={<HtmlRendering />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path='/sendEmailLater' element={<SendEmailLater/>}></Route>
 
             <Route path="/profile" element={<UserProfile />} />
           </Routes>

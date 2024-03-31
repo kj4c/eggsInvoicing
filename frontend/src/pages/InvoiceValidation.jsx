@@ -55,9 +55,13 @@ const InvoiceValidation = () => {
             setData(response.data);
           })
           .catch(error => {
-            console.error('error:', error.response.data);
-            setError(true);
-            setFailed(true);
+            if (error.response.status === 500) {
+              console.error('error:', error.response.data);
+              setError(error.response.data);
+            } else {
+              console.error('error:', error.response.data);
+              setFailed(true);
+            }
           })
           .finally(() => {
             setIsSubmitting(false);
@@ -111,7 +115,7 @@ const InvoiceValidation = () => {
           {file ? <p className='valid-uploaded'>Uploaded: {fileName}</p> : <p className='valid-uploaded'>No File Uploaded.</p>}
           <button className='valid-submit' onClick={handleOnSubmit}>Submit</button>
           {isSubmitting && <p className='validating-load'>Validating...</p>}
-          {error && <p className='validating-error'>Validating Error</p>}
+          {error && <p className='validating-error'>Validating Error: {error}</p>}
           {passed && <h2 className='valid-result'>Invoice Passed Validation!</h2>}
           {failed && <p className='valid-result'>Invoice Failed Validation</p>}
           {(passed || failed) &&
