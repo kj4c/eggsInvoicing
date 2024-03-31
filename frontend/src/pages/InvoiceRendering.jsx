@@ -1,23 +1,47 @@
 import {useState, useEffect} from 'react';
 import '../stylesheets/InvoiceRendering.css';
 import Notif from '../components/RenderNotif';
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 const InvoiceRendering = () => {
   const [file, setFile] = useState('ready');
   const [fileName, setFileName] = useState('');
   const [notif, setNotif] = useState(false);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cookieExists = document.cookie.includes('cookie='); 
+
+    if (!cookieExists) {
+      navigate('/login');
+    }
+  }, [navigate]);
+  
   async function handleOnSubmit(e) {
-    const btn = document.querySelector('.noSubmitBtn');
-    btn.classList.add('vibrating');
-    setTimeout(() => {
-      btn.classList.remove('vibrating');
-    }, 300);
     e.preventDefault();
     if (file === 'ready') {
+      const btn = document.querySelector('.noSubmitBtn');
+      btn.classList.add('vibrating');
+      setTimeout(() => {
+        btn.classList.remove('vibrating');
+      }, 300);
       setTimeout(() => setNotif(true), 250);
       return;
     }
+
+    const formData = new FormData();
+    formData.append('invoice', file);
+    try {
+      const res = await axios.post('https://sleeperagents1.alwaysdata.net/renderHTML?language=eng', formData);
+      navigate('/invoiceRendered', { state: { res: res.data } });
+    } catch (error) {
+      console.error('Error:', error);
+    } 
+  
   }
+
+
   function handleOnChange(e) {
     const target = e.target;
     setFile(target.files[0]);
