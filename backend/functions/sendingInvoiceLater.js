@@ -8,21 +8,21 @@ function sendInvoiceLater(type, from, recipient, filesOrString, delayInMinutes) 
   return new Promise((resolve, reject) => {
     let sendFunction;
     switch (type.toLowerCase()) {
-      case 'multiplejson':
-        sendFunction = sendEmailWithMultipleJSON;
-        break;
-      case 'multiplexml':
-        sendFunction = sendEmailWithMultipleXML;
-        break;
-      case 'xml':
-        sendFunction = sendEmailWithXML;
-        break;
-      case 'json':
-        sendFunction = sendEmailWithJSON;
-        break;
-      default:
-        reject(new Error(`Unsupported type: ${type}`));
-        return;
+    case 'multiplejson':
+      sendFunction = sendEmailWithMultipleJSON;
+      break;
+    case 'multiplexml':
+      sendFunction = sendEmailWithMultipleXML;
+      break;
+    case 'xml':
+      sendFunction = sendEmailWithXML;
+      break;
+    case 'json':
+      sendFunction = sendEmailWithJSON;
+      break;
+    default:
+      reject(new Error(`Unsupported type: ${type}`));
+      return;
     }
 
     setTimeout(() => {
@@ -38,6 +38,5 @@ function sendInvoiceLater(type, from, recipient, filesOrString, delayInMinutes) 
     }, delayInMinutes * 60 * 1000);
   });
 }
-
 
 module.exports = sendInvoiceLater;
