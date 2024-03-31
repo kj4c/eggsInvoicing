@@ -1,9 +1,8 @@
-// import React from 'react'
+// Import statements remain unchanged
 import '../stylesheets/UserProfile.css';
-import { useState } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import CreateIcon from '@mui/icons-material/Create';
 import picture from '../assets/profile.png';
 
 const UserProfile = () => {
@@ -11,70 +10,101 @@ const UserProfile = () => {
 
   useEffect(() => {
     const cookieExists = document.cookie.includes('cookie='); 
-
     if (!cookieExists) {
       navigate('/login');
     }
   }, [navigate]);
-  
+
+  // State for user details
   const [userDetails, setUserDetails] = useState({
     username: '',
     email: '',
     phone_no: ''
   });
 
-  async function getUserInfo() {
-    const uid = localStorage.getItem('uid');
-    try {
-      const res = await axios.get('https://invoice-seng2021-24t1-eggs.vercel.app/getUserInfo', {
-        params: {
-          uid: uid
-        }
-      });
-      setUserDetails({
-        username: res.data.username,
-        email: res.data.email,
-        phone_no: res.data.phone_no
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  // State to manage editing status
+  const [isEditing, setIsEditing] = useState({
+    username: false,
+    email: false,
+    phone_no: false,
+  });
+
+  // Utility function to get cookie value
+  function getCookie(name) {
+    let cookies = document.cookie.split('; ');
+    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    return cookieValue ? cookieValue.split('=')[1] : null;
   }
 
-  const handleLogout = () => {
-    localStorage.removeItem('uid');
-    document.cookie = 'cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    document.cookie = 'uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    navigate('/login');
-  }
+  // Fetch user info from cookies
+  useEffect(() => {
+    const uid = localStorage.getItem('uid'); // Assuming you're using this somewhere or for future use
 
-  getUserInfo();
+    setUserDetails({
+      uid: uid, // Including uid in state assuming it might be used later on
+      username: getCookie('username'),
+      email: getCookie('email'),
+      phone_no: getCookie('phone_no')
+    });
+  }, []);
+
+  // Update individual user detail and cookie
+  const handleEditChange = (event, field) => {
+    setUserDetails({ ...userDetails, [field]: event.target.value });
+  };
+
+  // Toggle edit state
+  const toggleEdit = (field) => {
+    setIsEditing({ ...isEditing, [field]: !isEditing[field] });
+  };
+
+  // Save edits to cookies
+  const handleSave = (field) => {
+    document.cookie = `${field}=${userDetails[field]}; path=/`;
+    toggleEdit(field);
+  };
+
+  // Handle logout
+  const handleLogout = () => { 
+  localStorage.removeItem('uid'); 
+  document.cookie = 'cookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
+  document.cookie = 'uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
+  document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
+  document.cookie = 'phone_no=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
+  document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
+  navigate('/');
+  }
 
   return (
     <div>
       <p className='heading'>Profile</p>
       <div className='profile-info'>
-        <img className='profile-picture' src={picture}/>
+        <img className='profile-picture' src={picture} alt="Profile"/>
         <hr className="solid" />
-        <div className='info-containers'>
-          <p className='user-name'>Username</p>
-          <p className='user-info'>{userDetails.username}</p>
-        </div>
-        <hr className="solid" />
-        <div className='info-containers'>
-          <p className='email'>Email</p>
-          <p className='user-info'>{userDetails.email}</p>
-        </div>
-        <hr className="solid" />
-        <div className='info-containers'>
-          <p className='phone-no'>Phone</p>
-          <p className='user-info'>{userDetails.phone_no}</p>
-        </div>
-        <hr className="solid" />
+        {Object.keys(userDetails).map((field) => 
+          field !== 'uid' && ( // Assuming you don't want to display UID
+            <div key={field} className='info-containers'>
+              <p className={`${field}-label`}>{field.replace('_', ' ').toUpperCase()}</p>
+              {isEditing[field] ? (
+                <div>
+                  <input 
+                    type="text"
+                    value={userDetails[field]}
+                    onChange={(e) => handleEditChange(e, field)}
+                  />
+                  <button onClick={() => handleSave(field)}>Save</button>
+                </div>
+              ) : (
+                <p className='user-info'>{userDetails[field]} <button onClick={() => toggleEdit(field)} className='pencilLogo'><CreateIcon/></button></p>
+              )}
+              <hr className="solid" />
+            </div>
+          )
+        )}
         <button onClick={handleLogout} className='log-out'>Log Out</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserProfile
+export default UserProfile;

@@ -73,7 +73,7 @@ const InvoiceInputMultipleJson = () => {
                 1. From: should be your email<br />
                 2. Enter the recipient&apos;s email inside the To (Email)<br />
                 3. Upload your JSON files from your computer. <br/>
-				4. click add another Attachment if you need.
+				4. Click add another Attachment if you need.
             </p>
             <label className="labels">From:</label>
             <input type="text" className="inputBox" name="from" value={formData.from} onChange={handleChange}/>
