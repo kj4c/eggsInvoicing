@@ -47,7 +47,8 @@ const Dashboard = () => {
         setData(`${response.data.notifications.length}`);
         setLoaded(true);
       } catch (error) {
-        console.error(error);
+        setData('0');
+        setLoaded(true);
       }
     }; 
     
