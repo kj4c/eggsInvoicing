@@ -72,25 +72,21 @@ const Dashboard = () => {
   const [dInvoice, setDInvoice] = useState('loading');
   const [dTax, setDTax] = useState('loading');
   const [dAmount, setDAmount] = useState('loading');
-  const [dPrepaid, setDPrepaid] = useState('loading');
   const [dPayable, setDPayable] = useState('loading');
 
   const [wInvoice, setWInvoice] = useState('loading');
   const [wTax, setWTax] = useState('loading');
   const [wAmount, setWAmount] = useState('loading');
-  const [wPrepaid, setWPrepaid] = useState('loading');
   const [wPayable, setWPayable] = useState('loading');
 
   const [mInvoice, setMInvoice] = useState('loading');
   const [mTax, setMTax] = useState('loading');
   const [mAmount, setMAmount] = useState('loading');
-  const [mPrepaid, setMPrepaid] = useState('loading');
   const [mPayable, setMPayable] = useState('loading');
 
   const [yInvoice, setYInvoice] = useState('loading');
   const [yTax, setYTax] = useState('loading');
   const [yAmount, setYAmount] = useState('loading');
-  const [yPrepaid, setYPrepaid] = useState('loading');
   const [yPayable, setYPayable] = useState('loading');
 
   useEffect(() => {
@@ -106,13 +102,11 @@ const Dashboard = () => {
           setDInvoice(res.data.dailyFinancialStats.numInvoices);
           setDTax(res.data.dailyFinancialStats.taxAmount);
           setDAmount(res.data.dailyFinancialStats.taxInclusiveAmount);
-          setDPrepaid(res.data.dailyFinancialStats.prepaidAmount);
           setDPayable(res.data.dailyFinancialStats.payableAmount);
         } else {
           setDInvoice('0');
           setDTax('$0');
           setDAmount('$0');
-          setDPrepaid('$0');
           setDPayable('$0');
         }
         
@@ -120,13 +114,11 @@ const Dashboard = () => {
           setWInvoice(res.data.weeklyFinancialStats.numInvoices);
           setWTax(res.data.weeklyFinancialStats.taxAmount);
           setWAmount(res.data.weeklyFinancialStats.taxInclusiveAmount);
-          setWPrepaid(res.data.weeklyFinancialStats.prepaidAmount);
           setWPayable(res.data.weeklyFinancialStats.payableAmount);
         } else {
           setWInvoice('0');
           setWTax('$0');
           setWAmount('$0');
-          setWPrepaid('$0');
           setWPayable('$0');
         }
         
@@ -134,13 +126,11 @@ const Dashboard = () => {
           setMInvoice(res.data.monthlyFinancialStats.numInvoices);
           setMTax(res.data.monthlyFinancialStats.taxAmount);
           setMAmount(res.data.monthlyFinancialStats.taxInclusiveAmount);
-          setMPrepaid(res.data.monthlyFinancialStats.prepaidAmount);
           setMPayable(res.data.monthlyFinancialStats.payableAmount);
         } else {
           setMInvoice('0');
           setMTax('$0');
           setMAmount('$0');
-          setMPrepaid('$0');
           setMPayable('$0');
         }
 
@@ -148,35 +138,29 @@ const Dashboard = () => {
           setYInvoice(res.data.financialYearStats.numInvoices);
           setYTax(res.data.financialYearStats.taxAmount);
           setYAmount(res.data.financialYearStats.taxInclusiveAmount);
-          setYPrepaid(res.data.financialYearStats.prepaidAmount);
           setYPayable(res.data.financialYearStats.payableAmount);
         } else {
           setYInvoice('0');
           setYTax('$0');
           setYAmount('$0');
-          setYPrepaid('$0');
           setYPayable('$0');
         }
       } catch (error) {
         setDInvoice('0');
         setDTax('$0');
         setDAmount('$0');
-        setDPrepaid('$0');
         setDPayable('$0');
         setWInvoice('0');
         setWTax('$0');
         setWAmount('$0');
-        setWPrepaid('$0');
         setWPayable('$0');
         setMInvoice('0');
         setMTax('$0');
         setMAmount('$0');
-        setMPrepaid('$0');
         setMPayable('$0');
         setYInvoice('0');
         setYTax('$0');
         setYAmount('$0');
-        setYPrepaid('$0');
         setYPayable('$0');
         setYPayable('$0');
       }
