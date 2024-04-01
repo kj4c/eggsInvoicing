@@ -50,9 +50,8 @@ async function getStatisticsDateRangeV2(uid, startDate, endDate) {
         payableAmount += parseFloat(monetaryTotal['cbc:PayableAmount']);
         numInvoices++;
       } catch (error) {
-        continue
+        continue;
       }
-      
     }
   }
 

@@ -232,7 +232,7 @@ app.get('/receive/getStatistics', async function (req, res) {
 
 /*
 @brief
-retrieves the Financial Year, Financial Quarter,
+version 2 of retrieves the Financial Year, Financial Quarter,
 monthly, weekly and daily financial statistics of the invoices
 @params
 uid: int - user id of the user
@@ -246,7 +246,6 @@ app.get('/receive/v2/getStatistics', async function (req, res) {
   try {
     res.json(await getStatisticsV2(uid));
   } catch (error) {
-    console.log(error)
     res.status(error.statusCode).json(error);
   }
 });
