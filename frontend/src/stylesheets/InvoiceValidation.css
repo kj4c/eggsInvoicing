@@ -1,3 +1,7 @@
+.validation-page {
+  background-color: #FAFBFB;
+}
+
 h1 {
   margin: 70px;
   color: #442583
@@ -15,6 +19,7 @@ h1 {
 
   margin-left: 50px;
   margin-right: 50px;
+  margin-bottom: 100px;
 
   border-style: solid;
   border-radius: 40px;
@@ -148,8 +153,10 @@ h1 {
 }
 
 .validation-report {
+  margin-left: 100px;
+  margin-right: 100px;
   background-color: white;
-  padding: 25px;
+  padding: 50px;
 }
 
 .report-download {
@@ -177,10 +184,41 @@ h1 {
 }
 
 .report-title {
+  font-size: 40px;
   text-align: center;
+  margin-bottom: 20px;
+}
+
+.solid {
+  margin-left: -5px;
+  margin-right: -5px;
 }
 
 .report-results {
-  margin-top: 2vh;
+  color: #442583;
+  text-align: center;
+}
+
+.index-container {
+  margin-top: 5px;
+}
+
+.report-index {
   color: #7f45f2;
+  margin-top: 10px;
+}
+
+.error-location {
+  margin-bottom: 10px;
+}
+
+pre {
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+.error-index {
+  color: #442583;
 }
