@@ -20,6 +20,7 @@ const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
 const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
+const fetchByDateRangev2 = require('./functions/fetchByDateRangev2');
 const getStatisticsDateRange = require('./functions/getStatisticsDateRange');
 const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
@@ -181,6 +182,29 @@ app.get('/receive/fetchByDateRange', async function (req, res) {
   const toDate = req.query.toDate;
   try {
     res.json(await fetchByDateRange(uid, fromDate, toDate));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
+retrieves all invoices in between a date range version 2
+@params
+uid: int - user id of the user
+fromDate: string - start date of the range
+toDate: string - end date of the range
+@output
+invoices: array - array of invoices
+OR
+message: string - error message
+*/
+app.get('/receive/fetchByDateRangev2', async function (req, res) {
+  const uid = req.query.uid;
+  const fromDate = req.query.fromDate;
+  const toDate = req.query.toDate;
+  try {
+    res.json(await fetchByDateRangev2(uid, fromDate, toDate));
   } catch (error) {
     res.status(error.statusCode).json(error);
   }
