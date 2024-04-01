@@ -164,7 +164,7 @@ const InvoiceValidation = () => {
                         <>
                           <h4>Errors</h4>
                           {result.errors.map((error, index) => (
-                            <div>
+                            <div key={index}>
                               <p><span className='error-index'>Error ID:</span> {error.id}</p>
                               <p><span className='error-index'>Breached Rule:</span> {error.breached_rule}</p>
                               <p className='error-location'>
