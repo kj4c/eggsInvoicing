@@ -1,7 +1,7 @@
 CREATE DATABASE seng2021_db;
 
 CREATE TABLE IF NOT EXISTS users (
-  uid           serial primary key,
+  uid           uuid DEFAULT gen_random_uuid(),
   email         varchar(225) not null,
   phone_no      varchar(10) not null,
   username      varchar(225) not null,
