@@ -347,21 +347,23 @@ if failed
 success: boolean - false
 message: string - error message
 */
-app.post('/send/invoiceLater', async (req, res) => {
+app.post('/send/invoiceLater', (req, res) => {
   const { type, from, recipient, content, delayInMinutes } = req.body;
 
-  try {
-    if (!type || !from || !recipient || !content || delayInMinutes === undefined) {
-      return res.status(400).json({ success: false, message: 'Missing required parameters' });
-    }
-
-    await sendInvoiceLater(type, from, recipient, content, delayInMinutes);
-    console.log(`Scheduled invoice to be sent after ${delayInMinutes} minute(s)`);
-    res.status(202).json({ success: true, message: `Invoice scheduled to be sent after ${delayInMinutes} minute(s)` });
-  } catch (error) {
-    console.error('Error scheduling invoice:', error);
-    res.status(500).json({ success: false, message: 'Internal server error' });
+  // Check for required parameters
+  if (!type || !from || !recipient || !content || delayInMinutes === undefined) {
+    return res.status(400).json({ success: false, message: 'Missing required parameters' });
   }
+
+  res.status(202).json({ success: true, message: `Invoice scheduled to be sent after ${delayInMinutes} minute(s)` });
+
+  sendInvoiceLater(type, from, recipient, content, delayInMinutes)
+    .then(result => {
+      console.log(`Invoice sent successfully after ${delayInMinutes} minute(s):`, result);
+    })
+    .catch(error => {
+      console.error('Error sending invoice later:', error);
+    });
 });
 
 /*

@@ -67,6 +67,7 @@ const InvoiceInputMultiple = () => {
         } else if (formData.from === "") {
             alert('Please enter text in the "From" field.');
         } else {
+            console.log(formData);
             sendEmail(formData); // Directly using formData since it already matches the required structure
         }
     };

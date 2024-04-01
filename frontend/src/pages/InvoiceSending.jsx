@@ -33,6 +33,11 @@ const InvoiceSending = () => {
     navigate(path);
   }
 
+  const routeChange5 = () => {
+    let path = `/sendEmailLater`
+    navigate(path);
+  }
+
   return (
     <>
     <div className='options-grid-container'>
@@ -40,7 +45,7 @@ const InvoiceSending = () => {
       <button className = 'email-options' onClick={routeChange2}>Sending Email with JSON File</button>
       <button className = 'email-options' onClick={routeChange3}>Sending Email with Multiple XML Files</button>
       <button className = 'email-options' onClick={routeChange4}>Sending Email with Multiple JSON Files</button>
-      <button className = 'email-options' onClick={routeChange4}>Sending Email Later</button>
+      <button className = 'email-options' onClick={routeChange5}>Sending Email Later</button>
       <button className = 'email-options' onClick={routeChange4}>Sending multiple emails of invoices</button>
     </div>
     </>
@@ -48,3 +53,4 @@ const InvoiceSending = () => {
 }
 
 export default InvoiceSending;
+
