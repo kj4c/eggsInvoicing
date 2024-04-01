@@ -18,7 +18,7 @@ async function fetchByDateRange(uid, fromDate, toDate) {
   let q = 'select email from users where uid = $1';
   const email = (await pool.query(q, [uid])).rows[0].email;
 
-  q = 'select * from sent_invoices where receiver_email = $1 and sent_at::date between (select to_date($2, \'DD/MM/YYYY\')) and (select to_date($3, \'DD/MM/YYYY\'))';
+  q = 'select * from sent_invoices where receiver_email = $1 and (select sent_at::date AT TIME ZONE \'Australia/Sydney\')  between (select to_date($2, \'DD/MM/YYYY\')) and (select to_date($3, \'DD/MM/YYYY\'))';
 
   const res = await pool.query(q, [email, fromDate, toDate]);
 

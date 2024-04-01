@@ -41,18 +41,11 @@ const InvoiceRendering = () => {
   
   }
 
-
   function handleOnChange(e) {
     const target = e.target;
     setFile(target.files[0]);
     setFileName(target.files[0].name);
   }
-
-  useEffect(() => {
-    console.log(fileName);
-    const formData = new FormData();
-    formData.append('file', file);
-  }, [file, fileName]);
 
   return(
     <div className='render-container'>

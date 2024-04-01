@@ -9,7 +9,7 @@
     margin-right: 5%;
     border-radius: 15px;
     border: 3px solid #7f45f2;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
     overflow: auto;
 }
 
@@ -30,20 +30,29 @@
 .search {
     border-radius: 20px;
     margin-right: 1%;
+    background-color: #7f45f2;
+    border: none;
+}
+
+.search:hover {
+    cursor: pointer;
 }
 .inputSearch {
     flex: 2;
     margin-right: 10%;
     border: none;
+    background-color: #FAFBFB;
     border-bottom: 2px solid #000000;
     outline: none;
     font-size: 20px;
 }
 
 .options {
-    font-size: 20px;
+    font-size: 18px;
+    font-family: Roboto;
     padding: 5px;
     flex: 1.5;
+    border: 2px solid #7f45f2;
 }
 
 .grid-row {
@@ -51,7 +60,8 @@
 }
 
 .row-hover .grid-item {
-    background-color: #ecececec; /* This will now work since .grid-row acts as a real container */
+    background-color: #ecececec;
+    cursor: pointer; /* This will now work since .grid-row acts as a real container */
 }
 
 .grid-item {
@@ -74,9 +84,8 @@
     flex-direction: row;
     z-index: 100;
     position: sticky;
-    background-color: rgb(255, 255, 255);
+    background-color: #FAFBFB;
     width: 100%;
-    bottom: 1px;
 }
 
 .button1, .button2 {

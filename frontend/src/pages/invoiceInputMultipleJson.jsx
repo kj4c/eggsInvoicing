@@ -8,6 +8,12 @@ function isValidEmail(email) {
     return regex.test(email);
 }
 
+function getCookie(name) {
+    let cookies = document.cookie.split('; ');
+    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    return cookieValue ? cookieValue.split('=')[1] : null;
+}
+
 function sendEmail(reqBody) {
     axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/multiInvoice-json", reqBody)
     .then((response) => {
@@ -19,7 +25,7 @@ function sendEmail(reqBody) {
 const InvoiceInputMultipleJson = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        from: "",
+        from: getCookie('email') || "",
         recipient: "",
         jsonFiles: [{ filename: "", jsonString: "{}" }] // Initialized jsonString with an empty object
     });
@@ -73,7 +79,7 @@ const InvoiceInputMultipleJson = () => {
                 1. From: should be your email<br />
                 2. Enter the recipient&apos;s email inside the To (Email)<br />
                 3. Upload your JSON files from your computer. <br/>
-				4. click add another Attachment if you need.
+				4. Click add another Attachment if you need.
             </p>
             <label className="labels">From:</label>
             <input type="text" className="inputBox" name="from" value={formData.from} onChange={handleChange}/>

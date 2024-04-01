@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 :root {
   font-family: 'Roboto', sans-serif;
 }
@@ -7,9 +8,10 @@
   margin: 0;
 }
 
-.main-container{
+.main-container {
   position: relative;
   display: flex;
+  height: 100vh;
   /* background-color: #FAFBFB; */
 }
 
@@ -27,7 +29,7 @@
 .activeMenu {
   background-color: #FAFBFB;
   min-height: 100vh;
-  width: 100%;
+  width: 100vw;
 }
 
 .unActiveMenu {
@@ -44,8 +46,8 @@
   background-color: #FAFBFB;
 }
 
-@media (min-width: 768px){
-  .md-ml-72{
+@media (min-width: 768px) {
+  .md-ml-72 {
     margin-left: 18rem
   }
 }
@@ -56,8 +58,8 @@
   }
 }
 
-@media  screen and (max-width:800px) {
-  .sidebar{
+@media screen and (max-width:800px) {
+  .sidebar {
     z-index: 10000000;
   }
 }

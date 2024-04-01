@@ -1,5 +1,9 @@
+.validation-page {
+  background-color: #FAFBFB;
+}
+
 h1 {
-  margin: 50px;
+  margin: 70px;
   color: #442583
 }
 
@@ -11,12 +15,11 @@ h1 {
 .validation-container {
   position: relative;
   align-items: center;
-  height: 1000px;
+  padding: 50px;
 
   margin-left: 50px;
   margin-right: 50px;
-  padding-top: 30px;
-  padding-left: 50px;
+  margin-bottom: 100px;
 
   border-style: solid;
   border-radius: 40px;
@@ -29,6 +32,7 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
 }
 
 .select-button-div {
@@ -37,8 +41,7 @@ h1 {
   border: solid;
   border-color: #7f45f2;
   border-radius: 16px;
-  height: 10vh;
-  width: 30vw;
+  padding: 20px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -94,8 +97,14 @@ h1 {
 .valid-submit {
   margin-top: 3vh;
 
-  height: 5vh;
-  width: 7vw;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: 0.2s;
+
+  /* height: 5vh;
+  width: 7vw; */
+  padding: 9px;
 
   font-size: 16px;
   font-weight: bold;
@@ -104,10 +113,7 @@ h1 {
   border-radius: 16px;
   border-style: solid;
   border-width: 2px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: 0.2s;
+
 }
 
 .valid-submit:hover {
@@ -116,28 +122,47 @@ h1 {
   color: white;
 }
 
+.invalid-format {
+  color: #7f45f2;
+  font-size: 30px;
+  margin-top: 5vh;
+}
+
 
 .validating-load {
   font-size: 30px;
   margin-top: 5vh;
 }
 
-.valid-report {
-  margin-top: 3vh;
+.validating-error {
   font-size: 30px;
+  margin-top: 5vh;
 }
 
-.valid-report-container {
+.valid-result {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.report-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.valid-type {
+.validation-report {
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color: white;
+  padding: 50px;
+}
+
+.report-download {
   margin-top: 3vh;
   margin-left: 3vh;
-  height: 8vh;
-  width: 15vw;
+  padding: 20px;
 
   font-size: 24px;
   font-weight: bold;
@@ -152,8 +177,48 @@ h1 {
   transition: 0.2s;
 }
 
-.valid-type:hover {
+.report-download:hover {
   cursor: pointer;
   background-color: #7f45f2;
   color: white;
+}
+
+.report-title {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.solid {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.report-results {
+  color: #442583;
+  text-align: center;
+}
+
+.index-container {
+  margin-top: 5px;
+}
+
+.report-index {
+  color: #7f45f2;
+  margin-top: 10px;
+}
+
+.error-location {
+  margin-bottom: 10px;
+}
+
+pre {
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+.error-index {
+  color: #442583;
 }

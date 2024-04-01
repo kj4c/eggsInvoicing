@@ -1,17 +1,16 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 // No need to import React with the latest React version unless you're using class components or React. useState, etc. explicitly
-import { Navbar, Sidebar } from './components'
-import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving, HtmlRendering} from './pages';
+
+import { Navbar, Sidebar, UserProfile } from './components'
+import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving, HtmlRendering, InvoiceCreationUploadDocument, InvoiceInputMultiple, InvoiceInputMultipleJson} from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
 import AuthRegister from './pages/authRegister';
 import InvoiceInputJSON from './pages/invoiceInputJson';
 import NotFoundPage from './pages/NotFoundPage';
 import ForgetPassword from './pages/forgetPassword';
-import UserProfile from './components/UserProfile';
-import InvoiceInputMultiple from './pages/invoiceInputMultiple';
-import InvoiceInputMultipleJson from './pages/invoiceInputMultipleJson';
 import './App.css';
+import SendEmailLater from './pages/sendEmailLater';
 
 const AppContent = () => {
   const { activeMenu } = useStateContext();
@@ -21,7 +20,7 @@ const AppContent = () => {
     '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
     '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
     '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving',
-    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering'
+    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering', '/invoiceCreation/uploadDocument', '/sendEmailLater'
   ];
 
   const hideSidebarPaths = ['/login', '/register', 'reset-password'];
@@ -42,6 +41,7 @@ const AppContent = () => {
             <Route path='/' element={<Dashboard />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path="/invoiceCreation" element={<InvoiceCreation />} />
+            <Route path="/invoiceCreation/uploadDocument" element={<InvoiceCreationUploadDocument />} />
             <Route path="/invoiceValidation" element={<InvoiceValidation />} />
             <Route path="/invoiceRendering" element={<InvoiceRendering />} />
             <Route path="/invoiceRendered" element={<InvoiceRendered />} />
@@ -58,6 +58,7 @@ const AppContent = () => {
             <Route path="/reset-password" element={<ForgetPassword />} />
             <Route path="/htmlRendering" element={<HtmlRendering />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path='/sendEmailLater' element={<SendEmailLater/>}></Route>
 
             <Route path="/profile" element={<UserProfile />} />
           </Routes>

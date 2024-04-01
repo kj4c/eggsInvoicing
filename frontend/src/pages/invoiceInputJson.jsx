@@ -8,6 +8,13 @@ function isValidEmail(email) {
     return regex.test(email);
 }
 
+function getCookie(name) {
+    let cookies = document.cookie.split('; ');
+    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    return cookieValue ? cookieValue.split('=')[1] : null;
+}
+
+
 function sendEmail(reqBody) {
     axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/email-json", reqBody)
     .then((response) => {
@@ -17,7 +24,7 @@ function sendEmail(reqBody) {
 
 const InvoiceInputJSON = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({from: "", to: "", attachment: ""});
+    const [formData, setFormData] = useState({from: getCookie('email') || "", to: "", attachment: ""});
     const [fileName, setFileName] = useState('No file chosen, yet.');
     const [buttonName, setButtonName] = useState('Upload JSON File');
 
@@ -72,7 +79,7 @@ const InvoiceInputJSON = () => {
                 Back
             </button>
             <h1 className="header">Send Email with JSON File</h1>
-            <p className='description'>1. From: should be your email<br></br>2. Enter the recipients email inside the To (Email) <br></br>3. Lastly upload your json file from your computer </p>
+            <p className='description'>1. From: should be your email<br></br>2. Enter the recipients email inside the To (Email) <br></br>3. Lastly upload your JSON file from your computer </p>
             <label className="labels">From:</label>
             <input type="text" className="inputBox" name="from" value={formData.from} onChange={handleChange}/>
             <label className="labels">To (Email):</label>

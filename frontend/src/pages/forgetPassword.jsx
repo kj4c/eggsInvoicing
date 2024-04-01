@@ -71,6 +71,7 @@ function ForgetPassword() {
               <input
                 type="email"
                 placeholder='Enter your email'
+                className='inputFields'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
