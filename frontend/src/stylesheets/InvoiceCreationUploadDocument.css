@@ -1,15 +1,20 @@
 .ICUD-container {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100vh;
   /* background-color: purple; */
 }
 
+.body-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: pink; */
+}
 
 .upload {
   width: 660px;
-  height: 150px;
+  height: 300px;
   font-size: 18px;
   font-weight: 500;
   display: flex;
@@ -48,7 +53,7 @@
 }
 
 .file-container {
-  margin-top: 5%;
+  /* margin-top: 5%; */
   display: flex;
   align-items: center;
   gap: 15px;
@@ -58,6 +63,7 @@
   border-radius: 6px;
   padding: 15px 15px;
   /* background-color: #000; */
+  width: 627px;
 }
 
 .file-icon {

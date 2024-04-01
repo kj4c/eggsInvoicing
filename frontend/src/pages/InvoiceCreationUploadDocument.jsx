@@ -28,64 +28,80 @@ const InvoiceCreationUploadDocument = () => {
     setUploadStatus("select");
   };
 
+  const downloadFile= (content, filename)  => {
+    const blob = new Blob([content], { type: 'application/xml' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }
+
   const handleFileUpload = async (e) => {
+    e.preventDefault();
     if (uploadStatus === "done") {
       clearFileInput();
       return;
     }
     
-    // try {
-    //   const token = await axios.post('https://3dj53454nj.execute-api.ap-southeast-2.amazonaws.com/login', {
-    //     email: 'eggInvoice@gmail.com',
-    //     password: 'eggInvoice'
-    //   });
-    //   console.log("token = ", token);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    e.preventDefault();
     try {
-      console.log("HERE");
-      const userData = await axios.post('https://invoice-seng2021-24t1-eggs-frontend.vercel.app/login', {
-        username: 'khyejac',
-        password: 'password'
+      let res = await axios.post('https://3dj53454nj.execute-api.ap-southeast-2.amazonaws.com/login', {
+        email: 'eggInvoice@gmail.com',
+        password: 'eggInvoice'
       });
-      console.log("userData = ", userData);
-    } catch (error) {
-      console.log("ERROR!!!")
-      console.error(error);
-    }
- 
 
-    try {
+      const token = res.data.token;
       setUploadStatus("uploading");
-
       const formData = new FormData();
-      formData.append("invoice.csv", selectedFile);
+      formData.append("file", selectedFile);
 
-      const response = await axios.post(
-        "http://3.27.23.157/invoice/CSV",
+      res = await axios.post('https://3dj53454nj.execute-api.ap-southeast-2.amazonaws.com/invoices/v2', 
         formData,
-        {
+        { headers: {
+          'Authorization': `${token}`
+        },
           onUploadProgress: (progressEvent) => {
             const percentCompleted = Math.round(
               (progressEvent.loaded * 100) / progressEvent.total
             );
             setUploadProgress(percentCompleted);
           },
-        }
+        },
       );
-      console.log(response);
+
       setUploadStatus("done");
+      const invoiceID = res.data[0];
+      
+      const url = 'https://3dj53454nj.execute-api.ap-southeast-2.amazonaws.com/invoices/v2/' + invoiceID;
+      res = await axios.get(url,
+        { headers: {
+          'Authorization': `${token}`
+        } }
+      );
+
+      const xmlInvoice = res.data;
+      const filename = selectedFile.name.replace(/\.csv$/, '.xml');
+      downloadFile(xmlInvoice, filename);
     } catch (error) {
-      console.error(error);
-      setUploadStatus("select");
+      if (error.response) {
+        console.error('Server responded with error:', error.response.data);
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+      } else {
+        console.error('Error setting up the request:', error.message);
+      }
     }
   };
 
   return (
     <div className="ICUD-container">
-      <div>
+      <div className='body-container'>
+        <h1 >
+          Create XML invoice with CSV file upload 
+        </h1>
         <input
           ref={inputRef}
           style={{ display: "none" }}
@@ -98,19 +114,12 @@ const InvoiceCreationUploadDocument = () => {
             <span style={{ lineHeight: 1 }}>
               <MdOutlineFileUpload className="uploadIcon" />
             </span>
-            Upload File
+            Upload CSV File
           </button>
         )}
 
         {selectedFile && (
           <>
-            <button className="upload" onClick={onChooseFile}>
-              <span style={{ lineHeight: 1 }}>
-                <MdOutlineFileUpload className="uploadIcon" />
-              </span>
-              Upload File
-            </button>
-
             <div className="file-container">
               <span className="file-icon">
                 <FaRegFileAlt />
@@ -159,4 +168,3 @@ const InvoiceCreationUploadDocument = () => {
 };
 
 export default InvoiceCreationUploadDocument;
-
