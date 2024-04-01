@@ -47,6 +47,54 @@ const InvoiceCreationUploadDocument = () => {
       return;
     }
     
+    if (selectedFile.type === 'text/csv') {
+      handleCSVFile();
+    }
+
+    if (selectedFile.type === 'application/json') {
+      handleJSONFile();
+    }
+  };
+  
+  const handleJSONFile = async () => {
+    try {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const fileContent = e.target.result;
+        const jsonData = JSON.parse(fileContent);
+        setUploadStatus("uploading");
+
+        const res = await axios.post('https://w13a-brownie.vercel.app/v2/api/invoice/create', 
+          jsonData,
+          {
+            onUploadProgress: (progressEvent) => {
+              const percentCompleted = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              setUploadProgress(percentCompleted);
+            },
+          }
+        );
+        setUploadStatus("done");
+        const xmlInvoice = res.data;
+        const filename = selectedFile.name.replace(/\.json$/, '.xml');
+        downloadFile(xmlInvoice, filename);
+      };
+      reader.readAsText(selectedFile);
+      
+    } catch (error) {
+      setUploadStatus("select");
+      if (error.response) {
+        console.error('Server responded with error:', error.response.data);
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+      } else {
+        console.error('Error setting up the request:', error.message);
+      }
+    }
+  }
+
+  const handleCSVFile = async () => {
     try {
       let res = await axios.post('https://3dj53454nj.execute-api.ap-southeast-2.amazonaws.com/login', {
         email: 'eggInvoice@gmail.com',
@@ -86,6 +134,7 @@ const InvoiceCreationUploadDocument = () => {
       const filename = selectedFile.name.replace(/\.csv$/, '.xml');
       downloadFile(xmlInvoice, filename);
     } catch (error) {
+      setUploadStatus("select");
       if (error.response) {
         console.error('Server responded with error:', error.response.data);
       } else if (error.request) {
