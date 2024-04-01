@@ -94,7 +94,7 @@ const Dashboard = () => {
     const stat = async () => {
       try {
         if (!uid) return;
-        const res = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/getStatistics?uid=${uid}`);
+        const res = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/v2/getStatistics?uid=${uid}`);
         console.log(res.data);
         if (res.status !== 200) {
           return
