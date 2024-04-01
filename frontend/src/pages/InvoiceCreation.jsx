@@ -83,7 +83,7 @@ const InvoiceCreation = () => {
       const res = await axios.post('https://w13a-brownie.vercel.app/v2/api/invoice/create', values);
 
       const xmlInvoice = res.data;
-      downloadFile(xmlInvoice, 'xmlInvoice.xml');
+      downloadFile(xmlInvoice, 'Invoice.xml');
     } catch (error) {
       if (error.response) {
         console.error('Server responded with error:', error.response.data);
