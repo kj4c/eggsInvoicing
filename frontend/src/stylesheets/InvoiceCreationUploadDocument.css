@@ -3,6 +3,15 @@
   justify-content: center;
   height: 100vh;
   /* background-color: purple; */
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  ),
+  url('../assets/InvoiceCreationPage/icon12.png');
+
+  background-size: cover;
+  background-position: center;
+  background-clip: border-box;
 }
 
 .body-container {
