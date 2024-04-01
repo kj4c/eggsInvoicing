@@ -99,7 +99,7 @@ const InvoiceCreationUploadDocument = () => {
   return (
     <div className="ICUD-container">
       <div className='body-container'>
-        <h1 >
+        <h1 style={{color:'blueviolet'}}>
           Create XML invoice with CSV file upload 
         </h1>
         <input
