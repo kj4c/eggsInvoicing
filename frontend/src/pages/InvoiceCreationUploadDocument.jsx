@@ -163,7 +163,7 @@ const InvoiceCreationUploadDocument = () => {
             <span style={{ lineHeight: 1 }}>
               <MdOutlineFileUpload className="uploadIcon" />
             </span>
-            Upload CSV File
+            Upload CSV or JSON File
           </button>
         )}
 
