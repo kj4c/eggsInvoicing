@@ -146,7 +146,6 @@ const InvoiceReceiving = () => {
         setDataFound(true);
       }
     } else if (fetchOption === 'DateRange') {
-      console.log("WOOF");
       try {
         setLoading(true);
         let response = 
