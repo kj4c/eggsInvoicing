@@ -42,26 +42,26 @@ const InvoiceValidation = () => {
       setIsSubmitting(true);
 
       const reader = new FileReader();
-      reader.onload = function (event) {
+      reader.onload = async function (event) {
         const xmlContent = event.target.result;
-        axios.post('https://sandc.vercel.app/validate', xmlContent, {
+        await axios.post('https://sandc.vercel.app/validate', xmlContent, {
           headers: {
             'Content-Type': 'application/xml',
           },
         })
           .then(response => {
             console.log('success:', response.data);
-            setPassed(true);
             setData(response.data);
-          })
-          .catch(error => {
-            if (error.response.status === 500) {
-              console.error('error:', error.response.data);
-              setError(error.response.data);
+            console.log(response.data.successful);
+            if (response.data.successful) {
+              setPassed(true);
             } else {
-              console.error('error:', error.response.data);
               setFailed(true);
             }
+          })
+          .catch(error => {
+            console.error('error:', error.response.data);
+            setError(error.response.data);
           })
           .finally(() => {
             setIsSubmitting(false);
@@ -102,7 +102,7 @@ const InvoiceValidation = () => {
   }
 
   return (
-    <div>
+    <div className='validation-page'>
       <h1 className='validation-heading'>Validation</h1>
       <div className='validation-container'>
         <h2>Upload your invoice to be validated here:</h2>
@@ -122,22 +122,37 @@ const InvoiceValidation = () => {
             <div className='report-container'>
               <div className='validation-report'>
                 <h2 className='report-title'>Validation Report</h2>
-                <p>Format: {data.format}</p>
-                <p>Issue Date: {data["issueDate (YYYY-MM-DD)"]}</p>
-                <p>Successful: {data.successful ? 'Yes' : 'No'}</p>
-                <p>{data.summary}</p>
-                <p>Total Error Count: {data.totalErrorCount}</p>
-
-                <h3 className='report-results'>Results</h3>
+                <p className='index-container'>
+                  <span className='report-index'>Format: </span>
+                  {data.format}
+                </p>
+                <p className='index-container'>
+                  <span className='report-index'>Issue Date: </span>
+                  {data["issueDate (YYYY-MM-DD)"]}
+                </p>
+                <p className='index-container'>
+                  <span className='report-index'>Successful: </span>
+                  {data.successful ? 'Yes' : 'No'}
+                </p>
+                <p className='index-container'>
+                  <span className='report-index'>Summary: </span>
+                  {data.summary}
+                </p>
+                <p className='index-container'>
+                  <span className='report-index'>Total Error Count: </span>
+                  {data.totalErrorCount}
+                </p>
+                <hr className='solid'></hr>
+                <h2 className='report-results'>Results</h2>
                 <div>
                   {Object.entries(data.results).map(([key, result]) => (
                     <div key={key}>
-                      <h4>{key}</h4>
-                      <p>Successful: {result.successful ? 'Yes' : 'No'}</p>
+                      <h3>{key}</h3>
+                      <p ><span className='report-index'>Successful: </span> {result.successful ? 'Yes' : 'No'}</p>
                       <p>{result.summary}</p>
                       {result.errorCodes.length > 0 && (
                         <>
-                          <h5>Error Codes</h5>
+                          <h4>Error Codes</h4>
                           <ul>
                             {result.errorCodes.map((code, index) => (
                               <li key={index}>{code}</li>
@@ -147,12 +162,19 @@ const InvoiceValidation = () => {
                       )}
                       {result.errors.length > 0 && (
                         <>
-                          <h5>Errors</h5>
-                          <ul>
-                            {result.errors.map((error, index) => (
-                              <li key={index}>{error}</li>
-                            ))}
-                          </ul>
+                          <h4>Errors</h4>
+                          {result.errors.map((error, index) => (
+                            <div key={index}>
+                              <p><span className='error-index'>Error ID:</span> {error.id}</p>
+                              <p><span className='error-index'>Breached Rule:</span> {error.breached_rule}</p>
+                              <p className='error-location'>
+                                <span className='error-index'>Location: </span>
+                                <ul>
+                                  <pre><code>{error.location}</code></pre>
+                                </ul>
+                              </p>
+                            </div>
+                          ))}
                         </>
                       )}
                     </div>
