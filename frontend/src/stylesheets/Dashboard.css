@@ -32,6 +32,16 @@
   font-size: 80px;
   color: #7f45f2;
   width: 80%;
+  animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .welcome {
@@ -44,6 +54,7 @@
   padding-bottom: 1vh;
   color: rgba(0, 0, 0, 0.735);
   padding-bottom: 10px;
+  animation: fadeIn 5s;
 }
 
 .dashboard-content{
@@ -81,6 +92,7 @@
 .unread-start, .unread-data, .unread-end{
   display: inline;
   padding-right: 10px;
+  animation: fadeIn 5s;
 }
 
 .unread-data {
@@ -125,6 +137,7 @@
   display: grid;
   width: 65vw;
   grid-template-columns: repeat(2, auto);
+  animation: fadeIn 2s;
 }
 
 .day, .week, .month, .year {
@@ -138,6 +151,7 @@
 
 .day:hover, .week:hover, .month:hover, .year:hover {
   box-shadow: 0 10px 20px #7f45f255;
+  transition: all 0.2s ease;
 }
 
 
