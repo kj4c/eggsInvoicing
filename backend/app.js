@@ -23,6 +23,7 @@ const fetchByDateRange = require('./functions/fetchByDateRange');
 const getStatisticsDateRange = require('./functions/getStatisticsDateRange');
 const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
+const getStatisticsV2 = require('./functions/v2getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
 const cors = require('cors');
 
@@ -225,6 +226,27 @@ app.get('/receive/getStatistics', async function (req, res) {
   try {
     res.json(await getStatistics(uid));
   } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
+retrieves the Financial Year, Financial Quarter,
+monthly, weekly and daily financial statistics of the invoices
+@params
+uid: int - user id of the user
+@output
+statistics: object - statistics of the invoices
+OR
+message: string - error message
+*/
+app.get('/receive/v2/getStatistics', async function (req, res) {
+  const uid = req.query.uid;
+  try {
+    res.json(await getStatisticsV2(uid));
+  } catch (error) {
+    console.log(error)
     res.status(error.statusCode).json(error);
   }
 });
