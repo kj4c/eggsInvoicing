@@ -19,7 +19,7 @@ const body = {
   toDate: hiDate
 };
 
-describe('/fetchByDateRangev2 route', () => {
+describe('/fetchByDateRange/v2 route', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.spyOn(console, 'error').mockImplementation(() => {}); // Suppress console.error
@@ -32,7 +32,7 @@ describe('/fetchByDateRangev2 route', () => {
   it('Invalid User Id', async () => {
     pool.query.mockResolvedValueOnce({rows: []});
 
-    const response = await request(app).get('/receive/fetchByDateRangev2').query(body);
+    const response = await request(app).get('/receive/fetchByDateRange/v2').query(body);
     expect(response.status).toBe(403);
     expect(response.body.message).toStrictEqual('Invalid User');
 
@@ -48,7 +48,7 @@ describe('/fetchByDateRangev2 route', () => {
       fromDate: hiDate,
       toDate: loDate
     };
-    const response = await request(app).get('/receive/fetchByDateRangev2').query(body);
+    const response = await request(app).get('/receive/fetchByDateRange/v2').query(body);
     expect(response.status).toBe(400);
     expect(response.body.message).toStrictEqual('fromDate is larger than toDate');
 
@@ -66,7 +66,7 @@ describe('/fetchByDateRangev2 route', () => {
       fromDate: hiDate,
       toDate: hiDate
     };
-    const response = await request(app).get('/receive/fetchByDateRangev2').query(body);
+    const response = await request(app).get('/receive/fetchByDateRange/v2').query(body);
     expect(response.status).toBe(200);
     expect(response.body.message).toStrictEqual('No emails found within given date range');
 
@@ -107,7 +107,7 @@ describe('/fetchByDateRangev2 route', () => {
     pool.query.mockResolvedValueOnce({rows: [{email: email}]});
     pool.query.mockResolvedValueOnce({rows: expected});
 
-    const response = await request(app).get('/receive/fetchByDateRangev2').query(body);
+    const response = await request(app).get('/receive/fetchByDateRange/v2').query(body);
     expect(response.status).toBe(200);
     expect(response.body).toStrictEqual(expected);
 
