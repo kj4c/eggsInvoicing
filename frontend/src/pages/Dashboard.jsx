@@ -5,7 +5,6 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
 const API_KEY = "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";
 
 const Dashboard = () => {
@@ -364,7 +363,7 @@ const Dashboard = () => {
 
       {
         !chat ? (
-          <img src='../assets/chat.png' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px"}} onClick={() => setChat(true) }></img>
+          <img src='../../src/assets/chat.png' alt='chat' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px"}} onClick={() => setChat(true) }></img>
         ) : (
           <div className="chat">
               <div style={{ position: "fixed", bottom: "60px", right: "20px", height: "400px", width: "300px" }}>
@@ -388,7 +387,7 @@ const Dashboard = () => {
                   </ChatContainer>
                 </MainContainer>
             </div>
-            <img src='../assets/chat.png' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "35px", width: "35px"}} onClick={() => setChat(false) }></img>
+            <img src='../../src/assets/chat.png' alt='chat' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "35px", width: "35px"}} onClick={() => setChat(false) }></img>
           </div>         
         )
       }
