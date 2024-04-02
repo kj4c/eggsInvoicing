@@ -37,6 +37,7 @@
 .search:hover {
     cursor: pointer;
 }
+
 .inputSearch {
     flex: 2;
     margin-right: 10%;
@@ -70,6 +71,7 @@
     padding: 10px;
     border-bottom: 2px solid #7f45f2;
     align-self: center;
+    font-size: 17px;
 }
 
 .header {
