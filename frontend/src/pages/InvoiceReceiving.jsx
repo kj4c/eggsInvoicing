@@ -146,11 +146,10 @@ const InvoiceReceiving = () => {
         setDataFound(true);
       }
     } else if (fetchOption === 'DateRange') {
-      console.log("WOOF");
       try {
         setLoading(true);
         let response = 
-        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByDateRange?uid=${uid}&fromDate=${formData.DateFrom}&toDate=${formData.DateTo}`,);
+        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByDateRange/v2?uid=${uid}&fromDate=${formData.DateFrom}&toDate=${formData.DateTo}`,);
         response.data.reverse().map((item) => {
           let date = new Date(item.sent_at);
           let actualDate = date.toLocaleDateString('en-GB');

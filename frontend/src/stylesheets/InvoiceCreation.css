@@ -60,3 +60,33 @@
   margin-top: 15px;
   margin-bottom: 30px;
 }
+
+
+.FI-Container{
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  margin-bottom: 10px;
+  /* background-color: rgb(20, 170, 100); */
+}
+
+.FI-Container input {
+  padding: 15px;
+  margin: 10px 0px;
+  font-size: large;
+  /* background-color: rgb(111, 206, 235); */
+}
+
+.FI-Container label {
+  font-size: medium;
+  color: gray;
+}
+
+.FI-Container h2 {
+  color: rgb(77, 1, 77);
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}

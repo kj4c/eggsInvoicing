@@ -20,9 +20,11 @@ const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
 const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
+const fetchByDateRangev2 = require('./functions/fetchByDateRangev2');
 const getStatisticsDateRange = require('./functions/getStatisticsDateRange');
 const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
+const getStatisticsV2 = require('./functions/v2getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
 const cors = require('cors');
 
@@ -188,6 +190,29 @@ app.get('/receive/fetchByDateRange', async function (req, res) {
 
 /*
 @brief
+retrieves all invoices in between a date range version 2
+@params
+uid: int - user id of the user
+fromDate: string - start date of the range
+toDate: string - end date of the range
+@output
+invoices: array - array of invoices
+OR
+message: string - error message
+*/
+app.get('/receive/fetchByDateRange/v2', async function (req, res) {
+  const uid = req.query.uid;
+  const fromDate = req.query.fromDate;
+  const toDate = req.query.toDate;
+  try {
+    res.json(await fetchByDateRangev2(uid, fromDate, toDate));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
 retrieves the statistics of the invoices in between a date range
 @params
 uid: int - user id of the user
@@ -224,6 +249,26 @@ app.get('/receive/getStatistics', async function (req, res) {
   const uid = req.query.uid;
   try {
     res.json(await getStatistics(uid));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
+version 2 of retrieves the Financial Year, Financial Quarter,
+monthly, weekly and daily financial statistics of the invoices
+@params
+uid: int - user id of the user
+@output
+statistics: object - statistics of the invoices
+OR
+message: string - error message
+*/
+app.get('/receive/v2/getStatistics', async function (req, res) {
+  const uid = req.query.uid;
+  try {
+    res.json(await getStatisticsV2(uid));
   } catch (error) {
     res.status(error.statusCode).json(error);
   }
