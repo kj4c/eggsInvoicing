@@ -364,7 +364,7 @@ const Dashboard = () => {
 
       {
         !chat ? (
-          <img src='../src/assets/chat.png' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px"}} onClick={() => setChat(true) }></img>
+          <img src='../assets/chat.png' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px"}} onClick={() => setChat(true) }></img>
         ) : (
           <div className="chat">
               <div style={{ position: "fixed", bottom: "60px", right: "20px", height: "400px", width: "300px" }}>
@@ -388,7 +388,7 @@ const Dashboard = () => {
                   </ChatContainer>
                 </MainContainer>
             </div>
-            <img src='../src/assets/chat.png' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "35px", width: "35px"}} onClick={() => setChat(false) }></img>
+            <img src='../assets/chat.png' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "35px", width: "35px"}} onClick={() => setChat(false) }></img>
           </div>         
         )
       }
