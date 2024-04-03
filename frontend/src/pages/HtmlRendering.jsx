@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+/* Renders the HTML Data Downloaded and renders it into a readable format */
 const HtmlRendering = () => {
   const [res, setRes] = useState('');
   const navigate = useNavigate();

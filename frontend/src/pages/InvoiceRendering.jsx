@@ -3,6 +3,8 @@ import '../stylesheets/InvoiceRendering.css';
 import Notif from '../components/RenderNotif';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+
+// page for rendering invoices
 const InvoiceRendering = () => {
   const [file, setFile] = useState('ready');
   const [fileName, setFileName] = useState('');
@@ -10,6 +12,7 @@ const InvoiceRendering = () => {
 
   const navigate = useNavigate();
 
+  //checks if cookie exists
   useEffect(() => {
     const cookieExists = document.cookie.includes('cookie='); 
 
@@ -17,7 +20,8 @@ const InvoiceRendering = () => {
       navigate('/login');
     }
   }, [navigate]);
-  
+
+  // on submit see if the file is ready, remove the vibarting effect and calls the API to render the invoice
   async function handleOnSubmit(e) {
     e.preventDefault();
     if (file === 'ready') {
@@ -41,12 +45,14 @@ const InvoiceRendering = () => {
   
   }
 
+  // sets the file if the user uploads a new file
   function handleOnChange(e) {
     const target = e.target;
     setFile(target.files[0]);
     setFileName(target.files[0].name);
   }
 
+  // design for the frontend for rendering
   return(
     <div className='render-container'>
       <h1>Render your invoice here</h1>

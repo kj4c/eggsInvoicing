@@ -9,12 +9,14 @@ function isValidEmail(email) {
 	return regex.test(email);
 }
 
+// get the cookie from the page
 function getCookie(name) {
     let cookies = document.cookie.split('; ');
     let cookieValue = cookies.find(row => row.startsWith(name + '='));
     return cookieValue ? cookieValue.split('=')[1] : null;
 }
 
+// calls our API to send the XML email
 function sendEmail(reqBody) {
 	axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/email", reqBody)
 	.then((response) => {
@@ -22,6 +24,8 @@ function sendEmail(reqBody) {
 	});
 }
 
+
+// Gets all the inputs from the user and stores them into states to be used to send later
 const InvoiceInput = () => {
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({from: getCookie('email') || "", to: "", attachment: ""});
@@ -45,14 +49,18 @@ const InvoiceInput = () => {
 		}
 	};
 
+	// update the formdata on any input change
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
 	};
 
+	// back button to go back
 	const goBack = () => {
         navigate("/invoiceSending");
       };
+	
+	// on submit you check if anything is wrong and alert user otherwise send the email
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (!isValidEmail(formData.to)) {
@@ -72,6 +80,7 @@ const InvoiceInput = () => {
 		}
 	};
   
+	// frontend design for the inputs
 	return (
 		<div className = "inputContainers">
 			<button onClick={goBack} className="backButton">

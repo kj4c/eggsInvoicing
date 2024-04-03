@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchIcon from '@mui/icons-material/Search';
 
-
+// Retrieves all invoices from the database and stores it in an inboxing format
 const InvoiceReceiving = () => {
   const [data, setData] = useState(null);
   const [dataFound, setDataFound] = useState(false);
@@ -16,6 +16,7 @@ const InvoiceReceiving = () => {
   const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
+  // Checks if the  cookie exists if not you go back
   const cookieExists = document.cookie.includes('cookie='); 
   useEffect(() => {
     if (!cookieExists) {
@@ -30,6 +31,7 @@ const InvoiceReceiving = () => {
     uid = uid.find(part => part.startsWith("uid=")).split("=")[1];
   }
 
+  // Loading screen before the invoices load
   useEffect(() => {
     const intervalId = setInterval(() => {
       setLoadingText(prev => {
@@ -70,6 +72,7 @@ const InvoiceReceiving = () => {
   }, [searchInput]); // Dependencies
 
   async function fetchData() {
+    // if its all then call for FetchAll
     if (fetchOption === 'All') {
       try {
         setLoading(true);
@@ -94,6 +97,7 @@ const InvoiceReceiving = () => {
       } finally {
         setDataFound(true);
       }
+      // If fetchoption is ID then you find the specific invoiceId
     } else if (fetchOption === 'ID') {
       console.log("YO");
       try {
@@ -120,6 +124,7 @@ const InvoiceReceiving = () => {
       } finally {
         setDataFound(true);
       }
+      // if its date then you call API to find all invoices in the matching date
     } else if (fetchOption === 'Date') {
       console.log("MEOW");
       try {
@@ -145,6 +150,7 @@ const InvoiceReceiving = () => {
       } finally {
         setDataFound(true);
       }
+      // calls api to find the invoice matching the given date range.
     } else if (fetchOption === 'DateRange') {
       try {
         setLoading(true);
@@ -170,7 +176,6 @@ const InvoiceReceiving = () => {
         setDataFound(true);
       }
     }
-
   }
 
   const handleSelectChange = () => {
@@ -178,7 +183,8 @@ const InvoiceReceiving = () => {
     const selectValue = document.getElementById('options').value;
     setFetchOption(selectValue);
   };
-  
+
+  // function to call API to generate the PDF which allows users to download and view it.
   const generatePDF = async () => {
     try {
       const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receiveReport?uid=${uid}`);
@@ -198,6 +204,7 @@ const InvoiceReceiving = () => {
     }
   };
 
+  //function to generate HTML which allows users to download the HTML file and display it
   const generateHTML = async () => {
     try {
       const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receiveHtml?uid=${uid}`);
@@ -218,6 +225,7 @@ const InvoiceReceiving = () => {
     }
   };
 
+  // on each row clicked, it will download the xml as well as display it on the website
   const openXML = async (invoiceId) => {
     try {
       const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByInvoiceId?uid=${uid}&invoiceId=${invoiceId}`, {
@@ -240,6 +248,7 @@ const InvoiceReceiving = () => {
     }
   }
 
+  // same thing but to open JSON files and download JSON files
   const openJSON = async (invoiceId) => {
     try {
       const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchByInvoiceId?uid=${uid}&invoiceId=${invoiceId}`, {
@@ -266,6 +275,7 @@ const InvoiceReceiving = () => {
     fetchData();
   }, []); // Empty dependency array means this effect runs once on mount
 
+  // design for frontend
   return (
     <>
       <div className='searchContainer'>

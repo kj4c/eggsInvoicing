@@ -46,9 +46,10 @@ function AuthLogin() {
       }, 1000); // Assumes fade-out animation duration is 1s
     }, 3000); // Adjust based on total desired duration per image
     
-    return () => clearInterval(intervalId);
-  }, []);
-  
+    return () => clearInterval(intervalId); 
+  }, []); 
+
+  /* Generates a random string */
   const generateRandomString = (length) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -58,6 +59,7 @@ function AuthLogin() {
     return result;
   };
 
+  /* Once submit button is clicked try to login, if it doesn't work prompt error message*/
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -91,6 +93,7 @@ function AuthLogin() {
     }
   };
 
+  /* Creating the GUI for Login with Slideshows. */
   return (
     <div>
       <div className="logo-container">
@@ -127,7 +130,7 @@ function AuthLogin() {
             </div>
             <p className='login-error'>{error}</p>
             <button type="submit" className='submit-button'>Login</button>
-            <div className="auth-links"> 
+            <div className="auth-links">
               <Link to="/register">New here? Click here to create your account.</Link>
               <Link to="/reset-password">Forget password? Click here to reset your password.</Link>
             </div>

@@ -2,6 +2,7 @@ import '../stylesheets/InvoiceSending.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
+// function for the buttons to select which type of sending they want
 const InvoiceSending = () => {
   const navigate = useNavigate();
 
@@ -13,6 +14,7 @@ const InvoiceSending = () => {
     }
   }, [navigate]);
 
+  // based on the button chosen we will navigate to the correct page
   const routeChange = () => { 
     let path = `/invoiceInput`; 
     navigate(path);
@@ -38,6 +40,7 @@ const InvoiceSending = () => {
     navigate(path);
   }
 
+  // FRONTEND design
   return (
     <>
     <div className='options-grid-container'>

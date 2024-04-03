@@ -11,6 +11,7 @@ import '../stylesheets/Navbar.css'
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
+// navigation bar
 const NavButton = ({ title, customFunc, icon, dotColour }) => (
   <Tooltip text={title}>
     <button type="button"

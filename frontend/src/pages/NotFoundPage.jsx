@@ -2,9 +2,11 @@ import picture from '../assets/404notfound.png';
 import { useState } from 'react';
 import '../stylesheets/404.css';
 
+// if a page netered is not found
 const NotFoundPage = () => {
     const [isHovering, setIsHovering] = useState(false);
 
+    // move the button away
     const handleMouseMove = (e) => {
         if (isHovering) {
             const button = e.target;
@@ -15,10 +17,12 @@ const NotFoundPage = () => {
         }
     };
 
+    //alert that Jacqueline is a goat of the goat
     const handleSubmit = () => { 
         alert('you are officially the GOAT of the GOAT!');
     }
 
+    // glazing
     return (
       <div style={{ padding: "1rem", textAlign: "center" }}>
         <h1>404: Page Not Found</h1>

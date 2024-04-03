@@ -6,6 +6,7 @@ import { IoIosClose } from "react-icons/io";
 import { FaCheck } from "react-icons/fa";
 import "../stylesheets/InvoiceCreationUploadDocument.css";
 
+// Page to upload CSV and JSON to convert into XML file 
 const InvoiceCreationUploadDocument = () => {
   const inputRef = useRef();
 
@@ -17,10 +18,12 @@ const InvoiceCreationUploadDocument = () => {
     setSelectedFile(e.target.files[0]);
   };
 
+  // For the chosen file 
   const onChooseFile = () => {
     inputRef.current.click();
   };
 
+  //Remove all files
   const clearFileInput = () => {
     inputRef.current.value = "";
     setSelectedFile(null);
@@ -28,6 +31,7 @@ const InvoiceCreationUploadDocument = () => {
     setUploadStatus("select");
   };
 
+  // Download the files and save it to your computer
   const downloadFile= (content, filename)  => {
     const blob = new Blob([content], { type: 'application/xml' });
     const url = window.URL.createObjectURL(blob);
@@ -40,6 +44,7 @@ const InvoiceCreationUploadDocument = () => {
     window.URL.revokeObjectURL(url);
   }
 
+  // see what type of file to upload
   const handleFileUpload = async (e) => {
     e.preventDefault();
     if (uploadStatus === "done") {
@@ -56,6 +61,7 @@ const InvoiceCreationUploadDocument = () => {
     }
   };
   
+  // pass the JSON file to the APi that converts JSON TO XML
   const handleJSONFile = async () => {
     try {
       const reader = new FileReader();
@@ -94,6 +100,7 @@ const InvoiceCreationUploadDocument = () => {
     }
   }
 
+  // Pass CSV file to another API that handles CSV to XML conversion and download
   const handleCSVFile = async () => {
     try {
       let res = await axios.post('https://3dj53454nj.execute-api.ap-southeast-2.amazonaws.com/login', {
@@ -145,6 +152,7 @@ const InvoiceCreationUploadDocument = () => {
     }
   };
 
+  // GUI CONTAINER FOR THE UPLOADING
   return (
     <div className="ICUD-container">
       <div className='body-container'>

@@ -3,17 +3,20 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/InvoiceInput.css'; // Ensuring the CSS is applied uniformly
 
+// check if the function is a valid email
 function isValidEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
+// get cookie
 function getCookie(name) {
     let cookies = document.cookie.split('; ');
     let cookieValue = cookies.find(row => row.startsWith(name + '='));
     return cookieValue ? cookieValue.split('=')[1] : null;
 }
 
+// function to send email later by calling the api
 function sendEmailLater(reqBody) {
     axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/invoiceLater", reqBody)
     .then((response) => {
@@ -35,6 +38,7 @@ function SendEmailLater() {
         delayInMinutes: 0
     });
 
+    // changing what type of files you wanna send
     const handleOptionChange = () => {
         // Get the select element
         let selectElement = document.getElementById('options');
@@ -43,11 +47,13 @@ function SendEmailLater() {
         alert('Selected type: ' + selectValue);
     };
 
+    // set the form data to be newly inputted data
     const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
 	};
 
+    // set the XML to a new XML string if new files are added
     const handleXmlStringChange = (index, event) => {
         const fileReader = new FileReader();
         fileReader.readAsText(event.target.files[0], "UTF-8");
@@ -62,6 +68,7 @@ function SendEmailLater() {
         };
     };
 
+    // same for json
     const handleJsonStringChange = (index, event) => {
         const fileReader = new FileReader();
         fileReader.readAsText(event.target.files[0], "UTF-8");
@@ -89,6 +96,8 @@ function SendEmailLater() {
     //     }
     // };
 
+
+    // creates a new input to attach new files
     const addFileInput = () => {
         setFormData(prevFormData => ({
             ...prevFormData,
@@ -96,6 +105,7 @@ function SendEmailLater() {
         }));
     };
 
+    // on submit checks if anything fails and alert the user
     const handleSubmit = async (event) => {
         event.preventDefault();
         // console.log(formData);
@@ -142,6 +152,7 @@ function SendEmailLater() {
         sendEmailLater(reqBody);
     };
 
+    // frontend for send email later
     return (
         <div className="inputContainers">
             <button onClick={() => navigate("/invoiceSending")} className="backButton">Back</button>

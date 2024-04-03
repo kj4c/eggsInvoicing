@@ -26,6 +26,7 @@ const images = [
   picture9,
 ];
 
+/* Makes a forgetpassword gui page which sends an email to the user to rest their password */
 function ForgetPassword() {
   const [email, setEmail] = useState('');
   const [currentImage, setCurrentImage] = useState(0); 

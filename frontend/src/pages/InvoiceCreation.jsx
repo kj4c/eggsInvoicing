@@ -3,9 +3,11 @@ import "../stylesheets/InvoiceCreation.css";
 import { inputs } from "../data/InvoiceCreationInputs";
 import axios from "axios";
 
+// Invoice creationg GUI page where users can generate an invoice
 const InvoiceCreation = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [numItems, setNumItems] = useState(0);
+  // temporary set the values for the demo.
   const [values, setValues] = useState({
     invoice: {
       inId: "123a",
@@ -47,6 +49,7 @@ const InvoiceCreation = () => {
     item: [],
   });
 
+  // Download the generate file by creating a window
   const downloadFile= (content, filename)  => {
     const blob = new Blob([content], { type: 'application/xml' });
     const url = window.URL.createObjectURL(blob);
@@ -59,6 +62,7 @@ const InvoiceCreation = () => {
     window.URL.revokeObjectURL(url);
   }
 
+  // Creates the generated DIVs from increasing the item count.
   const handleGenerateDivs = (e) => {
     e.preventDefault();
     setButtonClicked(true);
@@ -77,6 +81,7 @@ const InvoiceCreation = () => {
     }
   };
 
+  // on Submit call the API from the invoice creation group passing in the valid values
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -96,6 +101,7 @@ const InvoiceCreation = () => {
      
   };
 
+  // Set the item values every new input
   const onChange = (e) => {
     const { name, value } = e.target;
     const [category, subCategory, field] = name.split('.');
@@ -139,6 +145,7 @@ const InvoiceCreation = () => {
     }
   };
 
+  // Actual GUI for the Invoice Creation part
   return (
     <div className="IC-Container">
       <form className="IC-Form" onSubmit={handleSubmit}>
