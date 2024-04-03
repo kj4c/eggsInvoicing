@@ -7,14 +7,18 @@ import Tooltip from "./Tooltip";
 import "../stylesheets/Sidebar.css";
 import { useState } from "react";
 
+// side bar for the website
 const Sidebar = () => {
   const { activeMenu, setActiveMenu } = useStateContext();
   const [activeItem, setActiveItem] = useState(null);
 
+  // set the active item to color it 
   const handleMenuItemClick = (id) => {
     setActiveItem(id);
   };
 
+  // loops through and adds all the pages needed to the sidebar with the relevant styles
+  // makes it so on click it navigates
   return (
     <div className="sidebar-container md-overflow-hidden">
       {activeMenu && (
