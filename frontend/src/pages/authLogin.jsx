@@ -31,13 +31,20 @@ function AuthLogin() {
   const [password, setPassword] = useState('');
   const [currentImage, setCurrentImage] = useState(7); 
   const [error, setError] = useState('');
+  const [animationClass, setAnimationClass] = useState('fade-in');
   const navigate = useNavigate();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentImage((currentImage) => (currentImage + 1) % images.length);
-    }, 3500
-    ); 
+      setAnimationClass('fade-out');
+      setTimeout(() => {
+        setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+        // Delay before starting fade-in to ensure fade-out completes
+        setTimeout(() => {
+          setAnimationClass('fade-in');
+        }, 200); // Adjust based on your fade-out animation duration
+      }, 1000); // Assumes fade-out animation duration is 1s
+    }, 3000); // Adjust based on total desired duration per image
     
     return () => clearInterval(intervalId); 
   }, []); 
@@ -94,7 +101,7 @@ function AuthLogin() {
       </div>
       <div className="auth-page-container">
         <div className="slideshow-container">
-          <img src={images[currentImage]} alt="Slideshow" className="slideshow-image" />
+          <img src={images[currentImage]} alt="Slideshow" className={`slideshow-image ${animationClass}`} />
         </div>
         <div className='login-form-container'> 
           <form onSubmit={handleSubmit} className='login-form'>

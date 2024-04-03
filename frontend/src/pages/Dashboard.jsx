@@ -5,7 +5,8 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 const API_KEY = "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";
 
 const Dashboard = () => {
@@ -254,7 +255,7 @@ const Dashboard = () => {
             ) : (
               <p className="unread-data" dangerouslySetInnerHTML={{ __html: data }}></p>
             )}
-            <p className="unread-end">unread emails.</p>
+            <p className="unread-end">unread invoice.</p>
             <div className="receive-btn">
               {
                 loaded && data !== '0' ? (
@@ -353,19 +354,13 @@ const Dashboard = () => {
               </table>
             </div>
           </div>
-          {/* <div className="create">
-            <p className="ready-text">Ready to get started?</p>
-            <div className="create-btn">
-              <Link to="../invoiceCreation" className='create-link'>Create your invoice here</Link>
-            </div>
-          </div> */}
         </div>
       </div>
 
       {
         !chat ? (
-          <img src='../src/assets/chat.png' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px"}} onClick={() => setChat(true) }></img>
-        ) : (
+          <IoChatbubbleEllipsesOutline className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px", transform: "scaleX(-1)"}} onClick={() => setChat(true) }/>
+          ) : (
           <div className="chat">
               <div style={{ position: "fixed", bottom: "60px", right: "20px", height: "400px", width: "300px" }}>
                 <MainContainer>
@@ -388,7 +383,7 @@ const Dashboard = () => {
                   </ChatContainer>
                 </MainContainer>
             </div>
-            <img src='../src/assets/chat.png' className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "35px", width: "35px"}} onClick={() => setChat(false) }></img>
+            <IoChatbubbleEllipsesSharp className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px", transform: "scaleX(-1)"}} onClick={() => setChat(false) }/>
           </div>         
         )
       }
