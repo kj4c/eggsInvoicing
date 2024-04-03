@@ -3,6 +3,7 @@ import '../stylesheets/InvoiceInput.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+/* SAME THING AS INVOICEMULTIPLE BUT FOR JSON THIS TIME */
 function isValidEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);

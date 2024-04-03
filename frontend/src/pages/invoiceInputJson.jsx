@@ -3,18 +3,20 @@ import '../stylesheets/InvoiceInput.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+// checks if its a valid email
 function isValidEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
+// gets the cookie
 function getCookie(name) {
     let cookies = document.cookie.split('; ');
     let cookieValue = cookies.find(row => row.startsWith(name + '='));
     return cookieValue ? cookieValue.split('=')[1] : null;
 }
 
-
+// sneds an email in json format
 function sendEmail(reqBody) {
     axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/email-json", reqBody)
     .then((response) => {
@@ -22,12 +24,14 @@ function sendEmail(reqBody) {
     });
 }
 
+// gets all relevant information for json
 const InvoiceInputJSON = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({from: getCookie('email') || "", to: "", attachment: ""});
     const [fileName, setFileName] = useState('No file chosen, yet.');
     const [buttonName, setButtonName] = useState('Upload JSON File');
 
+    // check if the file was submitted and attach it as a string
     const handleFileChange = (event) => {
         let newFile = event.target.files[0];
         setFileName(newFile ? newFile.name : 'No file chosen, yet.');
@@ -45,6 +49,7 @@ const InvoiceInputJSON = () => {
         }
     };
 
+    // updates states for the form
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -53,7 +58,8 @@ const InvoiceInputJSON = () => {
     const goBack = () => {
         navigate("/invoiceSending");
         };
-  
+
+    // checks if any inputs are wrong and alerts users
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!isValidEmail(formData.to)) {
@@ -72,7 +78,8 @@ const InvoiceInputJSON = () => {
             alert('Email successfully sent!');
         }
     };
-  
+
+    //frontend design for inputJson similar to the other ones
     return (
         <div className = "inputContainers">
             <button onClick={goBack} className="backButton">

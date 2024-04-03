@@ -4,6 +4,7 @@ import '../stylesheets/InvoiceValidation.css'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// function to validate the invoice
 const InvoiceValidation = () => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
@@ -23,6 +24,7 @@ const InvoiceValidation = () => {
     }
   }, [navigate]);
 
+  // on submit,  check if the file is xml, read the file given and pass into the api
   async function handleOnSubmit(e) {
     const validExtensions = ['xml'];
     e.preventDefault();
@@ -41,6 +43,7 @@ const InvoiceValidation = () => {
       setFailed(false);
       setIsSubmitting(true);
 
+      // if there are no errors generate the succesful report
       const reader = new FileReader();
       reader.onload = async function (event) {
         const xmlContent = event.target.result;
@@ -67,6 +70,7 @@ const InvoiceValidation = () => {
             setIsSubmitting(false);
           });
       };
+      // see if theres an error, if it's an error generate a error report
       reader.onerror = (error) => {
         console.error('File reading error:', error);
         setError(true);
@@ -80,12 +84,14 @@ const InvoiceValidation = () => {
 
   }
 
+  // set the file for the new file attached
   function handleOnChange(e) {
     const target = e.target;
     setFile(target.files[0]);
     setFileName(target.files[0].name);
   }
 
+  // downloads the JSON into the user's computer
   function downloadJson() {
     const jsonString = JSON.stringify(data, null, 2);
     const blob = new Blob([jsonString], { type: 'application/json' });
@@ -101,6 +107,7 @@ const InvoiceValidation = () => {
     URL.revokeObjectURL(href);
   }
 
+  // frontend for validation
   return (
     <div className='validation-page'>
       <h1 className='validation-heading'>Validation</h1>

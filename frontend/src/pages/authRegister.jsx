@@ -36,6 +36,7 @@ function AuthRegister() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  /* Making the slide show */
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImage((currentImage) => (currentImage + 1) % images.length);
@@ -45,6 +46,7 @@ function AuthRegister() {
     return () => clearInterval(intervalId); 
   }, []); 
 
+  /* On submit see if it is possible to register by calling backend if not return error.*/
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -64,6 +66,7 @@ function AuthRegister() {
     }
   };
 
+  /* Creating GUI for register page with all relevant inputboxes. */
   return (
     <div>
       <div className="logo-container">

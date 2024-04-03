@@ -3,17 +3,20 @@ import '../stylesheets/InvoiceInput.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+// checks if the email is valid
 function isValidEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
+// gets cookie from site
 function getCookie(name) {
     let cookies = document.cookie.split('; ');
     let cookieValue = cookies.find(row => row.startsWith(name + '='));
     return cookieValue ? cookieValue.split('=')[1] : null;
 }
 
+//sends multiple xml invoices
 function sendEmail(reqBody) {
     axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/multiInvoice", reqBody)
     .then((response) => {
@@ -22,6 +25,7 @@ function sendEmail(reqBody) {
     });
 }
 
+//  function to send multiple invoices
 const InvoiceInputMultiple = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -30,6 +34,7 @@ const InvoiceInputMultiple = () => {
         xmlFiles: [{ filename: "", xmlString: "" }] // Initially empty XML string
     });
 
+    // adding a new xml file that appends to an exisitng xmlFiles string
     const addXmlFile = () => {
         setFormData(prevFormData => ({
             ...prevFormData,
@@ -37,6 +42,7 @@ const InvoiceInputMultiple = () => {
         }));
     };
 
+    //find the index to replace the xml and resets it to a new one
     const handleXmlStringChange = (index, event) => {
         const fileReader = new FileReader();
         fileReader.readAsText(event.target.files[0], "UTF-8");
@@ -60,6 +66,7 @@ const InvoiceInputMultiple = () => {
         navigate("/invoiceSending");
     };
 
+    // checks if the inputs were valid to submit and send the email
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!isValidEmail(formData.recipient)) {
@@ -72,6 +79,7 @@ const InvoiceInputMultiple = () => {
         }
     };
 
+    // design for the input
     return (
         <div className="inputContainers">
             <button onClick={goBack} className="backButton">Back</button>

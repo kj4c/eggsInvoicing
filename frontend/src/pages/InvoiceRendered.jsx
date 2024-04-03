@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../stylesheets/InvoiceRendered.css'
 
+// Renders the invoice given by converting it to a HTML which is nice formatted
 const InvoiceRendered = () => {
   const [res, setRes] = useState('');
   const navigate = useNavigate();

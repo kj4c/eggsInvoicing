@@ -9,6 +9,7 @@ import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 const API_KEY = "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";
 
+/* Creatse the main Dashboard for the page with notifications, financial statistics */
 const Dashboard = () => {
   const navigate = useNavigate();
   const [data, setData] = useState('&nbsp;');
@@ -19,13 +20,15 @@ const Dashboard = () => {
   const [chat, setChat] = useState(false)
   // Page
   const cookieExists = document.cookie.includes('cookie='); 
-  
+
+  /* Get the cookie of the current user and see if it exists. */
   function getCookie(name) {
     let cookies = document.cookie.split('; ');
     let cookieValue = cookies.find(row => row.startsWith(name + '='));
     return cookieValue ? cookieValue.split('=')[1] : null;
   }
 
+  /* If cookie does not exist you go back to login, if it exists find uid */
   useEffect(() => {
     if (!cookieExists) {
       navigate('/login');
@@ -37,6 +40,7 @@ const Dashboard = () => {
     }
   }, [cookieExists, navigate]);
 
+  /*On login get all the notifications for the user*/
   const hasFetchedData = useRef(false);
   useEffect(() => {
     const notif = async () => {
@@ -59,6 +63,7 @@ const Dashboard = () => {
     }
   }, [uid]);
 
+  /* Loading animation */
   useEffect(() => {
     const intervalId = setInterval(() => {
       setLoading(prev => {
@@ -91,6 +96,7 @@ const Dashboard = () => {
   const [yAmount, setYAmount] = useState('loading');
   const [yPayable, setYPayable] = useState('loading');
 
+  /*Get all the statistics for the dashboard and changing the states */
   useEffect(() => {
     const stat = async () => {
       try {
@@ -184,6 +190,8 @@ const Dashboard = () => {
   ]);
   const [isTyping, setIsTyping] = useState(false);
 
+
+  // To send to CHAT GPT on click and wait for the reply.
   const handleSend = async (text) => {
     const userMessage = {
       message: text,
@@ -202,6 +210,7 @@ const Dashboard = () => {
     "content": "Explain things like you're talking to a software professional with 2 years of experience."
   };
 
+  // Proccesses the messages for the ChatGPT assistant to understand using CHAT GPT API
   async function processMessageToChatGPT(chatMessages) {
     let apiMessages = chatMessages.map((messageObject) => {
       let role = "";
@@ -242,6 +251,7 @@ const Dashboard = () => {
     });
   }
 
+  // All frontend for the dashboard with the  chat interface.
   return (
     <div className='Dashboard'>
       <div className="welcome-page">
