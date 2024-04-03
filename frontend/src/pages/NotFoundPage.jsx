@@ -47,28 +47,28 @@ const NotFoundPage = () => {
         </p>
         <p>
         <br></br>
-        Your clothes are always so cute and you&apos;re so nice!!! Please give us HD.<br></br>
+        Your clothes are always so cute and you&apos;re so nice!!! Please give us the chance of investmetn.<br></br>
         -Cherise
         </p>
         <p>
         <br></br>
-        There&apos;s been a rumor going around that if you give us a HD, Eric will show you his dog<br></br>
+        There&apos;s been a rumor going around that if you give us an investment, Eric will show you his dog<br></br>
         -Eric
         </p>
         <p>
         <br></br>
-        Give us HD.<br></br>
+        Give us investment.<br></br>
         -Winnie
         </p>
         <div>
-            <button className="button" onClick={handleSubmit}>Give us HD</button>
+            <button className="button" onClick={handleSubmit}>Invest in Us</button>
             <button 
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={() => setIsHovering(false)}
                 style={{ position: 'relative', cursor: 'pointer' }}
             >
-                This project is not a HD project 😢
+                Dont Invest In Us 😢
             </button>
         </div>
       </div>
