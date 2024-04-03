@@ -254,7 +254,7 @@ const Dashboard = () => {
             ) : (
               <p className="unread-data" dangerouslySetInnerHTML={{ __html: data }}></p>
             )}
-            <p className="unread-end">unread emails.</p>
+            <p className="unread-end">unread invoice.</p>
             <div className="receive-btn">
               {
                 loaded && data !== '0' ? (
