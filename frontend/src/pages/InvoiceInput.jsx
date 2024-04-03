@@ -59,8 +59,8 @@ const InvoiceInput = () => {
 	const goBack = () => {
         navigate("/invoiceSending");
       };
-
-	  // on submit you check if anything is wrong and alert user otherwise send the email
+	
+	// on submit you check if anything is wrong and alert user otherwise send the email
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (!isValidEmail(formData.to)) {
