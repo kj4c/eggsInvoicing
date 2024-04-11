@@ -1,0 +1,13 @@
+.landingPageTheme {
+  background-color: #0E0C15;
+  color: white;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color-scheme: dark;
+  height: 100vh;
+}
+
+.headerContainer {
+  overflow:hidden;
+  padding-top: 5.25rem;
+}
