@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom'
-import  eggLogo  from '../../frontend/src/assets/eggs.logo.png'
+import  eggLogo  from '../assets/eggs.logo.png'
 import '../stylesheets/header.css'
+
 import {navItems} from '../data/navbarData'
 
 export const Header = () => {

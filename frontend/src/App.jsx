@@ -11,7 +11,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import ForgetPassword from './pages/forgetPassword';
 import './App.css';
 import SendEmailLater from './pages/sendEmailLater';
-import LandingPage from '../../landingpage/LandingPage';
+import LandingPage from './pages/LandingPage';
 
 const AppContent = () => {
   const { activeMenu } = useStateContext();

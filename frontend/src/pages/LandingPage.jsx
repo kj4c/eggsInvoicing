@@ -1,5 +1,5 @@
-import { Header } from "./components/Header"
-import './stylesheets/LandingPage.css'
+import { Header } from "../components/Header"
+import '../stylesheets/LandingPage.css'
 
 const LandingPage = () => {
   return (
