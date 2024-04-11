@@ -14,8 +14,20 @@ CREATE TABLE IF NOT EXISTS sent_invoices (
   sender_email      varchar(225) not null,
   receiver_email    varchar(225) not null,
   xml_invoices      xml ARRAY not null,
-  sent_at           timestamptz not null default now()
+  sent_at           timestamptz not null default (now() AT TIME ZONE 'AEST')
 );
+
+CREATE TABLE IF NOT EXISTS teams (
+  teamId      integer primary key,
+  teamName    varchar(225) not null,
+  passcode    varchar(225) not null  
+);
+
+CREATE TABLE IF NOT EXISTS members (
+  email       varchar(225) primary key,
+  teamId      integer references teams(teamId) 
+);
+
 
 INSERT INTO users (email, phone_no, username, hashed_password) VALUES('dummy@gmail.com', '0123456789', 'dummy', 'password123');
 
