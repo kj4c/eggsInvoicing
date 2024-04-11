@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS sent_invoices (
   sender_email      varchar(225) not null,
   receiver_email    varchar(225) not null,
   xml_invoices      xml ARRAY not null,
-  title             varchar(225) default 'attachment'
   sent_at           timestamptz not null default (now() AT TIME ZONE 'AEST')
 );
 
@@ -29,9 +28,6 @@ CREATE TABLE IF NOT EXISTS members (
   teamId      integer references teams(teamId) 
 );
 
-ALTER TABLE sent_invoices
-ALTER COLUMN sent_at
-SET DEFAULT (now() AT TIME ZONE 'AEST');
 
 INSERT INTO users (email, phone_no, username, hashed_password) VALUES('dummy@gmail.com', '0123456789', 'dummy', 'password123');
 
