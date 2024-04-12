@@ -647,18 +647,31 @@ app.post('/jointeam', async(req, res) => {
   }
 })
 
-app.delete('/leaveteam', async(req, res) => {
+/*
+@brief
+get detail of team
+@params
+email
+@output
+on success:
+status code - integer - 200
+object with teamName, passcode, teamEmail, and list of member's email
+on failure:
+status code and error message
+*/
+app.get('/teamdetail', async(req, res) => {
   try {
     const email = req.body.email;
-    const response = await leaveTeam(email);
+    console.log(email);
+    const response = await detailTeam(email);
     if (response.status !== 200) {
       res.status(response.status).json({error: response.error});
     } else {
-      res.status(response.status).json({message: "Successfully left team"});
+      res.status(response.status).json({details: response.details});
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json({error: "Cannot leave team"});
+    res.status(500).json({error: "Cannot get detail"});
   }
 })
 
