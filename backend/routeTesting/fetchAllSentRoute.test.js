@@ -15,7 +15,7 @@ const body = {
 describe('/fetchAllSent route', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    jest.spyOn(console, 'error').mockImplementation(() => {}); // Suppress console.error
+    jest.spyOn(console, 'error').mockImplementation(() => {}); // suppress console.error
   });
 
   afterEach(() => {
