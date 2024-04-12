@@ -62,7 +62,7 @@ export const links = [
       {
         id: 6,
         name: 'Sent',
-        path: 'invoiceReceiving',
+        path: 'invoicesSent',
         icon: <SlPaperPlane></SlPaperPlane>
       }
     ],
