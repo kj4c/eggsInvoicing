@@ -302,7 +302,7 @@ const InvoiceReceiving = () => {
              key={item.invoice_id}
              onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
           <p className="grid-item">{item.invoice_id}</p>
-          <p className="grid-item">Invoice: {data.length - index}</p>
+          <p className="grid-item">{item.title}</p>
           <p className="grid-item">{item.sender_email}</p>
           <p className="grid-item">{item.type}</p>
           <p className="grid-item">{item.sent_at}</p>
