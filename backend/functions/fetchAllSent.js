@@ -1,0 +1,16 @@
+const pool = require('../database/db');
+const HTTPError = require('http-errors');
+
+// this would fetch all of the sent and recieved invoices
+async function fetchAllSent(userEmail) {
+  const validEmail = await pool.query('select sender_email from users where sender_email = userEmail', [userEmail]);
+  if (validEmail.rows.length === 0) {
+    throw HTTPError(403, 'Invalid User');
+  }
+
+  q = 'select * from sent_invoices where sender_email = $1';
+  const emailFound = await pool.query(q, [userEmail]);
+  return emailFound.rows;
+}
+
+module.exports = fetchAllSent;
