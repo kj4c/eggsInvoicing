@@ -40,7 +40,6 @@ describe('team join tests', () => {
     pool.query.mockResolvedValueOnce({ rows: [{teamid: 2}] });
     const res = await joinTeam("hi", "askdjadhk");
     expect(pool.query).toHaveBeenCalledTimes(3);
-    console.log(res);
     expect(res.status).toEqual(200);
   });
 });

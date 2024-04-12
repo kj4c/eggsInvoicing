@@ -40,7 +40,6 @@ describe('team create tests', () => {
     pool.query.mockResolvedValueOnce({ rows: [{teamid: 2}] });
     const res = await createTeam("hi", "ksdf@email.com", "sdfkjd@team.com");
     expect(pool.query).toHaveBeenCalledTimes(4);
-    console.log(res);
     expect(res.status).toEqual(200);
   });
 });
