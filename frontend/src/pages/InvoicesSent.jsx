@@ -137,7 +137,6 @@ const InvoicesSent = () => {
       }
       // if its date then you call API to find all invoices in the matching date
     } else if (fetchOption === 'Date') {
-      console.log("MEOW");
       try {
         setLoading(true);
         let response = 
@@ -146,7 +145,6 @@ const InvoicesSent = () => {
           let date = new Date(item.sent_at);
           let actualDate = date.toLocaleDateString('en-GB');
           let hour = date.getHours();
-          let month = date.getMonth();
           let min = date.getMinutes();
           if (min < 10) {
             item.sent_at = `${actualDate} ${hour}:0${min}`;
@@ -307,7 +305,7 @@ const InvoicesSent = () => {
           <p className='header'>Receiver</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
-        {dataFound && data.map((item, index) => (
+        {dataFound && data.map((item) => (
           <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
             onMouseEnter={() => setHoveredRow(item.invoice_id)} 
             onMouseLeave={() => setHoveredRow(null)} 

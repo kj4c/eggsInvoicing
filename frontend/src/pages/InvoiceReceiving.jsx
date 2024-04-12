@@ -143,7 +143,6 @@ const InvoiceReceiving = () => {
           let date = new Date(item.sent_at);
           let actualDate = date.toLocaleDateString('en-GB');
           let hour = date.getHours();
-          let month = date.getMonth();
           let min = date.getMinutes();
           if (min < 10) {
             item.sent_at = `${actualDate} ${hour}:0${min}`;
@@ -304,7 +303,7 @@ const InvoiceReceiving = () => {
           <p className='header'>Sender</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
-        {dataFound && data.map((item, index) => (
+        {dataFound && data.map((item) => (
           <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
             onMouseEnter={() => setHoveredRow(item.invoice_id)} 
             onMouseLeave={() => setHoveredRow(null)} 
