@@ -618,6 +618,35 @@ app.post('/createteam', async(req, res) => {
     res.status(500).json({error: 'Cannot create team'});
   }
 })
+
+/*
+@brief
+join team
+@params
+email
+passcode
+@output
+on success:
+status code - integer - 200
+on failure:
+status code and error message
+*/
+app.post('/jointeam', async(req, res) => {
+  try {
+    const email = req.body.email;
+    const passcode = req.body.passcode;
+    const response = await joinTeam(email, passcode);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({message: "Successfully joined team"});
+    }
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot join team'});
+  }
+})
+
 // app.post('/resetPassword', async(req, res) => {
 //   try {
 //     const email = req.body;
