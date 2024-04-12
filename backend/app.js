@@ -31,7 +31,6 @@ const joinTeam = require('./functions/teamJoin');
 const leaveTeam = require('./functions/teamLeave');
 const detailTeam = require('./functions/teamDetail');
 
-
 const cors = require('cors');
 
 app.use(cors());
@@ -617,7 +616,7 @@ app.post('/createteam', async(req, res) => {
     console.log(err);
     res.status(500).json({error: 'Cannot create team'});
   }
-})
+});
 
 /*
 @brief
@@ -639,13 +638,13 @@ app.post('/jointeam', async(req, res) => {
     if (response.status !== 200) {
       res.status(response.status).json({error: response.error});
     } else {
-      res.status(response.status).json({message: "Successfully joined team"});
+      res.status(response.status).json({message: 'Successfully joined team'});
     }
   } catch(err) {
     console.log(err);
     res.status(500).json({error: 'Cannot join team'});
   }
-})
+});
 
 /*
 @brief
@@ -666,13 +665,13 @@ app.delete('/leaveteam', async(req, res) => {
     if (response.status !== 200) {
       res.status(response.status).json({error: response.error});
     } else {
-      res.status(response.status).json({message: "Successfully left team"});
+      res.status(response.status).json({message: 'Successfully left team'});
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json({error: "Cannot leave team"});
+    res.status(500).json({error: 'Cannot leave team'});
   }
-})
+});
 
 /*
 @brief
@@ -698,9 +697,9 @@ app.get('/teamdetail', async(req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json({error: "Cannot get detail"});
+    res.status(500).json({error: 'Cannot get detail'});
   }
-})
+});
 
 // app.post('/resetPassword', async(req, res) => {
 //   try {

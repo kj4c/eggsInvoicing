@@ -5,12 +5,12 @@ async function createTeam(name, email, teamEmail) {
   const existingEmail = await pool.query('SELECT * FROM members WHERE email = $1', [email]);
 
   if (existingEmail.rows.length !== 0) {
-    return {status: 400, error: "email is already in a team"};
+    return {status: 400, error: 'email is already in a team'};
   }
 
   const existingTeam = await pool.query('SELECT * FROM teams WHERE teamEmail = $1', [teamEmail]);
   if (existingTeam.rows.length !== 0) {
-    return {status: 400, error: "team email is already in use"};
+    return {status: 400, error: 'team email is already in use'};
   }
 
   // insert new team
@@ -24,7 +24,7 @@ async function createTeam(name, email, teamEmail) {
   return {
     status: 200,
     passcode: passcode
-  }
+  };
 }
 
 module.exports = createTeam;
