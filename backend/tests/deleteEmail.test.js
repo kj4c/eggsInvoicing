@@ -30,5 +30,5 @@ describe('Test suite for deleteEmails', () => {
     await expect(deleteEmail(invoiceId))
       .rejects
       .toThrow('Invoice ID not found');
-  })
+  });
 });

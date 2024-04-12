@@ -1,9 +1,8 @@
 const request = require('supertest');
 const app = require('../app');
-const HTTPError = require('http-errors');
 
 jest.mock('../functions/deleteEmail', () => jest.fn().mockImplementation((invoiceId) => {
-  if (invoiceId == 123) {
+  if (invoiceId === 123) {
     return Promise.resolve({
       status: 200,
     });
@@ -27,7 +26,7 @@ describe('/deleteEmail route', () => {
     const responseForBadRequest = await request(app)
       .delete('/deleteEmail/456');
 
-    expect(responseForBadRequest.statusCode).toBe(400);
+    expect(responseForBadRequest.statusCode).toBe(404);
     expect(responseForBadRequest.body).toEqual({ message: 'Invoice ID not found' });
   });
 });

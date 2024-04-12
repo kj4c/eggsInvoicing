@@ -532,7 +532,7 @@ email: string - email of the user
 invoiceId: int - id of invoice
 @output
 on success:
-status code 
+status code
 on failure:
 status code and error message
 */
@@ -541,9 +541,9 @@ app.delete('/deleteEmail/:invoiceId', async (req, res) => {
     const invoiceId = req.params.invoiceId;
     res.status(200).json(await deleteEmail(invoiceId));
   } catch (err) {
-    res.status(err.statusCode || 400).json({ message: err.message || "Error" })
+    res.status(err.statusCode || 400).json({ message: err.message || 'Error' });
   }
-})
+});
 
 /*
 @brief
