@@ -18,6 +18,7 @@ const receiveHtml = require('./functions/receiveReportHtml');
 const generateSentPdf = require('./functions/sentReport');
 const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
+const fetchAllSent = require('./functions/fetchAllSent');
 const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
 const fetchByDateRangev2 = require('./functions/fetchByDateRangev2');
@@ -104,7 +105,7 @@ app.post('/send/email-json', async function (req, res) {
 
 /*
 @brief
-fetches all invoices sent/received by user
+fetches all invoices received by user
 @params
 uid: int - user id of the user
 @output
@@ -117,6 +118,26 @@ app.get('/receive/fetchAll', async function (req, res) {
   const uid = req.query.uid;
   try {
     res.json(await fetchAll(uid));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
+fetches all invoices sent by user
+@params
+uid: int - user id of the user
+@output
+on success:
+invoices: array - array of invoices
+on failure:
+message: string - error message
+*/
+app.get('/receive/fetchAllSent', async function (req, res) {
+  const email = req.query.email;
+  try {
+    res.json(await fetchAllSent(email));
   } catch (error) {
     res.status(error.statusCode).json(error);
   }
