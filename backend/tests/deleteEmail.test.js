@@ -21,7 +21,7 @@ describe('Test suite for deleteEmails', () => {
     expect(pool.query).toHaveBeenCalledTimes(1);
     expect(pool.query).toHaveBeenCalledWith('delete from sent_invoices where invoice_id = $1', [invoiceId]);
 
-    expect(result).toEqual(1);
+    expect(result).toEqual({ status: 200 });
   });
 
   it('should throw an error if invoice id does not exist', async () => {

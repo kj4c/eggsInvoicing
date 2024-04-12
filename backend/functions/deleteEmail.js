@@ -1,21 +1,26 @@
 const pool = require('../database/db');
 const HTTPError = require('http-errors');
 
-async function deleteEmail(invoice_id) {
-  if (!invoice_id) {
-    throw HTTPError(400, 'invoice_id not provided');
+// given the id of an invoice, deletes the invoice from the database
+async function deleteEmail(invoiceId) {
+  try {
+    let q = 'delete from sent_invoices where invoice_id = $1';
+    deleteResult = await pool.query(q, [invoiceId]);
+
+    if (deleteResult.rowCount === 0) {
+      throw HTTPError(404, 'Invoice ID not found');
+    }
+
+    console.log('Successfully Deleted Invoice: %d', invoiceId);
+
+    return {
+      status: 200
+    }
+  } catch (error) {
+    console.error('Failed to delete:', error.message);
+    throw error;
   }
 
-  let q = 'delete from sent_invoices where invoice_id = $1';
-  deleteEmail = await pool.query(q, [invoice_id]);
-
-  if (deleteEmail.rowCount === 0) {
-    throw HTTPError(404, 'Invoice ID not found');
-  }
-
-  console.log('Successfully Deleted Invoice: %d', invoice_id);
-
-  return deleteEmail.rowCount;
 }
 
 module.exports = deleteEmail;
