@@ -13,10 +13,12 @@ async function createTeam(name, email, teamEmail) {
     return {status: 400, error: "team email is already in use"};
   }
 
+  // insert new team
   const passcode = uuidv4();
   let teamId = await pool.query('INSERT INTO teams(teamName, passcode, teamEmail) VALUES ($1, $2, $3) RETURNING teamId', [name, passcode, teamEmail] );
   teamId = teamId.rows[0].teamid;
 
+  // insert new member
   await pool.query('INSERT INTO members(email, teamId) VALUES ($1, $2)', [email, teamId]);
 
   return {
