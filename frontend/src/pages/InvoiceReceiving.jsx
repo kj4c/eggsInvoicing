@@ -295,7 +295,7 @@ const InvoiceReceiving = () => {
           <p className='header'>Sender</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
-          {dataFound && data.map((item, index) => (
+          {dataFound && data.map((item) => (
           <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
              onMouseEnter={() => setHoveredRow(item.invoice_id)} 
              onMouseLeave={() => setHoveredRow(null)} 
