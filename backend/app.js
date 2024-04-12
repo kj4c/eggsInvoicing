@@ -28,7 +28,7 @@ const getStatisticsV2 = require('./functions/v2getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
 const createTeam = require('./functions/teamCreate');
 const joinTeam = require('./functions/teamJoin');
-const deleteTeam = require('./functions/teamDelete');
+const leaveTeam = require('./functions/teamLeave');
 const detailTeam = require('./functions/teamDetail');
 
 
@@ -644,6 +644,21 @@ app.post('/jointeam', async(req, res) => {
   } catch(err) {
     console.log(err);
     res.status(500).json({error: 'Cannot join team'});
+  }
+})
+
+app.delete('/leaveteam', async(req, res) => {
+  try {
+    const email = req.body.email;
+    const response = await leaveTeam(email);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({message: "Successfully left team"});
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: "Cannot leave team"});
   }
 })
 
