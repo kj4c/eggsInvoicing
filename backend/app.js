@@ -136,6 +136,7 @@ message: string - error message
 */
 app.get('/receive/fetchAllSent', async function (req, res) {
   const email = req.query.email;
+  
   try {
     res.json(await fetchAllSent(email));
   } catch (error) {
