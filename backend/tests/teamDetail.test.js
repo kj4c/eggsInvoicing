@@ -1,4 +1,4 @@
-const joinTeam = require('../functions/teamDetail');
+const detailTeam = require('../functions/teamDetail');
 const pool = require('../database/db');
 
 jest.mock('../database/db', () => ({
@@ -27,8 +27,9 @@ describe('team detail tests', () => {
   it('success', async () => {
     pool.query.mockResolvedValueOnce({ rows: [{teamid: 2}] });
     pool.query.mockResolvedValueOnce({ rows: [{email: "hi@gmail.com"}] });
+    pool.query.mockResolvedValueOnce({ rows: [{teamid: 2, teamname: "hi", passcode: "askjdhasd", teamemail: "hi@team.com"}] });
     const res = await detailTeam("hi@gmail.com");
-    expect(pool.query).toHaveBeenCalledTimes(2);
+    expect(pool.query).toHaveBeenCalledTimes(3);
     expect(res.status).toEqual(200);
   });
 });
