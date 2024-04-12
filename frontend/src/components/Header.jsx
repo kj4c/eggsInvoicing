@@ -1,8 +1,8 @@
-import { useLocation } from 'react-router-dom'
-import  eggLogo  from '../assets/eggs.logo.png'
-import '../stylesheets/header.css'
+import { useLocation } from 'react-router-dom';
+import eggLogo from '../assets/eggs.logo.png';
+import '../stylesheets/header.css';
 
-import {navItems} from '../data/navbarData'
+import { navItems } from '../data/navbarData';
 
 export const Header = () => {
   const url = useLocation();
@@ -14,7 +14,6 @@ export const Header = () => {
           <img src={eggLogo} width={80} height={90} alt='eggLogo' />
           Eggs-Invoice
         </a>
-
 
         <nav className='yeet4'>
           <div className='yeet5'>
@@ -31,11 +30,14 @@ export const Header = () => {
         </nav>
 
         <div className='buttonsContainer'>
-          <a href="/register" className="signUpButton">SIGN UP</a>
-          <a href="/login" className="loginButton">LOGIN</a>
+          <a href='/register' className='signUpButton'>
+            SIGN UP
+          </a>
+          <a href='/login' className='loginButton'>
+            LOGIN
+          </a>
         </div>
-
       </div>
     </div>
-  )
-}
+  );
+};
