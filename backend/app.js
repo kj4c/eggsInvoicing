@@ -26,6 +26,12 @@ const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
 const getStatisticsV2 = require('./functions/v2getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
+const createTeam = require('./functions/teamCreate');
+const joinTeam = require('./functions/teamJoin');
+const deleteTeam = require('./functions/teamDelete');
+const detailTeam = require('./functions/teamDetail');
+
+
 const cors = require('cors');
 
 app.use(cors());
@@ -582,6 +588,36 @@ app.get('/getUserInfo', async (req, res) => {
   }
 });
 
+/*
+@brief
+create team
+@params
+name: team name
+email: email
+@output
+on success:
+status code - integer - 200
+passcode - string
+on failure:
+status code and error message
+*/
+app.post('/createteam', async(req, res) => {
+  try {
+    const name = req.body.name;
+    const email = req.body.email;
+    const teamEmail = req.body.teamEmail;
+    const response = await createTeam(name, email, teamEmail);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      console.log(response.passcode);
+      res.status(response.status).json({passcode: response.passcode});
+    }
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot create team'});
+  }
+})
 // app.post('/resetPassword', async(req, res) => {
 //   try {
 //     const email = req.body;
