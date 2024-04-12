@@ -5,6 +5,7 @@ import { ImFilePicture } from "react-icons/im";
 import { SlPaperPlane } from "react-icons/sl";
 import { TbFileUpload } from "react-icons/tb";
 import { HiOutlineFolderOpen } from "react-icons/hi2";
+import { SlPencil } from "react-icons/sl";
 
 export const links = [
   {
@@ -23,7 +24,7 @@ export const links = [
     links: [
       {
         id: 1,
-        name: 'Create Invoice',
+        name: 'Create',
         path: 'invoiceCreation',
         icon: <FaFileInvoice></FaFileInvoice>,
         subMenus: [
@@ -36,28 +37,34 @@ export const links = [
       },
       {
         id: 2,
-        name: 'Validate Invoice',
+        name: 'Validate',
         path: 'invoiceValidation',
         icon: <GrValidate></GrValidate>,
       },
       {
         id: 3,
-        name: 'Render Invoice',
+        name: 'Render',
         path: 'invoiceRendering',
         icon: <ImFilePicture></ImFilePicture>,
       },
       {
         id: 4,
-        name: 'Sending Invoice',
+        name: 'Compose',
         path: 'invoiceSending',
-        icon: <SlPaperPlane></SlPaperPlane>
+        icon: <SlPencil></SlPencil>
       },
       {
         id:5,
-        name: 'Receiving Invoice',
+        name: 'Received',
         path: 'invoiceReceiving',
         icon: <HiOutlineFolderOpen />,
       },
+      {
+        id: 6,
+        name: 'Sent',
+        path: 'invoiceReceiving',
+        icon: <SlPaperPlane></SlPaperPlane>
+      }
     ],
   },
 ];

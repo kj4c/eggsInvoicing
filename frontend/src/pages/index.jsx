@@ -11,3 +11,4 @@ export { default as InvoiceReceiving } from './InvoiceReceiving';
 export { default as HtmlRendering} from './HtmlRendering';
 export { default as InvoiceInputMultiple } from './invoiceInputMultiple';
 export { default as InvoiceInputMultipleJson } from './invoiceInputMultipleJson';
+export { default as InvoicesSent } from './InvoicesSent';
