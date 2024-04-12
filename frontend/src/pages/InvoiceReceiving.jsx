@@ -295,14 +295,14 @@ const InvoiceReceiving = () => {
           <p className='header'>Sender</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
-          {dataFound && data.map((item, index) => (
+          {dataFound && data.map((item) => (
           <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
              onMouseEnter={() => setHoveredRow(item.invoice_id)} 
              onMouseLeave={() => setHoveredRow(null)} 
              key={item.invoice_id}
              onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
           <p className="grid-item">{item.invoice_id}</p>
-          <p className="grid-item">Invoice: {data.length - index}</p>
+          <p className="grid-item">{item.title}</p>
           <p className="grid-item">{item.sender_email}</p>
           <p className="grid-item">{item.type}</p>
           <p className="grid-item">{item.sent_at}</p>
