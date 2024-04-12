@@ -4,6 +4,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchIcon from '@mui/icons-material/Search';
 
+// Making an array for months
+const Months = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
 // Retrieves all invoices from the database and stores it in an inboxing format
 const InvoiceReceiving = () => {
   const [data, setData] = useState(null);
@@ -80,15 +85,18 @@ const InvoiceReceiving = () => {
         await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,);
         response.data.reverse().map((item) => {
           let date = new Date(item.sent_at);
-          let actualDate = date.toLocaleDateString('en-GB');
           let hour = date.getHours();
+          let month = date.getMonth();
+          let day = date.getDate();
           let min = date.getMinutes();
           if (min < 10) {
-            item.sent_at = `${actualDate} ${hour}:0${min}`;
+            item.sent_at = `${Months[month]} ${day} ${hour}:0${min}`;
           } else {
-            item.sent_at = `${actualDate} ${hour}:${min}`;
+            item.sent_at = `${Months[month]} ${day} ${hour}:${min}`;
           }
         });
+        response.data = response.data.sort((a, b) => a.invoice_id - b.invoice_id);
+        response.data = response.data.reverse();
         setLoading(false);
         setData(response.data);
         console.log('hello')
@@ -135,6 +143,7 @@ const InvoiceReceiving = () => {
           let date = new Date(item.sent_at);
           let actualDate = date.toLocaleDateString('en-GB');
           let hour = date.getHours();
+          let month = date.getMonth();
           let min = date.getMinutes();
           if (min < 10) {
             item.sent_at = `${actualDate} ${hour}:0${min}`;
@@ -279,7 +288,7 @@ const InvoiceReceiving = () => {
   return (
     <>
       <div className='searchContainer'>
-        <p className = "fetching">Fetch Invoices</p>
+        <p className = "fetching">Received Invoices</p>
         <button className='search'><SearchIcon style={{color: 'white'}} onClick = {fetchData}/></button>
         <input type="text" className='inputSearch' placeholder='Fetch' onChange = {handleSearchChange}/>
         <select id = "options" className = "options" placeholder='Options' onChange={handleSelectChange}>
@@ -295,21 +304,20 @@ const InvoiceReceiving = () => {
           <p className='header'>Sender</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
-          {dataFound && data.map((item, index) => (
+        {dataFound && data.map((item, index) => (
           <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
-             onMouseEnter={() => setHoveredRow(item.invoice_id)} 
-             onMouseLeave={() => setHoveredRow(null)} 
-             key={item.invoice_id}
-             onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
-          <p className="grid-item">{item.invoice_id}</p>
-          <p className="grid-item">Invoice: {data.length - index}</p>
-          <p className="grid-item">{item.sender_email}</p>
-          <p className="grid-item">{item.type}</p>
-          <p className="grid-item">{item.sent_at}</p>
-        </div>
-      ))}
-      {Loading && <h1 className='loadingScreen'>{loadingText}</h1>}
-
+            onMouseEnter={() => setHoveredRow(item.invoice_id)} 
+            onMouseLeave={() => setHoveredRow(null)} 
+            key={item.invoice_id}
+            onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
+            <p className="grid-item">{item.invoice_id}</p>
+            <p className="grid-item">{item.title}</p>
+            <p className="grid-item">{item.sender_email}</p>
+            <p className="grid-item">{item.type}</p>
+            <p className="grid-item">{item.sent_at}</p>
+          </div>
+        ))}
+        {Loading && <h1 className='loadingScreen'>{loadingText}</h1>}
       </div>
       <div className='buttonContainer'>
         <button className='button1' onClick={generatePDF}>Generate PDF</button>
