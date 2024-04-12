@@ -3,14 +3,24 @@
   font-size: x-large;
   font-weight: 700;
 }
-
+.logo {
+  font-size: 4rem;
+  margin-right: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  width: 5rem;
+  color: blueviolet;
+  /* background-color: #ac6aff; */
+}
 .yeet {
   position: fixed;
   left: 0px;
   top: 0px;
   width: 100%;
   z-index: 50;
-  background-color: #0E0C15;
+  background-color: #0e0c15;
   border-bottom: 1px solid #252134;
   opacity: 0.9;
   backdrop-filter: blur(4px);
@@ -21,7 +31,6 @@
   align-items: center;
   padding-left: 7.5px;
   padding-right: 7.5px;
-  
 }
 
 .yeet3 {
@@ -35,7 +44,6 @@
   /* background-color: aqua; */
   /* background-color: black; */
 }
-
 
 .yeet4 {
   position: fixed;
@@ -56,7 +64,6 @@
   position: relative;
   margin: auto;
   /* z-index: 2; */
-  
 }
 
 .yeet6 {
@@ -72,13 +79,13 @@
   font-size: 0.75rem;
   line-height: 1.25rem;
   font-weight: 600;
-  transition-property: color; 
+  transition-property: color;
   transition-duration: 0.3s;
   /* background-color: aquamarine; */
 }
 
 .yeet6:hover {
-  color: #AC6AFF;
+  color: #ac6aff;
 }
 
 .yeet7 {
@@ -97,7 +104,7 @@
   font-size: 0.75rem;
   line-height: 1.25rem;
   font-weight: 600;
-  transition-property: color; 
+  transition-property: color;
   transition-duration: 0.3s;
   /* background-color: #AC6AFF; */
 }
@@ -114,7 +121,6 @@
   border-radius: 5px;
   padding: 10px 20px;
   /* background-color: #AC6AFF; */
-
 }
 
 .loginButton {
@@ -128,13 +134,13 @@
   color: black;
   border-radius: 5px;
   padding: 10px 20px;
-  background-color: #AC6AFF;
+  background-color: #ac6aff;
 }
 
 .loginButton:hover {
-  color:white
+  color: white;
 }
 
 .signUpButton:hover {
-  color: #AC6AFF;
+  color: #ac6aff;
 }

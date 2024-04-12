@@ -24,7 +24,7 @@ const Hero = () => {
             {/* Separate inline block for 'Eggs-Invoicing' */}
             <span>
               Eggs-Invoicing
-              <img src={curve} width={360} height={15} alt='curve' />
+              <img src={curve} width={415} height={15} alt='curve' />
             </span>
           </h1>
 

@@ -4,7 +4,7 @@ const SearchBar = ({ className }) => {
   return (
     <div className={`SearchBar ${className || ''}`}>
       <img className='LoadingIcon' src={loadingIcon} alt='loading' />
-      Create, Validate, Render, Compose, Received, Sent Invoices
+      Create, Validate, Render, Compose, Send and Receive Invoices ...
     </div>
   );
 };

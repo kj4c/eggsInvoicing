@@ -1,10 +1,10 @@
-import { FiShoppingBag, } from 'react-icons/fi';
-import { FaFileInvoice } from "react-icons/fa6";
-import { GrValidate } from "react-icons/gr";
-import { ImFilePicture } from "react-icons/im";
-import { SlPaperPlane } from "react-icons/sl";
-import { TbFileUpload } from "react-icons/tb";
-import { HiOutlineFolderOpen } from "react-icons/hi2";
+import { FiShoppingBag } from 'react-icons/fi';
+import { FaFileInvoice } from 'react-icons/fa6';
+import { GrValidate } from 'react-icons/gr';
+import { ImFilePicture } from 'react-icons/im';
+import { SlPaperPlane } from 'react-icons/sl';
+import { TbFileUpload } from 'react-icons/tb';
+import { HiOutlineFolderOpen } from 'react-icons/hi2';
 
 export const links = [
   {
@@ -30,8 +30,8 @@ export const links = [
           {
             name: 'Upload Documents',
             path: 'invoiceCreation/uploadDocument',
-            icon: <TbFileUpload></TbFileUpload>
-          }
+            icon: <TbFileUpload></TbFileUpload>,
+          },
         ],
       },
       {
@@ -50,10 +50,10 @@ export const links = [
         id: 4,
         name: 'Sending Invoice',
         path: 'invoiceSending',
-        icon: <SlPaperPlane></SlPaperPlane>
+        icon: <SlPaperPlane></SlPaperPlane>,
       },
       {
-        id:5,
+        id: 5,
         name: 'Receiving Invoice',
         path: 'invoiceReceiving',
         icon: <HiOutlineFolderOpen />,

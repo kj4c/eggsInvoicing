@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import eggLogo from '../assets/eggs.logo.png';
 import '../stylesheets/header.css';
+import { GiCosmicEgg } from 'react-icons/gi';
 
 import { navItems } from '../data/navbarData';
 
@@ -11,7 +11,9 @@ export const Header = () => {
     <div className='yeet'>
       <div className='yeet2'>
         <a className='yeet3' href='#hero'>
-          <img src={eggLogo} width={80} height={90} alt='eggLogo' />
+          <div className='logo'>
+            <GiCosmicEgg />
+          </div>
           Eggs-Invoice
         </a>
 
