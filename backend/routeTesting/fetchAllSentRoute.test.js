@@ -9,8 +9,8 @@ jest.mock('../database/db', () => ({
 }));
 const email = 'dummy@gmail.com';
 const body = {
-    email: email
-}
+  email: email
+};
 
 describe('/fetchAllSent route', () => {
   beforeEach(() => {
@@ -60,7 +60,7 @@ describe('/fetchAllSent route', () => {
     expect(response.body).toStrictEqual(expected);
 
     expect(pool.query).toHaveBeenCalledTimes(2);
-    q = 'select email from users where email = $1';
+    let q = 'select email from users where email = $1';
     expect(pool.query).toHaveBeenCalledWith(q, [email]);
     q = 'select * from sent_invoices where sender_email = $1';
     expect(pool.query).toHaveBeenCalledWith(q, [email]);

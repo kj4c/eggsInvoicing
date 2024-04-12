@@ -8,7 +8,7 @@ async function fetchAllSent(userEmail) {
     throw HTTPError(403, 'Invalid Email');
   }
 
-  q = 'select * from sent_invoices where sender_email = $1';
+  const q = 'select * from sent_invoices where sender_email = $1';
   const emailFound = await pool.query(q, [userEmail]);
   return emailFound.rows;
 }

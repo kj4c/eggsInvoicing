@@ -17,7 +17,7 @@ describe('Test suite for fetchAllSent()', () => {
     pool.query.mockResolvedValueOnce({rows: []});
     await expect(fetchAllSent(email)).rejects.toThrowError('Invalid Email');
     expect(pool.query).toHaveBeenCalledTimes(1);
-    const q = 'select email from users where email = $1'
+    const q = 'select email from users where email = $1';
     expect(pool.query).toHaveBeenCalledWith(q, [email]);
   });
 
@@ -48,7 +48,7 @@ describe('Test suite for fetchAllSent()', () => {
     expect(response).toEqual(expected);
 
     expect(pool.query).toHaveBeenCalledTimes(2);
-    let q = 'select email from users where email = $1'
+    let q = 'select email from users where email = $1';
     expect(pool.query).toHaveBeenCalledWith(q, [email]);
     q = 'select * from sent_invoices where sender_email = $1';
     expect(pool.query).toHaveBeenCalledWith(q, [email]);
