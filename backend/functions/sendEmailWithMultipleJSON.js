@@ -53,8 +53,8 @@ async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
 
   const invoiceIds = [];
   for (const attachment of attachments) {
-    let query = 'INSERT INTO sent_invoices (sender_email, receiver_email, invoices, type) VALUES ($1, $2, ARRAY[$3::json], \'JSON\') RETURNING invoice_id';
-    const invoiceId = (await pool.query(query, [from, recipient, attachment.content])).rows[0].invoice_id;
+    let query = 'INSERT INTO sent_invoices (sender_email, receiver_email, invoices, titles, type) VALUES ($1, $2, ARRAY[$3::json], \'JSON\') RETURNING invoice_id';
+    const invoiceId = (await pool.query(query, [from, recipient, attachment.content, attachment.filename, 'JSON'])).rows[0].invoice_id;
     invoiceIds.push(invoiceId);
 
     query = 'UPDATE users SET notifications = array_append(notifications, $1) WHERE email = $2';
