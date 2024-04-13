@@ -40,12 +40,16 @@
 }
 
 .Image {
+  display: flex;
   width: 50%;
+  height: 100vh;
+  align-items: center;
+  background-color: #803dfd;
 }
 
 .sourceImage {
   width: 100%;
-  height: 100%;
+  height: 50%;
 }
 
 .formBox {

@@ -3,6 +3,7 @@ import '../stylesheets/InvoiceInput.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SendImage from '../assets/SendImage.jpg';
+import purpleImage from '../assets/purple image.jpg';
 
 function isValidEmail(email) {
 	// Simple regex for basic email validation
@@ -111,7 +112,7 @@ const InvoiceInput = () => {
 				<button className="submit" onClick = {handleSubmit}>Submit</button>
 			</div>
 			<div className = "Image">
-				<img className = "sourceImage" src = {SendImage}/>
+				<img className = "sourceImage" src = {purpleImage}/>
 			</div>
 		</div>
 	)
