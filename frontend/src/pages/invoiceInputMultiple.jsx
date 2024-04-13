@@ -99,7 +99,7 @@ const InvoiceInputMultiple = () => {
                                     accept=".xml"
                                     hidden
                                 />
-                                <label for={`file-upload-${index}`} class="file-upload-button">{file.filename || 'Upload File'}</label>
+                                <label htmlFor={`file-upload-${index}`} className="file-upload-button">{file.filename || 'Upload File'}</label>
                             </div>
                         ))}
                     </div>

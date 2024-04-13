@@ -3,7 +3,6 @@ import '../stylesheets/InvoiceInput.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SendImage from '../assets/send_imagev2.png';
-import { LuSendHorizonal } from "react-icons/lu";
 
 function isValidEmail(email) {
 	// Simple regex for basic email validation
@@ -87,24 +86,24 @@ const InvoiceInput = () => {
 		<div className = "splitScreen">
 			<div className = "inputContainers">
 				<div className = "inputWrapper">
-				<button onClick={goBack} className="backButton">
-					Back
-				</button>
-				<input type="email" className="inputBox" placeholder ="Recipient" name="to" value={formData.to} onChange={handleChange}/>
-				<input 
-					type= "file" 
-					id = "fileUpload" 
-					hidden = 'hidden' 
-					name="file" 
-					accept=".xml" onChange={handleFileChange}
-				/>
-				<button
-					className = "fileUpload"
-					onClick={() => document.getElementById('fileUpload').click()}
-				>
-					{buttonName}
-				</button>
-				<button className="submit" onClick = {handleSubmit}>Submit</button>
+					<button onClick={goBack} className="backButton">
+						Back
+					</button>
+					<input type="email" className="inputBox" placeholder ="Recipient" name="to" value={formData.to} onChange={handleChange}/>
+					<input 
+						type= "file" 
+						id = "fileUpload" 
+						hidden = 'hidden' 
+						name="file" 
+						accept=".xml" onChange={handleFileChange}
+					/>
+					<button
+						className = "fileUpload"
+						onClick={() => document.getElementById('fileUpload').click()}
+					>
+						{buttonName}
+					</button>
+					<button className="submit" onClick = {handleSubmit}>Submit</button>
 				</div>
 			</div>
 			<div className = "Image">
