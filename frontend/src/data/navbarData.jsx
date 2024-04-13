@@ -12,7 +12,7 @@ export const navItems = [
   {
     id: '2',
     title: 'Services',
-    url: '#Services',
+    url: '#services',
   },
   {
     id: '3',

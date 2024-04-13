@@ -2,6 +2,7 @@ import { Header } from '../components/Header';
 import Hero from '../components/Hero';
 import Features from '../components/Features';
 import '../stylesheets/LandingPage.css';
+import Services from '../components/Services';
 
 const LandingPage = () => {
   return (
@@ -10,6 +11,7 @@ const LandingPage = () => {
         <Header />
         <Hero />
         <Features />
+        <Services />
       </div>
     </div>
   );
