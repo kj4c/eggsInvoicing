@@ -10,7 +10,7 @@ const Months = [
 ];
 
 // Retrieves all invoices from the database and stores it in an inboxing format
-const InvoiceReceiving = () => {
+const InvoicesSent = () => {
   const [data, setData] = useState(null);
   const [dataFound, setDataFound] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
@@ -31,9 +31,12 @@ const InvoiceReceiving = () => {
   }, [cookieExists, navigate]);
 
   let uid;
+  let email;
   if (cookieExists) {
     uid = document.cookie.split("; ");
     uid = uid.find(part => part.startsWith("uid=")).split("=")[1];
+    email = document.cookie.split("; ");
+    email = email.find(part => part.startsWith("email=")).split("=")[1];
   }
 
   // Loading screen before the invoices load
@@ -82,7 +85,7 @@ const InvoiceReceiving = () => {
       try {
         setLoading(true);
         let response = 
-        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,);
+        await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAllSent?email=${email}`,);
         response.data.reverse().map((item) => {
           let date = new Date(item.sent_at);
           let hour = date.getHours();
@@ -134,7 +137,6 @@ const InvoiceReceiving = () => {
       }
       // if its date then you call API to find all invoices in the matching date
     } else if (fetchOption === 'Date') {
-      console.log("MEOW");
       try {
         setLoading(true);
         let response = 
@@ -195,7 +197,7 @@ const InvoiceReceiving = () => {
   // function to call API to generate the PDF which allows users to download and view it.
   const generatePDF = async () => {
     try {
-      const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receiveReport?uid=${uid}`);
+      const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/sentReport?uid=${uid}`);
       const fileURL = window.URL.createObjectURL(new Blob([response.data]));
 
       /* Creates the hyperlink where the link is the PDF file. */
@@ -287,7 +289,7 @@ const InvoiceReceiving = () => {
   return (
     <>
       <div className='searchContainer'>
-        <p className = "fetching">Received Invoices</p>
+        <p className = "fetching">Sent Invoices</p>
         <button className='search'><SearchIcon style={{color: 'white'}} onClick = {fetchData}/></button>
         <input type="text" className='inputSearch' placeholder='Fetch' onChange = {handleSearchChange}/>
         <select id = "options" className = "options" placeholder='Options' onChange={handleSelectChange}>
@@ -300,7 +302,7 @@ const InvoiceReceiving = () => {
       <div className="inboxContainer">
           <p className='header'>Invoice ID</p>
           <p className='header'>Title</p>
-          <p className='header'>Sender</p>
+          <p className='header'>Receiver</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
         {dataFound && data.map((item) => (
@@ -311,7 +313,7 @@ const InvoiceReceiving = () => {
             onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
             <p className="grid-item">{item.invoice_id}</p>
             <p className="grid-item">{item.title}</p>
-            <p className="grid-item">{item.sender_email}</p>
+            <p className="grid-item">{item.receiver_email}</p>
             <p className="grid-item">{item.type}</p>
             <p className="grid-item">{item.sent_at}</p>
           </div>
@@ -326,4 +328,4 @@ const InvoiceReceiving = () => {
   )
 }
   
-export default InvoiceReceiving;
+export default InvoicesSent;

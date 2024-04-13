@@ -381,6 +381,7 @@ const Dashboard = () => {
                       {messages.map((msg, index) => (
                         <Message
                           key={index}
+                          className='text-box'
                           model={{
                             message: msg.message,
                             direction: msg.direction,
@@ -389,11 +390,11 @@ const Dashboard = () => {
                         />
                       ))}
                     </MessageList>
-                    <MessageInput placeholder="Type message here..." onSend={handleSend} />
+                    <MessageInput className='text-box' placeholder="Type message here..." onSend={handleSend} />
                   </ChatContainer>
                 </MainContainer>
             </div>
-            <IoChatbubbleEllipsesSharp className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px", transform: "scaleX(-1)"}} onClick={() => setChat(false) }/>
+            <IoChatbubbleEllipsesSharp className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px", transform: "scaleX(-1)" }} onClick={() => setChat(false) }/>
           </div>         
         )
       }

@@ -5,7 +5,9 @@
   "scripts": {
     "test": "jest --coverage",
     "start": "node app.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
+
   },
   "keywords": [],
   "author": "",
@@ -31,6 +33,7 @@
     "pg": "^8.11.3",
     "sync-request": "^6.1.0",
     "twilio": "^4.23.0",
+    "uuid": "^9.0.1",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {

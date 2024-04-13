@@ -27,11 +27,13 @@
 }
 
 .activeMenu {
+  background-color: #FAFBFB;
   min-height: 100vh;
   width: 100vw;
 }
 
 .unActiveMenu {
+  background-color: #FAFBFB;
   min-height: 100vh;
   width: 100%;
   flex: 2 2 auto;
