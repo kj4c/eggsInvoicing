@@ -29,6 +29,11 @@ const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
 const getStatisticsV2 = require('./functions/v2getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
+const createTeam = require('./functions/teamCreate');
+const joinTeam = require('./functions/teamJoin');
+const leaveTeam = require('./functions/teamLeave');
+const detailTeam = require('./functions/teamDetail');
+
 const cors = require('cors');
 
 app.use(cors());
@@ -646,6 +651,120 @@ app.get('/getUserInfo', async (req, res) => {
     res.status(200).json(userInfo);
   } catch (err) {
     res.status(400).json({ message: 'Failed to get user info:' });
+  }
+});
+
+/*
+@brief
+create team
+@params
+name: team name
+email: email
+@output
+on success:
+status code - integer - 200
+passcode - string
+on failure:
+status code and error message
+*/
+app.post('/createteam', async(req, res) => {
+  try {
+    const name = req.body.name;
+    const email = req.body.email;
+    const teamEmail = req.body.teamEmail;
+    const response = await createTeam(name, email, teamEmail);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      console.log(response.passcode);
+      res.status(response.status).json({passcode: response.passcode});
+    }
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot create team'});
+  }
+});
+
+/*
+@brief
+join team
+@params
+email
+passcode
+@output
+on success:
+status code - integer - 200
+on failure:
+status code and error message
+*/
+app.post('/jointeam', async(req, res) => {
+  try {
+    const email = req.body.email;
+    const passcode = req.body.passcode;
+    const response = await joinTeam(email, passcode);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({message: 'Successfully joined team'});
+    }
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot join team'});
+  }
+});
+
+/*
+@brief
+get detail of team
+@params
+email
+@output
+on success:
+status code - integer - 200
+object with teamName, passcode, teamEmail, and list of member's email
+on failure:
+status code and error message
+*/
+app.delete('/leaveteam', async(req, res) => {
+  try {
+    const email = req.body.email;
+    const response = await leaveTeam(email);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({message: 'Successfully left team'});
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot leave team'});
+  }
+});
+
+/*
+@brief
+get detail of team
+@params
+email
+@output
+on success:
+status code - integer - 200
+object with teamName, passcode, teamEmail, and list of member's email
+on failure:
+status code and error message
+*/
+app.get('/teamdetail', async(req, res) => {
+  try {
+    const email = req.body.email;
+    console.log(email);
+    const response = await detailTeam(email);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({details: response.details});
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot get detail'});
   }
 });
 
