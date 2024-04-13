@@ -337,7 +337,7 @@ statistics: object - statistics of the invoices
 OR
 message: string - error message
 */
-app.get('/receive/v2/getStatistics', async function (req, res) {
+app.get('/receive/getStatistics/v2', async function (req, res) {
   const uid = req.query.uid;
   try {
     res.json(await getStatisticsV2(uid));
@@ -754,9 +754,8 @@ status code and error message
 */
 app.get('/teamdetail', async(req, res) => {
   try {
-    const email = req.body.email;
-    console.log(email);
-    const response = await detailTeam(email);
+    const uid = req.query.uid;
+    const response = await detailTeam(uid);
     if (response.status !== 200) {
       res.status(response.status).json({error: response.error});
     } else {
