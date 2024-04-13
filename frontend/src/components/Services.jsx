@@ -11,10 +11,6 @@ const Services = () => {
         <SendReceive />
         <RenderValidate />
       </Section>
-
-      <div style={{ paddingTop: '100rem', fontSize: '10rem' }}>
-        REMOVE ME!!!
-      </div>
     </>
   );
 };

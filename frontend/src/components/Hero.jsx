@@ -36,7 +36,7 @@ const Hero = () => {
           </p>
 
           {/* Get Started Button */}
-          <a href='#pricing'> Get Started </a>
+          <a href='/register'> Get Started </a>
         </div>
 
         {/* Hero Picture */}
