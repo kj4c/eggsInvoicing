@@ -34,8 +34,8 @@ const SendReceive = () => {
         {/* Rendering Circle Graphics */}
         <div className='CircleGraphicTitleContainer'>
           <p>
-            With a multitude of features, it's the ultimate solution for teams
-            looking to work smarter and faster.
+            With a multitude of features, it&apos;s the ultimate solution for
+            teams looking to work smarter and faster.
           </p>
 
           <div className='OuterCircle'>
@@ -49,7 +49,7 @@ const SendReceive = () => {
 
             {/* Rendering logos on circle graphic */}
             <ul className='iconList'>
-              {servicesIcon.map((icon, index) => (
+              {servicesIcon.map((icon) => (
                 <li key={icon.id}>
                   <div>
                     <img

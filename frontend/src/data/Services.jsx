@@ -125,11 +125,26 @@ export const servicesIcon = [
 ];
 
 export const RenderingIcons = [
-  <TbTextScan2 />,
-  <BsSoundwave />,
-  <BsDiscFill />,
-  <MdDisplaySettings />,
-  <PiSlidersHorizontal />,
+  {
+    id: 0,
+    icon: <TbTextScan2 />,
+  },
+  {
+    id: 1,
+    icon: <BsSoundwave />,
+  },
+  {
+    id: 2,
+    icon: <BsDiscFill />,
+  },
+  {
+    id: 3,
+    icon: <MdDisplaySettings />,
+  },
+  {
+    id: 4,
+    icon: <PiSlidersHorizontal />,
+  },
 ];
 
 import { BsUpcScan } from 'react-icons/bs';
@@ -139,9 +154,24 @@ import { MdOutlineReport } from 'react-icons/md';
 import { FaListCheck } from 'react-icons/fa6';
 
 export const ValidateIcons = [
-  <BsUpcScan />,
-  <GrValidate />,
-  <FaListCheck />,
-  <MdOutlineReport />,
-  <RxCrossCircled />,
+  {
+    id: 0,
+    icon: <BsUpcScan />,
+  },
+  {
+    id: 1,
+    icon: <GrValidate />,
+  },
+  {
+    id: 2,
+    icon: <FaListCheck />,
+  },
+  {
+    id: 3,
+    icon: <MdOutlineReport />,
+  },
+  {
+    id: 4,
+    icon: <RxCrossCircled />,
+  },
 ];

@@ -21,15 +21,15 @@ const RenderValidate = () => {
               style={{ marginRight: '2rem', marginBottom: '-1.5rem' }}
               className='RenderingIconsContainer'
             >
-              {ValidateIcons.map((icon, index) => (
+              {ValidateIcons.map((item, index) => (
                 <li
-                  key={index}
+                  key={item.id}
                   className={`RenderingIcons ${
                     index === 2 ? 'GradientBorder' : 'NormalBorder'
                   }`}
                 >
                   <div className={`${index === 2 ? 'GradientImage' : ''}`}>
-                    {icon}
+                    {item.icon}
                   </div>
                 </li>
               ))}
@@ -60,15 +60,15 @@ const RenderValidate = () => {
 
               {/* Invoice Rendering Icons */}
               <ul className='RenderingIconsContainer'>
-                {RenderingIcons.map((icon, index) => (
+                {RenderingIcons.map((item, index) => (
                   <li
-                    key={index}
+                    key={item.id}
                     className={`RenderingIcons ${
                       index === 2 ? 'GradientBorder' : 'NormalBorder'
                     }`}
                   >
                     <div className={`${index === 2 ? 'GradientImage' : ''}`}>
-                      {icon}
+                      {item.icon}
                     </div>
                   </li>
                 ))}
