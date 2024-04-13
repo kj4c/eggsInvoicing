@@ -53,12 +53,18 @@ const InvoiceRendering = () => {
     setFileName(target.files[0].name);
   }
 
+  // navigate back to dashboard
+  function goBack() {
+    navigate('/');
+  }
+
   // design for the frontend for rendering
   return(
     <div className='splitScreen'>
       <div className='render-container'>
         <div className = "inputWrapper">
-          <div className='fileBtnDiv'>
+          <button onClick={goBack} className="backButton">Back</button>
+          <div className='select-button-div'>
             <input type='file' id='file' className='fileBtn' accept='.xml' onChange={handleOnChange}/>
             <label htmlFor='file' className='fileText'>Upload XML File</label>
           </div>
@@ -68,8 +74,8 @@ const InvoiceRendering = () => {
         </div>
       </div>
       <div className='Image'>
-        <h1 className = "pageTitle">Render your Invoice</h1>
-        <img className='sourceImage2' src={pointers}></img>
+        <h1 className = "pageTitle">Rendering</h1>
+        <img className='sourceImage' src={pointers}></img>
       </div>
     </div>
   )

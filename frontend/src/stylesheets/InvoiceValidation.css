@@ -1,5 +1,12 @@
 .validation-page {
-  background-color: #FAFBFB;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 48%;
+  border-radius: 0px 100px 0px 0px;
+  animation: fade-right 2s;
 }
 
 h1 {
@@ -28,25 +35,28 @@ h1 {
 }
 
 .mid-container {
+  margin-top: 8%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 80%;
 
 }
 
 .select-button-div {
   display: flex;
   position: relative;
-  border: solid;
+  border: dashed;
   border-color: #7f45f2;
   border-radius: 16px;
-  padding: 20px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 7vh;
+  margin-top: 21vh;
   transition: 0.2s;
+  width: 100%;
+  color: rgb(155, 155, 155);
 }
 
 .select-button {
@@ -84,6 +94,7 @@ h1 {
   font-weight: bold;
   padding: 16px;
   text-align: center;
+  width: 50%;
 
   background-color: #7f45f2;
   border-radius: 16px;
@@ -150,6 +161,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  animation: fade-right 2s;
 }
 
 .validation-report {
@@ -161,12 +173,11 @@ h1 {
 
 .report-download {
   margin-top: 3vh;
-  margin-left: 3vh;
   padding: 20px;
-
+  background-color: white;
   font-size: 24px;
   font-weight: bold;
-
+  width: 100%;
   border-color: #7f45f2;
   border-radius: 16px;
   border-style: solid;
