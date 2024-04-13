@@ -1,7 +1,7 @@
 .inboxContainer {
     display: grid;
     grid-template-columns: 0.5fr 1fr 1fr 0.5fr 0.4fr;
-    grid-template-rows: 55px repeat(15, 1fr);
+    grid-template-rows: 50px repeat(12, 1fr);
     width: 90%;
     height: 75vh;
     background-color: white;
@@ -11,6 +11,8 @@
     border: 3px solid #7f45f2;
     margin-bottom: 1%;
     overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #7f45f2 white;
 }
 
 .searchContainer {
@@ -21,6 +23,7 @@
     margin-top: 5vh;
     margin-bottom: 2vh;
 }
+
 
 .fetching {
     flex: 1.5;
@@ -57,11 +60,13 @@
 }
 
 .grid-row {
-    display: contents; /* This makes .grid-row act as a "wrapper" without affecting the grid layout */
+    border-bottom: 2px solid #7f45f2;
+    display: contents;
 }
 
 .row-hover .grid-item {
     background-color: #ecececec;
+    transition: 0.2s;
     cursor: pointer; /* This will now work since .grid-row acts as a real container */
 }
 
@@ -69,15 +74,14 @@
     /* Special styles for items not in the first row */
     background-color: white;
     padding: 10px;
+    font-size: 22px;
     border-bottom: 2px solid #7f45f2;
-    align-self: center;
-    font-size: 17px;
+
 }
 
 .header {
-    align-self: center;
     padding: 10px;
-    font-size: 22px;
+    font-size: 24px;
     border-bottom: 2px solid #7f45f2;
 }
 

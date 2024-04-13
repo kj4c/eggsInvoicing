@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 // No need to import React with the latest React version unless you're using class components or React. useState, etc. explicitly
 
 import { Navbar, Sidebar, UserProfile } from './components'
-import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving, HtmlRendering, InvoiceCreationUploadDocument, InvoiceInputMultiple, InvoiceInputMultipleJson } from './pages';
+import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving, HtmlRendering, InvoiceCreationUploadDocument, InvoiceInputMultiple, InvoiceInputMultipleJson, InvoicesSent} from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
 import AuthRegister from './pages/authRegister';
@@ -21,10 +21,10 @@ const AppContent = () => {
     '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
     '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
     '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving',
-    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering', '/invoiceCreation/uploadDocument', '/sendEmailLater' 
+    '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering', '/invoiceCreation/uploadDocument', '/sendEmailLater', '/invoicesSent'
   ];
 
-  const hideSidebarPaths = ['/login', '/register', 'reset-password', '/landingPage'];
+  const hideSidebarPaths = ['/login', '/register', 'reset-password'];
 
   const showSidebar = knownPaths.includes(location.pathname) && !hideSidebarPaths.includes(location.pathname);
   return (
@@ -39,9 +39,9 @@ const AppContent = () => {
       <div className={activeMenu && showSidebar ? 'activeMenu md-ml-72' : 'unActiveMenu'}>
         <div>
           <Routes>
-            <Route path="/landingPage" element={<LandingPage />} />
             <Route path='/' element={<Dashboard />} />
             <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/dashboard' element={<LandingPage />} />
             <Route path="/invoiceCreation" element={<InvoiceCreation />} />
             <Route path="/invoiceCreation/uploadDocument" element={<InvoiceCreationUploadDocument />} />
             <Route path="/invoiceValidation" element={<InvoiceValidation />} />
@@ -61,6 +61,7 @@ const AppContent = () => {
             <Route path="/htmlRendering" element={<HtmlRendering />} />
             <Route path="*" element={<NotFoundPage />} />
             <Route path='/sendEmailLater' element={<SendEmailLater/>}></Route>
+            <Route path='/invoicesSent' element={<InvoicesSent/>}></Route>
 
             <Route path="/profile" element={<UserProfile />} />
           </Routes>
@@ -77,4 +78,5 @@ function App() {
     </BrowserRouter>
   );
 }
+
 export default App;
