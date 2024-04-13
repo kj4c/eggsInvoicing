@@ -8,12 +8,14 @@ export const Features = () => {
   return (
     <Section id='features'>
       <div className='FeaturesContainer'>
+        {/* Re-usable Heading component */}
         <Heading
           className='FeaturesContainerHeading'
           title='Effortlessly Manage Your Invoices with Eggs-Invoicing'
         />
 
         <div className='CardContainer'>
+          {/* Rendering individual Cards */}
           {features.map((item) => (
             <div
               className='CardBox'
@@ -26,6 +28,7 @@ export const Features = () => {
                 <h5>{item.title}</h5>
                 <p>{item.text}</p>
                 <div className='CardMoreContainer'>
+                  {/* dynamically rendering each card and it's properties */}
                   <div
                     className='CardIcon'
                     style={{ backgroundColor: item.colour }}

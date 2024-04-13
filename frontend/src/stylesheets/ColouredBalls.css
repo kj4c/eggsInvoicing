@@ -136,19 +136,3 @@
   transition-duration: 500ms;
   transition-timing-function: ease-out;
 }
-
-.translate-y-0 {
-  transform: translateY(0);
-}
-
-.opacity-100 {
-  opacity: 1;
-}
-
-.translate-y-10 {
-  transform: translateY(10px);
-}
-
-.opacity-0 {
-  opacity: 0;
-}

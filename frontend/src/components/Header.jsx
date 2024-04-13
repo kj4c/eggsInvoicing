@@ -8,22 +8,26 @@ export const Header = () => {
   const url = useLocation();
 
   return (
-    <div className='yeet'>
-      <div className='yeet2'>
-        <a className='yeet3' href='#hero'>
-          <div className='logo'>
+    <div className='HeaderPos'>
+      <div className='HeaderContainer'>
+        {/* Logo */}
+        <a className='LogoContainer' href='#hero'>
+          <div className='Logo'>
             <GiCosmicEgg />
           </div>
           Eggs-Invoice
         </a>
 
-        <nav className='yeet4'>
-          <div className='yeet5'>
+        {/* Dyanmically rendering each item in nav bar */}
+        <nav className='navContainer'>
+          <div className='navContent'>
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={item.url}
-                className={`yeet6 ${item.url === url.hash ? `yeet7` : `yeet8`}`}
+                className={`navItem ${
+                  item.url === url.hash ? `activeItem` : `unActiveItem`
+                }`}
               >
                 {item.title}
               </a>
@@ -31,6 +35,7 @@ export const Header = () => {
           </div>
         </nav>
 
+        {/* SignUp and Login button in Navbar */}
         <div className='buttonsContainer'>
           <a href='/register' className='signUpButton'>
             SIGN UP

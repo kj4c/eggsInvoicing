@@ -79,7 +79,6 @@ const Hero = () => {
                 </ScrollParallax>
               </div>
             </div>
-
             <Gradient />
           </div>
           <BackgroundCircles />

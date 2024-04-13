@@ -3,7 +3,7 @@
   font-size: x-large;
   font-weight: 700;
 }
-.logo {
+.Logo {
   font-size: 4rem;
   margin-right: 0.25rem;
   display: flex;
@@ -14,7 +14,7 @@
   color: blueviolet;
   /* background-color: #ac6aff; */
 }
-.yeet {
+.HeaderPos {
   position: fixed;
   left: 0px;
   top: 0px;
@@ -26,26 +26,23 @@
   backdrop-filter: blur(4px);
 }
 
-.yeet2 {
+.HeaderContainer {
   display: flex;
   align-items: center;
   padding-left: 7.5px;
   padding-right: 7.5px;
 }
 
-.yeet3 {
+.LogoContainer {
   display: flex;
   align-items: center;
   font-size: x-large;
   font-weight: 700;
   text-decoration: none;
   color: white;
-  /* width: 12rem; */
-  /* background-color: aqua; */
-  /* background-color: black; */
 }
 
-.yeet4 {
+.navContainer {
   position: fixed;
   display: flex;
   left: 0px;
@@ -56,17 +53,17 @@
   /* background-color: aqua; */
 }
 
-.yeet5 {
+.navContent {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   position: relative;
   margin: auto;
-  /* z-index: 2; */
 }
 
-.yeet6 {
+.navItem {
+  /* background-color: aqua; */
   text-decoration: none;
   position: relative;
   display: block;
@@ -84,16 +81,16 @@
   /* background-color: aquamarine; */
 }
 
-.yeet6:hover {
+.navItem:hover {
   color: #ac6aff;
 }
 
-.yeet7 {
+.activeItem {
   z-index: 2;
   color: white;
 }
 
-.yeet8 {
+.unActiveItem {
   color: rgba(255, 255, 255, 0.5);
 }
 
