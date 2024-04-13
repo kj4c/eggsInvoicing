@@ -83,11 +83,10 @@ const InvoiceInputMultiple = () => {
     // design for the input
     return (
         <div className='splitScreen'>
-            <div className='inputWrapper'>
-                <div className="inputContainers">
+            <div className='inputContainers'>
+                <div className="inputWrapper">
                     <button onClick={goBack} className="backButton">Back</button>
-                    <h1 className="header">Send Email with Multiple XML Attachments</h1>
-                    <input type="email" className="inputBox" name="recipient" value={formData.recipient} onChange={handleChange}/>
+                    <input type="email" className="inputBox" name="recipient" placeholder = "Recipient" value={formData.recipient} onChange={handleChange}/>
                     {formData.xmlFiles.map((file, index) => (
                         <div key={index} className="attachmentGroup">
                             <input
