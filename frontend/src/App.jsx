@@ -11,6 +11,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import ForgetPassword from './pages/forgetPassword';
 import './App.css';
 import SendEmailLater from './pages/sendEmailLater';
+import LandingPage from './pages/LandingPage';
 
 const AppContent = () => {
   const { activeMenu } = useStateContext();
@@ -40,6 +41,7 @@ const AppContent = () => {
           <Routes>
             <Route path='/' element={<Dashboard />} />
             <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/landingPage' element={<LandingPage />} />
             <Route path="/invoiceCreation" element={<InvoiceCreation />} />
             <Route path="/invoiceCreation/uploadDocument" element={<InvoiceCreationUploadDocument />} />
             <Route path="/invoiceValidation" element={<InvoiceValidation />} />
