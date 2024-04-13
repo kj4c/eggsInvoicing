@@ -31,8 +31,8 @@ export const links = [
           {
             name: 'Upload Documents',
             path: 'invoiceCreation/uploadDocument',
-            icon: <TbFileUpload></TbFileUpload>,
-          },
+            icon: <TbFileUpload></TbFileUpload>
+          }
         ],
       },
       {
@@ -51,11 +51,11 @@ export const links = [
         id: 4,
         name: 'Compose',
         path: 'invoiceSending',
-        icon: <SlPaperPlane></SlPaperPlane>
+        icon: <SlPencil></SlPencil>
       },
       {
         id:5,
-        name: 'Receiving Invoice',
+        name: 'Received',
         path: 'invoiceReceiving',
         icon: <HiOutlineFolderOpen />,
       },
