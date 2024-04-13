@@ -708,9 +708,8 @@ status code and error message
 */
 app.get('/teamdetail', async(req, res) => {
   try {
-    const email = req.body.email;
-    console.log(email);
-    const response = await detailTeam(email);
+    const uid = req.query.uid;
+    const response = await detailTeam(uid);
     if (response.status !== 200) {
       res.status(response.status).json({error: response.error});
     } else {

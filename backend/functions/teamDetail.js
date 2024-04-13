@@ -1,5 +1,6 @@
 const pool = require('../database/db');
-async function detailTeam(email) {
+async function detailTeam(uid) {
+  const email = await pool.query('SELECT email FROM users WHERE uid = $1', [uid]);
   const team = await pool.query('SELECT teamId FROM members WHERE email = $1', [email]);
 
   if (team.rows.length === 0) {
