@@ -291,7 +291,7 @@ statistics: object - statistics of the invoices
 OR
 message: string - error message
 */
-app.get('/receive/v2/getStatistics', async function (req, res) {
+app.get('/receive/getStatistics/v2', async function (req, res) {
   const uid = req.query.uid;
   try {
     res.json(await getStatisticsV2(uid));
