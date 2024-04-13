@@ -33,8 +33,7 @@
 }
 
 .inputContainers {
-  margin-left: 15%;
-  margin-top: 5%;
+  padding: 5%;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -42,6 +41,11 @@
 
 .Image {
   width: 50%;
+}
+
+.sourceImage {
+  width: 100%;
+  height: 100%;
 }
 
 .formBox {
@@ -77,6 +81,7 @@
   transition: all .3s;
   cursor: pointer;
 }
+
 .submit{
   background-color: initial;
   background-image: linear-gradient(#8614f8 0, #760be0 100%);
