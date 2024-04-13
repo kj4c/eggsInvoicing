@@ -2,6 +2,8 @@ import {useState} from 'react';
 import '../stylesheets/InvoiceInput.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import SendImage from '../assets/send_imagev2.png';
+import { LuSendHorizonal } from "react-icons/lu";
 
 function isValidEmail(email) {
 	// Simple regex for basic email validation
@@ -64,7 +66,7 @@ const InvoiceInput = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (!isValidEmail(formData.to)) {
-			alert('Please enter a valid email in the "To" section and try again.')
+			alert('Please enter a valid email and try again.')
 		} else if (formData.from === "") {
 			alert('Please enter text in the "From" field.')
 		} else if (fileName === 'No file chosen, yet.') {
@@ -82,31 +84,33 @@ const InvoiceInput = () => {
   
 	// frontend design for the inputs
 	return (
-		<div className = "inputContainers">
-			<button onClick={goBack} className="backButton">
-                Back
-            </button>
-            <h1 className="header">Send Email with XML File</h1>
-			<p className='description'>1. From: should be your email<br></br>2. Enter the recipients email inside the To (Email) <br></br>3. Lastly upload your XML file from your computer </p>
-			<label className="labels">From:</label>
-			<input type="text" className="inputBox" name="from" value={formData.from} onChange={handleChange}/>
-			<label className="labels">To (Email):</label>
-			<input type="email" className="inputBox" name="to" value={formData.to} onChange={handleChange}/>
-			<label className="labels">Attachment:</label>
-			<input 
-				type= "file" 
-				id = "fileUpload" 
-				hidden = 'hidden' 
-				name="file" 
-				accept=".xml" onChange={handleFileChange}
-			/>
-			<button
-				className = "fileUpload"
-				onClick={() => document.getElementById('fileUpload').click()}
-			>
-				{buttonName}
-      </button>
-			<button className="submit" onClick = {handleSubmit}>Submit</button>
+		<div className = "splitScreen">
+			<div className = "inputContainers">
+				<div className = "inputWrapper">
+				<button onClick={goBack} className="backButton">
+					Back
+				</button>
+				<input type="email" className="inputBox" placeholder ="Recipient" name="to" value={formData.to} onChange={handleChange}/>
+				<input 
+					type= "file" 
+					id = "fileUpload" 
+					hidden = 'hidden' 
+					name="file" 
+					accept=".xml" onChange={handleFileChange}
+				/>
+				<button
+					className = "fileUpload"
+					onClick={() => document.getElementById('fileUpload').click()}
+				>
+					{buttonName}
+				</button>
+				<button className="submit" onClick = {handleSubmit}>Submit</button>
+				</div>
+			</div>
+			<div className = "Image">
+				<h1 className = "pageTitle">Email XML Invoices</h1>
+				<img className = "sourceImage" src = {SendImage}/>
+			</div>
 		</div>
 	)
 };
