@@ -67,7 +67,7 @@ const InvoiceRendering = () => {
         <Notif trigger={notif} setTrigger={setNotif}></Notif>
       </div>
       <div className='Image'>
-        <img className='sourceImage' src={pointers}></img>
+        <img className='sourceImage2' src={pointers}></img>
       </div>
     </div>
   )

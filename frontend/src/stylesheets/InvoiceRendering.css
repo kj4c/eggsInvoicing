@@ -11,6 +11,11 @@
   align-self: top;
 }
 
+.sourceImage2 {
+  width: 120%;
+  animation: fade-up 2s;
+}
+
 .fileBtnDiv {
   display: flex;
   position: relative;
