@@ -19,6 +19,8 @@ const generateSentPdf = require('./functions/sentReport');
 const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
 const fetchAllSent = require('./functions/fetchAllSent');
+const fetchBySender = require('./functions/fetchBySender');
+const fetchByReceiver = require('./functions/fetchByReceiver');
 const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
 const fetchByDateRangev2 = require('./functions/fetchByDateRangev2');
@@ -165,6 +167,50 @@ app.get('/receive/fetchByInvoiceId', async function (req, res) {
   const invoiceId = parseInt(req.query.invoiceId);
   try {
     res.json(await fetchByInvoiceId(uid, invoiceId));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
+fetches all invoices with matching receiver_email
+@params
+uid: int - user id of the user
+receiver_email: string - email of the receiver
+@output
+on success:
+invoice: object - invoice object
+on failure:
+message: string - error message
+*/
+app.get('/receive/fetchByReceiver', async function (req, res) {
+  const uid = req.query.uid;
+  const receiverEmail = req.query.email;
+  try {
+    res.json(await fetchByReceiver(uid, receiverEmail));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
+fetches all invoices with matching sender_email
+@params
+uid: int - user id of the user
+sender_email: string - email of the sender
+@output
+on success:
+invoice: object - invoice object
+on failure:
+message: string - error message
+*/
+app.get('/receive/fetchBySender', async function (req, res) {
+  const uid = req.query.uid;
+  const senderEmail = req.query.email;
+  try {
+    res.json(await fetchBySender(uid, senderEmail));
   } catch (error) {
     res.status(error.statusCode).json(error);
   }
