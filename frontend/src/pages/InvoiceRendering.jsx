@@ -3,7 +3,7 @@ import '../stylesheets/InvoiceRendering.css';
 import Notif from '../components/RenderNotif';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
-import { yapper} from '../assets/yapper.png';
+import pointers from '../assets/pointers_nobg.png';
 
 // page for rendering invoices
 const InvoiceRendering = () => {
@@ -67,7 +67,7 @@ const InvoiceRendering = () => {
         <Notif trigger={notif} setTrigger={setNotif}></Notif>
       </div>
       <div className='Image'>
-        <img className='sourceImage' src={yapper}></img>
+        <img className='sourceImage' src={pointers}></img>
       </div>
     </div>
   )
