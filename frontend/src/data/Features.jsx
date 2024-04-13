@@ -22,7 +22,7 @@ export const features = [
     backgroundUrl: './src/assets/features/card-2.svg',
     icon: <GrValidate />,
     light: true,
-    url: '#validate',
+    url: '#rendervalidate',
     colour: '#FFC876',
   },
   {
@@ -31,7 +31,7 @@ export const features = [
     text: 'Receive XML invoices and instantly generate professionally formatted invoices with a click.',
     backgroundUrl: './src/assets/features/card-3.svg',
     icon: <ImFilePicture />,
-    url: '#render',
+    url: '#rendervalidate',
     colour: '#AC6AFF',
   },
   {

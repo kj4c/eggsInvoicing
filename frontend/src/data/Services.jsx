@@ -9,6 +9,12 @@ import cyber from '../assets/services/cyber-security.png';
 import imaging from '../assets/services/imaging.png';
 import approval from '../assets/services/approval.png';
 
+import { TbTextScan2 } from 'react-icons/tb';
+import { BsSoundwave } from 'react-icons/bs';
+import { BsDiscFill } from 'react-icons/bs';
+import { MdDisplaySettings } from 'react-icons/md';
+import { PiSlidersHorizontal } from 'react-icons/pi';
+
 export const servicesData = [
   'Comprehensive GUI Form',
   'Save Time',
@@ -116,4 +122,26 @@ export const servicesIcon = [
     width: 36,
     height: 36,
   },
+];
+
+export const RenderingIcons = [
+  <TbTextScan2 />,
+  <BsSoundwave />,
+  <BsDiscFill />,
+  <MdDisplaySettings />,
+  <PiSlidersHorizontal />,
+];
+
+import { BsUpcScan } from 'react-icons/bs';
+import { GrValidate } from 'react-icons/gr';
+import { RxCrossCircled } from 'react-icons/rx';
+import { MdOutlineReport } from 'react-icons/md';
+import { FaListCheck } from 'react-icons/fa6';
+
+export const ValidateIcons = [
+  <BsUpcScan />,
+  <GrValidate />,
+  <FaListCheck />,
+  <MdOutlineReport />,
+  <RxCrossCircled />,
 ];
