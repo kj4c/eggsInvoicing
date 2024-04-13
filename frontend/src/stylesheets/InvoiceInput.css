@@ -29,11 +29,10 @@
   height: 40px;
   border-color: #7f45f2;
   flex-direction: column;
-  font-size: 20px;
-  margin: 1%; 
-  padding: 10px;
-  width: 20%;
-  height: 10%;
+  font-size: 25px;
+  padding: 30px;
+  margin-bottom: 10%;
+  width: 100%;
 }
 
 .inputContainers {
@@ -48,6 +47,9 @@
 .inputWrapper {
   margin: 8%;
   animation: fade-right 2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Image {
@@ -83,6 +85,7 @@
 .fileUpload {
   background: #ffffff;
   border-color: #7f45f2;
+  border: 2px solid #7f45f2; /* Purple border */
   height: 200px;
   width: 100%;
   color: rgb(155, 155, 155);
@@ -158,6 +161,7 @@
   width: 150px;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, border-color 0.3s ease-in-out;
   text-decoration: none; /* In case you switch to <a> tag */
+  align-self: flex-start; /* Aligns the button to the start of the flex container */
 }
 
 .backButton:hover,
@@ -174,14 +178,73 @@
   transform: translateY(1px);
 }
 
+.fileWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-y: auto;
+  height: 347px;
+  scrollbar-width: thin;
+  scrollbar-color: #7f45f2 white;
+  border: 2px solid #7f45f2;
+  padding: 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
 .attachmentGroup {
-  margin-bottom: 20px; /* Space between each attachment group */
+  margin-bottom: 15px; /* Space between each attachment group */
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
+.plusButton {
+  font-size: 30px;
+  background-color: #7f45f2;
+  color: white;
+  font-family: bold;
+  padding: 0;
+  cursor: pointer;
+  text-align: center;
+  line-height: 50px;
+  width: 50px;
+  height: 40px;
+  border-radius: 20%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+.plusButton:hover {
+  background-color: #945eff;
+  color: white;
+  transition: all .3s;
+}
+.file-upload-button {
+  background: #ffffff;
+  border-color: #7f45f2;
+  border: 2px solid #7f45f2; /* Purple border */
+  color: rgb(155, 155, 155);
+  font-size: 20px;
+  text-align: center;
+  border-radius: 10px;
+  transition: all .3s ease;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 99%;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.file-upload-button:hover {
+  background: #ffffff;
+  color: #7f45f2;
+  transition: all .3s;
+  cursor: pointer;
+}
 /* Styles for the title input of each attachment */
 .attachmentTitleInput {
   margin: 5px 0;
@@ -196,7 +259,8 @@
 .attachmentFileInput {
   margin: 5px 0;
   padding: 10px;
-  width: calc(80% + 22px); /* Slightly larger to align with the title input's visual width */
+  width: 95%;
+  /* width: calc(80% + 22px); eSlightly larger to align with the title input's visual width */
   border: 2px dashed #007bff; /* Light blue dashed border */
   border-radius: 4px;
   background-color: #f8f9fa; /* Light background to distinguish from other inputs */

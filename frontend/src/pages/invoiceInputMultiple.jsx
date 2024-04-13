@@ -3,6 +3,7 @@ import '../stylesheets/InvoiceInput.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SendImage from '../assets/send_imagev2.png';
+import { GoPlus } from "react-icons/go";
 
 // checks if the email is valid
 function isValidEmail(email) {
@@ -71,7 +72,7 @@ const InvoiceInputMultiple = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!isValidEmail(formData.recipient)) {
-            alert('Please enter a valid email in the "To" section and try again.');
+            alert('Please enter a valid email');
         } else if (formData.from === "") {
             alert('Please enter text in the "From" field.');
         } else {
@@ -87,23 +88,27 @@ const InvoiceInputMultiple = () => {
                 <div className="inputWrapper">
                     <button onClick={goBack} className="backButton">Back</button>
                     <input type="email" className="inputBox" name="recipient" placeholder = "Recipient" value={formData.recipient} onChange={handleChange}/>
-                    {formData.xmlFiles.map((file, index) => (
-                        <div key={index} className="attachmentGroup">
-                            <input
-                                type="file"
-                                className="attachmentFileInput"
-                                onChange={(e) => handleXmlStringChange(index, e)}
-                                accept=".xml"
-                            />
-                            <span className="fileNameDisplay">{file.filename || 'No file chosen, yet.'}</span>
-                        </div>
-                    ))}
-                    <button onClick={addXmlFile} type="button">Add Another XML File</button>
+                    <div className = "fileWrapper">
+                        {formData.xmlFiles.map((file, index) => (
+                            <div key={index} className="attachmentGroup">
+                                <input
+                                    type="file"
+                                    id = {`file-upload-${index}`}
+                                    className="attachmentFileInput"
+                                    onChange={(e) => handleXmlStringChange(index, e)}
+                                    accept=".xml"
+                                    hidden
+                                />
+                                <label for={`file-upload-${index}`} class="file-upload-button">{file.filename || 'Upload File'}</label>
+                            </div>
+                        ))}
+                    </div>
+                    <button onClick={addXmlFile} type="button" className='plusButton'><GoPlus /></button>
                     <button className="submit" onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
             <div className = "Image">
-				<h1 className = "pageTitle">Email Multiple XML Invoices</h1>
+				<h1 className = "pageTitle">Email XML Invoices</h1>
 				<img className = "sourceImage" src = {SendImage}/>
 			</div>
         </div>
