@@ -115,3 +115,23 @@
   background: #7f45f2; 
   border-radius: 5px;
 }
+
+.team-send, .team-receive {
+  color: white;
+}
+
+.team-loading {
+  display: flex;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+.load-img {
+  height: 40%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import '../stylesheets/team.css';
 import teamwork from '../assets/teamwork.png'
+import teamload from '../assets/team-loading.jpg'
 
 const Team = () => {
   const [load, setLoad] = useState(false);
@@ -15,6 +16,7 @@ const Team = () => {
   const [teamEmail, setTeamEmail] = useState('');
   const [showPasscode, setShowPasscode] = useState(false);
   const [copyStatus, setCopyStatus] = useState(false);
+  const [loading, setLoading] = useState('Loading');
 
   const navigate = useNavigate();
 
@@ -27,6 +29,18 @@ const Team = () => {
     return cookieValue ? cookieValue.split('=')[1] : null;
   }
 
+  /* Loading animation */
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setLoading(prev => {
+        if (prev.length >= 10) return 'Loading';
+        return prev + '.';
+      });
+    }, 200); 
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []);
+  
   /* If cookie does not exist you go back to login, if it exists find email*/
   useEffect(() => {
     if (!cookieExists) {
@@ -100,12 +114,17 @@ const Team = () => {
               </ul>
             </div>
             <div className='team-right'>
+              <h3 className="team-send">Send invoices</h3>
+              <h3 className="team-receive">Check received invoices</h3>
               <img src={teamwork}  alt="team" className='team-img'/>
             </div>
           </div>
           
         ) : (
-          <div className='team-loading'>loading</div>
+          <div className='team-loading'>
+            <h1>{loading}</h1>
+            <img src={teamload}  alt="team" className='load-img'/>
+          </div>
         )
       }
     </div>
