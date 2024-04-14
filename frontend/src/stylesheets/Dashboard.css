@@ -111,6 +111,10 @@
   margin-top: 5vh;
 }
 
+.text-box {
+  color: #7f45f2;
+}
+
 .create-btn {
   background-color: #eae0ff85;
   border: solid #7f45f2;

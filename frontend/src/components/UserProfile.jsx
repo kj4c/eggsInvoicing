@@ -75,6 +75,17 @@ const UserProfile = () => {
   navigate('/');
   }
 
+  const simulateCtrlA = () => {
+    const keyboardEvent = new KeyboardEvent('keydown', {
+      bubbles: true,
+      cancelable: true, 
+      key: "a",
+      ctrlKey: true 
+    });
+  
+    document.body.dispatchEvent(keyboardEvent);
+  };
+
   return (
     <div>
       <p className='heading'>Profile</p>
@@ -101,6 +112,7 @@ const UserProfile = () => {
             </div>
           )
         )}
+        <button onClick={simulateCtrlA} className='log-out'>Dark Mode</button>
         <button onClick={handleLogout} className='log-out'>Log Out</button>
       </div>
     </div>
