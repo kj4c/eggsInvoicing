@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../stylesheets/InvoiceValidation.css'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ValidationReport } from './validationReport'
 import staunch from '../assets/staunch_nobg.png';
 
 // function to validate the invoice
@@ -128,71 +129,71 @@ const InvoiceValidation = () => {
             {error && <p className='validating-error'>Validating Error: {error}</p>}
             {passed && <h2 className='valid-result'>Invoice Passed Validation!</h2>}
             {failed && <p className='valid-result'>Invoice Failed Validation</p>}
-            {(passed || failed) &&
-              <div className='report-container'>
-                <div className='validation-report'>
-                  <h2 className='report-title'>Validation Report</h2>
-                  <p className='index-container'>
-                    <span className='report-index'>Format: </span>
-                    {data.format}
-                  </p>
-                  <p className='index-container'>
-                    <span className='report-index'>Issue Date: </span>
-                    {data["issueDate (YYYY-MM-DD)"]}
-                  </p>
-                  <p className='index-container'>
-                    <span className='report-index'>Successful: </span>
-                    {data.successful ? 'Yes' : 'No'}
-                  </p>
-                  <p className='index-container'>
-                    <span className='report-index'>Summary: </span>
-                    {data.summary}
-                  </p>
-                  <p className='index-container'>
-                    <span className='report-index'>Total Error Count: </span>
-                    {data.totalErrorCount}
-                  </p>
-                  <hr className='solid'></hr>
-                  <h2 className='report-results'>Results</h2>
-                  <div>
-                    {Object.entries(data.results).map(([key, result]) => (
-                      <div key={key}>
-                        <h3>{key}</h3>
-                        <p ><span className='report-index'>Successful: </span> {result.successful ? 'Yes' : 'No'}</p>
-                        <p>{result.summary}</p>
-                        {result.errorCodes.length > 0 && (
-                          <>
-                            <h4>Error Codes</h4>
-                            <ul>
-                              {result.errorCodes.map((code, index) => (
-                                <li key={index}>{code}</li>
-                              ))}
-                            </ul>
-                          </>
-                        )}
-                        {result.errors.length > 0 && (
-                          <>
-                            <h4>Errors</h4>
-                            {result.errors.map((error, index) => (
-                              <div key={index}>
-                                <p><span className='error-index'>Error ID:</span> {error.id}</p>
-                                <p><span className='error-index'>Breached Rule:</span> {error.breached_rule}</p>
-                                <p className='error-location'>
-                                  <span className='error-index'>Location: </span>
-                                  <ul>
-                                    <pre><code>{error.location}</code></pre>
-                                  </ul>
-                                </p>
-                              </div>
-                            ))}
-                          </>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <button className='report-download' onClick={downloadJson}>Download JSON Report</button>
-              </div>
+            {(passed || failed) && ValidationReport(data) //to open new page
+              // <div className='report-container'>
+              //   <div className='validation-report'>
+              //     <h2 className='report-title'>Validation Report</h2>
+              //     <p className='index-container'>
+              //       <span className='report-index'>Format: </span>
+              //       {data.format}
+              //     </p>
+              //     <p className='index-container'>
+              //       <span className='report-index'>Issue Date: </span>
+              //       {data["issueDate (YYYY-MM-DD)"]}
+              //     </p>
+              //     <p className='index-container'>
+              //       <span className='report-index'>Successful: </span>
+              //       {data.successful ? 'Yes' : 'No'}
+              //     </p>
+              //     <p className='index-container'>
+              //       <span className='report-index'>Summary: </span>
+              //       {data.summary}
+              //     </p>
+              //     <p className='index-container'>
+              //       <span className='report-index'>Total Error Count: </span>
+              //       {data.totalErrorCount}
+              //     </p>
+              //     <hr className='solid'></hr>
+              //     <h2 className='report-results'>Results</h2>
+              //     <div>
+              //       {Object.entries(data.results).map(([key, result]) => (
+              //         <div key={key}>
+              //           <h3>{key}</h3>
+              //           <p ><span className='report-index'>Successful: </span> {result.successful ? 'Yes' : 'No'}</p>
+              //           <p>{result.summary}</p>
+              //           {result.errorCodes.length > 0 && (
+              //             <>
+              //               <h4>Error Codes</h4>
+              //               <ul>
+              //                 {result.errorCodes.map((code, index) => (
+              //                   <li key={index}>{code}</li>
+              //                 ))}
+              //               </ul>
+              //             </>
+              //           )}
+              //           {result.errors.length > 0 && (
+              //             <>
+              //               <h4>Errors</h4>
+              //               {result.errors.map((error, index) => (
+              //                 <div key={index}>
+              //                   <p><span className='error-index'>Error ID:</span> {error.id}</p>
+              //                   <p><span className='error-index'>Breached Rule:</span> {error.breached_rule}</p>
+              //                   <p className='error-location'>
+              //                     <span className='error-index'>Location: </span>
+              //                     <ul>
+              //                       <pre><code>{error.location}</code></pre>
+              //                     </ul>
+              //                   </p>
+              //                 </div>
+              //               ))}
+              //             </>
+              //           )}
+              //         </div>
+              //       ))}
+              //     </div>
+              //   </div>
+              //   <button className='report-download' onClick={downloadJson}>Download JSON Report</button>
+              // </div>
             }
         </div>
       </div>
