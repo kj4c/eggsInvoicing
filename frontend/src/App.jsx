@@ -60,7 +60,6 @@ const AppContent = () => {
             <Route path="*" element={<NotFoundPage />} />
             <Route path='/sendEmailLater' element={<SendEmailLater/>}></Route>
             <Route path='/invoicesSent' element={<InvoicesSent/>}></Route>
-
             <Route path="/profile" element={<UserProfile />} />
           </Routes>
         </div>

@@ -53,11 +53,17 @@ const InvoiceRendering = () => {
     setFileName(target.files[0].name);
   }
 
+  // navigate back to dashboard
+  function goBack() {
+    navigate('/');
+  }
+
   // design for the frontend for rendering
   return(
     <div className='splitScreen'>
       <div className='render-container'>
         <div className = "inputWrapper">
+          <button onClick={goBack} className="backButton">Back</button>
           <div className='fileBtnDiv'>
             <input type='file' id='file' className='fileBtn' accept='.xml' onChange={handleOnChange}/>
             <label htmlFor='file' className='fileText'>Upload XML File</label>

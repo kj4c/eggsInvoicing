@@ -94,8 +94,8 @@ const InvoiceInputMultipleJson = () => {
                                 <label htmlFor={`file-upload-${index}`} className="file-upload-button">{file.filename || 'Upload File'}</label>
                             </div>
                         ))}
-                        <button onClick={addJsonFile} type="button" className='plusButton'><GoPlus /></button>
                     </div>
+                    <button onClick={addJsonFile} type="button" className='plusButton'><GoPlus /></button>
                     <button className="submit" onClick={handleSubmit}>Submit</button>
                 </div>
             </div>

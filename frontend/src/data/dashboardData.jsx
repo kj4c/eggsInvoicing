@@ -51,7 +51,13 @@ export const links = [
         id: 4,
         name: 'Compose',
         path: 'invoiceSending',
-        icon: <SlPencil></SlPencil>
+        icon: <SlPencil></SlPencil>,
+        subMenus: [
+          {
+            name: 'XML',
+            path: 'invoiceInputMultipleXML',
+          }
+        ],
       },
       {
         id:5,
@@ -63,7 +69,7 @@ export const links = [
         id: 6,
         name: 'Sent',
         path: 'invoicesSent',
-        icon: <SlPaperPlane></SlPaperPlane>
+        icon: <SlPaperPlane></SlPaperPlane>,
       }
     ],
   },
