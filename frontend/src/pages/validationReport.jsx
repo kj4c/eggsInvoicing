@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../stylesheets/InvoiceRendered.css'
 
 // Renders the validation report in a separate page
-const ValidationReport = (data) => {
-  // downloads the JSON into the user's computer
+const ValidationReport = () => {
+    const location = useLocation();
+    let data = location.state;
+    // downloads the JSON into the user's computer
     function downloadJson() {
         const jsonString = JSON.stringify(data, null, 2);
         const blob = new Blob([jsonString], { type: 'application/json' });
@@ -19,10 +20,18 @@ const ValidationReport = (data) => {
         document.body.removeChild(link);
         URL.revokeObjectURL(href);
     }
-    
+
+    const navigate = useNavigate();
+
+    // navigate back to validation page
+    function goBack() {
+        navigate('/invoiceValidation');
+    }
+
     return (
         <div className='report-container'>
         <div className='validation-report'>
+          <button onClick={goBack} className="backButton">Back</button>
           <h2 className='report-title'>Validation Report</h2>
           <p className='index-container'>
             <span className='report-index'>Format: </span>
@@ -82,8 +91,8 @@ const ValidationReport = (data) => {
               </div>
             ))}
           </div>
+            <button className='report-download' onClick={downloadJson}>Download JSON Report</button>
         </div>
-        <button className='report-download' onClick={downloadJson}>Download JSON Report</button>
       </div>
     )
 }

@@ -17,7 +17,7 @@ const AppContent = () => {
   const location = useLocation();
 
   const knownPaths = [
-    '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
+    '/', '/dashboard', '/invoiceCreation', '/invoiceValidation', '/validationReport',
     '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
     '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving',
     '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering', '/invoiceCreation/uploadDocument', '/sendEmailLater', '/invoicesSent'
