@@ -110,9 +110,11 @@
   padding-top: 0.75rem;
   padding-bottom: 0.625rem;
   border-radius: 0.5rem;
-  color: rgb(55 65 81);
+  /* color: rgb(55 65 81); */
+  color: white;
   font-size: 1rem;
   text-decoration: none;
+  background-color: #9160f2;
 }
 
 /* Medium screen size */
