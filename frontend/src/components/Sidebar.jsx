@@ -64,6 +64,7 @@ const Sidebar = () => {
                       </Link>
                     ) : (
                       <a
+                        style={{ cursor: 'pointer' }}
                         className={
                           activeItem === link.id
                             ? 'sidebar-activeLink'
