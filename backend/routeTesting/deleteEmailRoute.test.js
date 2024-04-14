@@ -1,5 +1,4 @@
 const request = require('supertest');
-const pool = require('../database/db');
 const app = require('../app');
 
 jest.mock('../functions/deleteEmail', () => jest.fn().mockImplementation((invoiceId) => {
@@ -10,10 +9,6 @@ jest.mock('../functions/deleteEmail', () => jest.fn().mockImplementation((invoic
   } else {
     return Promise.reject(new Error('Invoice ID not found'));
   }
-}));
-
-jest.mock('../database/db', () => ({
-  query: jest.fn()
 }));
 
 describe('/deleteEmail route', () => {
