@@ -7,6 +7,7 @@ import {
   InvoiceCreation,
   InvoiceRendering,
   InvoiceValidation,
+  ValidationReport,
   InvoiceSending,
   InvoiceInput,
   InvoiceRendered,
@@ -36,6 +37,7 @@ const AppContent = () => {
     '/dashboard',
     '/invoiceCreation',
     '/invoiceValidation',
+    '/validationReport',
     '/invoiceRendering',
     '/invoiceRendered',
     '/invoiceSending',
@@ -86,6 +88,7 @@ const AppContent = () => {
               element={<InvoiceCreationUploadDocument />}
             />
             <Route path='/invoiceValidation' element={<InvoiceValidation />} />
+            <Route path='/validationReport' element={<ValidationReport />} />
             <Route path='/invoiceRendering' element={<InvoiceRendering />} />
             <Route path='/invoiceRendered' element={<InvoiceRendered />} />
             <Route path='/invoiceSending' element={<InvoiceSending />} />
