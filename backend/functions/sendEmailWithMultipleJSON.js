@@ -19,6 +19,7 @@ async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
 
   const attachments = jsonFiles.map(jsonFile => {
     // Expecting jsonString instead of jsonContent
+    jsonFile.jsonString = JSON.stringify(jsonFile.jsonString);
     if (typeof jsonFile.filename !== 'string' || typeof jsonFile.jsonString !== 'string') {
       throw new Error(`Expected filename to be a string and jsonString to be a string, but got ${typeof jsonFile.filename} and ${typeof jsonFile.jsonString}`);
     }
@@ -53,7 +54,7 @@ async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
 
   const invoiceIds = [];
   for (const attachment of attachments) {
-    let query = 'INSERT INTO sent_invoices (sender_email, receiver_email, invoices, title, type) VALUES ($1, $2, ARRAY[$3::json], \'JSON\') RETURNING invoice_id';
+    let query = 'INSERT INTO sent_invoices (sender_email, receiver_email, invoices, title, type) VALUES ($1, $2, ARRAY[$3::json], $4, $5) RETURNING invoice_id';
     const invoiceId = (await pool.query(query, [from, recipient, attachment.content, attachment.filename, 'JSON'])).rows[0].invoice_id;
     invoiceIds.push(invoiceId);
 
