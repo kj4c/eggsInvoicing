@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import '../stylesheets/InvoiceCreation.css';
+import '../stylesheets/InvoiceCreation2.css';
 import { inputs } from '../data/InvoiceCreationInputs';
 import axios from 'axios';
 
 // Invoice creationg GUI page where users can generate an invoice
-const InvoiceCreation = () => {
+const InvoiceCreation2 = () => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [numItems, setNumItems] = useState(0);
   // temporary set the values for the demo.
@@ -149,12 +149,12 @@ const InvoiceCreation = () => {
 
   // Actual GUI for the Invoice Creation part
   return (
-    <div className='IC-Container'>
-      <form className='IC-Form' onSubmit={handleSubmit}>
-        <h1 className='IC-h1'>Invoice Form</h1>
-        <h2 className='IC-h2'>Invoice Details</h2>
+    <div className='IC2-Container'>
+      <form className='IC2-Form' onSubmit={handleSubmit}>
+        <h1 className='IC2-h1'>Invoice Form</h1>
+        <h2 className='IC2-h2'>Invoice Details</h2>
         {inputs.map((input) => (
-          <div key={input.id} className='FI-Container'>
+          <div key={input.id} className='FI2-Container'>
             {input.heading && <h2> {input.heading} </h2>}
             <label>{input.label}</label>
             <input
@@ -169,7 +169,7 @@ const InvoiceCreation = () => {
         ))}
 
         {/* INVOICE LINE ITEMS */}
-        <div className='FI-Container'>
+        <div className='FI2-Container'>
           <h2>Invoice Line Items</h2>
           <label className='label'> Number of Items </label>
           <input
@@ -179,13 +179,13 @@ const InvoiceCreation = () => {
           />
 
           {!buttonClicked && (
-            <button className='IC-button' onClick={handleGenerateDivs}>
+            <button className='IC2-button' onClick={handleGenerateDivs}>
               Select
             </button>
           )}
 
           {values.item.map((item, index) => (
-            <div key={item + index} className='FI-Container'>
+            <div key={item + index} className='FI2-Container'>
               <input
                 label='Item Name'
                 name={`item[${index}].name`}
@@ -224,10 +224,10 @@ const InvoiceCreation = () => {
             </div>
           ))}
         </div>
-        <button className='IC-button'>Submit</button>
+        <button className='IC2-button'>Submit</button>
       </form>
     </div>
   );
 };
 
-export default InvoiceCreation;
+export default InvoiceCreation2;
