@@ -29,12 +29,11 @@ const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
 const getStatisticsV2 = require('./functions/v2getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
+const deleteEmail = require('./functions/deleteEmail');
 const createTeam = require('./functions/teamCreate');
 const joinTeam = require('./functions/teamJoin');
 const leaveTeam = require('./functions/teamLeave');
 const detailTeam = require('./functions/teamDetail');
-
-const deleteEmail = require('./functions/deleteEmail');
 const cors = require('cors');
 
 app.use(cors());
