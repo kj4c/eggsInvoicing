@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 // No need to import React with the latest React version unless you're using class components or React. useState, etc. explicitly
 
 import { Navbar, Sidebar, UserProfile } from './components'
-import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving, HtmlRendering, InvoiceCreationUploadDocument, InvoiceInputMultiple, InvoiceInputMultipleJson, InvoicesSent} from './pages';
+import { Dashboard, InvoiceCreation, InvoiceRendering, InvoiceValidation, ValidationReport, InvoiceSending, InvoiceInput, InvoiceRendered, InvoiceReceiving, HtmlRendering, InvoiceCreationUploadDocument, InvoiceInputMultiple, InvoiceInputMultipleJson, InvoicesSent} from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
 import AuthRegister from './pages/authRegister';
@@ -18,7 +18,7 @@ const AppContent = () => {
   const location = useLocation();
 
   const knownPaths = [
-    '/', '/dashboard', '/invoiceCreation', '/invoiceValidation',
+    '/', '/dashboard', '/invoiceCreation', '/invoiceValidation', '/validationReport',
     '/invoiceRendering', '/invoiceRendered', '/invoiceSending', '/invoiceInput',
     '/login', '/register', '/invoiceInputJson', '/profile', '/invoiceReceiving',
     '/invoiceInputMultiple', '/invoiceInputMultipleJson', 'htmlRendering', '/invoiceCreation/uploadDocument', '/sendEmailLater', '/invoicesSent'
@@ -45,6 +45,7 @@ const AppContent = () => {
             <Route path="/invoiceCreation" element={<InvoiceCreation />} />
             <Route path="/invoiceCreation/uploadDocument" element={<InvoiceCreationUploadDocument />} />
             <Route path="/invoiceValidation" element={<InvoiceValidation />} />
+            <Route path ="/validationReport" element={<ValidationReport/>}/>
             <Route path="/invoiceRendering" element={<InvoiceRendering />} />
             <Route path="/invoiceRendered" element={<InvoiceRendered />} />
             <Route path="/invoiceSending" element={<InvoiceSending />} />
@@ -62,7 +63,6 @@ const AppContent = () => {
             <Route path="*" element={<NotFoundPage />} />
             <Route path='/sendEmailLater' element={<SendEmailLater/>}></Route>
             <Route path='/invoicesSent' element={<InvoicesSent/>}></Route>
-
             <Route path="/profile" element={<UserProfile />} />
           </Routes>
         </div>
