@@ -1,11 +1,11 @@
-import { FiShoppingBag, } from 'react-icons/fi';
-import { FaFileInvoice } from "react-icons/fa6";
-import { GrValidate } from "react-icons/gr";
-import { ImFilePicture } from "react-icons/im";
-import { SlPaperPlane } from "react-icons/sl";
-import { TbFileUpload } from "react-icons/tb";
-import { HiOutlineFolderOpen } from "react-icons/hi2";
-import { SlPencil } from "react-icons/sl";
+import { FiShoppingBag } from 'react-icons/fi';
+import { FaFileInvoice } from 'react-icons/fa6';
+import { GrValidate } from 'react-icons/gr';
+import { ImFilePicture } from 'react-icons/im';
+import { SlPaperPlane } from 'react-icons/sl';
+import { TbFileUpload } from 'react-icons/tb';
+import { HiOutlineFolderOpen } from 'react-icons/hi2';
+import { SlPencil } from 'react-icons/sl';
 
 export const links = [
   {
@@ -29,10 +29,11 @@ export const links = [
         icon: <FaFileInvoice></FaFileInvoice>,
         subMenus: [
           {
+            id: 101,
             name: 'Upload Documents',
             path: 'invoiceCreation/uploadDocument',
-            icon: <TbFileUpload></TbFileUpload>
-          }
+            icon: <TbFileUpload></TbFileUpload>,
+          },
         ],
       },
       {
@@ -50,11 +51,31 @@ export const links = [
       {
         id: 4,
         name: 'Compose',
-        path: 'invoiceSending',
-        icon: <SlPencil></SlPencil>
+        path: '',
+        icon: <SlPencil></SlPencil>,
+        subMenus: [
+          {
+            id: 401,
+            name: 'XML Multiple',
+            path: 'invoiceInputMultiple',
+            icon: <TbFileUpload></TbFileUpload>,
+          },
+          {
+            id: 402,
+            name: 'JSON Multiple',
+            path: 'invoiceInputMultipleJson',
+            icon: <TbFileUpload></TbFileUpload>,
+          },
+          {
+            id: 403,
+            name: 'Send Multiple',
+            path: 'invoiceInputMultipleJson1',
+            icon: <TbFileUpload></TbFileUpload>,
+          },
+        ],
       },
       {
-        id:5,
+        id: 5,
         name: 'Received',
         path: 'invoiceReceiving',
         icon: <HiOutlineFolderOpen />,
@@ -63,8 +84,8 @@ export const links = [
         id: 6,
         name: 'Sent',
         path: 'invoicesSent',
-        icon: <SlPaperPlane></SlPaperPlane>
-      }
+        icon: <SlPaperPlane></SlPaperPlane>,
+      },
     ],
   },
 ];

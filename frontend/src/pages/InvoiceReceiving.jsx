@@ -1,6 +1,7 @@
 import '../stylesheets/InvoiceReceiving.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { RiDeleteBinLine } from "react-icons/ri";
 import axios from 'axios';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -19,6 +20,7 @@ const InvoiceReceiving = () => {
   const [fetchOption, setFetchOption] = useState('All')
   const [formData, setFormData] =  useState({ID: "", Date: "", DateFrom: "", DateTo: ""});
   const [searchInput, setSearchInput] = useState("");
+  const [checkedItems, setCheckedItems] = useState({});
   const navigate = useNavigate();
 
   // Checks if the  cookie exists if not you go back
@@ -80,6 +82,7 @@ const InvoiceReceiving = () => {
     // if its all then call for FetchAll
     if (fetchOption === 'All') {
       try {
+        setData([]);
         setLoading(true);
         let response = 
         await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/fetchAll?uid=${uid}`,);
@@ -107,7 +110,7 @@ const InvoiceReceiving = () => {
       }
       // If fetchoption is ID then you find the specific invoiceId
     } else if (fetchOption === 'ID') {
-      console.log("YO");
+      setData([]);
       try {
         setLoading(true);
         let response = 
@@ -134,7 +137,7 @@ const InvoiceReceiving = () => {
       }
       // if its date then you call API to find all invoices in the matching date
     } else if (fetchOption === 'Date') {
-      console.log("MEOW");
+      setData([]);
       try {
         setLoading(true);
         let response = 
@@ -160,6 +163,7 @@ const InvoiceReceiving = () => {
       }
       // calls api to find the invoice matching the given date range.
     } else if (fetchOption === 'DateRange') {
+      setData([]);
       try {
         setLoading(true);
         let response = 
@@ -190,6 +194,26 @@ const InvoiceReceiving = () => {
     // Get the select element
     const selectValue = document.getElementById('options').value;
     setFetchOption(selectValue);
+  };
+
+  const handleCheckedInvoices = (invoiceId, isChecked) => {
+    setCheckedItems(prev => ({
+      ...prev,
+      [invoiceId]: isChecked
+    }));
+  };
+
+  const deleteSelectedEmails = async () => {
+    const checkedIds = Object.entries(checkedItems).filter(([value]) => value).map(([key]) => key);
+    try {
+      await Promise.all(checkedIds.map(id =>
+        axios.delete(`https://invoice-seng2021-24t1-eggs.vercel.app/deleteEmail/${id}`)
+      ));
+      fetchData();
+      setCheckedItems({});
+    } catch (error) {
+      alert('An error occurred when deleting');
+    }
   };
 
   // function to call API to generate the PDF which allows users to download and view it.
@@ -298,22 +322,36 @@ const InvoiceReceiving = () => {
         </select>
       </div>
       <div className="inboxContainer">
+        <div className='bin-button-container'>
+          <button className='bin-button' onClick={deleteSelectedEmails}>
+            <RiDeleteBinLine className='bin-icon' />  
+            <div className="tooltip">Delete</div>
+          </button>
+        </div>
           <p className='header'>Invoice ID</p>
           <p className='header'>Title</p>
           <p className='header'>Sender</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
         {dataFound && data.map((item) => (
-          <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
-            onMouseEnter={() => setHoveredRow(item.invoice_id)} 
-            onMouseLeave={() => setHoveredRow(null)} 
-            key={item.invoice_id}
-            onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
-            <p className="grid-item">{item.invoice_id}</p>
-            <p className="grid-item">{item.title}</p>
-            <p className="grid-item">{item.sender_email}</p>
-            <p className="grid-item">{item.type}</p>
-            <p className="grid-item">{item.sent_at}</p>
+          <div className="inbox-grid" key={item.invoice_id}>
+            <div className='checkbox-container'>
+              <input type="checkbox" className="checkbox" 
+              onChange={e => handleCheckedInvoices(item.invoice_id, e.target.checked)}
+              checked={checkedItems[item.invoice_id] || false}
+              />
+            </div>
+            <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
+              onMouseEnter={() => setHoveredRow(item.invoice_id)} 
+              onMouseLeave={() => setHoveredRow(null)} 
+              key={item.invoice_id}
+              onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
+              <p className="grid-item">{item.invoice_id}</p>
+              <p className="grid-item">{item.title}</p>
+              <p className="grid-item">{item.sender_email}</p>
+              <p className="grid-item">{item.type}</p>
+              <p className="grid-item">{item.sent_at}</p>
+            </div>
           </div>
         ))}
         {Loading && <h1 className='loadingScreen'>{loadingText}</h1>}

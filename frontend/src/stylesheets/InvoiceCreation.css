@@ -9,14 +9,12 @@
     ),
     url('../assets/InvoiceCreationPage/icon12.png');
 
-  /* background-color: rgba(106, 17, 203, 0.5) */
-
   background-size: cover;
   background-position: center;
   background-clip: border-box;
 }
 
-.IC-Form{
+.IC-Form {
   background-color: rgb(255, 255, 255);
   padding: 0px 60px;
   border-radius: 10px;
@@ -45,7 +43,6 @@
   border-bottom: 1px solid gray;
 }
 
-
 .IC-button {
   width: 100%;
   height: 50px;
@@ -61,8 +58,7 @@
   margin-bottom: 30px;
 }
 
-
-.FI-Container{
+.FI-Container {
   display: flex;
   flex-direction: column;
   width: 800px;

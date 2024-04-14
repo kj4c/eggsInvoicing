@@ -20,7 +20,7 @@ describe('/fetchAllSent route', () => {
 
   afterEach(() => {
     console.error.mockRestore(); // Restore console.error
-  });
+  });////
 
   it('Invalid Email', async () => {
     pool.query.mockResolvedValueOnce({rows: []});
