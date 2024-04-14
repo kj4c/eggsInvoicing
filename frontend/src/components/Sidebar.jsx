@@ -23,10 +23,14 @@ const Sidebar = () => {
     <div className='sidebar-container md-overflow-hidden'>
       {activeMenu && (
         <>
+          {/* Homepage Logo Container */}
           <div className='sidebar-listContainer'>
+            {/* Homepage Logo */}
             <Link to='/' className='sidebar-title'>
               <FaHome /> <span>EGGS-INVOICE</span>
             </Link>
+
+            {/* Close Menu button */}
             <Tooltip text='Menu'>
               <button
                 className='sidebar-closeMenuButton md-hidden'
@@ -38,32 +42,51 @@ const Sidebar = () => {
             </Tooltip>
           </div>
 
+          {/* Sidebar items */}
           <div className='sidebar-mt-10'>
             {links.map((item) => (
               <div key={item.title}>
                 <p className='sidebar-listTitles'>{item.title}</p>
                 {item.links.map((link) => (
-                  <div key={link.path}>
-                    <NavLink
-                      to={`/${link.path}`}
-                      className={({ isActive }) =>
-                        isActive ? 'sidebar-activeLink' : 'sidebar-normalLink'
-                      }
-                      onClick={() => handleMenuItemClick(link.id)}
-                    >
-                      {link.icon}
-                      <span>{link.name}</span>
-                    </NavLink>
+                  <div key={link.id}>
+                    {link.path ? (
+                      <Link
+                        to={link.path}
+                        className={
+                          activeItem === link.id
+                            ? 'sidebar-activeLink'
+                            : 'sidebar-normalLink'
+                        }
+                        onClick={() => handleMenuItemClick(link.id)}
+                      >
+                        {link.icon}
+                        <span>{link.name}</span>
+                      </Link>
+                    ) : (
+                      <a
+                        className={
+                          activeItem === link.id
+                            ? 'sidebar-activeLink'
+                            : 'sidebar-normalLink'
+                        }
+                        onClick={() => handleMenuItemClick(link.id)}
+                      >
+                        {link.icon}
+                        <span>{link.name}</span>
+                      </a>
+                    )}
 
+                    {/* COnditionally render submenus */}
                     {activeItem === link.id &&
                       link.subMenus &&
                       link.subMenus.map((subMenu) => (
                         <NavLink
-                          key={subMenu.path}
+                          key={subMenu.id}
                           to={`/${subMenu.path}`}
                           className={({ isActive }) =>
                             isActive ? 'subMenu-active' : 'subMenu-normal'
                           }
+                          onClick={() => handleMenuItemClick(link.id)}
                         >
                           {subMenu.icon}
                           <span>{subMenu.name}</span>
