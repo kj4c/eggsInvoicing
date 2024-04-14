@@ -2,6 +2,7 @@ import '../stylesheets/InvoiceReceiving.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { RiDeleteBinLine } from "react-icons/ri";
 import SearchIcon from '@mui/icons-material/Search';
 
 // Making an array for months
@@ -19,6 +20,7 @@ const InvoicesSent = () => {
   const [fetchOption, setFetchOption] = useState('All')
   const [formData, setFormData] =  useState({ID: "", Date: "", DateFrom: "", DateTo: ""});
   const [searchInput, setSearchInput] = useState("");
+  const [checkedItems, setCheckedItems] = useState({});
   const navigate = useNavigate();
 
   // Checks if the  cookie exists if not you go back
@@ -194,6 +196,26 @@ const InvoicesSent = () => {
     setFetchOption(selectValue);
   };
 
+  const handleCheckedInvoices = (invoiceId, isChecked) => {
+    setCheckedItems(prev => ({
+      ...prev,
+      [invoiceId]: isChecked
+    }));
+  };
+
+  const deleteSelectedEmails = async () => {
+    const checkedIds = Object.entries(checkedItems).filter(([value]) => value).map(([key]) => key);
+    try {
+      await Promise.all(checkedIds.map(id =>
+        axios.delete(`https://invoice-seng2021-24t1-eggs.vercel.app/deleteEmail/${id}`)
+      ));
+      fetchData();
+      setCheckedItems({});
+    } catch (error) {
+      alert('An error occurred when deleting');
+    }
+  }
+
   // function to call API to generate the PDF which allows users to download and view it.
   const generatePDF = async () => {
     try {
@@ -300,23 +322,37 @@ const InvoicesSent = () => {
         </select>
       </div>
       <div className="inboxContainer">
+        <div className='bin-button-container'>
+          <button className='bin-button' onClick={deleteSelectedEmails}>
+            <RiDeleteBinLine className='bin-icon' />  
+            <div class="tooltip">Delete</div>
+          </button>
+        </div>
           <p className='header'>Invoice ID</p>
           <p className='header'>Title</p>
           <p className='header'>Receiver</p>
           <p className='header'>Type</p>     
           <p className='header'>Date</p>
         {dataFound && data.map((item) => (
-          <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
-            onMouseEnter={() => setHoveredRow(item.invoice_id)} 
-            onMouseLeave={() => setHoveredRow(null)} 
-            key={item.invoice_id}
-            onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
-            <p className="grid-item">{item.invoice_id}</p>
-            <p className="grid-item">{item.title}</p>
-            <p className="grid-item">{item.receiver_email}</p>
-            <p className="grid-item">{item.type}</p>
-            <p className="grid-item">{item.sent_at}</p>
+          <div className="inbox-grid" key={item.invoice_id}>
+          <div className='checkbox-container'>
+            <input type="checkbox" className="checkbox" 
+            onChange={e => handleCheckedInvoices(item.invoice_id, e.target.checked)}
+            checked={checkedItems[item.invoice_id] || false}
+            />
           </div>
+            <div className={`grid-row ${hoveredRow === item.invoice_id ? 'row-hover' : ''}`} 
+              onMouseEnter={() => setHoveredRow(item.invoice_id)} 
+              onMouseLeave={() => setHoveredRow(null)} 
+              key={item.invoice_id}
+              onClick={() => item.type === 'XML' ? openXML(item.invoice_id) : openJSON(item.invoice_id)}>
+              <p className="grid-item">{item.invoice_id}</p>
+              <p className="grid-item">{item.title}</p>
+              <p className="grid-item">{item.receiver_email}</p>
+              <p className="grid-item">{item.type}</p>
+              <p className="grid-item">{item.sent_at}</p>
+            </div>
+        </div>
         ))}
         {Loading && <h1 className='loadingScreen'>{loadingText}</h1>}
       </div>
