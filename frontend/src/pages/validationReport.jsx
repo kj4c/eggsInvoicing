@@ -23,7 +23,7 @@ const ValidationReport = () => {
 
     const navigate = useNavigate();
 
-    // navigate back to validation page
+    // navigate back to validation Page
     function goBack() {
         navigate('/invoiceValidation');
     }
