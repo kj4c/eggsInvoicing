@@ -12,3 +12,5 @@ export { default as HtmlRendering} from './HtmlRendering';
 export { default as InvoiceInputMultiple } from './invoiceInputMultiple';
 export { default as InvoiceInputMultipleJson } from './invoiceInputMultipleJson';
 export { default as InvoicesSent } from './InvoicesSent';
+export { default as Team } from './Team';
+export { default as TeamCreate } from './TeamCreate'
