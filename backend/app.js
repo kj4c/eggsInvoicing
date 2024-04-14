@@ -29,11 +29,11 @@ const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
 const getStatisticsV2 = require('./functions/v2getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
+const deleteEmail = require('./functions/deleteEmail');
 const createTeam = require('./functions/teamCreate');
 const joinTeam = require('./functions/teamJoin');
 const leaveTeam = require('./functions/teamLeave');
 const detailTeam = require('./functions/teamDetail');
-
 const cors = require('cors');
 
 app.use(cors());
@@ -571,6 +571,27 @@ app.get('/receiveHtml', async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: 'error generating the report' });
+  }
+});
+
+/*
+@brief
+deletes an invoice
+@params
+email: string - email of the user
+invoiceId: int - id of invoice
+@output
+on success:
+status code
+on failure:
+status code and error message
+*/
+app.delete('/deleteEmail/:invoiceId', async (req, res) => {
+  try {
+    const invoiceId = parseInt(req.params.invoiceId);
+    res.status(200).json(await deleteEmail(invoiceId));
+  } catch (err) {
+    res.status(err.status || 400).json({ message: err.message || 'Error' });
   }
 });
 
