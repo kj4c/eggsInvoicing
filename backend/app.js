@@ -19,6 +19,8 @@ const generateSentPdf = require('./functions/sentReport');
 const fetchByInvoiceId = require('./functions/fetchByInvoiceId');
 const fetchAll = require('./functions/fetchAll');
 const fetchAllSent = require('./functions/fetchAllSent');
+const fetchBySender = require('./functions/fetchBySender');
+const fetchByReceiver = require('./functions/fetchByReceiver');
 const fetchByDate = require('./functions/fetchByDate');
 const fetchByDateRange = require('./functions/fetchByDateRange');
 const fetchByDateRangev2 = require('./functions/fetchByDateRangev2');
@@ -27,6 +29,11 @@ const sendMultEmail = require('./functions/sendMultEmail');
 const getStatistics = require('./functions/getStatistics');
 const getStatisticsV2 = require('./functions/v2getStatistics');
 const getUserInfo = require('./functions/getUserInfo');
+const createTeam = require('./functions/teamCreate');
+const joinTeam = require('./functions/teamJoin');
+const leaveTeam = require('./functions/teamLeave');
+const detailTeam = require('./functions/teamDetail');
+
 const deleteEmail = require('./functions/deleteEmail');
 const cors = require('cors');
 
@@ -168,6 +175,50 @@ app.get('/receive/fetchByInvoiceId', async function (req, res) {
 
 /*
 @brief
+fetches all invoices with matching receiver_email
+@params
+uid: int - user id of the user
+receiver_email: string - email of the receiver
+@output
+on success:
+invoice: object - invoice object
+on failure:
+message: string - error message
+*/
+app.get('/receive/fetchByReceiver', async function (req, res) {
+  const uid = req.query.uid;
+  const receiverEmail = req.query.email;
+  try {
+    res.json(await fetchByReceiver(uid, receiverEmail));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
+fetches all invoices with matching sender_email
+@params
+uid: int - user id of the user
+sender_email: string - email of the sender
+@output
+on success:
+invoice: object - invoice object
+on failure:
+message: string - error message
+*/
+app.get('/receive/fetchBySender', async function (req, res) {
+  const uid = req.query.uid;
+  const senderEmail = req.query.email;
+  try {
+    res.json(await fetchBySender(uid, senderEmail));
+  } catch (error) {
+    res.status(error.statusCode).json(error);
+  }
+});
+
+/*
+@brief
 retrieves all invoices on a specific date
 @params
 uid: int - user id of the user
@@ -287,7 +338,7 @@ statistics: object - statistics of the invoices
 OR
 message: string - error message
 */
-app.get('/receive/v2/getStatistics', async function (req, res) {
+app.get('/receive/getStatistics/v2', async function (req, res) {
   const uid = req.query.uid;
   try {
     res.json(await getStatisticsV2(uid));
@@ -622,6 +673,119 @@ app.get('/getUserInfo', async (req, res) => {
     res.status(200).json(userInfo);
   } catch (err) {
     res.status(400).json({ message: 'Failed to get user info:' });
+  }
+});
+
+/*
+@brief
+create team
+@params
+name: team name
+email: email
+@output
+on success:
+status code - integer - 200
+passcode - string
+on failure:
+status code and error message
+*/
+app.post('/createteam', async(req, res) => {
+  try {
+    const name = req.body.name;
+    const email = req.body.email;
+    const teamEmail = req.body.teamEmail;
+    const response = await createTeam(name, email, teamEmail);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      console.log(response.passcode);
+      res.status(response.status).json({passcode: response.passcode});
+    }
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot create team'});
+  }
+});
+
+/*
+@brief
+join team
+@params
+email
+passcode
+@output
+on success:
+status code - integer - 200
+on failure:
+status code and error message
+*/
+app.post('/jointeam', async(req, res) => {
+  try {
+    const email = req.body.email;
+    const passcode = req.body.passcode;
+    const response = await joinTeam(email, passcode);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({message: 'Successfully joined team'});
+    }
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot join team'});
+  }
+});
+
+/*
+@brief
+get detail of team
+@params
+email
+@output
+on success:
+status code - integer - 200
+object with teamName, passcode, teamEmail, and list of member's email
+on failure:
+status code and error message
+*/
+app.delete('/leaveteam', async(req, res) => {
+  try {
+    const email = req.body.email;
+    const response = await leaveTeam(email);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({message: 'Successfully left team'});
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot leave team'});
+  }
+});
+
+/*
+@brief
+get detail of team
+@params
+email
+@output
+on success:
+status code - integer - 200
+object with teamName, passcode, teamEmail, and list of member's email
+on failure:
+status code and error message
+*/
+app.get('/teamdetail', async(req, res) => {
+  try {
+    const uid = req.query.uid;
+    const response = await detailTeam(uid);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({details: response.details});
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot get detail'});
   }
 });
 

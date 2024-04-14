@@ -3,6 +3,7 @@ import '../stylesheets/InvoiceRendering.css';
 import Notif from '../components/RenderNotif';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import pointers from '../assets/pointers_nobg.png';
 
 // page for rendering invoices
 const InvoiceRendering = () => {
@@ -54,17 +55,23 @@ const InvoiceRendering = () => {
 
   // design for the frontend for rendering
   return(
-    <div className='render-container'>
-      <h1>Render your invoice here</h1>
-      <div className='fileBtnDiv'>
-        <input type='file' id='file' className='fileBtn' accept='.xml' onChange={handleOnChange}/>
-        <label htmlFor='file' className='fileText'>Upload your xml file here</label>
+    <div className='splitScreen'>
+      <div className='render-container'>
+        <div className = "inputWrapper">
+          <div className='fileBtnDiv'>
+            <input type='file' id='file' className='fileBtn' accept='.xml' onChange={handleOnChange}/>
+            <label htmlFor='file' className='fileText'>Upload XML File</label>
+          </div>
+          <p className={file!=='ready' ? 'textUploaded':'textNotUploaded'}>Uploaded file: {fileName}</p>
+          <button type='submit' className={file!=='ready' ? 'submitBtn':'noSubmitBtn'} onClick={handleOnSubmit}>Render</button>
+          <Notif trigger={notif} setTrigger={setNotif}></Notif>
+        </div>
       </div>
-      <p className={file!=='ready' ? 'textUploaded':'textNotUploaded'}>Uploaded file: {fileName}</p>
-      <button type='submit' className={file!=='ready' ? 'submitBtn':'noSubmitBtn'} onClick={handleOnSubmit}>Submit</button>
-      <Notif trigger={notif} setTrigger={setNotif}></Notif>
+      <div className='Image'>
+        <h1 className = "pageTitle">Render your Invoice</h1>
+        <img className='sourceImage2' src={pointers}></img>
+      </div>
     </div>
-    
   )
 }
 
