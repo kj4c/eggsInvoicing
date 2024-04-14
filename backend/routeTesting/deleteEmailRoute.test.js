@@ -18,15 +18,14 @@ describe('/deleteEmail route', () => {
   it('should handle invoice deletion correctly', async () => {
     const response = await request(app)
       .delete('/deleteEmail/123');
-    expect(response.statusCode).toBe(200);
+    expect(response.status).toBe(200);
   });
 
-  // testing with incorrect credentials
   it('should throw an error if deletion fails', async () => {
     const responseForBadRequest = await request(app)
       .delete('/deleteEmail/456');
 
-    expect(responseForBadRequest.statusCode).toBe(404);
+    expect(responseForBadRequest.statusCode).toBe(400);
     expect(responseForBadRequest.body).toEqual({ message: 'Invoice ID not found' });
   });
 });

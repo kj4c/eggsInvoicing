@@ -20,7 +20,6 @@ async function deleteEmail(invoiceId) {
     console.error('Failed to delete:', error.message);
     throw error;
   }
-
 }
 
 module.exports = deleteEmail;

@@ -588,10 +588,10 @@ status code and error message
 */
 app.delete('/deleteEmail/:invoiceId', async (req, res) => {
   try {
-    const invoiceId = req.params.invoiceId;
+    const invoiceId = parseInt(req.params.invoiceId);
     res.status(200).json(await deleteEmail(invoiceId));
   } catch (err) {
-    res.status(err.statusCode || 400).json({ message: err.message || 'Error' });
+    res.status(err.status || 400).json({ message: err.message || 'Error' });
   }
 });
 
