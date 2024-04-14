@@ -8,11 +8,6 @@
   border-radius: 0px 100px 0px 0px;
 }
 
-.sourceImage2 {
-  width: 100%;
-  animation: fade-up 2s;
-}
-
 .fileBtnDiv {
   display: flex;
   border: solid;

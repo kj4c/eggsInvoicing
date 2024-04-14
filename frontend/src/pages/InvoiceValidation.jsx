@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../stylesheets/InvoiceValidation.css'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import staunch from '../assets/staunch_nobg.png';
 
 // function to validate the invoice
 const InvoiceValidation = () => {
@@ -81,7 +82,6 @@ const InvoiceValidation = () => {
       console.log('No file selected.');
       setIsSubmitting(false);
     }
-
   }
 
   // set the file for the new file attached
@@ -107,94 +107,100 @@ const InvoiceValidation = () => {
     URL.revokeObjectURL(href);
   }
 
+  // navigate back to dashboard
+  function goBack() {
+    navigate('/');
+  }
+
   // frontend for validation
   return (
-    <div className='validation-page'>
-      <h1 className='validation-heading'>Validation</h1>
-      <div className='validation-container'>
-        <h2>Upload your invoice to be validated here:</h2>
-        <p className='valid-text'>Ensure your uploaded invoice is in valid XML format.</p>
-        <div className='mid-container'>
-          <div className='select-button-div'>
-            <input type="file" id='file' className='select-file' onChange={handleOnChange} accept='.xml'></input>
-            <label htmlFor='file' className='select-button'>Select Files to Upload</label>
-          </div>
-          {file ? <p className='valid-uploaded'>Uploaded: {fileName}</p> : <p className='valid-uploaded'>No File Uploaded.</p>}
-          <button className='valid-submit' onClick={handleOnSubmit}>Submit</button>
-          {isSubmitting && <p className='validating-load'>Validating...</p>}
-          {error && <p className='validating-error'>Validating Error: {error}</p>}
-          {passed && <h2 className='valid-result'>Invoice Passed Validation!</h2>}
-          {failed && <p className='valid-result'>Invoice Failed Validation</p>}
-          {(passed || failed) &&
-            <div className='report-container'>
-              <div className='validation-report'>
-                <h2 className='report-title'>Validation Report</h2>
-                <p className='index-container'>
-                  <span className='report-index'>Format: </span>
-                  {data.format}
-                </p>
-                <p className='index-container'>
-                  <span className='report-index'>Issue Date: </span>
-                  {data["issueDate (YYYY-MM-DD)"]}
-                </p>
-                <p className='index-container'>
-                  <span className='report-index'>Successful: </span>
-                  {data.successful ? 'Yes' : 'No'}
-                </p>
-                <p className='index-container'>
-                  <span className='report-index'>Summary: </span>
-                  {data.summary}
-                </p>
-                <p className='index-container'>
-                  <span className='report-index'>Total Error Count: </span>
-                  {data.totalErrorCount}
-                </p>
-                <hr className='solid'></hr>
-                <h2 className='report-results'>Results</h2>
-                <div>
-                  {Object.entries(data.results).map(([key, result]) => (
-                    <div key={key}>
-                      <h3>{key}</h3>
-                      <p ><span className='report-index'>Successful: </span> {result.successful ? 'Yes' : 'No'}</p>
-                      <p>{result.summary}</p>
-                      {result.errorCodes.length > 0 && (
-                        <>
-                          <h4>Error Codes</h4>
-                          <ul>
-                            {result.errorCodes.map((code, index) => (
-                              <li key={index}>{code}</li>
-                            ))}
-                          </ul>
-                        </>
-                      )}
-                      {result.errors.length > 0 && (
-                        <>
-                          <h4>Errors</h4>
-                          {result.errors.map((error, index) => (
-                            <div key={index}>
-                              <p><span className='error-index'>Error ID:</span> {error.id}</p>
-                              <p><span className='error-index'>Breached Rule:</span> {error.breached_rule}</p>
-                              <p className='error-location'>
-                                <span className='error-index'>Location: </span>
-                                <ul>
-                                  <pre><code>{error.location}</code></pre>
-                                </ul>
-                              </p>
-                            </div>
-                          ))}
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <button className='report-download' onClick={downloadJson}>Download JSON Report</button>
+    <div className='splitScreen'>
+      <div className='validation-page'>
+          <div className='mid-container'>
+          <button onClick={goBack} className="backButton">Back</button>
+            <div className='select-button-div'>
+              <input type="file" id='file' className='select-file' onChange={handleOnChange} accept='.xml'></input>
+              <label htmlFor='file' className='select-button'>Upload File</label>
             </div>
-          }
+            {file ? <p className='valid-uploaded'>Uploaded: {fileName}</p> : <p className='valid-uploaded'>No File Uploaded.</p>}
+            <button className='submit' onClick={handleOnSubmit}>Submit</button>
+            {isSubmitting && <p className='validating-load'>Validating...</p>}
+            {error && <p className='validating-error'>Validating Error: {error}</p>}
+            {passed && <h2 className='valid-result'>Invoice Passed Validation!</h2>}
+            {failed && <p className='valid-result'>Invoice Failed Validation</p>}
+            {(passed || failed) &&
+              <div className='report-container'>
+                <div className='validation-report'>
+                  <h2 className='report-title'>Validation Report</h2>
+                  <p className='index-container'>
+                    <span className='report-index'>Format: </span>
+                    {data.format}
+                  </p>
+                  <p className='index-container'>
+                    <span className='report-index'>Issue Date: </span>
+                    {data["issueDate (YYYY-MM-DD)"]}
+                  </p>
+                  <p className='index-container'>
+                    <span className='report-index'>Successful: </span>
+                    {data.successful ? 'Yes' : 'No'}
+                  </p>
+                  <p className='index-container'>
+                    <span className='report-index'>Summary: </span>
+                    {data.summary}
+                  </p>
+                  <p className='index-container'>
+                    <span className='report-index'>Total Error Count: </span>
+                    {data.totalErrorCount}
+                  </p>
+                  <hr className='solid'></hr>
+                  <h2 className='report-results'>Results</h2>
+                  <div>
+                    {Object.entries(data.results).map(([key, result]) => (
+                      <div key={key}>
+                        <h3>{key}</h3>
+                        <p ><span className='report-index'>Successful: </span> {result.successful ? 'Yes' : 'No'}</p>
+                        <p>{result.summary}</p>
+                        {result.errorCodes.length > 0 && (
+                          <>
+                            <h4>Error Codes</h4>
+                            <ul>
+                              {result.errorCodes.map((code, index) => (
+                                <li key={index}>{code}</li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
+                        {result.errors.length > 0 && (
+                          <>
+                            <h4>Errors</h4>
+                            {result.errors.map((error, index) => (
+                              <div key={index}>
+                                <p><span className='error-index'>Error ID:</span> {error.id}</p>
+                                <p><span className='error-index'>Breached Rule:</span> {error.breached_rule}</p>
+                                <p className='error-location'>
+                                  <span className='error-index'>Location: </span>
+                                  <ul>
+                                    <pre><code>{error.location}</code></pre>
+                                  </ul>
+                                </p>
+                              </div>
+                            ))}
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <button className='report-download' onClick={downloadJson}>Download JSON Report</button>
+              </div>
+            }
         </div>
       </div>
+      <div className = "Image">
+        <h1 className = "pageTitle">Validation</h1>
+        <img className = "sourceImage" src={staunch}></img>
+      </div>
     </div>
-
   )
 }
 

@@ -74,8 +74,8 @@ const InvoiceRendering = () => {
         </div>
       </div>
       <div className='Image'>
-        <h1 className = "pageTitle">Render your Invoice</h1>
-        <img className='sourceImage2' src={pointers}></img>
+        <h1 className = "pageTitle">Rendering</h1>
+        <img className='sourceImage' src={pointers}></img>
       </div>
     </div>
   )
