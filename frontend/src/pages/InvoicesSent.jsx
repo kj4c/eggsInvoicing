@@ -325,7 +325,7 @@ const InvoicesSent = () => {
         <div className='bin-button-container'>
           <button className='bin-button' onClick={deleteSelectedEmails}>
             <RiDeleteBinLine className='bin-icon' />  
-            <div class="tooltip">Delete</div>
+            <div className="tooltip">Delete</div>
           </button>
         </div>
           <p className='header'>Invoice ID</p>
