@@ -9,13 +9,23 @@
   height: 100vh;
   width: 100%;
   background-image: linear-gradient(#7f45f2 0, #3d266b 100%);
+  animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .team-left, .team-right {
   display: flex;
   flex-direction: column;
   width: 50%;
-  padding: 5vh 8vw;
+  padding: 5vh 2vw 0 8vw;
 }
 
 .team-left {
@@ -46,28 +56,30 @@
   padding: 0;
   margin: 0;
   color: #3d266b;
-  font-size: 45px;
+  font-size: 48px;
   display: inline-block;
 }
 
 .team-email {
   color: rgb(83, 83, 83);
+  font-size: 20px;
 }
 
 .team-action {
   display: flex;
+  text-align: center;
+  margin-top: 15px;
   position: relative;
 }
 
 .team-invite, .team-leave {
   margin-right: 1vw;
-  margin-top: 15px;
   padding: 13px;
   border-radius: 10px;
   background-color: #7f45f2;
   color: white;
-  width: 10vw;
-  text-align: center;
+  width: 14vw;
+  font-size: 20px;
 }
 
 .team-invite:hover, .team-leave:hover {
@@ -102,9 +114,10 @@
   margin-top: 1vh;
   margin-bottom: 2vh;
   border: solid #7f45f2;
-  width: 90%;
+  width: 83%;
   text-align: center;
   border-radius: 10px;
+  font-size: 20px;
 }
 
 ::-webkit-scrollbar {
@@ -116,7 +129,34 @@
   border-radius: 5px;
 }
 
-.team-send, .team-receive {
+.team-send {
+  position:absolute;
+  display: flex;
+  align-items: center;
+  top: 25vh;
+  left: 30%
+}
+
+.team-receive {
+  position:absolute;
+  display: flex;
+  top: 35vh;
+  left: 30%;
+  align-items: center;
+}
+
+.team-send:hover, .team-receive:hover {
+  cursor: pointer;
+}
+
+.team-send-text, .team-receive-text {
+  color: white;
+  font-size: 28px;
+  display: inline;
+}
+
+.arrow {
+  padding-left: 8px;
   color: white;
 }
 
@@ -125,10 +165,19 @@
   position: relative;
   height: 100vh;
   width: 100%;
+  background: linear-gradient(white, #7f45f2)
+}
+
+.loading-text {
+  color: #3d266b;
+  text-align: center;
+  font-size: 80px;
+  padding-left: 10vw;
+  padding-top: 10vh
 }
 
 .load-img {
-  height: 40%;
+  height: 70%;
   position: absolute;
   bottom: 0;
   left: 50%;

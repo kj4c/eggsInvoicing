@@ -3,18 +3,17 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import '../stylesheets/team.css';
 import teamwork from '../assets/teamwork.png'
-import teamload from '../assets/team-loading.jpg'
+import teamload from '../assets/team-load.png'
+import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
 const Team = () => {
   const [load, setLoad] = useState(false);
-  const [joined, setJoined] = useState(false);
   const [email, setEmail] = useState('');
   const [members, setMembers] = useState('');
   const [uid, setUid] = useState('');
   const [teamName, setTeamName] = useState('');
   const [passcode, setPasscode] = useState('');
   const [teamEmail, setTeamEmail] = useState('');
-  const [showPasscode, setShowPasscode] = useState(false);
   const [copyStatus, setCopyStatus] = useState(false);
   const [loading, setLoading] = useState('Loading');
 
@@ -59,7 +58,6 @@ const Team = () => {
       if (!uid) return;
       try {
         const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/teamdetail?uid=${uid}`);
-        setJoined(true);
         setTeamName(response.data.details.teamName);
         setTeamEmail(response.data.details.teamEmail);
         setPasscode(response.data.details.passcode);
@@ -82,6 +80,18 @@ const Team = () => {
     navigator.clipboard.writeText(passcode);
   }
 
+  const onClickLeave = () => {
+    const leave = async() => {
+      await axios.delete(`https://invoice-seng2021-24t1-eggs-frontend.vercel.app/leaveteam`, {
+        headers: {
+          'email': email
+        }
+      });
+    }
+    setLoad(true);
+    leave();
+  }
+
   return(
     <div className='team-container'>
       {
@@ -95,7 +105,7 @@ const Team = () => {
                 <div className="team-email">{teamEmail}</div>
                 <div className="team-action">
                   <p className="team-invite" onClick={onClickInvite}>Invite to team</p>
-                  <p className="team-leave">Leave team</p>
+                  <p className="team-leave" onClick={onClickLeave}>Leave team</p>
                   {
                     copyStatus ? (
                       <div className="copied">Passcode copied to clipboard!</div>
@@ -108,21 +118,25 @@ const Team = () => {
                 {
                   members.map((x, index) => <li key={index} className='member'>{x}</li>)
                 }
-                <li className='member'>hi</li>
-                <li className='member'>hi</li>
-                <li className='member'>hi</li>
               </ul>
+              
             </div>
             <div className='team-right'>
-              <h3 className="team-send">Send invoices</h3>
-              <h3 className="team-receive">Check received invoices</h3>
+              <div className="team-send pageTitle">
+                <h3 className="team-send-text">Send Invoice</h3>
+                <IoArrowForwardCircleOutline className='arrow' size={30}/> 
+              </div>
+              <div className="team-receive pageTitle">
+                <h3 className="team-receive-text">Team Inbox</h3>
+                <IoArrowForwardCircleOutline className='arrow' size={30}/> 
+              </div>
               <img src={teamwork}  alt="team" className='team-img'/>
             </div>
           </div>
           
         ) : (
           <div className='team-loading'>
-            <h1>{loading}</h1>
+            <h1 className='loading-text'>{loading}</h1>
             <img src={teamload}  alt="team" className='load-img'/>
           </div>
         )
