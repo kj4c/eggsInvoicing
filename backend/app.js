@@ -748,7 +748,7 @@ status code and error message
 */
 app.delete('/leaveteam', async(req, res) => {
   try {
-    const email = req.body.email;
+    const email = req.headers.email;
     const response = await leaveTeam(email);
     if (response.status !== 200) {
       res.status(response.status).json({error: response.error});
