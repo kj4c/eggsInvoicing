@@ -60,7 +60,7 @@ const InvoiceInputMultipleJson = () => {
     };
 
     const goBack = () => {
-        navigate("/invoiceSending");
+        navigate("/");
     };
 
     const handleSubmit = (event) => {

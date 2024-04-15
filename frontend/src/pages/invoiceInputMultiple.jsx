@@ -65,7 +65,7 @@ const InvoiceInputMultiple = () => {
     };
 
     const goBack = () => {
-        navigate("/invoiceSending");
+        navigate("/");
     };
 
     // checks if the inputs were valid to submit and send the email
