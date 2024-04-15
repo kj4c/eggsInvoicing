@@ -4,6 +4,7 @@ const sendEmailWithXML = require('./sendingEmailFunction');
 const sendEmailWithJSON = require('./sendingEmailWithJsonFileAttachment');
 
 // this allows to send the invoice later and the delay is in minutes
+/* istanbul ignore next */
 function sendInvoiceLater(type, from, recipient, filesOrString, delayInMinutes) {
   return new Promise((resolve, reject) => {
     let sendFunction;

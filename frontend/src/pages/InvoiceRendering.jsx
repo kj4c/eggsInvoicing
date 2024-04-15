@@ -68,7 +68,11 @@ const InvoiceRendering = () => {
           <button onClick={goBack} className='backButton'>
             Back
           </button>
-          <div className='select-button-div'>
+          <p className='information-text'>
+            Invoice rendering converts structured data into easily understood
+            text, simplifying financial document interpretation.
+          </p>
+          <div className='select-button-div2'>
             <input
               type='file'
               id='file'

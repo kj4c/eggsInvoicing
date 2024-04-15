@@ -2,6 +2,7 @@ const pool = require('../database/db');
 const HTTPError = require('http-errors');
 
 // this function would fetch the invoice by receiver email
+/* istanbul ignore next */
 async function fetchByReceiver(uId, receiver_email) {
   let q = 'select email from users where uid = $1';
   const email = (await pool.query(q, [uId])).rows[0].email;

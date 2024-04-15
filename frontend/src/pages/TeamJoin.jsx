@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SendImage from '../assets/send_imagev2.png';
 import { useEffect } from 'react';
 import '../stylesheets/team.css';
+import teamload from '../assets/team-load.png';
 
 function getCookie(name) {
   let cookies = document.cookie.split('; ');
@@ -13,10 +14,11 @@ function getCookie(name) {
 
 const TeamJoin = () => {
   const [passcode, setPasscode] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const email = getCookie('email');
   const uid = getCookie('uid');
+  const [loadingText, setLoadingText] = useState('Loading');
 
   const handleCreateTeam = async (event) => {
     event.preventDefault();
@@ -63,40 +65,61 @@ const TeamJoin = () => {
     navigate('/dashboard');
   };
 
-  return (
-    <div className='splitScreen'>
-      <div className='inputContainers'>
-        <div className='inputWrapper'>
-          <h1>Join your team with the passcode!!</h1>
-          <form onSubmit={handleCreateTeam} className='team-create-form'>
-            <button onClick={goBack} className='backButton'>
-              Back
-            </button>
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setLoadingText((prev) => {
+        if (prev.length >= 10) return 'Loading';
+        return prev + '.';
+      });
+    }, 200);
 
-            <div>
-              <input
-                type='text'
-                placeholder='Passcode'
-                value={passcode}
-                className='team-creation-box'
-                onChange={(e) => setPasscode(e.target.value)}
-                required
-              />
-            </div>
-            <button
-              type='submit'
-              className='invoice-creation-submit-button'
-              disabled={loading}
-            >
-              {loading ? 'Creating...' : 'Create Team'}
-            </button>
-          </form>
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []);
+
+  return (
+    <div>
+      {loading ? (
+        <div className='team-loading'>
+          <h1 className='loading-text'>{loadingText}</h1>
+          <img src={teamload} alt='team' className='load-img' />
         </div>
-      </div>
-      <div className='Image'>
-        <h1 className='pageTitle'>Join a team</h1>
-        <img className='sourceImage' src={SendImage} />
-      </div>
+      ) : (
+        <div className='splitScreen'>
+          <div className='inputContainers'>
+            <div className='inputWrapper'>
+              <form onSubmit={handleCreateTeam} className='team-create-form'>
+                <button onClick={goBack} className='backButton'>
+                  Back
+                </button>
+                <h1 className='join-text'>
+                  Join your team with the passcode!!
+                </h1>
+                <div className='input-div'>
+                  <input
+                    type='text'
+                    placeholder='Passcode'
+                    value={passcode}
+                    className='team-creation-box'
+                    onChange={(e) => setPasscode(e.target.value)}
+                    required
+                  />
+                </div>
+                <button
+                  type='submit'
+                  className='invoice-creation-submit-button'
+                  disabled={loading}
+                >
+                  {loading ? 'Creating...' : 'Create Team'}
+                </button>
+              </form>
+            </div>
+          </div>
+          <div className='Image'>
+            <h1 className='pageTitle'>Join a team</h1>
+            <img className='sourceImage' src={SendImage} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

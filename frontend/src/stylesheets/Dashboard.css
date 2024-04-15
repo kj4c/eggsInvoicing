@@ -23,6 +23,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  animation: fadeIn 3s;
 }
 
 .hello {
@@ -32,7 +33,6 @@
   font-size: 80px;
   color: #7f45f2;
   width: 80%;
-  animation: fadeIn 3s;
 }
 
 @keyframes fadeIn {
@@ -41,6 +41,16 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes move-up {
+  0% {
+    transform: translateY(50px) scale(0.8);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1);
   }
 }
 
@@ -54,7 +64,6 @@
   padding-bottom: 1vh;
   color: rgba(0, 0, 0, 0.735);
   padding-bottom: 10px;
-  animation: fadeIn 5s;
 }
 
 .dashboard-content {
@@ -94,7 +103,6 @@
 .unread-end {
   display: inline;
   padding-right: 10px;
-  animation: fadeIn 5s;
 }
 
 .unread-data {
@@ -143,7 +151,6 @@
   display: grid;
   width: 65vw;
   grid-template-columns: repeat(2, auto);
-  animation: fadeIn 2s;
 }
 
 .day,
@@ -156,6 +163,7 @@
   border-radius: 20px;
   padding: 15px;
   width: 25vw;
+  animation: fadeIn 3s;
 }
 
 .day:hover,
@@ -192,6 +200,7 @@
   outline: none; /* Removes the outline */
   cursor: pointer; /* Changes cursor to a hand icon */
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transition for button press and hover effects */
+  animation: fadeIn 3s;
 }
 
 .fire-landing-page:hover,

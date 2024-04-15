@@ -60,19 +60,19 @@ export const links = [
         subMenus: [
           {
             id: 401,
-            name: 'XML Multiple',
+            name: 'XML',
             path: 'invoiceInputMultiple',
             icon: <TbFileUpload></TbFileUpload>,
           },
           {
             id: 402,
-            name: 'JSON Multiple',
+            name: 'JSON',
             path: 'invoiceInputMultipleJson',
             icon: <TbFileUpload></TbFileUpload>,
           },
           {
             id: 403,
-            name: 'Send Multiple',
+            name: 'Group Email',
             path: 'invoiceInputMultipleJson1',
             icon: <TbFileUpload></TbFileUpload>,
           },

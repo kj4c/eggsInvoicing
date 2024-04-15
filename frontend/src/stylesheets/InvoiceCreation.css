@@ -2,12 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: linear-gradient(
+  background-image: linear-gradient(#e2d4ff, #9260f7);
+  /* background: linear-gradient(
       rgba(255, 255, 255, 0.7),
       rgba(255, 255, 255, 0.3)
     ),
-    url('../assets/InvoiceCreationPage/icon12.png');
+    url('../assets/InvoiceCreationPage/icon12.png'); */
 
   background-size: cover;
   background-position: center;
@@ -23,6 +23,8 @@
   margin-top: 2.5%;
   margin-bottom: 2.5%;
   /* width: 30%; */
+  animation: fade-right 2s;
+
 }
 
 .IC-h1 {

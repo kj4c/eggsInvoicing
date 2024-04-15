@@ -110,6 +110,10 @@ const InvoiceValidation = () => {
           <button onClick={goBack} className='backButton'>
             Back
           </button>
+          <p className='information-text'>
+            Validation confirms that invoice data meets predefined standards,
+            ensuring accuracy and compliance for seamless financial processing.
+          </p>
           <div className='select-button-div'>
             <input
               type='file'

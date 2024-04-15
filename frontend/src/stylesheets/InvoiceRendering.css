@@ -8,6 +8,13 @@
   border-radius: 0px 100px 0px 0px;
 }
 
+.information-text {
+  font-family: Sora, sans-serif;
+  margin-top: 5%;
+  color: #7f45f2;
+  font-size: 20px;
+}
+
 .fileBtnDiv {
   display: flex;
   border: solid;
@@ -89,6 +96,27 @@
   text-align: center;
 }
 
+.select-button-div2 {
+  display: flex;
+  position: relative;
+  border: dashed;
+  border-color: #7f45f2;
+  border-radius: 16px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 14vh;
+  transition: 0.2s;
+  width: 100%;
+  color: rgb(155, 155, 155);
+}
+
+.select-button-div2:hover {
+  background-color: #7f45f2;
+  cursor: pointer;
+  color: white;
+}
+
 .closeBtn {
   margin-top: 10px;
   background-color: rgb(192, 189, 189);
@@ -143,6 +171,13 @@
 
 .noSubmitBtn {
   color: rgb(125, 125, 125);
+}
+
+.noSubmitBtn:hover {
+  animation: vibrate 0.4s;
+  cursor: pointer;
+  color: red;
+  border-color: red;
 }
 
 .vibrating {
