@@ -23,6 +23,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  animation: fadeIn 3s;
 }
 
 .hello {
@@ -32,7 +33,6 @@
   font-size: 80px;
   color: #7f45f2;
   width: 80%;
-  animation: move-right 2s;
 }
 
 @keyframes fadeIn {
@@ -158,7 +158,7 @@
   border-radius: 20px;
   padding: 15px;
   width: 25vw;
-  animation: move-up 2s;
+  animation: fadeIn 3s;
 }
 
 .day:hover, .week:hover, .month:hover, .year:hover {
@@ -188,6 +188,7 @@
   outline: none; /* Removes the outline */
   cursor: pointer; /* Changes cursor to a hand icon */
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transition for button press and hover effects */
+  animation: fadeIn 3s;
 }
 
 .fire-landing-page:hover, .fire-landing-page:focus {
