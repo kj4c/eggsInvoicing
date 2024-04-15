@@ -16,4 +16,4 @@ async function teamInboxReceived(uid) {
   return {status: 200, ret: emailRet.rows};
 }
 
-module.exports = teamInboxReceived
+module.exports = teamInboxReceived;

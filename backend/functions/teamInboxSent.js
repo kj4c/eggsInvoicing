@@ -10,10 +10,10 @@ async function teamInboxSent(uid) {
   }
 
   const teamId = team.rows[0].teamid;
-	const teamQ = await pool.query('SELECT teamEmail from teams WHERE teamId = $1', [teamId]);
-	const teamEmail = teamQ.rows[0].teamemail;
-	const emailRet = await pool.query('SELECT * FROM sent_invoices WHERE sender_email = $1', [teamEmail]);
-	return {status: 200, ret: emailRet.rows};
+  const teamQ = await pool.query('SELECT teamEmail from teams WHERE teamId = $1', [teamId]);
+  const teamEmail = teamQ.rows[0].teamemail;
+  const emailRet = await pool.query('SELECT * FROM sent_invoices WHERE sender_email = $1', [teamEmail]);
+  return {status: 200, ret: emailRet.rows};
 }
 
-module.exports = teamInboxSent
+module.exports = teamInboxSent;
