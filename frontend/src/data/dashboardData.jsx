@@ -4,6 +4,7 @@ import { GrValidate } from 'react-icons/gr';
 import { ImFilePicture } from 'react-icons/im';
 import { SlPaperPlane } from 'react-icons/sl';
 import { TbFileUpload } from 'react-icons/tb';
+import { AiOutlineTeam } from "react-icons/ai";
 import { HiOutlineFolderOpen } from 'react-icons/hi2';
 import { SlPencil } from 'react-icons/sl';
 
@@ -85,6 +86,12 @@ export const links = [
         name: 'Sent',
         path: 'invoicesSent',
         icon: <SlPaperPlane></SlPaperPlane>,
+      },
+      {
+        id: 7,
+        name: 'Team',
+        path: 'team',
+        icon: <AiOutlineTeam></AiOutlineTeam>,
       },
     ],
   },
