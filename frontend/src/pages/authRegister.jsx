@@ -69,7 +69,7 @@ function AuthRegister() {
   };
 
   const ToLandingPage = () => {
-    navigate(`/LandingPage`);
+    navigate(`/`);
   };
 
   /* Creating GUI for register page with all relevant inputboxes. */

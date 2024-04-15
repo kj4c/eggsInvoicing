@@ -26,7 +26,7 @@ const Sidebar = () => {
           {/* Homepage Logo Container */}
           <div className='sidebar-listContainer'>
             {/* Homepage Logo */}
-            <Link to='/' className='sidebar-title'>
+            <Link to='/dashboard' className='sidebar-title'>
               <FaHome /> <span>EGGS-INVOICE</span>
             </Link>
 
