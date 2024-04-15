@@ -112,7 +112,6 @@ const TeamJoin = () => {
               <img className = "sourceImage" src = {JoinImage}/>
             </div>
           </div>
-        </div>
       )}
     </div>
   );
