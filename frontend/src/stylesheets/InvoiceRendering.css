@@ -111,6 +111,12 @@
   color: rgb(155, 155, 155);
 }
 
+.select-button-div2:hover {
+  background-color: #7f45f2;
+  cursor: pointer;
+  color: white;
+}
+
 .closeBtn {
   margin-top: 10px;
   background-color: rgb(192, 189, 189);
@@ -165,6 +171,13 @@
 
 .noSubmitBtn {
   color: rgb(125, 125, 125);
+}
+
+.noSubmitBtn:hover {
+  animation: vibrate 0.4s;
+  cursor: pointer;
+  color: red;
+  border-color: red;
 }
 
 .vibrating {
