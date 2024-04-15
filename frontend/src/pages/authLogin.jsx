@@ -50,7 +50,7 @@ function AuthLogin() {
   }, []);
 
   function ToLandingPage() {
-    navigate(`/Landingpage`);
+    navigate(`/`);
   }
 
   /* Generates a random string */
@@ -98,7 +98,7 @@ function AuthLogin() {
 
       console.log('Login successful:', response.data);
 
-      navigate(`/`);
+      navigate(`/dashboard`);
     } catch (error) {
       setError('Login failed. Please check your credentials and try again.');
       console.error('Login failed:', error);

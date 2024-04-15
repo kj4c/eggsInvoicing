@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import '../stylesheets/InvoiceValidation.css'
+import '../stylesheets/InvoiceValidation.css';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import staunch from '../assets/staunch_nobg.png';
@@ -48,12 +48,13 @@ const InvoiceValidation = () => {
       const reader = new FileReader();
       reader.onload = async function (event) {
         const xmlContent = event.target.result;
-        await axios.post('https://sandc.vercel.app/validate', xmlContent, {
-          headers: {
-            'Content-Type': 'application/xml',
-          },
-        })
-          .then(response => {
+        await axios
+          .post('https://sandc.vercel.app/validate', xmlContent, {
+            headers: {
+              'Content-Type': 'application/xml',
+            },
+          })
+          .then((response) => {
             console.log('success:', response.data);
             setData(response.data);
             console.log(response.data.successful);
@@ -63,7 +64,7 @@ const InvoiceValidation = () => {
               setFailed(true);
             }
           })
-          .catch(error => {
+          .catch((error) => {
             console.error('error:', error.response.data);
             setError(error.response.data);
           })
@@ -90,10 +91,10 @@ const InvoiceValidation = () => {
     setFile(target.files[0]);
     setFileName(target.files[0].name);
   }
-  
+
   // navigate back to dashboard
   function goBack() {
-    navigate('/');
+    navigate('/dashboard');
   }
 
   // Function to navigate and pass data
@@ -105,28 +106,48 @@ const InvoiceValidation = () => {
   return (
     <div className='splitScreen'>
       <div className='validation-page'>
-          <div className='mid-container'>
-          <button onClick={goBack} className="backButton">Back</button>
-            <div className='select-button-div'>
-              <input type="file" id='file' className='select-file' onChange={handleOnChange} accept='.xml'></input>
-              <label htmlFor='file' className='select-button'>Upload File</label>
-            </div>
-            {file ? <p className='valid-uploaded'>Uploaded: {fileName}</p> : <p className='valid-uploaded'>No File Uploaded.</p>}
-            <button className='submit' onClick={handleOnSubmit}>Submit</button>
-            {isSubmitting && <p className='validating-load'>Validating...</p>}
-            {error && <p className='validating-error'>Validating Error: {error}</p>}
-            {passed && <h2 className='valid-result'>Invoice Passed Validation!</h2>}
-            {failed && <p className='valid-result'>Invoice Failed Validation</p>}
-            {/* to open new page */}
-            {(passed || failed) && goToReportPage()}
+        <div className='mid-container'>
+          <button onClick={goBack} className='backButton'>
+            Back
+          </button>
+          <div className='select-button-div'>
+            <input
+              type='file'
+              id='file'
+              className='select-file'
+              onChange={handleOnChange}
+              accept='.xml'
+            ></input>
+            <label htmlFor='file' className='select-button'>
+              Upload File
+            </label>
+          </div>
+          {file ? (
+            <p className='valid-uploaded'>Uploaded: {fileName}</p>
+          ) : (
+            <p className='valid-uploaded'>No File Uploaded.</p>
+          )}
+          <button className='submit' onClick={handleOnSubmit}>
+            Submit
+          </button>
+          {isSubmitting && <p className='validating-load'>Validating...</p>}
+          {error && (
+            <p className='validating-error'>Validating Error: {error}</p>
+          )}
+          {passed && (
+            <h2 className='valid-result'>Invoice Passed Validation!</h2>
+          )}
+          {failed && <p className='valid-result'>Invoice Failed Validation</p>}
+          {/* to open new page */}
+          {(passed || failed) && goToReportPage()}
         </div>
       </div>
-      <div className = "Image">
-        <h1 className = "pageTitle">Validation</h1>
-        <img className = "sourceImage" src={staunch}></img>
+      <div className='Image'>
+        <h1 className='pageTitle'>Validation</h1>
+        <img className='sourceImage' src={staunch}></img>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default InvoiceValidation
+export default InvoiceValidation;

@@ -51,7 +51,7 @@ const Pricing = () => {
                 </div>
 
                 <div className='PriceButton'>
-                  <a href='/'>Get Started</a>
+                  <a href='/register'>Get Started</a>
                 </div>
 
                 {/* <Button
