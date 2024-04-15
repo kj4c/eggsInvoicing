@@ -37,10 +37,10 @@ export const Header = () => {
 
         {/* SignUp and Login button in Navbar */}
         <div className='buttonsContainer'>
-          <a href='/' className='signUpButton'>
+          <a href='/register' className='signUpButton'>
             SIGN UP
           </a>
-          <a href='/' className='loginButton'>
+          <a href='/login' className='loginButton'>
             LOGIN
           </a>
         </div>
