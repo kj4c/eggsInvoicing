@@ -37,7 +37,6 @@ const AppContent = () => {
   const location = useLocation();
 
   const knownPaths = [
-    '/',
     '/dashboard',
     '/invoiceCreation',
     '/invoiceValidation',
@@ -65,7 +64,7 @@ const AppContent = () => {
     '/teamsend'
   ];
 
-  const hideSidebarPaths = ['/login', '/register', 'reset-password'];
+  const hideSidebarPaths = ['/login', '/register', 'reset-password', '/'];
 
   const showSidebar =
     knownPaths.includes(location.pathname) &&
@@ -88,9 +87,8 @@ const AppContent = () => {
       >
         <div>
           <Routes>
-            <Route path='/' element={<Dashboard />} />
+            <Route path='/' element={<LandingPage />} />
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/landingPage' element={<LandingPage />} />
             <Route path='/invoiceCreation' element={<InvoiceCreation />} />
             <Route
               path='/invoiceCreation/uploadDocument'
@@ -115,8 +113,6 @@ const AppContent = () => {
               element={<InvoiceInputMultipleJson />}
             />
             <Route path='/invoiceReceiving' element={<InvoiceReceiving />} />
-            <Route path='/login' element={<AuthLogin />} />
-            <Route path='/register' element={<AuthRegister />} />
             <Route path='/login' element={<AuthLogin />} />
             <Route path='/register' element={<AuthRegister />} />
             <Route path='/invoiceInputJson' element={<InvoiceInputJSON />} />

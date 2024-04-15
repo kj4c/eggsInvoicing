@@ -1,8 +1,8 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import '../stylesheets/InvoiceRendering.css';
 import Notif from '../components/RenderNotif';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import pointers from '../assets/pointers_nobg.png';
 
 // page for rendering invoices
@@ -15,7 +15,7 @@ const InvoiceRendering = () => {
 
   //checks if cookie exists
   useEffect(() => {
-    const cookieExists = document.cookie.includes('cookie='); 
+    const cookieExists = document.cookie.includes('cookie=');
 
     if (!cookieExists) {
       navigate('/login');
@@ -38,12 +38,14 @@ const InvoiceRendering = () => {
     const formData = new FormData();
     formData.append('invoice', file);
     try {
-      const res = await axios.post('https://sleeperagents1.alwaysdata.net/renderHTML?language=eng', formData);
+      const res = await axios.post(
+        'https://sleeperagents1.alwaysdata.net/renderHTML?language=eng',
+        formData
+      );
       navigate('/invoiceRendered', { state: { res: res.data } });
     } catch (error) {
       console.error('Error:', error);
-    } 
-  
+    }
   }
 
   // sets the file if the user uploads a new file
@@ -55,31 +57,52 @@ const InvoiceRendering = () => {
 
   // navigate back to dashboard
   function goBack() {
-    navigate('/');
+    navigate('/dashboard');
   }
 
   // design for the frontend for rendering
-  return(
+  return (
     <div className='splitScreen'>
       <div className='render-container'>
-        <div className = "inputWrapper">
-          <button onClick={goBack} className="backButton">Back</button>
-          <p className="information-text">Invoice rendering converts structured data into easily understood text, simplifying financial document interpretation.</p>
+        <div className='inputWrapper'>
+          <button onClick={goBack} className='backButton'>
+            Back
+          </button>
+          <p className='information-text'>
+            Invoice rendering converts structured data into easily understood
+            text, simplifying financial document interpretation.
+          </p>
           <div className='select-button-div2'>
-            <input type='file' id='file' className='fileBtn' accept='.xml' onChange={handleOnChange}/>
-            <label htmlFor='file' className='fileText'>Upload XML File</label>
+            <input
+              type='file'
+              id='file'
+              className='fileBtn'
+              accept='.xml'
+              onChange={handleOnChange}
+            />
+            <label htmlFor='file' className='fileText'>
+              Upload XML File
+            </label>
           </div>
-          <p className={file!=='ready' ? 'textUploaded':'textNotUploaded'}>Uploaded file: {fileName}</p>
-          <button type='submit' className={file!=='ready' ? 'submitBtn':'noSubmitBtn'} onClick={handleOnSubmit}>Render</button>
+          <p className={file !== 'ready' ? 'textUploaded' : 'textNotUploaded'}>
+            Uploaded file: {fileName}
+          </p>
+          <button
+            type='submit'
+            className={file !== 'ready' ? 'submitBtn' : 'noSubmitBtn'}
+            onClick={handleOnSubmit}
+          >
+            Render
+          </button>
           <Notif trigger={notif} setTrigger={setNotif}></Notif>
         </div>
       </div>
       <div className='Image'>
-        <h1 className = "pageTitle">Rendering</h1>
+        <h1 className='pageTitle'>Rendering</h1>
         <img className='sourceImage' src={pointers}></img>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default InvoiceRendering
+export default InvoiceRendering;
