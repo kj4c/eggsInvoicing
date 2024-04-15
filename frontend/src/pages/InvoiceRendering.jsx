@@ -64,7 +64,8 @@ const InvoiceRendering = () => {
       <div className='render-container'>
         <div className = "inputWrapper">
           <button onClick={goBack} className="backButton">Back</button>
-          <div className='select-button-div'>
+          <p className="information-text">Invoice rendering converts structured data into easily understood text, simplifying financial document interpretation.</p>
+          <div className='select-button-div2'>
             <input type='file' id='file' className='fileBtn' accept='.xml' onChange={handleOnChange}/>
             <label htmlFor='file' className='fileText'>Upload XML File</label>
           </div>

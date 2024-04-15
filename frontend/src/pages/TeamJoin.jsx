@@ -62,10 +62,9 @@ const [loading, setLoading] = useState(false);
     <div className='splitScreen'>
       <div className='inputContainers'>
         <div className='inputWrapper'>
-          <h1>Join your team with the passcode!!</h1>
-          <form onSubmit={handleCreateTeam} className='team-create-form'>
             <button onClick={goBack} className="backButton">Back</button>
-
+          <form onSubmit={handleCreateTeam} className='team-create-form'>
+          <h1>Enter team passcode</h1>
             <div>
               <input
                 type='text'
@@ -77,7 +76,7 @@ const [loading, setLoading] = useState(false);
               />
             </div>
             <button type='submit' className='invoice-creation-submit-button' disabled={loading}>
-              {loading ? 'Creating...' : 'Create Team'}
+              {loading ? 'Joining...' : 'Join Team'}
             </button>
           </form>
         </div>
