@@ -193,8 +193,7 @@
   flex-direction: column;
   font-size: 25px;
   padding: 30px;
-  width: 50%;
-  margin-left: 2%;
+  width: 100%;
   margin-bottom: 2%;
 }
 
@@ -225,6 +224,5 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: bottom;
-  width: 50%;
-  margin-left: 2%;
+  width: 100%;
 }

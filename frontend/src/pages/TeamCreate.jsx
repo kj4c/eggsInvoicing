@@ -30,46 +30,55 @@ const TeamCreate = () => {
       setLoading(false);
     }
   };
+  
+  const goBack = () => {
+    navigate('/');
+  }
 
   return (
-    <div className='team-create-container'>
-      <form onSubmit={handleCreateTeam}>
-        <div className='team-creation-input-div'>
-          <input
-            type='text'
-            value={teamName}
-            className="team-creation-box"
-            placeholder='teamname'
-            onChange={(e) => setTeamName(e.target.value)}
-            required
-          />
+    <div className='splitScreen'>
+      <div className='inputContainers'>
+        <div className='inputWrapper'>
+          <form onSubmit={handleCreateTeam}>
+            <button onClick={goBack} className="backButton">Back</button>
+            <div>
+              <input
+                type='text'
+                value={teamName}
+                className="inputBox"
+                placeholder='teamname'
+                onChange={(e) => setTeamName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type='email'
+                placeholder='email'
+                value={ownerEmail}
+                className="inputBox"
+                onChange={(e) => setOwnerEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type='email'
+                placeholder='team email'
+                value={teamEmail}
+                className="inputBox"
+                onChange={(e) => setTeamEmail(e.target.value)}
+                required
+              />
+            </div>
+            <button type='submit' className='invoice-creation-submit-button' disabled={loading}>
+              {loading ? 'Creating...' : 'Create Team'}
+            </button>
+          </form>
         </div>
-        <div>
-          <input
-            type='email'
-            placeholder='email'
-            value={ownerEmail}
-            className="team-creation-box"
-            onChange={(e) => setOwnerEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type='email'
-            placeholder='team email'
-            value={teamEmail}
-            className="team-creation-box"
-            onChange={(e) => setTeamEmail(e.target.value)}
-            required
-          />
-        </div>
-        <button type='submit' className='invoice-creation-submit-button' disabled={loading}>
-          {loading ? 'Creating...' : 'Create Team'}
-        </button>
-      </form>
+      </div>
       <div className = "Image">
-				<h1 className = "pageTitle">Email XML Invoices</h1>
+				<h1 className = "pageTitle">Create Your Team</h1>
 				<img className = "sourceImage" src = {SendImage}/>
 			</div>
     </div>
