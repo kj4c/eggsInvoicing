@@ -7,7 +7,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
-import LandingPage from './LandingPage';
 const API_KEY = "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";
 
 /* Creatse the main Dashboard for the page with notifications, financial statistics */
