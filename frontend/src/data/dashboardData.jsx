@@ -72,8 +72,8 @@ export const links = [
           },
           {
             id: 403,
-            name: 'Send Multiple',
-            path: 'invoiceInputMultipleJson1',
+            name: 'Send Multiple Email',
+            path: 'sendMultipleEmail',
             icon: <TbFileUpload></TbFileUpload>,
           },
         ],
