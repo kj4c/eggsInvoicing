@@ -166,7 +166,7 @@ const TeamSend = () => {
             </div>
             <div className = "Image">
               <h1 className = "send-page-title">Team email sending</h1>
-              <p className="send-discription">Send an invoice on your team's behalf using your team's email</p>
+              <p className="send-discription">Send an invoice on your team&apos;s behalf using your team&apos;s email</p>
               <img className = "sourceImage" src = {SendImage}/>
             </div>
           </div>

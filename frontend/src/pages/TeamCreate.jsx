@@ -135,8 +135,8 @@ const TeamCreate = () => {
               <img className = "sourceImage create-img" src = {TeamImg}/>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </div>
   );
 };
