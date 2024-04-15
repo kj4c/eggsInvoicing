@@ -67,6 +67,14 @@
   animation: fade-up 2s;
 }
 
+.team-create-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+}
+
 .pageTitle {
   color: white; 
   font-size: 60px;
