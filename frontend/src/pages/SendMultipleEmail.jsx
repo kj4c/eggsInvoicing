@@ -81,6 +81,7 @@ const SendMultipleEmail = () => {
     };
 
     const handleSubmit = (event) => {
+        console.log(formData)
         event.preventDefault();
         const invalidEmails = formData.recipients.filter(email => !isValidEmail(email));
         if (invalidEmails.length > 0) {
