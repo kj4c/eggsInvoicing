@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SendImage from '../assets/send_imagev2.png';
 import '../stylesheets/team.css';
 import teamload from '../assets/team-load.png';
+
 const TeamCreate = () => {
   const [teamName, setTeamName] = useState('');
   const [ownerEmail, setOwnerEmail] = useState('');
