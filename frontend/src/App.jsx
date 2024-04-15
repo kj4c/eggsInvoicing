@@ -19,6 +19,7 @@ import {
   InvoicesSent,
   Team,
   TeamCreate,
+  TeamSend,
 } from './pages';
 import TeamJoin from './pages/TeamJoin';
 import { useStateContext } from './contexts/ContextProvider';
@@ -61,6 +62,7 @@ const AppContent = () => {
     '/teamcreate',
     '/team/join',
     '/team/info',
+    '/teamsend'
   ];
 
   const hideSidebarPaths = ['/login', '/register', 'reset-password'];
@@ -126,6 +128,7 @@ const AppContent = () => {
             <Route path='/team' element={<Team />}></Route>
             <Route path='/team/info' element={<Team />}></Route>
             <Route path='/teamcreate' element={<TeamCreate />}></Route>
+            <Route path='/teamsend' element={<TeamSend />}></Route>
             <Route path='/team/join' element={<TeamJoin />}></Route>
             <Route path='/profile' element={<UserProfile />} />
           </Routes>
