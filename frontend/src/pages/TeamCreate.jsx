@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import SendImage from '../assets/send_imagev2.png';
+import TeamImg from '../assets/working.png';
 import '../stylesheets/team.css';
 import teamload from '../assets/team-load.png';
 
@@ -127,7 +127,7 @@ const TeamCreate = () => {
             </div>
             <div className = "Image">
               <h1 className = "pageTitle">Create Your Team</h1>
-              <img className = "sourceImage" src = {SendImage}/>
+              <img className = "sourceImage create-img" src = {TeamImg}/>
             </div>
           </div>
         )
