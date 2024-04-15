@@ -96,6 +96,10 @@ const Dashboard = () => {
   const [yAmount, setYAmount] = useState('loading');
   const [yPayable, setYPayable] = useState('loading');
 
+  function ToLandingPage() {
+    navigate('/landingPage');
+  }
+
   /*Get all the statistics for the dashboard and changing the states */
   useEffect(() => {
     const stat = async () => {
@@ -365,6 +369,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        <button className='fire-landing-page' onClick={ToLandingPage}>Landing Tutorial Page</button>
       </div>
 
       {

@@ -175,6 +175,31 @@
   color: #7f45f2;
 }
 
+.fire-landing-page {
+  display: inline-block; /* Use inline-block for buttons */
+  padding: 15px 30px; /* Adds padding around the text */
+  color: white; /* Text color */
+  font-size: 1.2em; /* Bigger text */
+  font-weight: bold; /* Bold text */
+  background: linear-gradient(45deg, #442583, #7f45f2); /* Gradient background */
+  border: none; /* No border */
+  border-radius: 30px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  outline: none; /* Removes the outline */
+  cursor: pointer; /* Changes cursor to a hand icon */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transition for button press and hover effects */
+}
+
+.fire-landing-page:hover, .fire-landing-page:focus {
+  transform: translateY(-3px); /* Moves the button up slightly */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Larger shadow when hovered */
+}
+
+.fire-landing-page:active {
+  transform: translateY(-1px); /* Subtle button press effect */
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12); /* Smaller shadow for pressed state */
+}
+
 .create-btn:hover > .create-link {
   color: white;
 }

@@ -149,7 +149,6 @@
   animation: vibrate 0.4s;
 }
 
-
 @keyframes vibrate {
   0% {transform: translateX(3px);}
   10% {transform: translateX(-3px);}

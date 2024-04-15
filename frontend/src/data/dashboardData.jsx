@@ -4,8 +4,12 @@ import { GrValidate } from 'react-icons/gr';
 import { ImFilePicture } from 'react-icons/im';
 import { SlPaperPlane } from 'react-icons/sl';
 import { TbFileUpload } from 'react-icons/tb';
+import { AiOutlineTeam } from "react-icons/ai";
 import { HiOutlineFolderOpen } from 'react-icons/hi2';
 import { SlPencil } from 'react-icons/sl';
+import { FaInbox } from "react-icons/fa6";
+import { GiTeamDowngrade } from "react-icons/gi";
+import { GiTeamIdea } from "react-icons/gi";
 
 export const links = [
   {
@@ -85,6 +89,44 @@ export const links = [
         name: 'Sent',
         path: 'invoicesSent',
         icon: <SlPaperPlane></SlPaperPlane>,
+      },
+      {
+        id: 7,
+        name: 'Team',
+        path: 'team',
+        icon: <AiOutlineTeam></AiOutlineTeam>,
+        subMenus: [
+          {
+            id: 701,
+            name: 'Team Info',
+            path: 'team/info',
+            icon: <AiOutlineTeam></AiOutlineTeam>,
+          }, 
+          {
+            id: 701,
+            name: 'Join Team',
+            path: 'team/join',
+            icon: <GiTeamDowngrade />,
+          }, 
+          {
+            id: 702,
+            name: 'Create Team',
+            path: 'teamcreate',
+            icon: <GiTeamIdea/>,
+          },
+          {
+            id: 703,
+            name: 'Team Send Inbox',
+            path: 'team/send',
+            icon: <SlPaperPlane></SlPaperPlane>,
+          },
+          {
+            id: 704,
+            name: 'Team Receive Inbox',
+            path: 'team/receive',
+            icon: <FaInbox />,
+          },
+        ],
       },
     ],
   },
