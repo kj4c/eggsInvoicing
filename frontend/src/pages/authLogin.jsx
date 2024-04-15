@@ -29,7 +29,7 @@ const images = [
 function AuthLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [currentImage, setCurrentImage] = useState(7); 
+  const [currentImage, setCurrentImage] = useState(7);
   const [error, setError] = useState('');
   const [animationClass, setAnimationClass] = useState('fade-in');
   const navigate = useNavigate();
@@ -45,21 +45,23 @@ function AuthLogin() {
         }, 200); // Adjust based on your fade-out animation duration
       }, 1000); // Assumes fade-out animation duration is 1s
     }, 3000); // Adjust based on total desired duration per image
-    
-    return () => clearInterval(intervalId); 
-  }, []); 
 
-  function ToLandingPage () {
+    return () => clearInterval(intervalId);
+  }, []);
+
+  function ToLandingPage() {
     navigate(`/Landingpage`);
   }
 
-  
   /* Generates a random string */
   const generateRandomString = (length) => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
     }
     return result;
   };
@@ -69,17 +71,22 @@ function AuthLogin() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://invoice-seng2021-24t1-eggs.vercel.app/login', {
-        username,
-        password,
-      });
-      
-      const userInfo = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/getUserInfo?uid=${response.data.uid}`);
+      const response = await axios.post(
+        'https://invoice-seng2021-24t1-eggs.vercel.app/login',
+        {
+          username,
+          password,
+        }
+      );
+
+      const userInfo = await axios.get(
+        `https://invoice-seng2021-24t1-eggs.vercel.app/getUserInfo?uid=${response.data.uid}`
+      );
 
       const cookie = generateRandomString(10);
       document.cookie = `cookie=${cookie}; path=/`;
       document.cookie = `uid=${response.data.uid}; path=/`;
-      
+
       localStorage.setItem('uid', response.data.uid);
       localStorage.setItem('email', userInfo.data.email);
       localStorage.setItem('username', userInfo.data.username);
@@ -93,7 +100,7 @@ function AuthLogin() {
 
       navigate(`/`);
     } catch (error) {
-      setError('Login failed. Please check your credentials and try again.')
+      setError('Login failed. Please check your credentials and try again.');
       console.error('Login failed:', error);
     }
   };
@@ -101,22 +108,26 @@ function AuthLogin() {
   /* Creating the GUI for Login with Slideshows. */
   return (
     <div>
-      <div className="logo-container">
-          <img src={eggslogo} alt="Eggs Logo" className="eggs-logo" />
+      <div className='logo-container'>
+        <img src={eggslogo} alt='Eggs Logo' className='eggs-logo' />
       </div>
-      
-      <div className="auth-page-container">
-        <div className="slideshow-container">
-          <img src={images[currentImage]} alt="Slideshow" className={`slideshow-image ${animationClass}`} />
+
+      <div className='auth-page-container'>
+        <div className='slideshow-container'>
+          <img
+            src={images[currentImage]}
+            alt='Slideshow'
+            className={`slideshow-image ${animationClass}`}
+          />
         </div>
-        
-        <div className='login-form-container'> 
+
+        <div className='login-form-container'>
           <form onSubmit={handleSubmit} className='login-form'>
             <h2 className='title-login'>Eggs Invoicing Login</h2>
             <div>
               <label>Username:</label>
               <input
-                type="text" // Use type="text" for username field
+                type='text' // Use type="text" for username field
                 placeholder='username'
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -127,7 +138,7 @@ function AuthLogin() {
             <div>
               <label>Password:</label>
               <input
-                type="password"
+                type='password'
                 placeholder='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -136,17 +147,26 @@ function AuthLogin() {
               />
             </div>
             <p className='login-error'>{error}</p>
-            <button type="submit" className='submit-button'>Login</button>
-            <div className="auth-links">
-              <Link to="/register">New here? Click here to create your account.</Link>
-              <Link to="/reset-password">Forget password? Click here to reset your password.</Link>
+            <button type='submit' className='submit-button'>
+              Login
+            </button>
+            <div className='auth-links'>
+              <Link to='/register'>
+                New here? Click here to create your account.
+              </Link>
+              <Link to='/reset-password'>
+                Forget password? Click here to reset your password.
+              </Link>
             </div>
-            <button className='fire-landing-page' onClick={ToLandingPage}>Landing Tutorial Page</button>
+            <div className='LandingPageButtonContainer'>
+              <button className='LandingPageButton' onClick={ToLandingPage}>
+                Landing Tutorial Page
+              </button>
+            </div>
           </form>
-          
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
