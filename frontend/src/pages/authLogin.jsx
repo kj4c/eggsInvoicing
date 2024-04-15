@@ -49,6 +49,11 @@ function AuthLogin() {
     return () => clearInterval(intervalId); 
   }, []); 
 
+  function ToLandingPage () {
+    navigate(`/Landingpage`);
+  }
+
+  
   /* Generates a random string */
   const generateRandomString = (length) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -99,10 +104,12 @@ function AuthLogin() {
       <div className="logo-container">
           <img src={eggslogo} alt="Eggs Logo" className="eggs-logo" />
       </div>
+      
       <div className="auth-page-container">
         <div className="slideshow-container">
           <img src={images[currentImage]} alt="Slideshow" className={`slideshow-image ${animationClass}`} />
         </div>
+        
         <div className='login-form-container'> 
           <form onSubmit={handleSubmit} className='login-form'>
             <h2 className='title-login'>Eggs Invoicing Login</h2>
@@ -134,7 +141,9 @@ function AuthLogin() {
               <Link to="/register">New here? Click here to create your account.</Link>
               <Link to="/reset-password">Forget password? Click here to reset your password.</Link>
             </div>
+            <button className='fire-landing-page' onClick={ToLandingPage}>Landing Tutorial Page</button>
           </form>
+          
         </div>
       </div>
       <Footer/>
