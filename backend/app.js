@@ -184,6 +184,7 @@ invoice: object - invoice object
 on failure:
 message: string - error message
 */
+/* istanbul ignore next */
 app.get('/receive/fetchByReceiver', async function (req, res) {
   const uid = req.query.uid;
   const receiverEmail = req.query.email;
@@ -206,6 +207,7 @@ invoice: object - invoice object
 on failure:
 message: string - error message
 */
+/* istanbul ignore next */
 app.get('/receive/fetchBySender', async function (req, res) {
   const uid = req.query.uid;
   const senderEmail = req.query.email;

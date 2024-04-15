@@ -19,7 +19,6 @@ async function sendEmailWithMultipleJSON(from, recipient, jsonFiles) {
 
   const attachments = jsonFiles.map(jsonFile => {
     // Expecting jsonString instead of jsonContent
-    jsonFile.jsonString = JSON.stringify(jsonFile.jsonString);
     if (typeof jsonFile.filename !== 'string' || typeof jsonFile.jsonString !== 'string') {
       throw new Error(`Expected filename to be a string and jsonString to be a string, but got ${typeof jsonFile.filename} and ${typeof jsonFile.jsonString}`);
     }
