@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
+import LandingPage from './LandingPage';
 const API_KEY = "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";
 
 /* Creatse the main Dashboard for the page with notifications, financial statistics */
@@ -95,6 +96,10 @@ const Dashboard = () => {
   const [yTax, setYTax] = useState('loading');
   const [yAmount, setYAmount] = useState('loading');
   const [yPayable, setYPayable] = useState('loading');
+
+  function ToLandingPage() {
+    navigate('/landingPage');
+  }
 
   /*Get all the statistics for the dashboard and changing the states */
   useEffect(() => {
@@ -365,6 +370,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        <button className='fire-landing-page' onClick={ToLandingPage}>Landing Tutorial Page</button>
       </div>
 
       {
