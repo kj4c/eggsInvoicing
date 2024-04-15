@@ -16,10 +16,14 @@ function getCookie(name) {
 }
 
 function sendEmail(reqBody) {
+    console.log(reqBody);
     axios.post("https://invoice-seng2021-24t1-eggs.vercel.app/send/multEmail", reqBody)
     .then((response) => {
         console.log(response);
         alert('Email successfully sent!');
+    }).catch(error => {
+        console.error("Failed to send email:", error);
+        alert('Failed to send email. Please check the console for details.');
     });
 }
 
@@ -28,27 +32,28 @@ const SendMultipleEmail = () => {
     const [formData, setFormData] = useState({
         from: getCookie('email') || "",
         recipients: [],
-        files: [{ filename: "", content: "{}", type: "multiplejson" }]
+        content: [{ filename: "", jsonstring: "{}" }],
+        type: "multiplejson"
     });
 
     const handleFileTypeChange = (event) => {
         const newFileType = event.target.value;
-        // Update all files to new file type with default content
-        const updatedFiles = formData.files.map(file => ({
-            ...file,
-            content: newFileType === "multiplejson" ? "{}" : "",
-            type: newFileType
-        }));
+        const newContentTemplate = newFileType === "multiplejson" ? "{}" : "<?xml version=\"1.0\"?><root></root>";
         setFormData(prevFormData => ({
             ...prevFormData,
-            files: updatedFiles
+            type: newFileType,
+            content: prevFormData.content.map(file => ({
+                ...file,
+                jsonstring: newContentTemplate
+            }))
         }));
     };
 
     const addFile = () => {
+        const newFileContent = formData.type === "multiplejson" ? "{}" : "<?xml version=\"1.0\"?><root></root>";
         setFormData(prevFormData => ({
             ...prevFormData,
-            files: [...prevFormData.files, { filename: "", content: formData.files[0].type === "multiplejson" ? "{}" : "", type: formData.files[0].type }]
+            content: [...prevFormData.content, { filename: "", jsonstring: newFileContent }]
         }));
     };
 
@@ -56,13 +61,13 @@ const SendMultipleEmail = () => {
         const fileReader = new FileReader();
         fileReader.readAsText(event.target.files[0], "UTF-8");
         fileReader.onload = e => {
-            const updatedFiles = formData.files.map((file, i) => {
+            const updatedContent = formData.content.map((file, i) => {
                 if (i === index) {
-                    return { ...file, filename: event.target.files[0].name, content: e.target.result };
+                    return { ...file, filename: event.target.files[0].name, jsonstring: e.target.result };
                 }
                 return file;
             });
-            setFormData({...formData, files: updatedFiles});
+            setFormData({...formData, content: updatedContent});
         };
     };
 
@@ -81,7 +86,7 @@ const SendMultipleEmail = () => {
     };
 
     const handleSubmit = (event) => {
-        console.log(formData)
+        console.log(formData);
         event.preventDefault();
         const invalidEmails = formData.recipients.filter(email => !isValidEmail(email));
         if (invalidEmails.length > 0) {
@@ -89,14 +94,7 @@ const SendMultipleEmail = () => {
         } else if (formData.from === "") {
             alert('Please enter text in the "From" field.');
         } else {
-            sendEmail({
-                ...formData,
-                files: formData.files.map(file => ({
-                    filename: file.filename,
-                    content: file.content,
-                    type: file.type
-                }))
-            });
+            sendEmail(formData);
         }
     };
 
@@ -113,19 +111,19 @@ const SendMultipleEmail = () => {
                         value={formData.recipients.join(', ')}
                         onChange={handleChange}
                     />
-                    <select onChange={handleFileTypeChange} value={formData.files[0].type} className="fileTypeSelector">
+                    <select onChange={handleFileTypeChange} value={formData.type} className="fileTypeSelector">
                         <option value="multiplejson">JSON</option>
                         <option value="multiplexml">XML</option>
                     </select>
                     <div className="fileWrapper">
-                        {formData.files.map((file, index) => (
+                        {formData.content.map((file, index) => (
                             <div key={index} className="attachmentGroup">
                                 <input
                                     type="file"
                                     id={`file-upload-${index}`}
                                     className="attachmentFileInput"
                                     onChange={(e) => handleFileChange(index, e)}
-                                    accept={file.type === "multiplejson" ? ".json" : ".xml"}
+                                    accept={formData.type === "multiplejson" ? ".json" : ".xml"}
                                     hidden
                                 />
                                 <label htmlFor={`file-upload-${index}`} className="file-upload-button">{file.filename || 'Upload File'}</label>
