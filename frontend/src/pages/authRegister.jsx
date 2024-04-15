@@ -66,6 +66,10 @@ function AuthRegister() {
     }
   };
 
+  const ToLandingPage = () => {
+    navigate(`/LandingPage`);
+  }
+
   /* Creating GUI for register page with all relevant inputboxes. */
   return (
     <div>
@@ -128,6 +132,7 @@ function AuthRegister() {
             <div className="auth-links">
               <Link to="/login">Already have an account? Click here to log in.</Link>
             </div>
+            <button className='fire-landing-page' onClick={ToLandingPage}>Landing Tutorial Page</button>
           </form>
         </div>
       </div>
