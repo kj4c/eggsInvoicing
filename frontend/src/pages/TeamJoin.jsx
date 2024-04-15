@@ -13,7 +13,7 @@ function getCookie(name) {
 
 const TeamJoin = () => {
   const [passcode, setPasscode] = useState('');
-const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const email = getCookie('email');
   const uid = getCookie('uid');
