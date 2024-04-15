@@ -12,7 +12,7 @@ const TeamCreate = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [loadingText, setLoadingText] = useState('Loading');
-  
+  const [uid, setUid] = useState('');
   const cookieExists = document.cookie.includes('cookie='); 
 
   /* Get the cookie of the current user and see if it exists. */
@@ -21,7 +21,6 @@ const TeamCreate = () => {
     let cookieValue = cookies.find(row => row.startsWith(name + '='));
     return cookieValue ? cookieValue.split('=')[1] : null;
   }
-  const uid = getCookie('uid');
 
   /* If cookie does not exist you go back to login, if it exists find email*/
   useEffect(() => {
@@ -30,6 +29,7 @@ const TeamCreate = () => {
     } else {
       let id = document.cookie.split("; ");
       id = id.find(part => part.startsWith("uid=")).split("=")[1];
+      setUid(id);
       setOwnerEmail(getCookie('email'));
     }
   }, [cookieExists, navigate]);
@@ -43,9 +43,8 @@ const TeamCreate = () => {
           navigate('/team');
         }
       } catch (err) {
-        
+        setLoading(false); 
       }
-      setLoading(false);
     }; 
   
     detail();
