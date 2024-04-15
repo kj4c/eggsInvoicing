@@ -32,7 +32,7 @@ function AuthRegister() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [currentImage, setCurrentImage] = useState(0); 
+  const [currentImage, setCurrentImage] = useState(0);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -40,24 +40,26 @@ function AuthRegister() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImage((currentImage) => (currentImage + 1) % images.length);
-    }, 3500
-    ); 
-    
-    return () => clearInterval(intervalId); 
-  }, []); 
+    }, 3500);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   /* On submit see if it is possible to register by calling backend if not return error.*/
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://invoice-seng2021-24t1-eggs.vercel.app/register', {
-        email,
-        username,
-        password,
-        phone: phoneNumber,
-      });
-      
+      const response = await axios.post(
+        'https://invoice-seng2021-24t1-eggs.vercel.app/register',
+        {
+          email,
+          username,
+          password,
+          phone: phoneNumber,
+        }
+      );
+
       console.log('Registration successful:', response.data);
       navigate('/login');
     } catch (error) {
@@ -68,25 +70,29 @@ function AuthRegister() {
 
   const ToLandingPage = () => {
     navigate(`/LandingPage`);
-  }
+  };
 
   /* Creating GUI for register page with all relevant inputboxes. */
   return (
     <div>
-      <div className="logo-container">
-        <img src={eggslogo} alt="Eggs Logo" className="eggs-logo" />
+      <div className='logo-container'>
+        <img src={eggslogo} alt='Eggs Logo' className='eggs-logo' />
       </div>
-      <div className="auth-page-container">
-        <div className="slideshow-container">
-          <img src={images[currentImage]} alt="Slideshow" className="slideshow-image" />
+      <div className='auth-page-container'>
+        <div className='slideshow-container'>
+          <img
+            src={images[currentImage]}
+            alt='Slideshow'
+            className='slideshow-image'
+          />
         </div>
-        <div className="registration-form-container">
-          <form onSubmit={handleSubmit} className="registration-form">
-            <h2 className="title-login">Create Your Eggs Invoicing Account</h2>
+        <div className='registration-form-container'>
+          <form onSubmit={handleSubmit} className='registration-form'>
+            <h2 className='title-login'>Create Your Eggs Invoicing Account</h2>
             <div>
               <label className='label-regi'>Email:</label>
               <input
-                type="email"
+                type='email'
                 placeholder='email'
                 className='inputFields'
                 value={email}
@@ -97,7 +103,7 @@ function AuthRegister() {
             <div>
               <label className='label-regi'>Username:</label>
               <input
-                type="text"
+                type='text'
                 placeholder='username'
                 className='inputFields'
                 value={username}
@@ -108,7 +114,7 @@ function AuthRegister() {
             <div className='label-regi'>
               <label>Password:</label>
               <input
-                type="password"
+                type='password'
                 placeholder='password'
                 className='inputFields'
                 value={password}
@@ -119,7 +125,7 @@ function AuthRegister() {
             <div className='label-regi'>
               <label>Phone Number:</label>
               <input
-                type="tel"
+                type='tel'
                 placeholder='phone number'
                 className='inputFields'
                 value={phoneNumber}
@@ -127,16 +133,27 @@ function AuthRegister() {
                 required
               />
             </div>
-            <p className="login-error">{error}</p>
-            <button type="submit" className="submit-button">Register</button>
-            <div className="auth-links">
-              <Link to="/login">Already have an account? Click here to log in.</Link>
+            <p className='login-error'>{error}</p>
+            <button type='submit' className='submit-button'>
+              Register
+            </button>
+            <div className='auth-links'>
+              <Link to='/login'>
+                Already have an account? Click here to log in.
+              </Link>
             </div>
-            <button className='fire-landing-page' onClick={ToLandingPage}>Landing Tutorial Page</button>
+            <div
+              style={{ marginTop: '1rem' }}
+              className='LandingPageButtonContainer'
+            >
+              <button className='LandingPageButton' onClick={ToLandingPage}>
+                Landing Tutorial Page
+              </button>
+            </div>
           </form>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
