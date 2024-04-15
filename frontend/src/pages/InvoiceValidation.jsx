@@ -106,7 +106,9 @@ const InvoiceValidation = () => {
     <div className='splitScreen'>
       <div className='validation-page'>
           <div className='mid-container'>
+            
           <button onClick={goBack} className="backButton">Back</button>
+          <p className="information-text">Validation confirms that invoice data meets predefined standards, ensuring accuracy and compliance for seamless financial processing.</p>
             <div className='select-button-div'>
               <input type="file" id='file' className='select-file' onChange={handleOnChange} accept='.xml'></input>
               <label htmlFor='file' className='select-button'>Upload File</label>

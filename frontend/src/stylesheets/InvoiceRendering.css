@@ -8,6 +8,13 @@
   border-radius: 0px 100px 0px 0px;
 }
 
+.information-text {
+  font-family: Sora, sans-serif;
+  margin-top: 5%;
+  color: #7f45f2;
+  font-size: 20px;
+}
+
 .fileBtnDiv {
   display: flex;
   border: solid;
@@ -87,6 +94,21 @@
 
 .notifText h3 {
   text-align: center;
+}
+
+.select-button-div2 {
+  display: flex;
+  position: relative;
+  border: dashed;
+  border-color: #7f45f2;
+  border-radius: 16px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 14vh;
+  transition: 0.2s;
+  width: 100%;
+  color: rgb(155, 155, 155);
 }
 
 .closeBtn {
