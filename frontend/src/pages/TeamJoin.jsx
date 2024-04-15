@@ -42,14 +42,17 @@ const [loading, setLoading] = useState(false);
       if (!uid) return;
       try {
         const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/teamdetail?uid=${uid}`);
-        navigate('/team');
-        
+        if (response.data) {
+          navigate('/team');
+        }
       } catch (err) {
-        navigate('/team/join');
+        console.error('User is not in a team:', err);
       }
-      setLoad(true);
+      setLoading(false);
     }; 
-  }, [uid]);
+  
+    detail();
+  }, [uid, navigate]);
   
   const goBack = () => {
     navigate('/');
@@ -59,6 +62,7 @@ const [loading, setLoading] = useState(false);
     <div className='splitScreen'>
       <div className='inputContainers'>
         <div className='inputWrapper'>
+          <h1>Join your team with the passcode!!</h1>
           <form onSubmit={handleCreateTeam} className='team-create-form'>
             <button onClick={goBack} className="backButton">Back</button>
 
@@ -79,9 +83,10 @@ const [loading, setLoading] = useState(false);
         </div>
       </div>
       <div className = "Image">
-            <h1 className = "pageTitle">Join a team</h1>
-            <img className = "sourceImage" src = {SendImage}/>
-        </div>
+        <h1 className = "pageTitle">Join a team</h1>
+        <img className = "sourceImage" src = {SendImage}/>
+      </div>
+      
     </div>
   );
 };
