@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import SendImage from '../assets/send_imagev2.png';
+import '../stylesheets/team.css';
 
 const TeamCreate = () => {
   const [teamName, setTeamName] = useState('');
@@ -31,41 +33,45 @@ const TeamCreate = () => {
 
   return (
     <div className='team-create-container'>
-      <h2>Create a New Team</h2>
       <form onSubmit={handleCreateTeam}>
-        <div className='form-group'>
-          <label>Team Name:</label>
+        <div className='team-creation-input-div'>
           <input
             type='text'
             value={teamName}
+            className="team-creation-box"
             placeholder='teamname'
             onChange={(e) => setTeamName(e.target.value)}
             required
           />
         </div>
-        <div className='form-group'>
-          <label>Owner Email:</label>
+        <div>
           <input
             type='email'
             placeholder='email'
             value={ownerEmail}
+            className="team-creation-box"
             onChange={(e) => setOwnerEmail(e.target.value)}
             required
           />
         </div>
-        <div className='form-group'>
-          <label>Team Email (for communications):</label>
+        <div>
           <input
             type='email'
+            placeholder='team email'
             value={teamEmail}
+            className="team-creation-box"
             onChange={(e) => setTeamEmail(e.target.value)}
             required
           />
         </div>
-        <button type='submit' disabled={loading}>
+        <button type='submit' className='invoice-creation-submit-button' disabled={loading}>
           {loading ? 'Creating...' : 'Create Team'}
         </button>
       </form>
+      <div className = "Image">
+				<h1 className = "pageTitle">Email XML Invoices</h1>
+				<img className = "sourceImage" src = {SendImage}/>
+			</div>
     </div>
   );
 };
