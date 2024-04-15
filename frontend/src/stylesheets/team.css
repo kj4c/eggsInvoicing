@@ -193,11 +193,9 @@
   flex-direction: column;
   font-size: 25px;
   padding: 30px;
-  width: 100%;
-  margin-bottom: 2%;
-}
-
-.team-creation-input-div {
+  width: 140%;;
+  margin-bottom: 10%;
+  margin-left: -20%;
   margin-top: 10%;
 }
 
@@ -225,4 +223,10 @@
   touch-action: manipulation;
   vertical-align: bottom;
   width: 100%;
+}
+
+
+.team-creation-image {
+  width: 100%;
+  animation: fade-up 2s;
 }

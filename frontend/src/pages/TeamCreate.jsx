@@ -39,14 +39,14 @@ const TeamCreate = () => {
     <div className='splitScreen'>
       <div className='inputContainers'>
         <div className='inputWrapper'>
-          <form onSubmit={handleCreateTeam}>
+          <form onSubmit={handleCreateTeam} className='team-create-form'>
             <button onClick={goBack} className="backButton">Back</button>
             <div>
               <input
                 type='text'
                 value={teamName}
-                className="inputBox"
-                placeholder='teamname'
+                className="team-creation-box"
+                placeholder='Team Name'
                 onChange={(e) => setTeamName(e.target.value)}
                 required
               />
@@ -54,9 +54,9 @@ const TeamCreate = () => {
             <div>
               <input
                 type='email'
-                placeholder='email'
+                placeholder='Email'
                 value={ownerEmail}
-                className="inputBox"
+                className="team-creation-box"
                 onChange={(e) => setOwnerEmail(e.target.value)}
                 required
               />
@@ -64,9 +64,9 @@ const TeamCreate = () => {
             <div>
               <input
                 type='email'
-                placeholder='team email'
+                placeholder='Team Email'
                 value={teamEmail}
-                className="inputBox"
+                className="team-creation-box"
                 onChange={(e) => setTeamEmail(e.target.value)}
                 required
               />
