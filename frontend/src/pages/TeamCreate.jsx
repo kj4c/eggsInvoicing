@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SendImage from '../assets/send_imagev2.png';
@@ -10,6 +10,27 @@ const TeamCreate = () => {
   const [teamEmail, setTeamEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  
+  const cookieExists = document.cookie.includes('cookie='); 
+
+  /* Get the cookie of the current user and see if it exists. */
+  function getCookie(name) {
+    let cookies = document.cookie.split('; ');
+    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    return cookieValue ? cookieValue.split('=')[1] : null;
+  }
+
+  /* If cookie does not exist you go back to login, if it exists find email*/
+  useEffect(() => {
+    if (!cookieExists) {
+      navigate('/login');
+    } else {
+      let id = document.cookie.split("; ");
+      id = id.find(part => part.startsWith("uid=")).split("=")[1];
+      setOwnerEmail(getCookie('email'));
+    }
+  }, [cookieExists, navigate]);
+
 
   const handleCreateTeam = async (event) => {
     event.preventDefault();
@@ -40,8 +61,8 @@ const TeamCreate = () => {
       <div className='inputContainers'>
         <div className='inputWrapper'>
           <form onSubmit={handleCreateTeam} className='team-create-form'>
-            <button onClick={goBack} className="backButton">Back</button>
-            <div>
+            <button onClick={goBack} className="back-button backButton">Back</button>
+            <div className='input-div'>
               <input
                 type='text'
                 value={teamName}
@@ -51,17 +72,7 @@ const TeamCreate = () => {
                 required
               />
             </div>
-            <div>
-              <input
-                type='email'
-                placeholder='Email'
-                value={ownerEmail}
-                className="team-creation-box"
-                onChange={(e) => setOwnerEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div>
+            <div className='input-div'>
               <input
                 type='email'
                 placeholder='Team Email'

@@ -194,9 +194,16 @@
   font-size: 25px;
   padding: 30px;
   width: 140%;;
-  margin-bottom: 10%;
-  margin-left: -20%;
+  margin-bottom: 4%;
+  margin-left: 0;
   margin-top: 10%;
+  align-self: flex-start;
+}
+
+.input-div {
+  display: flex;
+  align-self: flex-start;
+  width: 100%;
 }
 
 .invoice-creation-submit-button {
@@ -225,8 +232,15 @@
   width: 100%;
 }
 
-
+.team-create-form {
+  margin-top: 7vh;
+  display: flex;
+}
 .team-creation-image {
   width: 100%;
   animation: fade-up 2s;
+}
+
+.back-button {
+  margin-bottom: 5vh;
 }

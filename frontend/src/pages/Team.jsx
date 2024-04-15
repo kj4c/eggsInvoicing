@@ -82,7 +82,8 @@ const Team = () => {
 
   const onClickLeave = () => {
     const leave = async() => {
-      await axios.delete(`https://invoice-seng2021-24t1-eggs-frontend.vercel.app/leaveteam`, {
+      console.log(email);
+      await axios.delete(`https://invoice-seng2021-24t1-eggs.vercel.app/leaveteam`, {
         headers: {
           'email': email
         }
@@ -90,6 +91,7 @@ const Team = () => {
     }
     setLoad(true);
     leave();
+    navigate('/teamcreate');
   }
 
   return(
@@ -104,7 +106,7 @@ const Team = () => {
                 </h1>
                 <div className="team-email">{teamEmail}</div>
                 <div className="team-action">
-                  <p className="team-invite" onClick={onClickInvite}>Invite to team</p>
+                  <p className="team-invite" onClick={onClickInvite }>Invite to team</p>
                   <p className="team-leave" onClick={onClickLeave}>Leave team</p>
                   {
                     copyStatus ? (
