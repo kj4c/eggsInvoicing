@@ -18,8 +18,9 @@ import {
   InvoiceInputMultipleJson,
   InvoicesSent,
   Team,
-  TeamCreate
+  TeamCreate,
 } from './pages';
+import TeamJoin from './pages/TeamJoin';
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
 import AuthRegister from './pages/authRegister';
@@ -57,7 +58,9 @@ const AppContent = () => {
     '/sendEmailLater',
     '/invoicesSent',
     '/team',
-    '/teamcreate'
+    '/teamcreate',
+    '/team/join',
+    '/team/info',
   ];
 
   const hideSidebarPaths = ['/login', '/register', 'reset-password'];
@@ -121,7 +124,9 @@ const AppContent = () => {
             <Route path='/sendEmailLater' element={<SendEmailLater />}></Route>
             <Route path='/invoicesSent' element={<InvoicesSent />}></Route>
             <Route path='/team' element={<Team />}></Route>
+            <Route path='/team/info' element={<Team />}></Route>
             <Route path='/teamcreate' element={<TeamCreate />}></Route>
+            <Route path='/team/join' element={<TeamJoin />}></Route>
             <Route path='/profile' element={<UserProfile />} />
           </Routes>
         </div>
