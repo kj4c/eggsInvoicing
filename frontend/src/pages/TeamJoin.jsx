@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import SendImage from '../assets/send_imagev2.png';
+import JoinImage from '../assets/teams.png';
 import { useEffect } from 'react';
 import '../stylesheets/team.css';
 import teamload from '../assets/team-load.png';
@@ -98,14 +98,14 @@ const TeamJoin = () => {
                     />
                   </div>
                   <button type='submit' className='invoice-creation-submit-button' disabled={loading}>
-                    {loading ? 'Creating...' : 'Create Team'}
+                    Join team
                   </button>
                 </form>
               </div>
             </div>
             <div className = "Image">
               <h1 className = "pageTitle">Join a team</h1>
-              <img className = "sourceImage" src = {SendImage}/>
+              <img className = "sourceImage" src = {JoinImage}/>
             </div>
           </div>
         )
