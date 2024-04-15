@@ -6,7 +6,6 @@
   background-color: white;
   width: 48%;
   border-radius: 0px 100px 0px 0px;
-  animation: fade-right 2s;
 }
 
 h1 {
@@ -41,6 +40,8 @@ h1 {
   align-items: center;
   flex-direction: column;
   width: 80%;
+  animation: fade-right 2s;
+
 
 }
 
@@ -53,7 +54,7 @@ h1 {
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 21vh;
+  margin-top: 12vh;
   transition: 0.2s;
   width: 100%;
   color: rgb(155, 155, 155);
