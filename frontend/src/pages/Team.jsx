@@ -81,6 +81,7 @@ const Team = () => {
   }
 
   const onClickLeave = () => {
+    setLoad(false);
     const leave = async() => {
       console.log(email);
       await axios.delete(`https://invoice-seng2021-24t1-eggs.vercel.app/leaveteam`, {
@@ -88,11 +89,15 @@ const Team = () => {
           'email': email
         }
       });
+      navigate('/teamcreate');
     }
-    setLoad(true);
     leave();
-    navigate('/teamcreate');
+    
   }
+
+  const goBack = () => {
+    navigate("/dashboard");
+  };
 
   return(
     <div className='team-container'>
@@ -100,6 +105,9 @@ const Team = () => {
         load ? (
           <div className='team-page'>
             <div className='team-left'>
+              <button onClick={goBack} className="backButton back-button">
+                Back
+              </button>
               <div className="team-info-container">
                 <h1 className="team-info-heading">
                   {teamName}
@@ -125,11 +133,11 @@ const Team = () => {
             </div>
             <div className='team-right'>
               <div className="team-send pageTitle">
-                <h3 className="team-send-text">Send Invoice</h3>
+                <h3 className="team-send-text" onClick={() => {navigate('/teamsend')}}>Send Invoice</h3>
                 <IoArrowForwardCircleOutline className='arrow' size={30}/> 
               </div>
               <div className="team-receive pageTitle">
-                <h3 className="team-receive-text">Team Inbox</h3>
+                <h3 className="team-receive-text" onClick={() => {navigate('/teaminbox')}}>Team Inbox</h3>
                 <IoArrowForwardCircleOutline className='arrow' size={30}/> 
               </div>
               <img src={teamwork}  alt="team" className='team-img'/>

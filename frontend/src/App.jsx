@@ -19,6 +19,8 @@ import {
   InvoicesSent,
   Team,
   TeamCreate,
+  TeamSend,
+  TeamInbox
 } from './pages';
 import TeamJoin from './pages/TeamJoin';
 import { useStateContext } from './contexts/ContextProvider';
@@ -36,7 +38,6 @@ const AppContent = () => {
   const location = useLocation();
 
   const knownPaths = [
-    '/',
     '/dashboard',
     '/invoiceCreation',
     '/invoiceValidation',
@@ -61,9 +62,11 @@ const AppContent = () => {
     '/teamcreate',
     '/team/join',
     '/team/info',
+    '/teamsend',
+    '/teaminbox'
   ];
 
-  const hideSidebarPaths = ['/login', '/register', 'reset-password'];
+  const hideSidebarPaths = ['/login', '/register', 'reset-password', '/'];
 
   const showSidebar =
     knownPaths.includes(location.pathname) &&
@@ -86,9 +89,8 @@ const AppContent = () => {
       >
         <div>
           <Routes>
-            <Route path='/' element={<Dashboard />} />
+            <Route path='/' element={<LandingPage />} />
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/landingPage' element={<LandingPage />} />
             <Route path='/invoiceCreation' element={<InvoiceCreation />} />
             <Route
               path='/invoiceCreation/uploadDocument'
@@ -115,8 +117,6 @@ const AppContent = () => {
             <Route path='/invoiceReceiving' element={<InvoiceReceiving />} />
             <Route path='/login' element={<AuthLogin />} />
             <Route path='/register' element={<AuthRegister />} />
-            <Route path='/login' element={<AuthLogin />} />
-            <Route path='/register' element={<AuthRegister />} />
             <Route path='/invoiceInputJson' element={<InvoiceInputJSON />} />
             <Route path='/reset-password' element={<ForgetPassword />} />
             <Route path='/htmlRendering' element={<HtmlRendering />} />
@@ -126,6 +126,8 @@ const AppContent = () => {
             <Route path='/team' element={<Team />}></Route>
             <Route path='/team/info' element={<Team />}></Route>
             <Route path='/teamcreate' element={<TeamCreate />}></Route>
+            <Route path='/teamsend' element={<TeamSend />}></Route>
+            <Route path='/teaminbox' element={<TeamInbox />}></Route>
             <Route path='/team/join' element={<TeamJoin />}></Route>
             <Route path='/profile' element={<UserProfile />} />
           </Routes>

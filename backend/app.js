@@ -34,6 +34,8 @@ const createTeam = require('./functions/teamCreate');
 const joinTeam = require('./functions/teamJoin');
 const leaveTeam = require('./functions/teamLeave');
 const detailTeam = require('./functions/teamDetail');
+const teamInboxSent = require('./functions/teamInboxSent');
+const teamInboxReceived = require('./functions/teamInboxReceived');
 const cors = require('cors');
 
 app.use(cors());
@@ -690,6 +692,7 @@ passcode - string
 on failure:
 status code and error message
 */
+/* istanbul ignore next */
 app.post('/createteam', async(req, res) => {
   try {
     const name = req.body.name;
@@ -720,6 +723,7 @@ status code - integer - 200
 on failure:
 status code and error message
 */
+/* istanbul ignore next */
 app.post('/jointeam', async(req, res) => {
   try {
     const email = req.body.email;
@@ -748,6 +752,7 @@ object with teamName, passcode, teamEmail, and list of member's email
 on failure:
 status code and error message
 */
+/* istanbul ignore next */
 app.delete('/leaveteam', async(req, res) => {
   try {
     const email = req.headers.email;
@@ -775,6 +780,7 @@ object with teamName, passcode, teamEmail, and list of member's email
 on failure:
 status code and error message
 */
+/* istanbul ignore next */
 app.get('/teamdetail', async(req, res) => {
   try {
     const uid = req.query.uid;
@@ -787,6 +793,62 @@ app.get('/teamdetail', async(req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({error: 'Cannot get detail'});
+  }
+});
+
+/*
+@brief
+get sent inbox
+@params
+uid
+@output
+on success:
+status code - integer - 200
+list of emails
+on failure:
+status code and error message
+*/
+/* istanbul ignore next */
+app.get('/sentinbox', async(req, res) => {
+  try {
+    const uid = req.query.uid;
+    const response = await teamInboxSent(uid);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({inbox: response.ret});
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot fetch inbox'});
+  }
+});
+
+/*
+@brief
+get received inbox of team
+@params
+uid
+@output
+on success:
+status code - integer - 200
+list of emails
+on failure:
+status code and error message
+*/
+/* istanbul ignore next */
+app.get('/receiveinbox', async(req, res) => {
+  try {
+    const uid = req.query.uid;
+    const response = await teamInboxReceived(uid);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({inbox: response.ret});
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot fetch inbox'});
   }
 });
 

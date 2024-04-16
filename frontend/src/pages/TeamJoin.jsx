@@ -1,21 +1,20 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import SendImage from '../assets/send_imagev2.png';
+import JoinImage from '../assets/teams.png';
 import { useEffect } from 'react';
 import '../stylesheets/team.css';
 import teamload from '../assets/team-load.png';
 
-
 function getCookie(name) {
-    let cookies = document.cookie.split('; ');
-    let cookieValue = cookies.find(row => row.startsWith(name + '='));
-    return cookieValue ? cookieValue.split('=')[1] : null;
+  let cookies = document.cookie.split('; ');
+  let cookieValue = cookies.find((row) => row.startsWith(name + '='));
+  return cookieValue ? cookieValue.split('=')[1] : null;
 }
 
 const TeamJoin = () => {
   const [passcode, setPasscode] = useState('');
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const email = getCookie('email');
   const uid = getCookie('uid');
@@ -26,12 +25,15 @@ const TeamJoin = () => {
     setLoading(true);
 
     try {
-      await axios.post('https://invoice-seng2021-24t1-eggs.vercel.app/jointeam', {
-        email: email,  
-        passcode: passcode
-      });
+      await axios.post(
+        'https://invoice-seng2021-24t1-eggs.vercel.app/jointeam',
+        {
+          email: email,
+          passcode: passcode,
+        }
+      );
       alert('Team created successfully!');
-      navigate('/team'); 
+      navigate('/team');
     } catch (error) {
       console.error('Failed to create team:', error);
       alert('Error creating team. Please try again.');
@@ -44,7 +46,9 @@ const TeamJoin = () => {
     const detail = async () => {
       if (!uid) return;
       try {
-        const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/teamdetail?uid=${uid}`);
+        const response = await axios.get(
+          `https://invoice-seng2021-24t1-eggs.vercel.app/teamdetail?uid=${uid}`
+        );
         if (response.data) {
           navigate('/team');
         }
@@ -52,22 +56,22 @@ const TeamJoin = () => {
         console.error('User is not in a team:', err);
       }
       setLoading(false);
-    }; 
-  
+    };
+
     detail();
   }, [uid, navigate]);
-  
+
   const goBack = () => {
-    navigate('/');
-  }
+    navigate('/dashboard');
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setLoadingText(prev => {
+      setLoadingText((prev) => {
         if (prev.length >= 10) return 'Loading';
         return prev + '.';
       });
-    }, 200); 
+    }, 200);
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, []);
@@ -98,18 +102,17 @@ const TeamJoin = () => {
                     />
                   </div>
                   <button type='submit' className='invoice-creation-submit-button' disabled={loading}>
-                    {loading ? 'Creating...' : 'Create Team'}
+                    Join team
                   </button>
                 </form>
               </div>
             </div>
             <div className = "Image">
               <h1 className = "pageTitle">Join a team</h1>
-              <img className = "sourceImage" src = {SendImage}/>
+              <img className = "sourceImage" src = {JoinImage}/>
             </div>
           </div>
-        )
-      }
+      )}
     </div>
   );
 };

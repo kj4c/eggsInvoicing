@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import SendImage from '../assets/send_imagev2.png';
+import TeamImg from '../assets/working.png';
 import '../stylesheets/team.css';
 import teamload from '../assets/team-load.png';
 
@@ -13,12 +13,12 @@ const TeamCreate = () => {
   const navigate = useNavigate();
   const [loadingText, setLoadingText] = useState('Loading');
   const [uid, setUid] = useState('');
-  const cookieExists = document.cookie.includes('cookie='); 
+  const cookieExists = document.cookie.includes('cookie=');
 
   /* Get the cookie of the current user and see if it exists. */
   function getCookie(name) {
     let cookies = document.cookie.split('; ');
-    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    let cookieValue = cookies.find((row) => row.startsWith(name + '='));
     return cookieValue ? cookieValue.split('=')[1] : null;
   }
 
@@ -27,26 +27,28 @@ const TeamCreate = () => {
     if (!cookieExists) {
       navigate('/login');
     } else {
-      let id = document.cookie.split("; ");
-      id = id.find(part => part.startsWith("uid=")).split("=")[1];
+      let id = document.cookie.split('; ');
+      id = id.find((part) => part.startsWith('uid=')).split('=')[1];
       setUid(id);
       setOwnerEmail(getCookie('email'));
     }
   }, [cookieExists, navigate]);
-  
+
   useEffect(() => {
     const detail = async () => {
       if (!uid) return;
       try {
-        const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/teamdetail?uid=${uid}`);
+        const response = await axios.get(
+          `https://invoice-seng2021-24t1-eggs.vercel.app/teamdetail?uid=${uid}`
+        );
         if (response.data) {
           navigate('/team');
         }
       } catch (err) {
-        setLoading(false); 
+        setLoading(false);
       }
-    }; 
-  
+    };
+
     detail();
   }, [uid, navigate]);
 
@@ -55,13 +57,16 @@ const TeamCreate = () => {
     setLoading(true);
 
     try {
-      await axios.post('https://invoice-seng2021-24t1-eggs.vercel.app/createteam', {
-        name: teamName,
-        email: ownerEmail,
-        teamEmail: teamEmail
-      });
+      await axios.post(
+        'https://invoice-seng2021-24t1-eggs.vercel.app/createteam',
+        {
+          name: teamName,
+          email: ownerEmail,
+          teamEmail: teamEmail,
+        }
+      );
       alert('Team created successfully!');
-      navigate('/team'); 
+      navigate('/team');
     } catch (error) {
       console.error('Failed to create team:', error);
       alert('Error creating team. Please try again.');
@@ -69,18 +74,18 @@ const TeamCreate = () => {
       setLoading(false);
     }
   };
-  
+
   const goBack = () => {
-    navigate('/');
-  }
+    navigate('/dashboard');
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setLoadingText(prev => {
+      setLoadingText((prev) => {
         if (prev.length >= 10) return 'Loading';
         return prev + '.';
       });
-    }, 200); 
+    }, 200);
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, []);
@@ -127,7 +132,7 @@ const TeamCreate = () => {
             </div>
             <div className = "Image">
               <h1 className = "pageTitle">Create Your Team</h1>
-              <img className = "sourceImage" src = {SendImage}/>
+              <img className = "sourceImage create-img" src = {TeamImg}/>
             </div>
           </div>
         )
