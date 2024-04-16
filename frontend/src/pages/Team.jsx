@@ -96,7 +96,7 @@ const Team = () => {
   }
 
   const goBack = () => {
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return(
@@ -137,7 +137,7 @@ const Team = () => {
                 <IoArrowForwardCircleOutline className='arrow' size={30}/> 
               </div>
               <div className="team-receive pageTitle">
-                <h3 className="team-receive-text">Team Inbox</h3>
+                <h3 className="team-receive-text" onClick={() => {navigate('/teaminbox')}}>Team Inbox</h3>
                 <IoArrowForwardCircleOutline className='arrow' size={30}/> 
               </div>
               <img src={teamwork}  alt="team" className='team-img'/>

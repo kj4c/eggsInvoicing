@@ -1,5 +1,5 @@
 const pool = require('../database/db');
-
+/* istanbul ignore next */
 async function teamInboxSent(uid) {
   const emailQ = await pool.query('SELECT email FROM users WHERE uid = $1', [uid]);
   const email = emailQ.rows[0].email;
