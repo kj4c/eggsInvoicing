@@ -17,9 +17,6 @@ const TeamInbox = () => {
   const [hoveredRow, setHoveredRow] = useState(null);
   const [Loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState('Fetching Invoices');
-  const [fetchOption, setFetchOption] = useState('All')
-  const [formData, setFormData] =  useState({ID: "", Date: "", DateFrom: "", DateTo: ""});
-  const [searchInput, setSearchInput] = useState("");
   const [checkedItems, setCheckedItems] = useState({});
   const navigate = useNavigate();
   const [preLoading, setPreLoading] = useState('Loading');
@@ -50,8 +47,6 @@ const TeamInbox = () => {
     uid = uid.find(part => part.startsWith("uid=")).split("=")[1];
   }
 
-  const [sent, setSent] = useState(null);
-  const [received, setReceived] = useState(null);
   const [receivedTab, setReceivedTab] = useState(true);
   const [sentTab, setSentTab] = useState(false);
   const [teamEmail, setTeamEmail] = useState('');
@@ -87,34 +82,6 @@ const TeamInbox = () => {
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, []);
-
-  // Function to handle actual search input changes
-  const handleSearchChange = (e) => {
-    setSearchInput(e.target.value);
-  };
-
-  // useEffect hook to update formData based on selectedVariable and searchInput
-  useEffect(() => {
-    // Logic to update formData based on selectedVariable whenever searchInput changes
-    // or the selected variable changes
-    switch(fetchOption) {
-      case "ID":
-        setFormData(prev => ({ ...prev, ID: searchInput }));
-        break;
-      case "Date":
-        setFormData(prev => ({ ...prev, Date: searchInput }));
-        break;
-      case "DateRange": {
-        // Your logic for handling date range
-        const [from, to] = searchInput.split("-");
-        setFormData(prev => ({ ...prev, DateFrom: from, DateTo: to }));
-        break;
-      }
-      default:
-        // No default action
-    }
-    console.log(formData);
-  }, [searchInput]); // Dependencies
 
   async function fetchData() {
     if (receivedTab) {

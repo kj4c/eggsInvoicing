@@ -379,7 +379,13 @@
 .sent-active, .receive-active, .sent-inactive, .receive-inactive {
   font-size: 25px;
   padding-right: 15px;
+  cursor: default;
 }
+
+.sent-inactive:hover, .receive-inactive:hover {
+  cursor: pointer;
+}
+
 .sent-active, .receive-active {
   color: #7f45f2;
 }
