@@ -9,41 +9,85 @@ const InvoiceCreation = () => {
   const [numItems, setNumItems] = useState(0);
   // temporary set the values for the demo.
   const [values, setValues] = useState({
-    invoice: {
-      inId: '',
-      date: '',
-      buyerRef: '',
-      payment: {
-        pid: '',
-        financialAccId: '',
-        accName: '',
-        bsb: '',
-      },
-    },
-
-    seller: {
-      id: '',
-      name: '',
-      address: {
-        streetAdd: '',
-        city: '',
-        postCode: '',
-        state: '',
-      },
-    },
+    // invoice: {
+    //   inId: '123a',
+    //   date: '2024-01-01',
+    //   buyerRef: '1093A8',
+    //   payment: {
+    //     pid: '109',
+    //     financialAccId: '1234567890',
+    //     accName: 'Acc Name',
+    //     bsb: '123456',
+    //   },
+    // },
+    // seller: {
+    //   id: '13 004 085 616',
+    //   name: 'NSW Transport',
+    //   address: {
+    //     streetAdd: '123 Pitt St',
+    //     city: 'Sydney',
+    //     postCode: '2000',
+    //     state: 'NSW',
+    //   },
+    // },
+    // customer: {
+    //   id: '53 004 085 616',
+    //   name: 'UNSW',
+    //   address: {
+    //     streetAdd: '23 Pitt St',
+    //     city: 'Sydney',
+    //     postCode: '2000',
+    //     state: 'NSW',
+    //   },
+    //   contact: {
+    //     name: 'Jacqueline',
+    //     phone: '012345679',
+    //     email: 'Jacquelinee@email.com',
+    //   },
+    // },
+    // item: [
+    //   {
+    //     itId: '194mn21',
+    //     name: 'Orange',
+    //     quantity: '12',
+    //     taxCategory: 'Z',
+    //     unitPrice: '3.99',
+    //   },
+    // ],
     customer: {
-      id: '',
-      name: '',
+      id: '53 004 085 616',
+      name: 'UNSW',
       address: {
-        streetAdd: '',
-        city: '',
-        postCode: '',
-        state: '',
+        city: 'Sydney',
+        postCode: '2052',
+        state: 'NSW',
+        streetAdd: 'UNSW Sydney, High St',
       },
       contact: {
-        name: '',
-        phone: '',
-        email: '',
+        name: 'Christine',
+        phone: '012345679',
+        email: 'christine@email.com',
+      },
+    },
+    seller: {
+      id: '53 004 085 616',
+      name: 'NSW Transport',
+      address: {
+        city: 'Sydney',
+        postCode: '2000',
+        state: 'NSW',
+        streetAdd: '123 Pitt St',
+      },
+    },
+    invoice: {
+      inId: '123a',
+      date: '2024-01-01',
+      buyerRef: '1093A8',
+      payment: {
+        pid: '109',
+        financialAccId: '1234567890',
+        accName: 'Acc Name',
+        bsb: '123456',
       },
     },
     item: [],
@@ -69,11 +113,11 @@ const InvoiceCreation = () => {
     const value = parseInt(numItems);
     if (!isNaN(value) && value > 0) {
       const itemsArray = Array.from({ length: value }, () => ({
-        name: '',
-        itId: '',
-        unitPrice: '',
-        quantity: '',
-        taxCategory: '',
+        name: 'Keycaps',
+        itId: '194mn21',
+        unitPrice: 10,
+        quantity: 10,
+        taxCategory: 'Z',
       }));
       setValues({ ...values, item: itemsArray });
     } else {
@@ -164,6 +208,7 @@ const InvoiceCreation = () => {
               value={values[input.name]}
               onChange={onChange}
               required={input.required}
+              defaultValue={input.placeholder}
             />
           </div>
         ))}
