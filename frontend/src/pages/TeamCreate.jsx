@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import SendImage from '../assets/send_imagev2.png';
+import TeamImg from '../assets/working.png';
 import '../stylesheets/team.css';
 import teamload from '../assets/team-load.png';
 
@@ -92,55 +92,51 @@ const TeamCreate = () => {
 
   return (
     <div className='create-page'>
-      {loading ? (
-        <div className='team-loading'>
-          <h1 className='loading-text'>{loadingText}</h1>
-          <img src={teamload} alt='team' className='load-img' />
-        </div>
-      ) : (
-        <div className='splitScreen'>
-          <div className='inputContainers'>
-            <div className='inputWrapper'>
-              <form onSubmit={handleCreateTeam} className='team-create-form'>
-                <button onClick={goBack} className='back-button backButton'>
-                  Back
-                </button>
-                <div className='input-div'>
-                  <input
-                    type='text'
-                    value={teamName}
-                    className='team-creation-box'
-                    placeholder='Team Name'
-                    onChange={(e) => setTeamName(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className='input-div'>
-                  <input
-                    type='email'
-                    placeholder='Team Email'
-                    value={teamEmail}
-                    className='team-creation-box'
-                    onChange={(e) => setTeamEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <button
-                  type='submit'
-                  className='invoice-creation-submit-button'
-                  disabled={loading}
-                >
-                  {loading ? 'Creating...' : 'Create Team'}
-                </button>
-              </form>
+      {
+        loading ? (
+          <div className='team-loading'>
+            <h1 className='loading-text'>{loadingText}</h1>
+            <img src={teamload}  alt="team" className='load-img'/>
+          </div>
+        ) : (
+          <div className='splitScreen'>
+            <div className='inputContainers'>
+              <div className='inputWrapper'>
+                <form onSubmit={handleCreateTeam} className='team-create-form'>
+                  <button onClick={goBack} className="back-button backButton">Back</button>
+                  <div className='input-div'>
+                    <input
+                      type='text'
+                      value={teamName}
+                      className="team-creation-box"
+                      placeholder='Team Name'
+                      onChange={(e) => setTeamName(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className='input-div'>
+                    <input
+                      type='email'
+                      placeholder='Team Email'
+                      value={teamEmail}
+                      className="team-creation-box"
+                      onChange={(e) => setTeamEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <button type='submit' className='invoice-creation-submit-button' disabled={loading}>
+                    {loading ? 'Creating...' : 'Create Team'}
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div className = "Image">
+              <h1 className = "pageTitle">Create Your Team</h1>
+              <img className = "sourceImage create-img" src = {TeamImg}/>
             </div>
           </div>
-          <div className='Image'>
-            <h1 className='pageTitle'>Create Your Team</h1>
-            <img className='sourceImage' src={SendImage} />
-          </div>
-        </div>
-      )}
+        )
+      }
     </div>
   );
 };

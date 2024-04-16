@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import SendImage from '../assets/send_imagev2.png';
+import JoinImage from '../assets/teams.png';
 import { useEffect } from 'react';
 import '../stylesheets/team.css';
 import teamload from '../assets/team-load.png';
@@ -78,47 +78,40 @@ const TeamJoin = () => {
 
   return (
     <div>
-      {loading ? (
-        <div className='team-loading'>
-          <h1 className='loading-text'>{loadingText}</h1>
-          <img src={teamload} alt='team' className='load-img' />
-        </div>
-      ) : (
-        <div className='splitScreen'>
-          <div className='inputContainers'>
-            <div className='inputWrapper'>
-              <form onSubmit={handleCreateTeam} className='team-create-form'>
-                <button onClick={goBack} className='backButton'>
-                  Back
-                </button>
-                <h1 className='join-text'>
-                  Join your team with the passcode!!
-                </h1>
-                <div className='input-div'>
-                  <input
-                    type='text'
-                    placeholder='Passcode'
-                    value={passcode}
-                    className='team-creation-box'
-                    onChange={(e) => setPasscode(e.target.value)}
-                    required
-                  />
-                </div>
-                <button
-                  type='submit'
-                  className='invoice-creation-submit-button'
-                  disabled={loading}
-                >
-                  {loading ? 'Creating...' : 'Create Team'}
-                </button>
-              </form>
+      {
+        loading ? (
+          <div className='team-loading'>
+            <h1 className='loading-text'>{loadingText}</h1>
+            <img src={teamload}  alt="team" className='load-img'/>
+          </div>
+        ) : (
+          <div className='splitScreen'>
+            <div className='inputContainers'>
+              <div className='inputWrapper'>
+                <form onSubmit={handleCreateTeam} className='team-create-form'>
+                  <button onClick={goBack} className="backButton">Back</button>
+                  <h1 className='join-text'>Join your team with the passcode!!</h1>
+                  <div className='input-div'>
+                    <input
+                      type='text'
+                      placeholder='Passcode'
+                      value={passcode}
+                      className="team-creation-box"
+                      onChange={(e) => setPasscode(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <button type='submit' className='invoice-creation-submit-button' disabled={loading}>
+                    Join team
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div className = "Image">
+              <h1 className = "pageTitle">Join a team</h1>
+              <img className = "sourceImage" src = {JoinImage}/>
             </div>
           </div>
-          <div className='Image'>
-            <h1 className='pageTitle'>Join a team</h1>
-            <img className='sourceImage' src={SendImage} />
-          </div>
-        </div>
       )}
     </div>
   );

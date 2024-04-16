@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   width: 50%;
-  padding: 5vh 2vw 0 8vw;
+  padding: 5vh 2vw 0 5vw;
 }
 
 .team-left {
@@ -49,7 +49,7 @@
 }
 
 .team-info-container {
-  margin: 10vh 0 3vh 0
+  margin: 4vh 0 3vh 0
 }
 
 .team-info-heading {
@@ -104,7 +104,7 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
-  height: 50vh;
+  height: 45vh;
   width: 100%;
   overflow-y: auto;
 }
@@ -151,7 +151,7 @@
 
 .team-send-text, .team-receive-text {
   color: white;
-  font-size: 28px;
+  font-size: 35px;
   display: inline;
 }
 
@@ -166,14 +166,15 @@
   height: 100vh;
   width: 100%;
   background: linear-gradient(#7f45f2 0, #3d266b 100%);
+
 }
 
 .loading-text {
   color: #ffffff;
-  text-align: center;
   font-size: 80px;
-  padding-left: 30vw;
-  padding-top: 20vh;
+  padding-top: 15vh;
+  position: absolute;
+  left: 29%;
 }
 
 .load-img {
@@ -242,10 +243,110 @@
 }
 
 .back-button {
-  margin-bottom: 5vh;
+  margin-top: 6vh;
+  margin-bottom: 1vh;
 }
 
 .join-text {
   margin: 0;
   padding-top: 10vh;
+}
+
+.team-send-email {
+  margin: 0;
+  margin-top: 3vh;
+}
+
+.fileUpload {
+  background: #ffffff;
+  border-color: #7f45f2;
+  border: 2px solid #7f45f2; /* Purple border */
+  height: 200px;
+  width: 100%;
+  color: rgb(155, 155, 155);
+  font-size: 25px;
+  line-height: 50px;
+  text-align: center;;
+  border-radius: 10px;
+  transition: all .3s ease;
+}
+
+.send-title {
+  font-size: 38px;
+  margin: 0;
+  margin-top: 25vh;
+  color: white;
+}
+
+.team-upload {
+  background: #ffffff;
+  border-color: #7f45f2;
+  border: 2px solid #7f45f2; /* Purple border */
+  height: 20vh;
+  width: 100%;
+  color: rgb(155, 155, 155);
+  font-size: 25px;
+  line-height: 50px;
+  text-align: center;;
+  border-radius: 10px;
+  transition: all .3s ease;
+}
+
+.team-upload:hover {
+  background: #ffffff;
+  color: #7f45f2;
+  transition: all .3s;
+  cursor: pointer;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 4vh;
+}
+
+.team-name-send {
+  color: #7f45f2;
+  font-size: 32px;
+}
+
+.team-email-send {
+  color: grey;
+  font-size: 19px;
+  padding: 0;
+  font-weight: bolder;
+}
+
+.team-email-input {
+  color: black;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 40px;
+  border: solid;
+  border-color: #7f45f2;
+  font-size: 25px;
+  padding: 30px;
+  margin-bottom: 3vh;
+  margin-top: 3vh;
+  width: 100%;
+}
+
+.send-page-title {
+  display: flex;
+  color: white;
+  font-size: 45px;
+  margin: 15vh 0 6vh 0;
+}
+
+.send-discription {
+  color: rgba(255, 255, 255, 0.758);
+  padding-bottom: 8vh; 
+  margin: 0; 
+}
+
+.create-img {
+
+  height: auto;
+  width: 80%;
 }

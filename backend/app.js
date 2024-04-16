@@ -34,6 +34,8 @@ const createTeam = require('./functions/teamCreate');
 const joinTeam = require('./functions/teamJoin');
 const leaveTeam = require('./functions/teamLeave');
 const detailTeam = require('./functions/teamDetail');
+const teamInboxSent = require('./functions/teamInboxSent');
+const teamInboxReceived = require('./functions/teamInboxReceived');
 const cors = require('cors');
 
 app.use(cors());
@@ -787,6 +789,36 @@ app.get('/teamdetail', async(req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({error: 'Cannot get detail'});
+  }
+});
+
+app.get('/sentinbox', async(req, res) => {
+  try {
+    const uid = req.query.uid;
+    const response = await teamInboxSent(uid);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({inbox: response.ret});
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot fetch inbox'});
+  }
+});
+
+app.get('/receiveinbox', async(req, res) => {
+  try {
+    const uid = req.query.uid;
+    const response = await teamInboxReceived(uid);
+    if (response.status !== 200) {
+      res.status(response.status).json({error: response.error});
+    } else {
+      res.status(response.status).json({inbox: response.ret});
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: 'Cannot fetch inbox'});
   }
 });
 
