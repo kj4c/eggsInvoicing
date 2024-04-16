@@ -50,7 +50,7 @@ export const features = [
     text: `View and download all your received invoices conveniently. Use our fetching feature to search invoices by ID, date, or date range for efficient organization. We've got everything you need for organized invoicing.`,
     backgroundUrl: './src/assets/features/card-5.svg',
     icon: <HiOutlineFolderOpen />,
-    url: '#send-receive',
+    url: '#sendreceive',
     colour: '#FF776F',
   },
   {
