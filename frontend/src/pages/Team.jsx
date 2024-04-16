@@ -134,11 +134,11 @@ const Team = () => {
             <div className='team-right'>
               <div className="team-send pageTitle">
                 <h3 className="team-send-text" onClick={() => {navigate('/teamsend')}}>Send Invoice</h3>
-                <IoArrowForwardCircleOutline className='arrow' size={30}/> 
+                <IoArrowForwardCircleOutline onClick={() => {navigate('/teamsend')}} className='arrow' size={30}/> 
               </div>
               <div className="team-receive pageTitle">
                 <h3 className="team-receive-text" onClick={() => {navigate('/teaminbox')}}>Team Inbox</h3>
-                <IoArrowForwardCircleOutline className='arrow' size={30}/> 
+                <IoArrowForwardCircleOutline onClick={() => {navigate('/teaminbox')}} className='arrow' size={30}/> 
               </div>
               <img src={teamwork}  alt="team" className='team-img'/>
             </div>
