@@ -103,6 +103,9 @@
 
 .team-invite:hover, .team-leave:hover {
   cursor: pointer;
+  color: #7f45f2;
+  background-color: white;
+  transition: 0.2s ease-in-out;
 }
 
 .copied {
@@ -133,7 +136,7 @@
   margin-top: 1vh;
   margin-bottom: 2vh;
   border: solid #7f45f2;
-  width: 83%;
+  width: 85%;
   text-align: center;
   border-radius: 10px;
   font-size: 20px;
@@ -174,9 +177,36 @@
   display: inline;
 }
 
+.team-send-text:hover, .team-receive-text:hover {
+  font-size: 35px;
+  display: inline;
+  animation: popUp 0.5s;
+  transition: all 0.5s ease-in-out;
+}
+
+@keyframes popUp {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+  
+}
+
 .arrow {
-  padding-left: 8px;
+  padding-top: 3px;
+  padding-left: 15px;
   color: white;
+}
+
+.arrow:hover {
+  display: inline;
+  animation: popUp 0.5s;
+  transition: all 0.5s ease-in-out;
 }
 
 .team-loading {

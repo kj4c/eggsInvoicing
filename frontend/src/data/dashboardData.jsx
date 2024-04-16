@@ -116,14 +116,14 @@ export const links = [
           },
           {
             id: 703,
-            name: 'Team Send Inbox',
-            path: 'team/send',
+            name: 'Team Send',
+            path: 'teamsend',
             icon: <SlPaperPlane></SlPaperPlane>,
           },
           {
             id: 704,
-            name: 'Team Receive Inbox',
-            path: 'team/receive',
+            name: 'Team Inbox',
+            path: 'teaminbox',
             icon: <FaInbox />,
           },
         ],
