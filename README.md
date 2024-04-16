@@ -1,6 +1,6 @@
 # TEAM EGGS
 Fullstack Invoicing Website
-
+This is by Jackson, KJ, Eric, Cherise and Winnie 
 
 ## SWAGGER LINK 🐸 
  **<a href="https://app.swaggerhub.com/apis/LOWKHYEJAC/InvoiceDeliver/1.0.0">HERE</a>**

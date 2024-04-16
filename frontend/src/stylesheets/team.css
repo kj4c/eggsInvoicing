@@ -1,9 +1,9 @@
-.team-container {
+.team-container, .inbox-container {
   min-height: 100vh;
   min-width: 100%;
 }
 
-.team-page {
+.team-page, .inbox-page {
   display: flex;
   justify-content: center;
   height: 100vh;
@@ -38,6 +38,25 @@
 .team-right {
   display: flex;
   position: relative;
+}
+
+.inbox-left {
+  flex-direction: column;
+  width: 50%;
+  padding: 5vh 2vw 0 5vw;
+  background-color: white;
+  border-radius: 0px 100px 0px 0px;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.inbox-right {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 50%;
+  padding: 5vh 1vw 0 1vw;
 }
 
 .team-img {
@@ -247,6 +266,12 @@
   margin-bottom: 1vh;
 }
 
+.inbox-back-button {
+  margin-top: 6vh;
+  margin-bottom: 1vh;
+  margin-left: 1vw;
+}
+
 .join-text {
   margin: 0;
   padding-top: 10vh;
@@ -349,4 +374,62 @@
 
   height: auto;
   width: 80%;
+}
+
+.sent-active, .receive-active, .sent-inactive, .receive-inactive {
+  font-size: 25px;
+  padding-right: 15px;
+  cursor: default;
+}
+
+.sent-inactive:hover, .receive-inactive:hover {
+  cursor: pointer;
+}
+
+.sent-active, .receive-active {
+  color: #7f45f2;
+}
+
+.sent-inactive, .receive-inactive {
+  color: rgba(0, 0, 0, 0.43);
+}
+
+.inbox-title {
+  text-align: center;
+  color:#7f45f2;
+  font-size: 38px;
+}
+
+.inbox-email {
+  text-align: center;
+  font-size: 20px;
+  color: rgb(80, 80, 80);
+}
+
+.inboxContainerTeam {
+  display: grid;
+  grid-template-columns: 0.1fr 0.5fr 1fr 1fr 0.5fr 0.5fr;
+  grid-template-rows: 50px repeat(12, 1fr);
+  width: 90%;
+  height: 65vh;
+  background-color: white;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 15px;
+  border: 3px solid #7f45f2;
+  margin-bottom: 1%;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #7f45f2 white;
+  animation: fadeIn 2s;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10vh;
+  margin-right: 10vh;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+  animation: fadeIn 2s;
 }
