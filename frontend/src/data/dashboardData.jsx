@@ -60,20 +60,20 @@ export const links = [
         subMenus: [
           {
             id: 401,
-            name: 'XML Multiple',
+            name: 'XML',
             path: 'invoiceInputMultiple',
             icon: <TbFileUpload></TbFileUpload>,
           },
           {
             id: 402,
-            name: 'JSON Multiple',
+            name: 'JSON',
             path: 'invoiceInputMultipleJson',
             icon: <TbFileUpload></TbFileUpload>,
           },
           {
             id: 403,
-            name: 'Send Multiple Email',
-            path: 'sendMultipleEmail',
+            name: 'Group Email',
+            path: 'invoiceInputMultipleJson1',
             icon: <TbFileUpload></TbFileUpload>,
           },
         ],
@@ -116,14 +116,14 @@ export const links = [
           },
           {
             id: 703,
-            name: 'Team Send Inbox',
-            path: 'team/send',
+            name: 'Team Send',
+            path: 'teamsend',
             icon: <SlPaperPlane></SlPaperPlane>,
           },
           {
             id: 704,
-            name: 'Team Receive Inbox',
-            path: 'team/receive',
+            name: 'Team Inbox',
+            path: 'teaminbox',
             icon: <FaInbox />,
           },
         ],

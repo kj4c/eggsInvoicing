@@ -82,8 +82,10 @@ const InvoicesSent = () => {
   }, [searchInput]); // Dependencies
 
   async function fetchData() {
+    setSearchInput('');
     // if its all then call for FetchAll
     if (fetchOption === 'All') {
+      setData([]);
       try {
         setLoading(true);
         let response = 
@@ -112,6 +114,7 @@ const InvoicesSent = () => {
       }
       // If fetchoption is ID then you find the specific invoiceId
     } else if (fetchOption === 'ID') {
+      setData([]);
       console.log("YO");
       try {
         setLoading(true);
@@ -139,6 +142,7 @@ const InvoicesSent = () => {
       }
       // if its date then you call API to find all invoices in the matching date
     } else if (fetchOption === 'Date') {
+      setData([]);
       try {
         setLoading(true);
         let response = 
@@ -164,6 +168,7 @@ const InvoicesSent = () => {
       }
       // calls api to find the invoice matching the given date range.
     } else if (fetchOption === 'DateRange') {
+      setData([]);
       try {
         setLoading(true);
         let response = 
@@ -313,7 +318,7 @@ const InvoicesSent = () => {
       <div className='searchContainer'>
         <p className = "fetching">Sent Invoices</p>
         <button className='search'><SearchIcon style={{color: 'white'}} onClick = {fetchData}/></button>
-        <input type="text" className='inputSearch' placeholder='Fetch' onChange = {handleSearchChange}/>
+        <input type="text" className='inputSearch' placeholder='Fetch' value={searchInput} onChange = {handleSearchChange}/>
         <select id = "options" className = "options" placeholder='Options' onChange={handleSelectChange}>
           <option value="All">Display all</option>
           <option value="ID">by Invoice ID</option>
@@ -357,8 +362,8 @@ const InvoicesSent = () => {
         {Loading && <h1 className='loadingScreen'>{loadingText}</h1>}
       </div>
       <div className='buttonContainer'>
-        <button className='button1' onClick={generatePDF}>Generate PDF</button>
-        <button className='button2' onClick={generateHTML}>Generate HTML</button>
+        <button className='button1' onClick={generatePDF}>PDF</button>
+        <button className='button2' onClick={generateHTML}>HTML</button>
       </div>
     </>
   )

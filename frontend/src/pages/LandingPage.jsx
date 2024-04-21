@@ -4,6 +4,7 @@ import Features from '../components/Features';
 import '../stylesheets/LandingPage.css';
 import Services from '../components/Services';
 import Pricing from '../components/Pricing';
+import LandingpageTeam from '../components/LandingpageTeam';
 
 const LandingPage = () => {
   return (
@@ -13,6 +14,7 @@ const LandingPage = () => {
         <Hero />
         <Features />
         <Services />
+        <LandingpageTeam />
         <Pricing />
       </div>
     </div>

@@ -80,6 +80,7 @@ const InvoiceReceiving = () => {
 
   async function fetchData() {
     // if its all then call for FetchAll
+    setSearchInput('');
     if (fetchOption === 'All') {
       try {
         setData([]);
@@ -311,9 +312,9 @@ const InvoiceReceiving = () => {
   return (
     <>
       <div className='searchContainer'>
-        <p className = "fetching">Received Invoices</p>
+        <p className = "fetching">Received</p>
         <button className='search'><SearchIcon style={{color: 'white'}} onClick = {fetchData}/></button>
-        <input type="text" className='inputSearch' placeholder='Fetch' onChange = {handleSearchChange}/>
+        <input type="text" className='inputSearch' placeholder='Fetch' value={searchInput} onChange = {handleSearchChange}/>
         <select id = "options" className = "options" placeholder='Options' onChange={handleSelectChange}>
           <option value="All">Display all</option>
           <option value="ID">by Invoice ID</option>
@@ -357,8 +358,8 @@ const InvoiceReceiving = () => {
         {Loading && <h1 className='loadingScreen'>{loadingText}</h1>}
       </div>
       <div className='buttonContainer'>
-        <button className='button1' onClick={generatePDF}>Generate PDF</button>
-        <button className='button2' onClick={generateHTML}>Generate HTML</button>
+        <button className='button1' onClick={generatePDF}>PDF</button>
+        <button className='button2' onClick={generateHTML}>HTML</button>
       </div>
     </>
   )

@@ -81,16 +81,23 @@ const Team = () => {
   }
 
   const onClickLeave = () => {
+    setLoad(false);
     const leave = async() => {
-      await axios.delete(`https://invoice-seng2021-24t1-eggs-frontend.vercel.app/leaveteam`, {
+      console.log(email);
+      await axios.delete(`https://invoice-seng2021-24t1-eggs.vercel.app/leaveteam`, {
         headers: {
           'email': email
         }
       });
+      navigate('/teamcreate');
     }
-    setLoad(true);
     leave();
+    
   }
+
+  const goBack = () => {
+    navigate("/dashboard");
+  };
 
   return(
     <div className='team-container'>
@@ -98,13 +105,16 @@ const Team = () => {
         load ? (
           <div className='team-page'>
             <div className='team-left'>
+              <button onClick={goBack} className="backButton back-button">
+                Back
+              </button>
               <div className="team-info-container">
                 <h1 className="team-info-heading">
                   {teamName}
                 </h1>
                 <div className="team-email">{teamEmail}</div>
                 <div className="team-action">
-                  <p className="team-invite" onClick={onClickInvite}>Invite to team</p>
+                  <p className="team-invite" onClick={onClickInvite }>Invite to team</p>
                   <p className="team-leave" onClick={onClickLeave}>Leave team</p>
                   {
                     copyStatus ? (
@@ -123,12 +133,12 @@ const Team = () => {
             </div>
             <div className='team-right'>
               <div className="team-send pageTitle">
-                <h3 className="team-send-text">Send Invoice</h3>
-                <IoArrowForwardCircleOutline className='arrow' size={30}/> 
+                <h3 className="team-send-text" onClick={() => {navigate('/teamsend')}}>Send Invoice</h3>
+                <IoArrowForwardCircleOutline onClick={() => {navigate('/teamsend')}} className='arrow' size={30}/> 
               </div>
               <div className="team-receive pageTitle">
-                <h3 className="team-receive-text">Team Inbox</h3>
-                <IoArrowForwardCircleOutline className='arrow' size={30}/> 
+                <h3 className="team-receive-text" onClick={() => {navigate('/teaminbox')}}>Team Inbox</h3>
+                <IoArrowForwardCircleOutline onClick={() => {navigate('/teaminbox')}} className='arrow' size={30}/> 
               </div>
               <img src={teamwork}  alt="team" className='team-img'/>
             </div>

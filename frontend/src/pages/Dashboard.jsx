@@ -2,12 +2,19 @@ import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Dashboard.css';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
-import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
+import {
+  MainContainer,
+  ChatContainer,
+  MessageList,
+  Message,
+  MessageInput,
+  TypingIndicator,
+} from '@chatscope/chat-ui-kit-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
-import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
-const API_KEY = "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";
+import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
+import { IoChatbubbleEllipsesSharp } from 'react-icons/io5';
+const API_KEY = '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';
 
 /* Creatse the main Dashboard for the page with notifications, financial statistics */
 const Dashboard = () => {
@@ -17,14 +24,14 @@ const Dashboard = () => {
   const [name, setName] = useState('');
   const [loading, setLoading] = useState('&nbsp;');
   const [loaded, setLoaded] = useState(false);
-  const [chat, setChat] = useState(false)
+  const [chat, setChat] = useState(false);
   // Page
-  const cookieExists = document.cookie.includes('cookie='); 
+  const cookieExists = document.cookie.includes('cookie=');
 
   /* Get the cookie of the current user and see if it exists. */
   function getCookie(name) {
     let cookies = document.cookie.split('; ');
-    let cookieValue = cookies.find(row => row.startsWith(name + '='));
+    let cookieValue = cookies.find((row) => row.startsWith(name + '='));
     return cookieValue ? cookieValue.split('=')[1] : null;
   }
 
@@ -33,8 +40,8 @@ const Dashboard = () => {
     if (!cookieExists) {
       navigate('/login');
     } else {
-      let id = document.cookie.split("; ");
-      id = id.find(part => part.startsWith("uid=")).split("=")[1];
+      let id = document.cookie.split('; ');
+      id = id.find((part) => part.startsWith('uid=')).split('=')[1];
       setUid(id);
       setName(getCookie('username'));
     }
@@ -47,7 +54,9 @@ const Dashboard = () => {
       try {
         if (!uid) return;
 
-        const response = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/getNotifications?uid=${uid}`);
+        const response = await axios.get(
+          `https://invoice-seng2021-24t1-eggs.vercel.app/receive/getNotifications?uid=${uid}`
+        );
 
         setData(`${response.data.notifications.length}`);
         setLoaded(true);
@@ -55,8 +64,8 @@ const Dashboard = () => {
         setData('0');
         setLoaded(true);
       }
-    }; 
-    
+    };
+
     if (uid !== '' && hasFetchedData.current === false) {
       notif();
       hasFetchedData.current = true;
@@ -66,11 +75,11 @@ const Dashboard = () => {
   /* Loading animation */
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setLoading(prev => {
+      setLoading((prev) => {
         if (prev.length >= 9) return '&nbsp;';
         return prev + '.';
       });
-    }, 200); 
+    }, 200);
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, []);
@@ -97,7 +106,7 @@ const Dashboard = () => {
   const [yPayable, setYPayable] = useState('loading');
 
   function ToLandingPage() {
-    navigate('/landingPage');
+    navigate('/');
   }
 
   /*Get all the statistics for the dashboard and changing the states */
@@ -105,10 +114,12 @@ const Dashboard = () => {
     const stat = async () => {
       try {
         if (!uid) return;
-        const res = await axios.get(`https://invoice-seng2021-24t1-eggs.vercel.app/receive/getStatistics/v2?uid=${uid}`);
+        const res = await axios.get(
+          `https://invoice-seng2021-24t1-eggs.vercel.app/receive/getStatistics/v2?uid=${uid}`
+        );
         console.log(res.data);
         if (res.status !== 200) {
-          return
+          return;
         }
         if (res.data.dailyFinancialStats.payableAmount !== undefined) {
           setDInvoice(res.data.dailyFinancialStats.numInvoices);
@@ -121,7 +132,7 @@ const Dashboard = () => {
           setDAmount('$0');
           setDPayable('$0');
         }
-        
+
         if (res.data.weeklyFinancialStats.payableAmount !== undefined) {
           setWInvoice(res.data.weeklyFinancialStats.numInvoices);
           setWTax(res.data.weeklyFinancialStats.taxAmount);
@@ -133,7 +144,7 @@ const Dashboard = () => {
           setWAmount('$0');
           setWPayable('$0');
         }
-        
+
         if (res.data.monthlyFinancialStats.payableAmount !== undefined) {
           setMInvoice(res.data.monthlyFinancialStats.numInvoices);
           setMTax(res.data.monthlyFinancialStats.taxAmount);
@@ -176,31 +187,31 @@ const Dashboard = () => {
         setYPayable('$0');
         setYPayable('$0');
       }
-    }; 
-    
+    };
+
     if (uid !== '') {
       stat();
     }
   }, [uid]);
-  
+
   //chat
   const [messages, setMessages] = useState([
     {
-      message: "Hello I'm your assistant for Eggs Invoicing. How can I help you today?",
-      sentTime: "just now",
-      sender: "Eggs Invoicing",
-      direction: "incoming"
-    }
+      message:
+        "Hello I'm your assistant for Eggs Invoicing. How can I help you today?",
+      sentTime: 'just now',
+      sender: 'Eggs Invoicing',
+      direction: 'incoming',
+    },
   ]);
   const [isTyping, setIsTyping] = useState(false);
-
 
   // To send to CHAT GPT on click and wait for the reply.
   const handleSend = async (text) => {
     const userMessage = {
       message: text,
       direction: 'outgoing',
-      sender: "user"
+      sender: 'user',
     };
 
     setMessages([...messages, userMessage]);
@@ -210,80 +221,93 @@ const Dashboard = () => {
   };
 
   const systemMessage = {
-    "role": "system",
-    "content": "Explain things like you're talking to a software professional with 2 years of experience."
+    role: 'system',
+    content:
+      "Explain things like you're talking to a software professional with 2 years of experience.",
   };
 
   // Proccesses the messages for the ChatGPT assistant to understand using CHAT GPT API
   async function processMessageToChatGPT(chatMessages) {
     let apiMessages = chatMessages.map((messageObject) => {
-      let role = "";
-      if (messageObject.sender === "ChatGPT") {
-        role = "assistant";
+      let role = '';
+      if (messageObject.sender === 'ChatGPT') {
+        role = 'assistant';
       } else {
-        role = "user";
+        role = 'user';
       }
-      return { role: role, content: messageObject.message}
+      return { role: role, content: messageObject.message };
     });
 
     const apiRequestBody = {
-      "model": "gpt-3.5-turbo",
-      "messages": [
-        systemMessage, 
-        ...apiMessages
-      ]
-    }
+      model: 'gpt-3.5-turbo',
+      messages: [systemMessage, ...apiMessages],
+    };
 
-    await fetch("https://api.openai.com/v1/chat/completions", 
-    {
-      method: "POST",
+    await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Authorization": "Bearer " + API_KEY,
-        "Content-Type": "application/json"
+        Authorization: 'Bearer ' + API_KEY,
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(apiRequestBody)
-    }).then((data) => {
-      return data.json();
-    }).then((data) => {
-      console.log(data);
-      setMessages([...chatMessages, {
-        message: data.choices[0].message.content,
-        sender: "ChatGPT",
-        direction: "incoming"
-      }]);
-      setIsTyping(false);
-    });
+      body: JSON.stringify(apiRequestBody),
+    })
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setMessages([
+          ...chatMessages,
+          {
+            message: data.choices[0].message.content,
+            sender: 'ChatGPT',
+            direction: 'incoming',
+          },
+        ]);
+        setIsTyping(false);
+      });
   }
 
   // All frontend for the dashboard with the  chat interface.
   return (
     <div className='Dashboard'>
-      <div className="welcome-page">
-        <div className="welcome-message">
+      <div className='welcome-page'>
+        <div className='welcome-message'>
           <h1 className='hello'>Hello {name} !</h1>
-          <p className="welcome">Welcome to EGG-INVOICE, your all-in-one e-invoicing platform for effortlessly creating, sending, and managing received invoices.</p>
+          <p className='welcome'>
+            Welcome to EGG-INVOICE, your all-in-one e-invoicing platform for
+            effortlessly creating, sending, and managing received invoices.
+          </p>
           <div className='unread-box'>
-            <p className="unread-start">You have</p>
+            <p className='unread-start'>You have</p>
             {!loaded ? (
-              <p className="unread-data" dangerouslySetInnerHTML={{ __html: loading }}></p>
+              <p
+                className='unread-data'
+                dangerouslySetInnerHTML={{ __html: loading }}
+              ></p>
             ) : (
-              <p className="unread-data" dangerouslySetInnerHTML={{ __html: data }}></p>
+              <p
+                className='unread-data'
+                dangerouslySetInnerHTML={{ __html: data }}
+              ></p>
             )}
-            <p className="unread-end">unread invoice.</p>
-            <div className="receive-btn">
-              {
-                loaded && data !== '0' ? (
-                  <Link to="../invoiceReceiving" className='receive-link'>Check your received invoices</Link>
-                ) : ''
-              }
+            <p className='unread-end'>unread invoice.</p>
+            <div className='receive-btn'>
+              {loaded && data !== '0' ? (
+                <Link to='../invoiceReceiving' className='receive-link'>
+                  Check your received invoices
+                </Link>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </div>
-        <div className="dashboard-content">
-          <div className="dashboard-grid">
-            <div className="day">
+        <div className='dashboard-content'>
+          <div className='dashboard-grid'>
+            <div className='day'>
               <h3 className='tb-heading'>Daily Statistics</h3>
-              <table className="day-table">
+              <table className='day-table'>
                 <tr>
                   <td className='td1'>Invoice received</td>
                   <td>{dInvoice}</td>
@@ -303,9 +327,9 @@ const Dashboard = () => {
               </table>
             </div>
 
-            <div className="week">
+            <div className='week'>
               <h3 className='tb-heading'>Weekly Statistics</h3>
-              <table className="week-table">
+              <table className='week-table'>
                 <tr>
                   <td className='td1'>Invoice received</td>
                   <td>{wInvoice}</td>
@@ -324,9 +348,9 @@ const Dashboard = () => {
                 </tr>
               </table>
             </div>
-            <div className="month">
+            <div className='month'>
               <h3 className='tb-heading'>Monthly Statistics</h3>
-              <table className="month-table">
+              <table className='month-table'>
                 <tr>
                   <td className='td1'>Invoice received</td>
                   <td>{mInvoice}</td>
@@ -346,9 +370,9 @@ const Dashboard = () => {
               </table>
             </div>
 
-            <div className="year">
+            <div className='year'>
               <h3 className='tb-heading'>Financial Year Statistics</h3>
-              <table className="year-table">
+              <table className='year-table'>
                 <tr>
                   <td className='td1'>Invoice received</td>
                   <td>{yInvoice}</td>
@@ -369,44 +393,78 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <button className='fire-landing-page' onClick={ToLandingPage}>Landing Tutorial Page</button>
+        <button className='fire-landing-page' onClick={ToLandingPage}>
+          Landing Tutorial Page
+        </button>
       </div>
 
-      {
-        !chat ? (
-          <IoChatbubbleEllipsesOutline className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px", transform: "scaleX(-1)"}} onClick={() => setChat(true) }/>
-          ) : (
-          <div className="chat">
-              <div style={{ position: "fixed", bottom: "60px", right: "20px", height: "400px", width: "300px" }}>
-                <MainContainer>
-                  <ChatContainer>
-                    <MessageList
-                      typingIndicator={isTyping && <TypingIndicator content="ChatGPT is typing" />}
-                    >
-                      {messages.map((msg, index) => (
-                        <Message
-                          key={index}
-                          className='text-box'
-                          model={{
-                            message: msg.message,
-                            direction: msg.direction,
-                            position: "single"
-                          }}
-                        />
-                      ))}
-                    </MessageList>
-                    <MessageInput className='text-box' placeholder="Type message here..." onSend={handleSend} />
-                  </ChatContainer>
-                </MainContainer>
-            </div>
-            <IoChatbubbleEllipsesSharp className='chat-btn' style={{ position: "fixed", bottom: "15px", right: "20px", height: "40px", width: "40px", transform: "scaleX(-1)" }} onClick={() => setChat(false) }/>
-          </div>         
-        )
-      }
-      
+      {!chat ? (
+        <IoChatbubbleEllipsesOutline
+          className='chat-btn'
+          style={{
+            position: 'fixed',
+            bottom: '15px',
+            right: '20px',
+            height: '40px',
+            width: '40px',
+            transform: 'scaleX(-1)',
+          }}
+          onClick={() => setChat(true)}
+        />
+      ) : (
+        <div className='chat'>
+          <div
+            style={{
+              position: 'fixed',
+              bottom: '60px',
+              right: '20px',
+              height: '400px',
+              width: '300px',
+            }}
+          >
+            <MainContainer>
+              <ChatContainer>
+                <MessageList
+                  typingIndicator={
+                    isTyping && <TypingIndicator content='ChatGPT is typing' />
+                  }
+                >
+                  {messages.map((msg, index) => (
+                    <Message
+                      key={index}
+                      className='text-box'
+                      model={{
+                        message: msg.message,
+                        direction: msg.direction,
+                        position: 'single',
+                      }}
+                    />
+                  ))}
+                </MessageList>
+                <MessageInput
+                  className='text-box'
+                  placeholder='Type message here...'
+                  onSend={handleSend}
+                />
+              </ChatContainer>
+            </MainContainer>
+          </div>
+          <IoChatbubbleEllipsesSharp
+            className='chat-btn'
+            style={{
+              position: 'fixed',
+              bottom: '15px',
+              right: '20px',
+              height: '40px',
+              width: '40px',
+              transform: 'scaleX(-1)',
+            }}
+            onClick={() => setChat(false)}
+          />
+        </div>
+      )}
     </div>
+  );
+};
 
-  )
-}
-
-export default Dashboard
+export default Dashboard;

@@ -3,7 +3,7 @@
     grid-template-columns: 0.1fr 0.5fr 1fr 1fr 0.5fr 0.5fr;
     grid-template-rows: 50px repeat(12, 1fr);
     width: 90%;
-    height: 75vh;
+    height: 70vh;
     background-color: white;
     margin-left: 5%;
     margin-right: 5%;
@@ -13,6 +13,7 @@
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: #7f45f2 white;
+    animation: fadeIn 2s;
 }
 
 .searchContainer {
@@ -22,6 +23,7 @@
     margin-right: 10vh;
     margin-top: 5vh;
     margin-bottom: 2vh;
+    animation: fadeIn 2s;
 }
 
 
@@ -35,6 +37,12 @@
     margin-right: 1%;
     background-color: #7f45f2;
     border: none;
+}
+
+.search:hover {
+    cursor: pointer;
+    background-color: #ab81ff;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .search:hover {
@@ -155,11 +163,12 @@
     position: sticky;
     background-color: #FAFBFB;
     width: 100%;
+    animation: fadeIn 2s;
 }
 
 .button1, .button2 {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
     margin-left: 18%;
     margin-right: 18%;
     background-color: white;
@@ -171,7 +180,7 @@
     font-size: 22px;
     line-height: 50px; /* This helps vertically center the text */
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     
     /* Optional: Add a hover effect */
     transition: background-color 0.3s;
