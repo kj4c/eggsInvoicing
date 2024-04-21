@@ -22,6 +22,7 @@ import {
   TeamSend,
   TeamInbox
 } from './pages';
+import SendMultipleEmail from './pages/SendMultipleEmail';
 import TeamJoin from './pages/TeamJoin';
 import { useStateContext } from './contexts/ContextProvider';
 import AuthLogin from './pages/authLogin';
@@ -62,6 +63,7 @@ const AppContent = () => {
     '/teamcreate',
     '/team/join',
     '/team/info',
+    '/sendMultipleEmail',
     '/teamsend',
     '/teaminbox'
   ];
@@ -114,6 +116,7 @@ const AppContent = () => {
               path='/invoiceInputMultipleJson1'
               element={<InvoiceInputMultipleJson />}
             />
+            <Route path='/sendMultipleEmail' element={<SendMultipleEmail />} />
             <Route path='/invoiceReceiving' element={<InvoiceReceiving />} />
             <Route path='/login' element={<AuthLogin />} />
             <Route path='/register' element={<AuthRegister />} />
