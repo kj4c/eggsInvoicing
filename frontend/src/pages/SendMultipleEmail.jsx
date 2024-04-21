@@ -80,7 +80,7 @@ const SendMultipleEmail = () => {
             setFormData({ ...formData, [name]: value });
         }
     };
-
+    
     const goBack = () => {
         navigate("/invoiceSending");
     };
