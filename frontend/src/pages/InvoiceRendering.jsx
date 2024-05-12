@@ -35,17 +35,7 @@ const InvoiceRendering = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append('invoice', file);
-    try {
-      const res = await axios.post(
-        'https://sleeperagents1.alwaysdata.net/renderHTML?language=eng',
-        formData
-      );
-      navigate('/invoiceRendered', { state: { res: res.data } });
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    navigate('/invoiceRendered');
   }
 
   // sets the file if the user uploads a new file
