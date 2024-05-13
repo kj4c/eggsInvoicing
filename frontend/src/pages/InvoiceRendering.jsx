@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../stylesheets/InvoiceRendering.css';
 import Notif from '../components/RenderNotif';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import pointers from '../assets/pointers_nobg.png';
 
