@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../stylesheets/InvoiceRendering.css';
 import Notif from '../components/RenderNotif';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import pointers from '../assets/pointers_nobg.png';
 
@@ -35,17 +34,7 @@ const InvoiceRendering = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append('invoice', file);
-    try {
-      const res = await axios.post(
-        'https://sleeperagents1.alwaysdata.net/renderHTML?language=eng',
-        formData
-      );
-      navigate('/invoiceRendered', { state: { res: res.data } });
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    navigate('/invoiceRendered');
   }
 
   // sets the file if the user uploads a new file

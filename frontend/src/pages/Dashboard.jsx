@@ -159,7 +159,7 @@ const Dashboard = () => {
 
         if (res.data.financialYearStats.payableAmount !== undefined) {
           setYInvoice(res.data.financialYearStats.numInvoices);
-          setYTax(res.data.financialYearStats.taxAmount);
+          setYTax('$NaN' === res.data.financialYearStats.taxAmount ? '$0' : res.data.financialYearStats.taxAmount);
           setYAmount(res.data.financialYearStats.taxInclusiveAmount);
           setYPayable(res.data.financialYearStats.payableAmount);
         } else {
