@@ -245,3 +245,31 @@
     flex-wrap: nowrap;
   }
 }
+
+.chat {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  height: 400px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-list {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.text-box {
+  color: #7f45f2;
+}
+
+.chat-btn {
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+  transform: scaleX(-1);
+}

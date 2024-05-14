@@ -3,7 +3,7 @@ import '../stylesheets/UserProfile.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreateIcon from '@mui/icons-material/Create';
-import picture from '../assets/profile.png';
+import picture from '../assets/anon.png';
 
 const UserProfile = () => {
   const navigate = useNavigate();
